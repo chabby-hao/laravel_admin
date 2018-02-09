@@ -154,6 +154,7 @@ a:hover {
 }
 
 .bi-history {
+    pointer-events:none;
     position: absolute;
     left: 0;
     right: 0;
@@ -193,6 +194,7 @@ a:hover {
 }
 
 .bi-point {
+    pointer-events:none;
     position: absolute;
     bottom: 20%;
     width: 960px;
@@ -253,6 +255,7 @@ a:hover {
 }
 
 .bi-top{
+    pointer-events:none;
     position: absolute;
     margin:0 auto;
     top:0;
