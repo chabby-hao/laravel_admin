@@ -174,7 +174,8 @@ a:hover {
     display: inline-block;
     width: 30px;
     height: 52px;
-    border: 1px solid #d7deff;
+    border: 1px solid #7ea0ff;
+    background-color: #081631;
     border-radius: 4px;
     margin-bottom: 22px;
     line-height: 48px;
