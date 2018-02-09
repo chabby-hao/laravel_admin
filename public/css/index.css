@@ -207,6 +207,7 @@ a:hover {
 }
 
 .bi-point span {
+    pointer-events: auto;
     float: left;
     text-align: center;
     opacity: 0.5;
