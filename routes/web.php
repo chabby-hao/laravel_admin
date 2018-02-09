@@ -15,12 +15,9 @@
 //    return view('welcome');
 //});
 
-Route::any('/',function(){
-    echo 666;exit;
-});
 
-Route::get('/index','HomeController@index');
+Route::get('/','HomeController@index');
 
-Route::get('/',function(){
-    echo 33;exit;
+Route::get('/phpinfo',function(){
+    phpinfo();
 });
