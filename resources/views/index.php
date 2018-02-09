@@ -14,25 +14,93 @@
 <body>
 <div class="bi-header">
     <video class="bi-video" src="/video/dabj.mp4" autoplay loop></video>
-    <div class="bi-nav">
-        <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
-        <a href="">关于我们</a>
-        <a href="">技术支持</a>
-        <a href="">成为伙伴</a>
+    <div class="bi-top">
+        <div class="bi-nav">
+            <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
+            <div class="bi-nav-a">
+                <a href="">关于我们</a>
+                <a href="">技术支持</a>
+                <a href="">成为伙伴</a>
+            </div>
+        </div>
+        <div class="bi-login">
+            <a id="login" href="javascript:;">登录</a>
+        </div>
+        <div class="bi-top-icon"><img src="/image/biaoqian1@2x.png" alt=""></div>
     </div>
-    <div class="bi-login">
-        <a href="">登录</a>
-        <!--<a href="">|</a>
-        <a id="bi-register" href="">注册</a>-->
-    </div>
+
     <div class="bi-point">
-        <span>驾驶舱</span>
-        <span>车辆统计</span>
-        <span>用户统计</span>
-        <span>营销服务</span>
+        <span class="point-1">驾驶舱</span>
+        <span class="point-2">车辆统计</span>
+        <span class="point-3">用户画像</span>
+        <span class="point-4">品质分析</span>
+        <span class="point-5">营销服务</span>
+    </div>
+
+    <div class="bi-history">
+        <div class="bi-number">
+            <ul>
+                <li><span>1</span></li>
+                <li><span>2</span></li>
+                <li><span>3</span></li>
+                <li><span>4</span></li>
+                <li><span>5</span></li>
+                <li><span>6</span></li>
+                <li><span>1</span></li>
+                <li><span>7</span></li>
+                <li><span>8</span></li>
+                <li><span>9</span></li>
+                <li><span>3</span></li>
+                <li><span>4</span></li>
+                <li><span>7</span></li>
+                <li><span>1</span></li>
+            </ul>
+        </div>
+        <label class="bi-history-text">历史访问请求量</label>
+    </div>
+
+    <div class="bi-login-model">
+        <div class="bi-login-logo">
+            <img src="/image/logo@2x.png" alt="">
+        </div>
+        <div class="bi-login-group">
+            <div class="bi-close"><img src="/image/guanbi@2x.png" alt=""></div>
+            <div class="bi-login-box">
+                <span class="bi-login-icon"><img src="/image/zhanghao@2x.png" alt=""></span>
+                <input type="text" name="user" placeholder="账户名称" />
+            </div>
+            <div class="bi-login-box">
+                <span class="bi-login-icon"><img src="/image/mima@2x.png" alt=""></span>
+                <input type="text" name="pwd" placeholder="用户密码" />
+            </div>
+
+            <div class="bi-login-go">
+                <button class="btn">登录</button>
+            </div>
+
+            <div class="bi-login-bottom">
+                <div class="forget"><a href="">忘记密码</a></div>
+                <div class="register-now"><a href="">立即注册 ></a></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="login-shade">
+    </div>
+
+    <div class="bi-header-icon2">
+        <img src="/image/biaoqian2@2x.png" alt="">
+        <span>COPY @ HTTP://BI.VIPCARE.COM, ALL RIGHTS RESERVED. </span>
     </div>
 </div>
 <div class="bi-content">
+
+    <div class="bi-content-top">
+        <span class="bi-content-partner">合作伙伴</span>
+        <span class="bi-zixun">合作咨询：bd@vipcare.com 021-6485-8993</span>
+        <div class="bi-icon"><img src="/image/biaoqian3@2x.png" alt=""></div>
+    </div>
 
     <div class="bi-partner">
         <img class="bi-hezuo" src="/image/hezuo@2x.png" alt="">
@@ -90,3 +158,14 @@
 <script src="/bootstrap4/js/bootstrap.min.js"></script>
 </body>
 </html>
+<script>
+    $("#login").click(function(){
+        $(".bi-login-model,.login-shade").show();
+        $(".bi-point,.bi-history").hide();
+    })
+
+    $(".bi-close").click(function(){
+        $(".bi-login-model,.login-shade").hide();
+        $(".bi-point,.bi-history").show();
+    })
+</script>
