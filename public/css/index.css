@@ -51,6 +51,7 @@ a:hover {
 }
 
 .bi-close {
+    cursor: pointer;
     position: absolute;
     right: -22px;
     top: 70px;
@@ -256,7 +257,7 @@ a:hover {
 }
 
 .bi-top{
-    pointer-events:none;
+    /*pointer-events:none;*/
     position: absolute;
     margin:0 auto;
     top:0;
@@ -336,13 +337,9 @@ a:hover {
 }
 
 .bi-video {
-    /*left: 0;*/
-    /*top: 0;*/
-    /*position: absolute;*/
     height: auto;
     width: 100%;
-    marin: 0 auto;
-    z-index: -9;
+    z-index: -1;
 }
 
 .bi-content {
