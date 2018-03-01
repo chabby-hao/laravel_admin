@@ -53,8 +53,6 @@ class WarningMile extends BaseWarning
                     $text = '设备: ' . $item->udid. ' 从 ' . date('Y-m-d H:i:s', $item->begin) . ' 至 ' . date('Y-m-d H:i:s', $item->end) . ' 单次行驶 ' . $item->mile . 'km';
                     $warningData[] = $text;
                     echo $log . "\n";
-                    echo $item->begin . "\n";
-                    echo $text . "\n";
                 }
             }
 
