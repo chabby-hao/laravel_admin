@@ -50,8 +50,10 @@ class WarningMile extends BaseWarning
                     $log = 'find mile>' . $this->maxMile . ' with data:' . json_encode($item);
                     $this->warning($log);
                     $mids[] = $item->mid;
-                    $warningData[] = '设备: ' . $item->udid. ' 从 ' . date('Y-m-d H:i:s', $item->begin) . ' 至 ' . date('Y-m-d H:i:s', $item->end) . ' 单次行驶 ' . $item->mile . 'km';
+                    $text = '设备: ' . $item->udid. ' 从 ' . date('Y-m-d H:i:s', $item->begin) . ' 至 ' . date('Y-m-d H:i:s', $item->end) . ' 单次行驶 ' . $item->mile . 'km';
+                    $warningData[] = $text;
                     echo $log . "\n";
+                    echo $text . "\n";
                 }
             }
 
