@@ -15,7 +15,7 @@ class WarningMile extends BaseWarning
         parent::__construct();
     }
 
-    private $maxMile = 10;
+    private $maxMile = 1;
 
     public function handle()
     {
