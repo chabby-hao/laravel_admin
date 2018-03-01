@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\Test;
+use App\Console\Commands\WarningMile;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command(Test::class)->everyMinute();
+        $schedule->command(WarningMile::class)->everyTenMinutes();
     }
 
     /**
