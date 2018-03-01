@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'bi'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,13 +39,43 @@ return [
             'prefix' => '',
         ],
 
-        'mysql' => [
+        'bi' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'care' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_CARE', '127.0.0.1'),
+            'port' => env('DB_PORT_CARE', '3306'),
+            'database' => env('DB_DATABASE_CARE', 'forge'),
+            'username' => env('DB_USERNAME_CARE', 'forge'),
+            'password' => env('DB_PASSWORD_CARE', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'care_operate' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_OP', '127.0.0.1'),
+            'port' => env('DB_PORT_OP', '3306'),
+            'database' => env('DB_DATABASE_OP', 'forge'),
+            'username' => env('DB_USERNAME_OP', 'forge'),
+            'password' => env('DB_PASSWORD_OP', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
