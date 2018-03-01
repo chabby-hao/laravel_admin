@@ -57,7 +57,9 @@ class WarningMile extends BaseWarning
 
         } while ($pagination->hasMorePages());
 
-        $this->sendEmail($warningData);
+        if($warningData){
+            $this->sendEmail($warningData);
+        }
 
     }
 }
