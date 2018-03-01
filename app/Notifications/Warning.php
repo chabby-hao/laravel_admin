@@ -46,7 +46,7 @@ class Warning extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $mail = (new MailMessage)->template('vendor.notifications.warning')
-            //->from('system@vipcare.com', '预警系统')
+            ->from(env('MAIL_FROM_ADDRESS'), '预警系统')
             ->subject($this->subject)
             ->greeting('异常信息:');
         foreach ($this->data as $line){
