@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->command(WarningMile::class)->everyTenMinutes();
+        $schedule->command(WarningMile::class)->hourly();
     }
 
     /**
