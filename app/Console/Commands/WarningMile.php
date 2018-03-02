@@ -35,7 +35,7 @@ class WarningMile extends BaseWarning
         $perPage = 100;
         $mids = [];
         $whereBegin = [
-            strtotime('-10 minutes'),
+            strtotime('-1 hours'),
             time(),
         ];
         $warningData = [];
