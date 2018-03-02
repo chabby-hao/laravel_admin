@@ -18,30 +18,12 @@ Route::middlewareGroup('admin', [
     \App\Http\Middleware\AdminBeforeCheck::class,
 ]);
 
-Route::any('/device/list', 'Admin\DeviceController@list');
-Route::any('/device/add', 'Admin\DeviceController@add');
-Route::any('/device/remoteUpgrade', 'Admin\DeviceController@remoteUpgrade');
-Route::any('/device/slaveBinManage', 'Admin\DeviceController@slaveBinManage');
-Route::any('/device/remoteTunnel', 'Admin\DeviceController@remoteTunnel');
-
-Route::any('/user/list', 'Admin\UserController@list');
-Route::any('/user/feedback', 'Admin\UserController@feedback');
-
-Route::any('/orders/list', 'Admin\OrdersController@list');
-
-Route::any('/charge/list', 'Admin\ChargeController@list');
-
-Route::any('/refunds/list', 'Admin\RefundsController@list');
 
 Route::any('/admins/list', 'Admin\AdminController@list');
 Route::any('/admins/add', 'Admin\AdminController@add');
 Route::any('/admins/login', 'Admin\AdminController@login')->name('login');
 Route::any('/admins/logout', 'Admin\AdminController@logout');
 
-Route::any('/activity/cardsList','Admin\ActivityController@cardsList');
-Route::any('/activity/cardsAdd','Admin\ActivityController@cardsAdd');
-Route::any('/activity/cardsEdit','Admin\ActivityController@cardsEdit');
-Route::any('/activity/cardsWhiteListExport','Admin\ActivityController@cardsWhiteListExport');
 
 Route::any('/test', function () {
 
