@@ -36,10 +36,6 @@ class BiUser extends \App\Models\Base\BiUser
 
     use EntrustUserTrait;
 
-	protected $hidden = [
-		'password'
-	];
-
 	protected $fillable = [
 		'username',
 		'password',

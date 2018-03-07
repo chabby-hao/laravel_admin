@@ -26,13 +26,13 @@ class AdminBeforeCheck
         if(!in_array($routeName, $this->noLoginRoutes)){
             //需要效验登录
             if(!$isLogin){
-                return Redirect::action('Admin\AdminController@login');
+                return Redirect::route('login');
             }
         }
 
         // 如果已经登录过了，直接调新页面
         if($isLogin && $routeName == 'login'){
-            return Redirect::action('Admin\DeviceController@list');
+            return Redirect::action('Admin\IndexController@welcome');
         }
 
         Log::debug('admin route : ' . $request->route()->getActionName());

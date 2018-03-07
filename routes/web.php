@@ -16,7 +16,7 @@
 //});
 
 
-Route::get('/','HomeController@index');
+Route::get('/','Bi\HomeController@index');
 
 Route::get('/phpinfo',function(){
     phpinfo();

@@ -18,11 +18,8 @@ Route::middlewareGroup('admin', [
     \App\Http\Middleware\AdminBeforeCheck::class,
 ]);
 
+Route::any('/index/welcome', 'Admin\IndexController@welcome');
 
-Route::any('/admins/list', 'Admin\AdminController@list');
-Route::any('/admins/add', 'Admin\AdminController@add');
-Route::any('/admins/login', 'Admin\AdminController@login')->name('login');
-Route::any('/admins/logout', 'Admin\AdminController@logout');
 
 //放在最后
-Route::any('/', 'Admin\AdminController@login')->name('login');
+Route::any('/', 'Admin\AuthController@login')->name('login');

@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Logic;
+namespace App\Logics;
 
 
 class BaseLogic
 {
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         //
