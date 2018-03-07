@@ -64,4 +64,5 @@ class TDevice extends \App\Models\Base\TDevice
 		'user_model',
 		'is_lose'
 	];
+
 }

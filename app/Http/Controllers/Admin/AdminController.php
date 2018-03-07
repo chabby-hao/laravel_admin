@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Libs\MyPage;
 use App\Models\Admins;
+use App\Models\BiUser;
 use App\Services\AdminService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -21,8 +22,7 @@ class AdminController extends BaseController
     public function list()
     {
 
-        $paginate = Admins::orderByDesc('id')->paginate();
-
+        $paginate = BiUser::orderByDesc('id')->paginate();
 
         return view('admin.admin.list',[
             'admins'=>$paginate->items(),
@@ -37,9 +37,6 @@ class AdminController extends BaseController
             //添加管理员
             $check = ['name','pwd'];
             $data = $this->checkParams($check, $request->input());
-            if(AdminService::addAdmin($data['name'], $data['pwd'])){
-                $this->outPutRedirect(URL::action('Admin\AdminController@list'));
-            }
             $this->outPutError('添加失败,请确认信息再次输入');
         }
 

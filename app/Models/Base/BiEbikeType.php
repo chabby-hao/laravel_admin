@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiEbikeType
- * 
+ *
  * @property int $id
  * @property int $ev_model
  * @property string $ebike_name
  * @property string $ebike_remark
  * @property int $brand_id
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereBrandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEbikeName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEbikeRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEvModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereId($value)
+ * @mixin \Eloquent
  */
 class BiEbikeType extends Eloquent
 {

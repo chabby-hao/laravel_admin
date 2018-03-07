@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
  * App\Models\BiUser
@@ -22,9 +23,19 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUsername($value)
  * @mixin \Eloquent
+ * @property int|null $last_ip
+ * @property string|null $last_record
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLastIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLastRecord($value)
+ * @property int|null $type_id 渠道ID or 品牌id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereTypeId($value)
  */
 class BiUser extends \App\Models\Base\BiUser
 {
+
+    use EntrustUserTrait;
+
 	protected $hidden = [
 		'password'
 	];

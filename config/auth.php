@@ -67,7 +67,8 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => \App\Models\BiUser::class,
+            'table' => 'bi_users',
         ],
 
         // 'users' => [
@@ -98,5 +99,7 @@ return [
             'expire' => 60,
         ],
     ],
+
+    'model' => 'App\Models\BiUser', 'table' => 'bi_users',
 
 ];
