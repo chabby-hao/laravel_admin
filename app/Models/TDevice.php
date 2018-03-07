@@ -1,36 +1,28 @@
 <?php
 
-/**
- * Created by Reliese Model.
- * Date: Tue, 27 Feb 2018 03:36:57 +0000.
- */
-
 namespace App\Models;
 
-use Reliese\Database\Eloquent\Model as Eloquent;
-
 /**
- * Class TDevice
+ * App\Models\TDevice
  *
  * @property int $id
  * @property string $udid
- * @property string $name
- * @property string $photo
+ * @property string|null $name 设备名称
+ * @property string|null $photo
  * @property int $rate
  * @property \Carbon\Carbon $regist_time
  * @property int $type
- * @property string $imei
+ * @property string|null $imei
  * @property int $mode
- * @property string $push
+ * @property string|null $push
  * @property int $remind
  * @property int $notice
  * @property int $abmove
- * @property string $chassis
- * @property int $user_voltage
- * @property int $user_brand
- * @property string $user_model
- * @property int $is_lose
- * @package App\Models
+ * @property string|null $chassis 车架号
+ * @property int $user_voltage 用户上传电压
+ * @property int $user_brand 用户上传品牌
+ * @property string|null $user_model 用户上传车辆型号
+ * @property int $is_lose 是否丢失，0-没有丢失，1-丢失
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereAbmove($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereChassis($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereId($value)
@@ -51,28 +43,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereUserVoltage($value)
  * @mixin \Eloquent
  */
-class TDevice extends Eloquent
+class TDevice extends \App\Models\Base\TDevice
 {
-	protected $connection = 'care';
-	protected $table = 't_device';
-	public $timestamps = false;
-
-	protected $casts = [
-		'rate' => 'int',
-		'type' => 'int',
-		'mode' => 'int',
-		'remind' => 'int',
-		'notice' => 'int',
-		'abmove' => 'int',
-		'user_voltage' => 'int',
-		'user_brand' => 'int',
-		'is_lose' => 'int'
-	];
-
-	protected $dates = [
-		'regist_time'
-	];
-
 	protected $fillable = [
 		'udid',
 		'name',

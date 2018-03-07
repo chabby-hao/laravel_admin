@@ -1,33 +1,25 @@
 <?php
 
-/**
- * Created by Reliese Model.
- * Date: Tue, 27 Feb 2018 03:36:57 +0000.
- */
-
 namespace App\Models;
 
-use Reliese\Database\Eloquent\Model as Eloquent;
-
 /**
- * Class TDeviceCode
+ * App\Models\TDeviceCode
  *
  * @property int $sid
  * @property int $type
- * @property string $imei
- * @property string $imsi
- * @property string $phone
- * @property string $qr
- * @property \Carbon\Carbon $register
+ * @property string|null $imei
+ * @property string|null $imsi
+ * @property string|null $phone
+ * @property string|null $qr
+ * @property \Carbon\Carbon|null $register
  * @property int $active
  * @property int $first
  * @property int $ver
  * @property int $rom
- * @property int $model
- * @property \Carbon\Carbon $product_date
- * @property int $product_type
- * @property \Carbon\Carbon $storage_time
- * @package App\Models
+ * @property int $model 0=>未知设备类型，1=eb001,2=eb001b,3=eb001c,4=eb001a,5=eb001d,7=B640,91=童鞋，92=手环，93=老人拐杖，99=测试
+ * @property \Carbon\Carbon|null $product_date 生产时间
+ * @property int $product_type 生产类型 1量产 2试产
+ * @property \Carbon\Carbon|null $storage_time 入库时间
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereFirst($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereImei($value)
@@ -44,30 +36,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereVer($value)
  * @mixin \Eloquent
+ * @property int $ebike_type_id 车型Id
+ * @property int $channel_id 渠道id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereChannelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereEbikeTypeId($value)
  */
-class TDeviceCode extends Eloquent
+class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
-	protected $connection = 'care';
-	protected $table = 't_device_code';
-	protected $primaryKey = 'sid';
-	public $timestamps = false;
-
-	protected $casts = [
-		'type' => 'int',
-		'active' => 'int',
-		'first' => 'int',
-		'ver' => 'int',
-		'rom' => 'int',
-		'model' => 'int',
-		'product_type' => 'int'
-	];
-
-	protected $dates = [
-		'register',
-		'product_date',
-		'storage_time'
-	];
-
 	protected $fillable = [
 		'type',
 		'imei',
@@ -82,6 +57,8 @@ class TDeviceCode extends Eloquent
 		'model',
 		'product_date',
 		'product_type',
-		'storage_time'
+		'storage_time',
+        'ebike_type_id',
+        'channel_id'
 	];
 }
