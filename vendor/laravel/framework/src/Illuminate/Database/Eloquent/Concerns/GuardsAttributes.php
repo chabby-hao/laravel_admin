@@ -18,8 +18,7 @@ trait GuardsAttributes
      *
      * @var array
      */
-    //protected $guarded = ['*'];
-    protected $guarded = [];
+    protected $guarded = ['*'];
 
     /**
      * Indicates if all mass assignment is enabled.
