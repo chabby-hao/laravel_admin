@@ -1,3 +1,6 @@
 [submodule "docker"]
 	path = laradock
 	url = https://github.com/chabby-hao/laradock.git
+[submodule "test"]
+    path = vendor/zizaco/entrust
+    url = https://github.com/Zizaco/entrust.git
