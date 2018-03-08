@@ -35,6 +35,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @mixin \Eloquent
  * @property int|null $type_id 渠道ID or 品牌id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereTypeId($value)
+ * @property string|null $email
+ * @property string|null $remember_token
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereRememberToken($value)
+ * @property bool $user_type 0=全部，1=渠道商，2=品牌商
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereUserType($value)
  */
 class BiUser extends Eloquent
 {

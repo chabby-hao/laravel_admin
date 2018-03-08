@@ -205,4 +205,18 @@ class Helper
         return $array;
     }
 
+    /**
+     * @param $array
+     * @param $key
+     * @param $value
+     */
+    public static function transToKeyValueArray($array, $key, $value)
+    {
+        $data = [];
+        foreach ($array as $row){
+            $data[$row[$key]] = $row[$value];
+        }
+        return $data;
+    }
+
 }

@@ -9,6 +9,17 @@ class AuthLogic extends BaseLogic
 {
 
     /**
+     * 获取当前登录用户正在使用的权限动作名称
+     * @return string
+     */
+    public static function getPermisName()
+    {
+        //route name 当成是权限 name
+        return 'hello';
+    }
+
+
+    /**
      * @param $name
      * @param $pwd
      * @return bool

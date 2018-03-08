@@ -21,3 +21,6 @@ Route::get('/','Bi\HomeController@index');
 Route::get('/phpinfo',function(){
     phpinfo();
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

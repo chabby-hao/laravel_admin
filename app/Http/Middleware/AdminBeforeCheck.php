@@ -21,7 +21,8 @@ class AdminBeforeCheck
     public function handle(Request $request, \Closure $next)
     {
 
-        $isLogin = session('is_login', 0);
+        return $next($request);
+        /*$isLogin = session('is_login', 0);
         $routeName = $request->route()->getName();
         if(!in_array($routeName, $this->noLoginRoutes)){
             //需要效验登录
@@ -40,7 +41,7 @@ class AdminBeforeCheck
 //        $a = session()->all();
 //        Log::debug('session  : ' . json_encode($a));
 
-        return $next($request);
+        return $next($request);*/
     }
 
 }

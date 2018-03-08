@@ -20,6 +20,8 @@ Route::middlewareGroup('admin', [
 
 Route::any('/index/welcome', 'Admin\IndexController@welcome');
 
+Route::any('/user/list', 'Admin\UserController@list');
+Route::any('/user/add', 'Admin\UserController@add');
 
 //放在最后
-Route::any('/', 'Admin\AuthController@login')->name('login');
+Route::any('/', 'Admin\AuthController@login');

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiChannel
@@ -15,8 +16,14 @@ namespace App\Models;
  */
 class BiChannel extends \App\Models\Base\BiChannel
 {
-	protected $fillable = [
-		'channel_name',
-		'channel_remark'
-	];
+    protected $fillable = [
+        'channel_name',
+        'channel_remark'
+    ];
+
+    public static function getChannelMap()
+    {
+        $rs = self::orderByDesc('id')->get();
+        return Helper::transToKeyValueArray($rs, 'id', 'channel_name');
+    }
 }

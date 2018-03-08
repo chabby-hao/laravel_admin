@@ -16,9 +16,6 @@ class IndexController extends BaseController
 
     public function welcome()
     {
-        $user = Auth::user();
-        var_dump($user);exit;
-
         return view('admin.index.welcome');
     }
 

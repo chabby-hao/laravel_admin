@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiBrand
@@ -15,9 +16,15 @@ namespace App\Models;
  */
 class BiBrand extends \App\Models\Base\BiBrand
 {
-	protected $fillable = [
-		'brand_name',
-		'brand_remark',
+    protected $fillable = [
+        'brand_name',
+        'brand_remark',
         'id',
-	];
+    ];
+
+    public static function getBrandMap()
+    {
+        $rs = self::orderByDesc('id')->get()->toArray();
+        return Helper::transToKeyValueArray($rs, 'id', 'brand_name');
+    }
 }

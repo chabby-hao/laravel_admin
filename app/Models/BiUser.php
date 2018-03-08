@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Foundation\Auth\User;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 /**
@@ -30,17 +31,32 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLastRecord($value)
  * @property int|null $type_id 渠道ID or 品牌id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereTypeId($value)
+ * @property string|null $email
+ * @property string|null $remember_token
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereRememberToken($value)
+ * @property bool $user_type 0=全部，1=渠道商，2=品牌商
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUserType($value)
  */
-class BiUser extends \App\Models\Base\BiUser
+class BiUser extends User
 {
 
     use EntrustUserTrait;
 
-	protected $fillable = [
-		'username',
-		'password',
-		'type',
-		'channel',
-		'factory_id'
-	];
+    //可查看数据类型
+    const USER_TYPE_ALL = 0;//全部
+    const USER_TYPE_CHANNEL = 1;//渠道商
+    const USER_TYPE_BRAND = 2;//品牌商
+
+    protected $guarded = [];
+
+    public static function getUserTypeMap($userType = null)
+    {
+        $map = [
+            self::USER_TYPE_ALL=>'全部',
+            self::USER_TYPE_CHANNEL=>'渠道商',
+            self::USER_TYPE_BRAND=>'品牌',
+        ];
+        return $userType ? $map[$userType] : $map;
+    }
 }
