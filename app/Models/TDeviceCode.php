@@ -40,6 +40,8 @@ namespace App\Models;
  * @property int $channel_id 渠道id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereChannelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereEbikeTypeId($value)
+ * @property int|null $brand_id 品牌id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereBrandId($value)
  */
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {

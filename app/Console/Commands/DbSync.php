@@ -27,7 +27,7 @@ class DbSync extends BaseCommand
 
     public function handle()
     {
-//        $this->categoryDicNew();
+        $this->categoryDicNew();
         $this->deviceCode();
     }
 
@@ -80,7 +80,6 @@ class DbSync extends BaseCommand
                 //品牌
                 BiBrand::firstOrCreate([
                     'brand_name' => $name,
-                    'id'=>$row->type,
                 ], [
                     'brand_remark' => $row->remark,
                 ]);
@@ -88,9 +87,9 @@ class DbSync extends BaseCommand
         }
 
         foreach ($res as $row) {
-            $name = $row->name;
             if ($row->level == 6) {
                 //车型
+                $name = $row->name;
                 $type = $row->type;
                 $val = TDeviceCategoryDicNew::where(['type'=>$type,'level'=>5])->first();
                 if($val){
@@ -99,7 +98,7 @@ class DbSync extends BaseCommand
                     $brandId = $brandModel->id;
                     BiEbikeType::firstOrCreate([
                         'ebike_name'=>$name,
-                        'ev_model'=>$row->ev_model,
+                        //'ev_model'=>$row->ev_model,
                     ],[
                         'ebike_remark'=>$row->remark,
                         'brand_id'=>$brandId,
@@ -121,12 +120,15 @@ class DbSync extends BaseCommand
 
         $dicNews = TDeviceCategoryDicNew::whereLevel(3)->whereProducts(6)->get()->keyBy('channel')->toArray();
 
-        $brandIds = BiBrand::select('id')->get()->toArray();
-        $brandIds = Helper::transToOneDimensionalArray($brandIds, 'id');
+        //手动修改漏掉的渠道
+        $dicNews[11] = ['name'=>'双马'];
+
+        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = Helper::transToOneDimensionalArray($types, 'type');
         $page = 1;
         $perPage = 100;
         do {
-            $pagination = TDeviceCode::whereIn('type', $brandIds)->whereNotNull('ebike_type_id')->simplePaginate($perPage, ['*'], 'page', $page++);
+            $pagination = TDeviceCode::whereIn('type', $types)->simplePaginate($perPage, ['*'], 'page', $page++);
 
             /** @var TDeviceCode $deviceCode */
             foreach ($pagination->items() as $deviceCode) {
@@ -134,7 +136,42 @@ class DbSync extends BaseCommand
                 echo "begin processing udid: $udid" . "\n";
                 $type = $deviceCode->type;
                 if($row = TDeviceCategory::whereUdid($udid)->first()){
-                    $brandId = $row->category;
+                    $evModel = substr($row->model, -3);
+
+                    $dicNew = TDeviceCategoryDicNew::whereType($type)->whereEvModel($evModel)->whereLevel(6)->first();
+                    if(!$dicNew){
+                        $dicNew = TDeviceCategoryDicNew::whereType($type)->whereLevel(6)->first();
+                        if(!$dicNew){
+                            continue;
+                        }
+                    }
+
+                    $brandName = TDeviceCategoryDicNew::whereType($type)->whereLevel(5)->first()->name;
+
+                    $oldEvName =$dicNew->name;
+                    $channel = $dicNew->channel;
+                    $channelName = $dicNews[$channel]['name'];
+
+                    $channelId = BiChannel::whereChannelName($channelName)->first()->id;
+
+                    $ebike = BiEbikeType::whereEbikeName($oldEvName)->first();
+
+                    $brandId = BiBrand::whereBrandName($brandName)->first()->id;
+
+                    $deviceCode->channel_id = $channelId;
+                    $deviceCode->ebike_type_id = $ebike->id;
+                    $deviceCode->brand_id = $brandId;
+
+                    //var_dump($deviceCode->toArray());
+
+                    $deviceCode->save();
+
+                    echo "process success udid: $udid, chanel_id:$channelId, eb_type_id:{$ebike->id}" . "\n";
+
+
+                    /*$brandName = $dicNew->name;
+                    $brandId = BiBrand::whereBrandName($brandName)->first()->id;
+                    //$brandId = $row->category;
                     $evModel = substr($row->model, -3);
                     if($ebike = BiEbikeType::whereBrandId($brandId)->whereEvModel($evModel)->first()){
                         $deviceCode->ebike_type_id = $ebike->id;
@@ -146,7 +183,7 @@ class DbSync extends BaseCommand
                             $deviceCode->save();
                             echo "process success udid: $udid, chanel_id:$channelId, eb_type_id:{$ebike->id}" . "\n";
                         }
-                    }
+                    }*/
                 }
             }
 

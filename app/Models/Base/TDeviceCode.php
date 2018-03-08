@@ -48,6 +48,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereVer($value)
  * @mixin \Eloquent
+ * @property int|null $brand_id 品牌id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereBrandId($value)
  */
 class TDeviceCode extends Eloquent
 {
