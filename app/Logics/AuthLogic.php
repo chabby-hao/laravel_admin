@@ -4,6 +4,11 @@ namespace App\Logics;
 
 
 use App\Models\BiUser;
+use App\Permission;
+use App\Role;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class AuthLogic extends BaseLogic
 {
@@ -19,36 +24,74 @@ class AuthLogic extends BaseLogic
     }
 
 
+    public function createUser(array $data)
+    {
+        try {
+            $user = new BiUser();
+            $user->username = $data['username'];
+            $user->password = bcrypt($data['password']);
+            $user->user_type = $data['user_type'];
+            $user->email = $data['email'];
+            $user->type_id = $data['type_id'];
+            $r = $user->save();
+            if($r){
+                $user->attachRole($data['role_id']);
+                return true;
+            }
+            return false;
+        }catch (\Exception $e){
+            Log::error('createUser db error' . $e->getMessage());
+        }
+    }
+
     /**
      * @param $name
      * @param $pwd
      * @return bool
      */
-    public function login($name, $pwd)
+    public function login($name, $pwd, $ip)
     {
-        $user = BiUser::whereUsername($name)->first();
-        if($user){
-            $pwd2= $user->password;
-            $pwd1 = $this->encrypt($pwd);
-            if($pwd1 === $pwd2){
-                session()->put('is_login', 1);
-                session()->put($user->toArray());
-                session()->put('user_id', $user->id);
-                session()->save();
-                return true;
-            }
-        }
-        return false;
 
+        if(Auth::attempt(['username'=>$name,'password'=>$pwd])){
+            /** @var BiUser $user */
+            $user = Auth::user();
+            $user->last_ip = $ip;
+            $user->login_at = date('Y-m-d H:i:s');
+            $user->save();
+            return true;
+        }else{
+            session()->put('aabb',333);
+            session()->save();
+            return false;
+        }
     }
 
-    /**
-     * @param $pwd
-     * @return string
-     */
-    public function encrypt($pwd)
+    public function createRole($data)
     {
-        return md5($pwd);
+        try{
+            $role = new Role();
+            $role->name = $data['name'];
+            $role->display_name = $data['display_name'];
+            $role->description = $data['description'];
+            return $role->save();
+        }catch (\Exception $e){
+            Log::error('createRole db error:' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function createPermis($data)
+    {
+        try {
+            $role = new Permission();
+            $role->name = $data['name'];
+            $role->display_name = $data['display_name'];
+            $role->description = $data['description'];
+            return $role->save();
+        } catch (\Exception $e) {
+            Log::error('createPermis db error:' . $e->getMessage());
+            return false;
+        }
     }
 
 }

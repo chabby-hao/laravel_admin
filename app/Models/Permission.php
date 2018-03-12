@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Libs\Helper;
 use Zizaco\Entrust\EntrustPermission;
 
 /**
@@ -24,5 +25,12 @@ use Zizaco\Entrust\EntrustPermission;
  */
 class Permission extends EntrustPermission
 {
+
+    public static function getPermisNameMap($permisId = null)
+    {
+        $data = self::get()->toArray();
+        $map = Helper::transToKeyValueArray($data, 'id','display_name');
+        return $permisId === null ? $map : $map[$permisId];
+    }
 
 }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
+use App\Libs\Helper;
 use Zizaco\Entrust\EntrustRole;
 
 /**
@@ -25,5 +26,12 @@ use Zizaco\Entrust\EntrustRole;
  */
 class Role extends EntrustRole
 {
+
+    public static function getRoleNameMap($roleId = null)
+    {
+        $data = self::get()->toArray();
+        $map = Helper::transToKeyValueArray($data, 'id','display_name');
+        return $roleId === null ? $map : $map[$roleId];
+    }
 
 }

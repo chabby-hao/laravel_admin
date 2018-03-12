@@ -11,7 +11,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Libs\MyPage;
 use App\Logics\AuthLogic;
-use App\Models\BiUser;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -20,31 +21,68 @@ class RoleController extends BaseController
     public function list()
     {
 
-        $paginate = BiUser::orderByDesc('id')->paginate();
+        $paginate = Role::orderByDesc('id')->paginate();
 
-        return view('admin.admin.list',[
-            'admins'=>$paginate->items(),
-            'page_nav'=>MyPage::showPageNav($paginate),
+        return view('admin.role.list', [
+            'datas' => $paginate->items(),
+            'page_nav' => MyPage::showPageNav($paginate),
         ]);
     }
 
-
-
-
-    public function login(Request $request)
+    public function add(Request $request)
     {
 
-        if($request->isXmlHttpRequest()){
-            $check = ['name','pwd'];
-            $data = $this->checkParams($check, $request->input());
+        if ($request->isXmlHttpRequest()) {
+            //添加用户
+            $intput = $this->checkParams([
+                'name',
+                'display_name',
+                'description'
+            ], $request->input(), ['display_name', 'description']);
+
             $authLogic = new AuthLogic();
-            if($authLogic->login($data['name'], $data['pwd'])){
-                return $this->outPutRedirect(URL::action('Admin\IndexController@welcome'), 0);
+
+            if($authLogic->createRole($intput)){
+                return $this->outPutRedirect(URL::action('Admin\RoleController@list'));
+            }else{
+                return $this->outPutError('操作失败，请确认角色名不重复');
             }
-            return $this->outPutError('用户名或者密码错误');
+
         }
 
-        return view('admin.auth.login');
+        return view('admin.role.add');
     }
+
+    public function attachPermis(Request $request)
+    {
+        $id = $request->input('id');
+        if(!$id){
+            return $this->outPutError();
+        }
+
+        $role = Role::find($id);
+
+        if($request->isXmlHttpRequest()){
+            $data = $this->checkParams(['permis_id'],$request->input());
+            $role->savePermissions($data['permis_id']);
+            return $this->outPutRedirect(URL::action('Admin\RoleController@list'));
+        }
+
+        $permiss = Permission::all();
+
+        $permisKeyByName = [];
+
+        foreach ($permiss as $permis){
+            list($controller, ) = explode('/',$permis->name);
+            $permisKeyByName[$controller][] = $permis;
+        }
+
+        return view('admin.role.attach_permis',[
+            'role'=>$role,
+            'permisMap'=>$permisKeyByName,
+        ]);
+
+    }
+
 
 }

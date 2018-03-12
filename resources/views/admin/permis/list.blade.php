@@ -4,7 +4,7 @@
         <hr>
 
         <div class="row-fluid">
-            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\UserController@add'); ?>" class="btn btn-success">新增账号</a></span>
+            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\PermisController@add'); ?>" class="btn btn-success">新增权限</a></span>
         </div>
 
         <div class="row-fluid margintop">
@@ -36,31 +36,23 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>账号</th>
-                                <th>账号类型</th>
-                                <th>角色</th>
-                                <th>email</th>
+                                <th>角色名(英文)</th>
+                                <th>角色展示名(中文)</th>
+                                <th>角色描述</th>
                                 <th>创建时间</th>
-                                <th>最后登录</th>
-                                <th>最后IP</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php/** @var \App\Models\BiUser $user */?>
-                            @foreach($users as $user)
+                            <?php/** @var \App\Models\Role $data */?>
+                            @foreach($datas as $data)
                                 <tr class="gradeX">
-                                    <td>{{$user->id}}</td>
-                                    <td>{{$user->username}}</td>
-                                    <td>{{\App\Models\BiUser::getUserTypeMap( $user->user_type)}}</td>
-                                    <td>{{\App\Models\Role::getRoleNameMap($user->role_id)}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->created_at}}</td>
-                                    <td>{{$user->login_at}}</td>
-                                    <td>{{$user->last_ip}}</td>
-                                    <td>
-                                        <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@attachRole',['id'=>$user->id])}}" class="btn btn-warning">分配角色</a>
-                                    </td>
+                                    <td>{{$data->id}}</td>
+                                    <td>{{$data->name}}</td>
+                                    <td>{{$data->display_name}}</td>
+                                    <td>{{$data->description}}</td>
+                                    <td>{{$data->created_at}}</td>
+                                    <td></td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->
                                     <!--<!--                                            <a href="javascript:;" class="btn btn-danger del">删除</a>-->

@@ -41,6 +41,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereRememberToken($value)
  * @property bool $user_type 0=全部，1=渠道商，2=品牌商
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereUserType($value)
+ * @property string|null $login_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereLoginAt($value)
  */
 class BiUser extends Eloquent
 {

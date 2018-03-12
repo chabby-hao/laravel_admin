@@ -100,6 +100,9 @@ $(function () {
     $.ajaxSetup({
         dataType: 'json',
         type: 'post',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         beforeSend: function () {
             onStart();
         },

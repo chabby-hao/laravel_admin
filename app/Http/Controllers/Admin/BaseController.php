@@ -15,25 +15,36 @@ use Illuminate\Http\Request;
 class BaseController extends Controller
 {
 
-    protected function outPut(array $data = [])
+    protected function outPut(array $data = [], $die = false)
     {
-        $data['code'] = 200;
-        header('Content-Type: application/json');
-        die(json_encode($data));
+        if(!isset($data['code'])){
+            $data['code'] = 200;
+        }
+        if($die){
+            die(json_encode($data));
+        }else{
+            return response($data);
+        }
     }
 
     protected function outPutSuccess()
     {
-        $this->outPut(['msg'=>'success']);
+        return $this->outPut(['msg'=>'success']);
     }
 
-    protected function outPutError($msg, array $data = [])
+    protected function outPutError($msg = 'error', array $data = [], $die = false)
     {
         if (!isset($data['code'])) {
             $data['code'] = 500;
         }
         $data['msg'] = $msg;
-        die(json_encode($data));
+        return $this->outPut($data, $die);
+        //die(json_encode($data));
+    }
+
+    protected function outputErrorWithDie($msg = 'error', array $data = [])
+    {
+        return $this->outPutError($msg, $data, true);
     }
 
     /**
@@ -43,7 +54,7 @@ class BaseController extends Controller
      */
     protected function outPutRedirect($url, $timeout = 1200)
     {
-        $this->outPut([
+        return $this->outPut([
             'redirect'=>$url,
             'timeout'=>$timeout,
         ]);
@@ -53,7 +64,7 @@ class BaseController extends Controller
     {
         $data = Helper::arrayRequiredCheck($check, $input, false, $allowEmptys);
         if ($data === false) {
-            return $this->outPutError('请填写完整信息');
+            return $this->outputErrorWithDie('请填写完整信息', []);
         }
         return $data;
     }

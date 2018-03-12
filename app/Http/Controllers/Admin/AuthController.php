@@ -36,7 +36,7 @@ class AuthController extends BaseController
             $check = ['name','pwd'];
             $data = $this->checkParams($check, $request->input());
             $authLogic = new AuthLogic();
-            if($authLogic->login($data['name'], $data['pwd'])){
+            if($authLogic->login($data['name'], $data['pwd'], $request->ip())){
                 return $this->outPutRedirect(URL::action('Admin\IndexController@welcome'), 0);
             }
             return $this->outPutError('用户名或者密码错误');

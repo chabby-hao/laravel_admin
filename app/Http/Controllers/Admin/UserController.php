@@ -11,51 +11,94 @@ namespace App\Http\Controllers\Admin;
 
 use App\Libs\Helper;
 use App\Libs\MyPage;
+use App\Logics\AuthLogic;
 use App\Models\BiUser;
-use App\Models\Feedbacks;
-use App\Models\User;
-use App\Services\ActivityService;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends BaseController
 {
     public function list()
     {
 
-        $users = BiUser::orderByDesc('id')->paginate();
+        $users = BiUser::join('role_user','id','=','user_id')->orderByDesc('id')->paginate();
         $usersList = $users->items();
-        /** @var User $user */
+
         foreach ($usersList as $user){
 
         }
 
-        return view('admin.user.list',[
-            'users'=>$usersList,
-            'page_nav'=>MyPage::showPageNav($users),
+        return view('admin.user.list', [
+            'users' => $usersList,
+            'page_nav' => MyPage::showPageNav($users),
         ]);
     }
 
     public function add(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
+            $input = $request->input();
+            if(!$input = Helper::arrayRequiredCheck(['username',
+                'password',
+                'password_confirm',
+                'user_type',
+                'email',
+                'brand_id',
+                'channel_id',
+                'role_id'
+            ],$input,false,['email','brand_id','channel_id'])){
+                $this->outPutError('信息不完整');
+            }
 
+            if($input['user_type'] == BiUser::USER_TYPE_ALL){
+                $input['type_id'] = 0;
+            }elseif($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']){
+                $input['type_id'] = $input['channel_id'];
+            }elseif($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']){
+                $input['type_id'] =$input['brand_id'];
+            }else{
+                $this->outPutError('信息有误，请确认填写正确');
+            }
+
+            $authLogic = new AuthLogic();
+            if($authLogic->createUser($input)){
+                return $this->outPutRedirect(URL::action('Admin\UserController@list'));
+            }
+            return $this->outPutError('添加失败,请确认是否有重复的账号名称');
         }
 
         return view('admin.user.add');
     }
 
-    public function feedback()
+    /**
+     * 用户分配角色
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function attachRole(Request $request)
     {
 
-        $feedbacks = Feedbacks::join('users',function($join){
-            $join->on('users.id','=','user_id');
-        })->select(['feedbacks.*','users.phone'])->orderBy('id')->paginate();
+        $id = $request->input('id');
 
-        return view('admin.user.feedbacks',[
-            'feedbacks'=>$feedbacks->items(),
-            'page_nav'=>MyPage::showPageNav($feedbacks),
+        if(!$id){
+            return $this->outPutError();
+        }
+        $user = BiUser::find($id);
+
+        if($request->isXmlHttpRequest()){
+            $roleId = $this->checkParams(['role_id'], $request->input())['role_id'];
+            //$user->roles()->detach();
+            $user->roles()->sync([$roleId]);
+            return $this->outPutRedirect(URL::action('Admin\UserController@list'));
+        }
+
+        $roles = Role::all();
+
+        return view('admin.user.attach_role',[
+            'user'=>$user,
+            'roles'=>$roles,
         ]);
-
     }
 
 }

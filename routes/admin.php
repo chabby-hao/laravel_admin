@@ -13,15 +13,33 @@ use Illuminate\Http\Request;
 |
 */
 Route::middlewareGroup('admin', [
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\VerifyCsrfToken::class,
     \App\Http\Middleware\AdminBeforeCheck::class,
 ]);
 
 Route::any('/index/welcome', 'Admin\IndexController@welcome');
 
+Route::any('/auth/login','Admin\AuthController@login')->name('admin-login');
+Route::any('/auth/logout',function(){
+    \Illuminate\Support\Facades\Auth::logout();
+    return \Illuminate\Support\Facades\Redirect::route('admin-login');
+})->name('admin_logout');
+
 Route::any('/user/list', 'Admin\UserController@list');
 Route::any('/user/add', 'Admin\UserController@add');
+Route::any('/user/attachRole', 'Admin\UserController@attachRole');
+
+Route::any('/role/list','Admin\RoleController@list');
+Route::any('/role/add','Admin\RoleController@add');
+Route::any('/role/attachPermis','Admin\RoleController@attachPermis');
+
+Route::any('/permis/list','Admin\PermisController@list');
+Route::any('/permis/add','Admin\PermisController@add');
+
 
 //放在最后
-Route::any('/', 'Admin\AuthController@login');
+Route::any('/', 'Admin\IndexController@welcome')->name('admin-home');

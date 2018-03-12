@@ -28,7 +28,6 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string|null $last_record
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Role[] $roles
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLastIp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLastRecord($value)
  * @property int|null $type_id 渠道ID or 品牌id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereTypeId($value)
  * @property string|null $email
@@ -37,6 +36,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereRememberToken($value)
  * @property bool $user_type 0=全部，1=渠道商，2=品牌商
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUserType($value)
+ * @property string|null $login_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLoginAt($value)
  */
 class BiUser extends User
 {
@@ -55,8 +56,10 @@ class BiUser extends User
         $map = [
             self::USER_TYPE_ALL=>'全部',
             self::USER_TYPE_CHANNEL=>'渠道商',
-            self::USER_TYPE_BRAND=>'品牌',
+            self::USER_TYPE_BRAND=>'品牌商',
         ];
-        return $userType ? $map[$userType] : $map;
+        return $userType !==null ? $map[$userType] : $map;
     }
+
+
 }
