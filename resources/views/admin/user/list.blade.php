@@ -10,17 +10,13 @@
         <div class="row-fluid margintop">
             <form class="form-search">
                 <div class="control-group">
-                    <div class="controls controls-row">
-                        <div class="inline-block">
-                            <label for="daterange">时间范围</label>
-                            <input name="date_range" id="daterange" type="text"/>
+                    <div class="inline-block w1">
+                        <label for="">时间范围</label>
+                        <div>
+                            <input class="w10" type="text">
                         </div>
-
-                        <div class="inline-block">
-                            <input class="btn btn-success" id="btn-search" type="submit" value="确定"/>
-                        </div>
-
                     </div>
+
                 </div>
             </form>
         </div>
@@ -59,7 +55,8 @@
                                     <td>{{$user->login_at}}</td>
                                     <td>{{$user->last_ip}}</td>
                                     <td>
-                                        <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@attachRole',['id'=>$user->id])}}" class="btn btn-warning">分配角色</a>
+                                        <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@attachRole',['id'=>$user->id])}}" class="btn btn-info">分配角色</a>
+                                        <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@edit',['id'=>$user->id])}}" class="btn btn-warning">编辑</a>
                                     </td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->

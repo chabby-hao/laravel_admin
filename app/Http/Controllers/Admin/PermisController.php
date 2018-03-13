@@ -30,18 +30,12 @@ class PermisController extends BaseController
 
     public function add(Request $request)
     {
-
         if ($request->isXmlHttpRequest()) {
-            //添加用户
-            $intput = $this->checkParams([
-                'name',
-                'display_name',
-                'description'
-            ], $request->input(), ['display_name', 'description']);
+            $input = $this->getInput($request->input());
 
             $authLogic = new AuthLogic();
 
-            if($authLogic->createPermis($intput)){
+            if($authLogic->createPermis($input)){
                 return $this->outPutRedirect(URL::action('Admin\PermisController@list'));
             }else{
                 return $this->outPutError('操作失败，请确认权限名不重复');
@@ -50,6 +44,38 @@ class PermisController extends BaseController
         }
 
         return view('admin.permis.add');
+    }
+
+    public function edit(Request $request)
+    {
+        $id = $this->getId($request);
+
+        if($request->isXmlHttpRequest()){
+            $input = $this->getInput($request->input());
+
+            $authLogic = new AuthLogic();
+
+            if($authLogic->editPermis($id, $input)){
+                return $this->outPutRedirect(URL::action('Admin\PermisController@list'));
+            }else{
+                return $this->outPutError('操作失败，请确认权限名不重复');
+            }
+        }
+
+        return view('admin.permis.edit',[
+            'permis'=>Permission::find($id),
+        ]);
+
+    }
+
+    public function getInput($input)
+    {
+        $input = $this->checkParams([
+            'name',
+            'display_name',
+            'description'
+        ], $input, ['display_name', 'description']);
+        return $input;
     }
 
 

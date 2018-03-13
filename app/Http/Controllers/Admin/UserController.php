@@ -38,29 +38,7 @@ class UserController extends BaseController
     public function add(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $input = $request->input();
-            if(!$input = Helper::arrayRequiredCheck(['username',
-                'password',
-                'password_confirm',
-                'user_type',
-                'email',
-                'brand_id',
-                'channel_id',
-                'role_id'
-            ],$input,false,['email','brand_id','channel_id'])){
-                $this->outPutError('信息不完整');
-            }
-
-            if($input['user_type'] == BiUser::USER_TYPE_ALL){
-                $input['type_id'] = 0;
-            }elseif($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']){
-                $input['type_id'] = $input['channel_id'];
-            }elseif($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']){
-                $input['type_id'] =$input['brand_id'];
-            }else{
-                $this->outPutError('信息有误，请确认填写正确');
-            }
-
+            $input = $this->getFilterInput($request->input());
             $authLogic = new AuthLogic();
             if($authLogic->createUser($input)){
                 return $this->outPutRedirect(URL::action('Admin\UserController@list'));
@@ -69,6 +47,63 @@ class UserController extends BaseController
         }
 
         return view('admin.user.add');
+    }
+
+    public function edit(Request $request)
+    {
+        $id = $request->input('id');
+        if(!$id){
+            return $this->outPutError();
+        }
+
+        if($request->isXmlHttpRequest()){
+            $input = $this->getFilterInput($request->input(), false);
+            $authLogic = new AuthLogic();
+            if($authLogic->editUser($id, $input)){
+                return $this->outPutRedirect(URL::action('Admin\UserController@list'));
+            }
+            return $this->outPutError('修改失败,请确认信息正确');
+        }
+
+        return view('admin.user.edit',[
+            'user'=>BiUser::getUserWithRole($id),
+        ]);
+
+    }
+
+    private function getFilterInput($input, $needPwd = true)
+    {
+        $arrCheck = ['username',
+            //'password',
+            //'password_confirm',
+            'user_type',
+            'email',
+            'brand_id',
+            'channel_id',
+            'role_id'
+        ];
+        if($needPwd){
+            $arrCheck[] = 'password';
+            $arrCheck[] = 'password_confirm';
+        }
+        if(!$input = Helper::arrayRequiredCheck($arrCheck,$input,false,['email','brand_id','channel_id'])){
+            return $this->outPutError('信息不完整');
+        }
+        if($needPwd && ($input['password'] !== $input['password_confirm'])){
+            return $this->outPutError('两次密码不一致');
+        }
+
+
+        if($input['user_type'] == BiUser::USER_TYPE_ALL){
+            $input['type_id'] = 0;
+        }elseif($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']){
+            $input['type_id'] = $input['channel_id'];
+        }elseif($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']){
+            $input['type_id'] =$input['brand_id'];
+        }else{
+            $this->outPutError('信息有误，请确认填写正确');
+        }
+        return $input;
     }
 
     /**

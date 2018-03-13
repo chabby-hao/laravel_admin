@@ -41,7 +41,7 @@
                             @endforeach
 
                             <div class="form-actions">
-                                <button type="button" id="mysubmit" class="btn btn-success">添加</button>
+                                <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>
                         </form>
                     </div>

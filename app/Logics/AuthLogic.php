@@ -4,11 +4,13 @@ namespace App\Logics;
 
 
 use App\Models\BiUser;
-use App\Permission;
-use App\Role;
+use App\Models\Permission;
+use App\Models\Role;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Mockery\Exception;
+use Illuminate\Support\Facades\Route;
+use Phalcon\Http\Request;
 
 class AuthLogic extends BaseLogic
 {
@@ -19,8 +21,11 @@ class AuthLogic extends BaseLogic
      */
     public static function getPermisName()
     {
-        //route name 当成是权限 name
-        return 'hello';
+        $uri = Route::getCurrentRoute()->uri();
+        $permisName = trim(substr($uri, 5), '/');
+        /** @var Permission $permis */
+        $permis = Permission::whereName($permisName)->first();
+        return $permis ? $permis->display_name : '';
     }
 
 
@@ -40,7 +45,27 @@ class AuthLogic extends BaseLogic
             }
             return false;
         }catch (\Exception $e){
-            Log::error('createUser db error' . $e->getMessage());
+            Log::error('create user db error' . $e->getMessage());
+        }
+    }
+
+    public function editUser($id, array $data)
+    {
+        try {
+            $user = BiUser::find($id);
+            $user->username = $data['username'];
+            //$user->password = bcrypt($data['password']);
+            $user->user_type = $data['user_type'];
+            $user->email = $data['email'];
+            $user->type_id = $data['type_id'];
+            $r = $user->save();
+            if($r){
+                $user->roles()->sync([$data['role_id']]);
+                return true;
+            }
+            return false;
+        }catch (\Exception $e){
+            Log::error('edit user db error' . $e->getMessage());
         }
     }
 
@@ -66,7 +91,7 @@ class AuthLogic extends BaseLogic
         }
     }
 
-    public function createRole($data)
+    public function createRole(array $data)
     {
         try{
             $role = new Role();
@@ -75,7 +100,21 @@ class AuthLogic extends BaseLogic
             $role->description = $data['description'];
             return $role->save();
         }catch (\Exception $e){
-            Log::error('createRole db error:' . $e->getMessage());
+            Log::error('create role db error:' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function editRole($id, array $data)
+    {
+        try{
+            $role = Role::find($id);
+            $role->name = $data['name'];
+            $role->display_name = $data['display_name'];
+            $role->description = $data['description'];
+            return $role->save();
+        }catch (\Exception $e){
+            Log::error('edit role db error:' . $e->getMessage());
             return false;
         }
     }
@@ -83,13 +122,27 @@ class AuthLogic extends BaseLogic
     public function createPermis($data)
     {
         try {
-            $role = new Permission();
-            $role->name = $data['name'];
-            $role->display_name = $data['display_name'];
-            $role->description = $data['description'];
-            return $role->save();
+            $permis = new Permission();
+            $permis->name = $data['name'];
+            $permis->display_name = $data['display_name'];
+            $permis->description = $data['description'];
+            return $permis->save();
         } catch (\Exception $e) {
-            Log::error('createPermis db error:' . $e->getMessage());
+            Log::error('create permis db error:' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function editPermis($id, $data)
+    {
+        try {
+            $permis = Permission::find($id);
+            $permis->name = $data['name'];
+            $permis->display_name = $data['display_name'];
+            $permis->description = $data['description'];
+            return $permis->save();
+        } catch (\Exception $e) {
+            Log::error('edit permis db error:' . $e->getMessage());
             return false;
         }
     }

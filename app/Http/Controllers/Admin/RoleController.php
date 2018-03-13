@@ -33,18 +33,13 @@ class RoleController extends BaseController
     {
 
         if ($request->isXmlHttpRequest()) {
-            //添加用户
-            $intput = $this->checkParams([
-                'name',
-                'display_name',
-                'description'
-            ], $request->input(), ['display_name', 'description']);
+            $input = $this->getInput($request->input());
 
             $authLogic = new AuthLogic();
 
-            if($authLogic->createRole($intput)){
+            if ($authLogic->createRole($input)) {
                 return $this->outPutRedirect(URL::action('Admin\RoleController@list'));
-            }else{
+            } else {
                 return $this->outPutError('操作失败，请确认角色名不重复');
             }
 
@@ -53,17 +48,46 @@ class RoleController extends BaseController
         return view('admin.role.add');
     }
 
+    public function edit(Request $request)
+    {
+
+        $id = $this->getId($request);
+
+        if ($request->isXmlHttpRequest()) {
+
+            $input = $this->getInput($request->input());
+
+            $authLogic = new AuthLogic();
+
+            if ($authLogic->editRole($id, $input)) {
+                return $this->outPutRedirect(URL::action('Admin\RoleController@list'));
+            } else {
+                return $this->outPutError('操作失败，请确认角色名不重复');
+            }
+        }
+        return view('admin.role.edit', [
+            'role' => Role::find($id),
+        ]);
+    }
+
+    public function getInput($input)
+    {
+        $input = $this->checkParams([
+            'name',
+            'display_name',
+            'description'
+        ], $input, ['display_name', 'description']);
+        return $input;
+    }
+
     public function attachPermis(Request $request)
     {
-        $id = $request->input('id');
-        if(!$id){
-            return $this->outPutError();
-        }
 
+        $id = $this->getId($request);
         $role = Role::find($id);
 
-        if($request->isXmlHttpRequest()){
-            $data = $this->checkParams(['permis_id'],$request->input());
+        if ($request->isXmlHttpRequest()) {
+            $data = $this->checkParams(['permis_id'], $request->input());
             $role->savePermissions($data['permis_id']);
             return $this->outPutRedirect(URL::action('Admin\RoleController@list'));
         }
@@ -72,14 +96,14 @@ class RoleController extends BaseController
 
         $permisKeyByName = [];
 
-        foreach ($permiss as $permis){
-            list($controller, ) = explode('/',$permis->name);
+        foreach ($permiss as $permis) {
+            list($controller,) = explode('/', $permis->name);
             $permisKeyByName[$controller][] = $permis;
         }
 
-        return view('admin.role.attach_permis',[
-            'role'=>$role,
-            'permisMap'=>$permisKeyByName,
+        return view('admin.role.attach_permis', [
+            'role' => $role,
+            'permisMap' => $permisKeyByName,
         ]);
 
     }

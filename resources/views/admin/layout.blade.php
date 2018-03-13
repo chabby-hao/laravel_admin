@@ -43,7 +43,7 @@
                 {{--<li><a href="#"><i class="icon-check"></i> My Tasks</a></li>--}}
                 {{--<li class="divider"></li>--}}
                 <li>
-                    <a href="{{ \Illuminate\Support\Facades\URL::route('admin_logout')  }}"><i class="icon-key"></i>
+                    <a href="{{ \Illuminate\Support\Facades\URL::route('admin-logout')  }}"><i class="icon-key"></i>
                         Log Out</a></li>
             </ul>
         </li>
@@ -67,9 +67,16 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
             </a>
             <ul>
-                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@list')}}">账号管理</a></li>
-                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@list')}}">角色管理</a></li>
-                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\PermisController@list')}}">权限管理</a></li>
+                @if(Auth::user()->can('user/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@list')}}">账号管理</a></li>
+                @endif
+                @if(Auth::user()->can('role/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@list')}}">角色管理</a></li>
+                @endif
+                @if(Auth::user()->can('permis/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\PermisController@list')}}">权限管理</a>
+                    </li>
+                @endif
             </ul>
 
         </li>

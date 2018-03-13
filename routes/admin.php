@@ -21,25 +21,28 @@ Route::middlewareGroup('admin', [
     \App\Http\Middleware\AdminBeforeCheck::class,
 ]);
 
-Route::any('/index/welcome', 'Admin\IndexController@welcome');
+Route::any('/index/welcome', 'Admin\IndexController@welcome')->name('admin-home');
 
 Route::any('/auth/login','Admin\AuthController@login')->name('admin-login');
 Route::any('/auth/logout',function(){
     \Illuminate\Support\Facades\Auth::logout();
     return \Illuminate\Support\Facades\Redirect::route('admin-login');
-})->name('admin_logout');
+})->name('admin-logout');
 
 Route::any('/user/list', 'Admin\UserController@list');
 Route::any('/user/add', 'Admin\UserController@add');
+Route::any('/user/edit', 'Admin\UserController@edit');
 Route::any('/user/attachRole', 'Admin\UserController@attachRole');
 
 Route::any('/role/list','Admin\RoleController@list');
 Route::any('/role/add','Admin\RoleController@add');
+Route::any('/role/edit','Admin\RoleController@edit');
 Route::any('/role/attachPermis','Admin\RoleController@attachPermis');
 
 Route::any('/permis/list','Admin\PermisController@list');
 Route::any('/permis/add','Admin\PermisController@add');
+Route::any('/permis/edit','Admin\PermisController@edit');
 
 
 //放在最后
-Route::any('/', 'Admin\IndexController@welcome')->name('admin-home');
+Route::any('/', 'Admin\IndexController@welcome');

@@ -44,7 +44,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php/** @var \App\Role $data */?>
+                            <?php/** @var \App\Models\Role $data */?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
                                     <td>{{$data->id}}</td>
@@ -53,7 +53,8 @@
                                     <td>{{$data->description}}</td>
                                     <td>{{$data->created_at}}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@attachPermis',['id'=>$data->id])}}">分配权限</a>
+                                        <a class="btn btn-info" href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@attachPermis',['id'=>$data->id])}}">分配权限</a>
+                                        <a class="btn btn-warning" href="{{URL::action('Admin\RoleController@edit', ['id'=>$data->id])}}">编辑</a>
                                     </td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->

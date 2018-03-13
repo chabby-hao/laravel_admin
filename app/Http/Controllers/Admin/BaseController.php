@@ -15,6 +15,15 @@ use Illuminate\Http\Request;
 class BaseController extends Controller
 {
 
+    protected function getId(Request $request, $id = 'id')
+    {
+        $id = $request->input($id);
+        if(!$id){
+            return $this->outPutError();
+        }
+        return $id;
+    }
+
     protected function outPut(array $data = [], $die = false)
     {
         if(!isset($data['code'])){

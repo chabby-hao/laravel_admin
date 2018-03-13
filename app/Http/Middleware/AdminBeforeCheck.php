@@ -12,7 +12,7 @@ class AdminBeforeCheck
 {
 
     //不用登录就可以访问的路由
-    protected $noLoginRoutes = ['admin-login'];
+    protected $noLoginRoutes = ['admin-login', 'admin-logout'];
 
     /**
      * Handle an incoming request.
@@ -27,20 +27,25 @@ class AdminBeforeCheck
 
         $a = session()->all();
         Log::debug('admin route : ' . $request->route()->getActionName());
-        Log::debug('session  : ' . json_encode($a));
-
-
-//        var_dump(Auth::user());
+        Log::debug('session  : ', $a);
 
         $routeName = $request->route()->getName();
 
-        if (Auth::check()) {
+        if (in_array($routeName, $this->noLoginRoutes)) {
+            //不需要登录
+            return $next($request);
+        }elseif (Auth::check()) {
             // 已通过认证
 
             //判断权限
             //admin/role/list
             $uri = $request->route()->uri();
+
             $permisName = trim(substr($uri, 5), '/');
+
+            if(empty($permisName)){
+                return $next($request);
+            }
 
             /** @var BiUser $user */
             $user = Auth::user();
@@ -48,16 +53,8 @@ class AdminBeforeCheck
                 return abort(403,'未经授权操作');
             }
 
-
-            if (in_array($routeName, $this->noLoginRoutes)) {
-                //需要登录,已登录的直接跳转
-                return Redirect::route('admin-home');
-            }
             return $next($request);
-        } elseif (in_array($routeName, $this->noLoginRoutes)) {
-            // 不需要登录
-            return $next($request);
-        } else {
+        }else{
             return Redirect::route('admin-login');
         }
     }

@@ -52,7 +52,9 @@
                                     <td>{{$data->display_name}}</td>
                                     <td>{{$data->description}}</td>
                                     <td>{{$data->created_at}}</td>
-                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-warning" href="{{\Illuminate\Support\Facades\URL::action('Admin\PermisController@edit', ['id'=>$data->id])}}">编辑</a>
+                                    </td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->
                                     <!--<!--                                            <a href="javascript:;" class="btn btn-danger del">删除</a>-->

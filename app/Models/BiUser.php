@@ -61,5 +61,9 @@ class BiUser extends User
         return $userType !==null ? $map[$userType] : $map;
     }
 
+    public static function getUserWithRole($id)
+    {
+        return BiUser::join('role_user','id','=','user_id')->find($id);
+    }
 
 }
