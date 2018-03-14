@@ -17,17 +17,6 @@ use Illuminate\Support\Facades\URL;
 
 class AuthController extends BaseController
 {
-    public function list()
-    {
-
-        $paginate = BiUser::orderByDesc('id')->paginate();
-
-        return view('admin.admin.list',[
-            'admins'=>$paginate->items(),
-            'page_nav'=>MyPage::showPageNav($paginate),
-        ]);
-    }
-
 
     public function login(Request $request)
     {

@@ -9,8 +9,6 @@
 namespace App\Http\Controllers\Admin;
 
 
-use Illuminate\Support\Facades\Auth;
-
 class IndexController extends BaseController
 {
 
