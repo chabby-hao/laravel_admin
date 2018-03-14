@@ -55,6 +55,7 @@
                                     <td>
                                         <a class="btn btn-info" href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@attachPermis',['id'=>$data->id])}}">分配权限</a>
                                         <a class="btn btn-warning" href="{{URL::action('Admin\RoleController@edit', ['id'=>$data->id])}}">编辑</a>
+                                        <a href="javascript:;" data-id="{{$data->id}}" class="btn btn-danger del">删除</a>
                                     </td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->
@@ -72,4 +73,5 @@
             </div>
         </div>
     </div>
+    @include('admin.common_deletejs',['url'=>URL::action('Admin\RoleController@delete')])
 @endsection

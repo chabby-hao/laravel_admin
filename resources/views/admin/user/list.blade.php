@@ -57,6 +57,7 @@
                                     <td>
                                         <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@attachRole',['id'=>$user->id])}}" class="btn btn-info">分配角色</a>
                                         <a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@edit',['id'=>$user->id])}}" class="btn btn-warning">编辑</a>
+                                        <a href="javascript:;" data-id="{{$user->id}}" class="btn btn-danger del">删除</a>
                                     </td>
                                     <!--                                        <td>-->
                                     <!--                                            <a href="" class="btn btn-info">设置</a>-->
@@ -74,4 +75,5 @@
             </div>
         </div>
     </div>
+    @include('admin.common_deletejs',['url'=>URL::action('Admin\UserController@delete')])
 @endsection

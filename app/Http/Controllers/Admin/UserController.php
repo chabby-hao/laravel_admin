@@ -106,6 +106,16 @@ class UserController extends BaseController
         return $input;
     }
 
+    public function delete(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            $id = $this->getId($request);
+            $user = BiUser::findOrFail($id);
+            $user->delete();
+            return $this->outPutSuccess();
+        }
+    }
+
     /**
      * 用户分配角色
      * @param Request $request

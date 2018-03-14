@@ -70,6 +70,16 @@ class RoleController extends BaseController
         ]);
     }
 
+    public function delete(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            $id = $this->getId($request);
+            $role = Role::findOrFail($id);
+            $role->delete();
+            return $this->outPutSuccess();
+        }
+    }
+
     public function getInput($input)
     {
         $input = $this->checkParams([

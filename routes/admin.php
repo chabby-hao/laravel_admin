@@ -33,11 +33,13 @@ Route::any('/user/list', 'Admin\UserController@list');
 Route::any('/user/add', 'Admin\UserController@add');
 Route::any('/user/edit', 'Admin\UserController@edit');
 Route::any('/user/attachRole', 'Admin\UserController@attachRole');
+Route::any('/user/delete', 'Admin\UserController@delete');
 
 Route::any('/role/list','Admin\RoleController@list');
 Route::any('/role/add','Admin\RoleController@add');
 Route::any('/role/edit','Admin\RoleController@edit');
 Route::any('/role/attachPermis','Admin\RoleController@attachPermis');
+Route::any('/role/delete','Admin\RoleController@delete');
 
 Route::any('/permis/list','Admin\PermisController@list');
 Route::any('/permis/add','Admin\PermisController@add');
