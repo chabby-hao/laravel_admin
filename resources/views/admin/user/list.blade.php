@@ -43,7 +43,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php/** @var \App\Models\BiUser $user */?>
+                            <?php /** @var \App\Models\BiUser $user */ ?>
                             @foreach($users as $user)
                                 <tr class="gradeX">
                                     <td>{{$user->id}}</td>
