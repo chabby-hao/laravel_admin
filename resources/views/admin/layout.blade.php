@@ -64,7 +64,7 @@
         <!--<li class="active"><a href=""><i class="icon icon-home"></i>
                 <span>Dashboard</span></a></li>-->
         <!--        用户参数配置，用于集成api-->
-        <li class="submenu"><a href="{{URL::route('admin-home')}}"><i class="icon icon-th-list"></i> <span>权限管理</span>
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
             </a>
             <ul>
                 @if(Auth::user()->can('user/list'))
@@ -100,7 +100,7 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"><a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <div id="breadcrumb"><a href="{{URL::route('admin-home')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
             <a href="#" class="current"><?php echo \App\Logics\AuthLogic::getPermisName(); ?></a></div>
     </div>
     @section('content')
