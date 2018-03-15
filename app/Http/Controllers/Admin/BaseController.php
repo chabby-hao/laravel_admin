@@ -41,7 +41,7 @@ class BaseController extends Controller
         return $this->outPut(['msg'=>'success']);
     }
 
-    protected function outPutError($msg = 'error', array $data = [], $die = false)
+    protected function outPutError($msg = 'error', array $data = [], $die = true)
     {
         if (!isset($data['code'])) {
             $data['code'] = 500;

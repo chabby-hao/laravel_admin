@@ -101,7 +101,7 @@ class UserController extends BaseController
         }elseif($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']){
             $input['type_id'] =$input['brand_id'];
         }else{
-            $this->outPutError('信息有误，请确认填写正确');
+            return $this->outPutError('信息有误，请确认填写正确');
         }
         return $input;
     }
