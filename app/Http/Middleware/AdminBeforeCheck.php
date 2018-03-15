@@ -51,7 +51,10 @@ class AdminBeforeCheck
             $user = Auth::user();
             if(!$user->can($permisName)){
                 //开发阶段暂时解除权限操作
-                //return abort(403,'未经授权操作');
+                if($request->isXmlHttpRequest()){
+                    return response(['code'=>500,'msg'=>'未经授权操作']);
+                }
+                return abort(403,'未经授权操作');
             }
 
             return $next($request);
