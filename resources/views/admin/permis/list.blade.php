@@ -44,7 +44,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php/** @var \App\Models\Role $data */?>
+                            <?php /** @var \App\Models\Role $data */ ?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
                                     <td>{{$data->id}}</td>
