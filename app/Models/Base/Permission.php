@@ -10,17 +10,25 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiWarningUser
+ * Class Permission
  * 
  * @property int $id
  * @property string $name
+ * @property string $display_name
+ * @property string $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property string $email_address
+ * 
+ * @property \Illuminate\Database\Eloquent\Collection $roles
  *
  * @package App\Models\Base
  */
-class BiWarningUser extends Eloquent
+class Permission extends Eloquent
 {
 	protected $connection = 'bi';
+
+	public function roles()
+	{
+		return $this->belongsToMany(\App\Models\Role::class);
+	}
 }

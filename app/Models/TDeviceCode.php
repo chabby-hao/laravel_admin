@@ -63,4 +63,10 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         'ebike_type_id',
         'channel_id'
 	];
+
+    public static function getByUdid($udid)
+    {
+        return self::whereQr($udid)->first();
+    }
+
 }

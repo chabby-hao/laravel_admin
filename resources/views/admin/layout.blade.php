@@ -13,7 +13,7 @@
 <!--<link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}"/>-->
     <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}"/>
-    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
 <!--<link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}"/>-->
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
 
@@ -61,9 +61,10 @@
 <!--sidebar-menu-->
 <div id="sidebar">
     <ul>
-        <!--<li class="active"><a href=""><i class="icon icon-home"></i>
-                <span>Dashboard</span></a></li>-->
-        <!--        用户参数配置，用于集成api-->
+
+        <li class=""><a href="{{URL::route('admin-home')}}"><i class="icon icon-home"></i>
+                <span>首页</span></a></li>
+
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
             </a>
             <ul>
@@ -124,9 +125,16 @@
             var _this = $(this);
             var _href = _this.find("a").attr("href");
             if (url.indexOf(_href) !== -1) {
-                _this.addClass("active").parents(".submenu").addClass("open");
+                _this.addClass("active");
             }
         });
+        $("#sidebar li").each(function(){
+            var _this = $(this);
+            var _href = _this.find("a").attr("href");
+            if (url.indexOf(_href) !== -1) {
+                _this.addClass("active").parents(".submenu").addClass("open");
+            }
+        })
     });
 </script>
 

@@ -39,7 +39,7 @@ class DbSync extends BaseCommand
         $dbOperate = DB::connection('care_operate');
         $db = $dbOperate->table('t_device_category_dic_new');
 
-        $res = $db->where(['products' => 6])->get()->toArray();
+        $res = $db->where(['products' => 6])->orderByDesc('type')->get()->toArray();
 
         $arr = [
             '1'=>'EB001',
@@ -81,6 +81,7 @@ class DbSync extends BaseCommand
                 BiBrand::firstOrCreate([
                     'brand_name' => $name,
                 ], [
+                    'id'=>$row->type,
                     'brand_remark' => $row->remark,
                 ]);
             }
