@@ -20,4 +20,17 @@ class BiProductType extends \App\Models\Base\BiProductType
 		'product_remark',
         'id'
 	];
+
+
+	const DEVICE_TYPE_EB001 = 1;
+	const DEVICE_TYPE_EB001B = 2;
+	const DEVICE_TYPE_EB001C = 3;
+	const DEVICE_TYPE_EB001A = 4;
+	const DEVICE_TYPE_EB001D = 5;
+	const DEVICE_TYPE_EB001W = 6;
+	const DEVICE_TYPE_B640 = 7;
+	const DEVICE_TYPE_EB003 = 8;
+
+
+
 }

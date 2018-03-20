@@ -43,10 +43,10 @@ class AuthLogic extends BaseLogic
                 $user->attachRole($data['role_id']);
                 return true;
             }
-            return false;
         }catch (\Exception $e){
             Log::error('create user db error' . $e->getMessage());
         }
+        return false;
     }
 
     public function editUser($id, array $data)
@@ -63,10 +63,10 @@ class AuthLogic extends BaseLogic
                 $user->roles()->sync([$data['role_id']]);
                 return true;
             }
-            return false;
         }catch (\Exception $e){
             Log::error('edit user db error' . $e->getMessage());
         }
+        return false;
     }
 
     /**

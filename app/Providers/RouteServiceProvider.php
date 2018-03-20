@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapAdminRoutes();
 
+        $this->mapToolRoutes();
+
         //
     }
 
@@ -86,5 +88,20 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('admin')
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapToolRoutes()
+    {
+        Route::prefix('tool')
+            ->middleware('tool')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/tool.php'));
     }
 }
