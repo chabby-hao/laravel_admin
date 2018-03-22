@@ -37,7 +37,7 @@ class DeviceObject extends BaseObject
     public $expectMile = 0;//预估里程,km
     public $turnon = 0;//是否启动,0=未启动，1=启动
     public $turnonTrans = '';
-    public $lastContact = '';//最后一次通讯时间,datetime
+    public $lastContact = '';
 
     /**
      * @return string
@@ -49,12 +49,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $udid
-     * @return DeviceObject
      */
-    public function setUdid(string $udid): DeviceObject
+    public function setUdid($udid)
     {
         $this->udid = $udid;
-        return $this;
     }
 
     /**
@@ -67,12 +65,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $imei
-     * @return DeviceObject
      */
-    public function setImei(string $imei): DeviceObject
+    public function setImei($imei)
     {
         $this->imei = $imei;
-        return $this;
     }
 
     /**
@@ -85,12 +81,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $productType
-     * @return DeviceObject
      */
-    public function setProductType(int $productType): DeviceObject
+    public function setProductType($productType)
     {
         $this->productType = $productType;
-        return $this;
     }
 
     /**
@@ -103,12 +97,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $productTypeName
-     * @return DeviceObject
      */
-    public function setProductTypeName(string $productTypeName): DeviceObject
+    public function setProductTypeName($productTypeName)
     {
         $this->productTypeName = $productTypeName;
-        return $this;
     }
 
     /**
@@ -121,12 +113,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $ebikeTypeId
-     * @return DeviceObject
      */
-    public function setEbikeTypeId(int $ebikeTypeId): DeviceObject
+    public function setEbikeTypeId($ebikeTypeId)
     {
         $this->ebikeTypeId = $ebikeTypeId;
-        return $this;
     }
 
     /**
@@ -139,12 +129,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $ebikeTypeName
-     * @return DeviceObject
      */
-    public function setEbikeTypeName(string $ebikeTypeName): DeviceObject
+    public function setEbikeTypeName($ebikeTypeName)
     {
         $this->ebikeTypeName = $ebikeTypeName;
-        return $this;
     }
 
     /**
@@ -157,12 +145,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $brandId
-     * @return DeviceObject
      */
-    public function setBrandId(int $brandId): DeviceObject
+    public function setBrandId($brandId)
     {
         $this->brandId = $brandId;
-        return $this;
     }
 
     /**
@@ -175,12 +161,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $brandName
-     * @return DeviceObject
      */
-    public function setBrandName(string $brandName): DeviceObject
+    public function setBrandName($brandName)
     {
         $this->brandName = $brandName;
-        return $this;
     }
 
     /**
@@ -193,12 +177,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $channelId
-     * @return DeviceObject
      */
-    public function setChannelId(int $channelId): DeviceObject
+    public function setChannelId($channelId)
     {
         $this->channelId = $channelId;
-        return $this;
     }
 
     /**
@@ -211,12 +193,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $channelName
-     * @return DeviceObject
      */
-    public function setChannelName(string $channelName): DeviceObject
+    public function setChannelName($channelName)
     {
         $this->channelName = $channelName;
-        return $this;
     }
 
     /**
@@ -229,12 +209,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $deliverdAt
-     * @return DeviceObject
      */
-    public function setDeliverdAt(string $deliverdAt): DeviceObject
+    public function setDeliverdAt($deliverdAt)
     {
         $this->deliverdAt = $deliverdAt;
-        return $this;
     }
 
     /**
@@ -247,12 +225,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $registerAt
-     * @return DeviceObject
      */
-    public function setRegisterAt(string $registerAt): DeviceObject
+    public function setRegisterAt($registerAt)
     {
         $this->registerAt = $registerAt;
-        return $this;
     }
 
     /**
@@ -265,12 +241,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $isOnline
-     * @return DeviceObject
      */
-    public function setIsOnline(int $isOnline): DeviceObject
+    public function setIsOnline($isOnline)
     {
         $this->isOnline = $isOnline;
-        return $this;
     }
 
     /**
@@ -283,12 +257,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $isOnlineTrans
-     * @return DeviceObject
      */
-    public function setIsOnlineTrans(string $isOnlineTrans): DeviceObject
+    public function setIsOnlineTrans($isOnlineTrans)
     {
         $this->isOnlineTrans = $isOnlineTrans;
-        return $this;
     }
 
     /**
@@ -301,12 +273,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $isContact
-     * @return DeviceObject
      */
-    public function setIsContact(int $isContact): DeviceObject
+    public function setIsContact($isContact)
     {
         $this->isContact = $isContact;
-        return $this;
     }
 
     /**
@@ -319,12 +289,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $isContactTrans
-     * @return DeviceObject
      */
-    public function setIsContactTrans(string $isContactTrans): DeviceObject
+    public function setIsContactTrans($isContactTrans)
     {
         $this->isContactTrans = $isContactTrans;
-        return $this;
     }
 
     /**
@@ -337,12 +305,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $lat
-     * @return DeviceObject
      */
-    public function setLat(int $lat): DeviceObject
+    public function setLat($lat)
     {
         $this->lat = $lat;
-        return $this;
     }
 
     /**
@@ -355,12 +321,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $lng
-     * @return DeviceObject
      */
-    public function setLng(int $lng): DeviceObject
+    public function setLng($lng)
     {
         $this->lng = $lng;
-        return $this;
     }
 
     /**
@@ -373,12 +337,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $address
-     * @return DeviceObject
      */
-    public function setAddress(string $address): DeviceObject
+    public function setAddress($address)
     {
         $this->address = $address;
-        return $this;
     }
 
     /**
@@ -391,12 +353,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $gsm
-     * @return DeviceObject
      */
-    public function setGsm(string $gsm): DeviceObject
+    public function setGsm($gsm)
     {
         $this->gsm = $gsm;
-        return $this;
     }
 
     /**
@@ -409,12 +369,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $chipPower
-     * @return DeviceObject
      */
-    public function setChipPower(int $chipPower): DeviceObject
+    public function setChipPower($chipPower)
     {
         $this->chipPower = $chipPower;
-        return $this;
     }
 
     /**
@@ -427,12 +385,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $charge
-     * @return DeviceObject
      */
-    public function setCharge(int $charge): DeviceObject
+    public function setCharge($charge)
     {
         $this->charge = $charge;
-        return $this;
     }
 
     /**
@@ -445,12 +401,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $voltage
-     * @return DeviceObject
      */
-    public function setVoltage(int $voltage): DeviceObject
+    public function setVoltage($voltage)
     {
         $this->voltage = $voltage;
-        return $this;
     }
 
     /**
@@ -463,12 +417,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $batteryCount
-     * @return DeviceObject
      */
-    public function setBatteryCount(int $batteryCount): DeviceObject
+    public function setBatteryCount($batteryCount)
     {
         $this->batteryCount = $batteryCount;
-        return $this;
     }
 
     /**
@@ -481,12 +433,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $battery
-     * @return DeviceObject
      */
-    public function setBattery(int $battery): DeviceObject
+    public function setBattery($battery)
     {
         $this->battery = $battery;
-        return $this;
     }
 
     /**
@@ -499,12 +449,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $expectMile
-     * @return DeviceObject
      */
-    public function setExpectMile(int $expectMile): DeviceObject
+    public function setExpectMile($expectMile)
     {
         $this->expectMile = $expectMile;
-        return $this;
     }
 
     /**
@@ -517,12 +465,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param int $turnon
-     * @return DeviceObject
      */
-    public function setTurnon(int $turnon): DeviceObject
+    public function setTurnon($turnon)
     {
         $this->turnon = $turnon;
-        return $this;
     }
 
     /**
@@ -535,12 +481,10 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $turnonTrans
-     * @return DeviceObject
      */
-    public function setTurnonTrans(string $turnonTrans): DeviceObject
+    public function setTurnonTrans($turnonTrans)
     {
         $this->turnonTrans = $turnonTrans;
-        return $this;
     }
 
     /**
@@ -553,13 +497,11 @@ class DeviceObject extends BaseObject
 
     /**
      * @param string $lastContact
-     * @return DeviceObject
      */
-    public function setLastContact(string $lastContact): DeviceObject
+    public function setLastContact($lastContact)
     {
         $this->lastContact = $lastContact;
-        return $this;
-    }
+    }//最后一次通讯时间,datetime
 
 
 

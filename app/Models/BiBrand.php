@@ -27,4 +27,10 @@ class BiBrand extends \App\Models\Base\BiBrand
         $rs = self::orderByDesc('id')->get()->toArray();
         return Helper::transToKeyValueArray($rs, 'id', 'brand_name');
     }
+
+    public static function getAllBrandIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
 }

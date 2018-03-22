@@ -42,6 +42,10 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereEbikeTypeId($value)
  * @property int|null $brand_id 品牌id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereBrandId($value)
+ * @property string|null $delivered_at 出货时间
+ * @property bool|null $is_lost 是否丢失，0=未丢失，1=丢失
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereDeliveredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereIsLost($value)
  */
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
@@ -67,6 +71,12 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
     public static function getByUdid($udid)
     {
         return self::whereQr($udid)->first();
+    }
+
+    public static function getDeviceModel()
+    {
+        $brandis = BiBrand::getAllBrandIds();
+        return TDeviceCode::whereIn('type', $brandis);
     }
 
 }

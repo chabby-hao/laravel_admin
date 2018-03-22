@@ -50,6 +50,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @mixin \Eloquent
  * @property int|null $brand_id 品牌id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereBrandId($value)
+ * @property string|null $delivered_at 出货时间
+ * @property bool|null $is_lost 是否丢失，0=未丢失，1=丢失
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereDeliveredAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereIsLost($value)
  */
 class TDeviceCode extends Eloquent
 {

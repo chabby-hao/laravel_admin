@@ -84,7 +84,7 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
             </a>
             <ul>
-                <li><a href="{{URL::action('Admin\UserController@list')}}">账号管理</a></li>
+                <li><a href="{{URL::action('Admin\DeviceController@list')}}">设备列表</a></li>
             </ul>
         </li>
 

@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceCategory
- * 
+ *
  * @property string $udid
  * @property int $channel
  * @property int $brand
@@ -22,8 +22,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $ver
  * @property \Carbon\Carbon $delivered_ts
  * @property \Carbon\Carbon $production_ts
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereCategory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereDeliveredTs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereImei($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereLast($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereProductionTs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategory whereVer($value)
+ * @mixin \Eloquent
  */
 class TDeviceCategory extends Eloquent
 {

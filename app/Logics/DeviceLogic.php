@@ -9,6 +9,7 @@ use App\Models\BiProductType;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use App\Objects\DeviceObject;
+use Illuminate\Support\Facades\Cache;
 
 class DeviceLogic extends BaseLogic
 {
@@ -24,7 +25,7 @@ class DeviceLogic extends BaseLogic
 
     public static function getDevice($imei)
     {
-        if(isset(self::$devices[$imei])){
+        if (isset(self::$devices[$imei])) {
             return self::$devices[$imei];
         }
         return false;
@@ -62,7 +63,7 @@ class DeviceLogic extends BaseLogic
         $device->setIsContact(static::isContanct($imei) ? 1 : 0);
         $device->setIsContactTrans($device->getisContact() ? '在联' : '失联');
         $loc = static::getLastLocationInfo($imei);
-        if($loc){
+        if ($loc) {
             $device->setLat($loc['lat']);
             $device->setLng($loc['lng']);
             $device->setAddress($loc['address']);
@@ -93,15 +94,15 @@ class DeviceLogic extends BaseLogic
 
     public static function getUdid($imei)
     {
-        if(isset(self::$imeisToUdids[$imei])){
+        if (isset(self::$imeisToUdids[$imei])) {
             return self::$imeisToUdids[$imei];
         }
         $deviceCode = TDeviceCode::whereImei($imei)->first();
-        if($deviceCode){
+        if ($deviceCode) {
             $udid = $deviceCode->qr;
             self::$imeisToUdids[$imei] = $udid;
             return $udid;
-        }else{
+        } else {
             return false;
         }
     }
@@ -110,16 +111,16 @@ class DeviceLogic extends BaseLogic
     {
 
         $udidsToImeis = array_flip(self::$imeisToUdids);
-        if(isset($udidsToImeis[$udid])){
+        if (isset($udidsToImeis[$udid])) {
             return $udidsToImeis[$udidsToImeis];
         }
 
         $deviceCode = TDeviceCode::whereQr($udid)->first();
-        if($deviceCode){
+        if ($deviceCode) {
             $imei = $deviceCode->imei;
             self::$imeisToUdids[$imei] = $udid;
             return $imei;
-        }else{
+        } else {
             return false;
         }
     }
@@ -216,8 +217,8 @@ class DeviceLogic extends BaseLogic
     public static function getBrandNameByUdid($udid)
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            $ebikeTypeName = BiBrand::find($deviceCode->brand_id);
-            return $ebikeTypeName->brand_name ?: '';
+            $brand = BiBrand::find($deviceCode->brand_id);
+            return $brand ? $brand->brand_name : '';
         });
     }
 
@@ -237,8 +238,8 @@ class DeviceLogic extends BaseLogic
     public static function getChannelNameByUdid($udid)
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            $ebikeTypeName = BiChannel::find($deviceCode->channel_id);
-            return $ebikeTypeName->channel_name ?: '';
+            $channel = BiChannel::find($deviceCode->channel_id);
+            return $channel ? $channel->channel_name : '';
         });
     }
 
@@ -290,7 +291,7 @@ class DeviceLogic extends BaseLogic
     public static function isContanct($imei, $delay = 1800)
     {
         $data = RedisLogic::getDevDataByImei($imei);
-        if ($data['offline'] && $data['offline'] > time() - $delay) {
+        if (isset($data['offline']) && $data['offline'] > time() - $delay) {
             return true;
         }
         return false;
@@ -362,7 +363,7 @@ class DeviceLogic extends BaseLogic
     public static function getChipPower($imei)
     {
         $data = RedisLogic::getDevDataByImei($imei);
-        if ($data['battery']) {
+        if (!empty($data['battery'])) {
             return $data['battery'];
         } else {
             return 0;
@@ -382,7 +383,7 @@ class DeviceLogic extends BaseLogic
     public static function isBatteryConnect($imei)
     {
         $data = RedisLogic::getDevDataByImei($imei);
-        if ($data['charge'] && $data['charge'] == 1) {
+        if (!empty($data['charge']) && $data['charge'] == 1) {
             return true;
         } else {
             return false;
@@ -663,6 +664,16 @@ class DeviceLogic extends BaseLogic
     {
         $imei = self::getUdid($udid);
         return self::getLastContact($imei);
+    }
+
+    public static function storeDeviceStatusToCache($key)
+    {
+        TDeviceCode::getDeviceModel()->get();
+    }
+
+    public static function getRuningUdidsByCache()
+    {
+        $udids = Cache::remember('');
     }
 
 }
