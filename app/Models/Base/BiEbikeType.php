@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 19 Mar 2018 17:43:42 +0800.
+ * Date: Mon, 26 Mar 2018 15:46:27 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,19 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiEbikeType
- *
+ * 
  * @property int $id
  * @property int $ev_model
  * @property string $ebike_name
  * @property string $ebike_remark
  * @property int $brand_id
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereBrandId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEbikeName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEbikeRemark($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereEvModel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiEbikeType whereId($value)
- * @mixin \Eloquent
  */
 class BiEbikeType extends Eloquent
 {

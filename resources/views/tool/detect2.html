@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>智能检测</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet"
+          href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+
+    <!--<link rel="stylesheet" href="http://v3.bootcss.com/assets/css/docs.min.css" />-->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+        .col-xs-1{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .col-xs-2{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .well{
+            min-height: 120px;
+            margin-bottom: 0;
+        }
+
+        .list-group li{
+            /*overflow: scroll;*/
+            /*min-height: 42px;*/
+            padding: 0;
+            word-wrap:break-word;
+        }
+        .myform label, .myform textarea .myform button{
+            font-size: 30px;
+            height:66px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row show-grid">
+
+        <form class="form-inline text-center">
+            <div class="form-group myform">
+                <label class="form-control">工装SN:</label>
+                <textarea style="margin-right: 15px; height: 66px;font-size:22px" class="form-control input_sn" placeholder="请在输入框输入sn"></textarea>
+                <button style="width:100px;height:66px;margin-right: 15px;font-size: 20px;" class="form-control btn btn-default btn-info btn_sn" type="button">检测</button>
+                <label class="form-control">工装信息:</label>
+                <textarea id="minfo" style="width:500px;height: 66px;font-size: 22px;" class="form-control input_sn" readonly placeholder="minfo信息会展示到这里"></textarea>
+            </div>
+        </form>
+
+<!--        <div class="col-xs-2">-->
+<!--            <div class="well">-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12">-->
+<!--                        <div class="input-group">-->
+<!--                            <textarea style="margin-right: 10px; width: 100px; height: 60px;" type="text" class="form-control input_sn" placeholder="请在输入框输入sn"></textarea>-->
+<!--                            <span class="input-group-btn">-->
+<!--                                <button style="width:80px;height:60px" class="btn btn-default btn-info btn_sn" type="button">检测</button>-->
+<!--                            </span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-xs-12">-->
+<!--                        <ul class="list-group">-->
+<!--<!--                            <li class="list-group-item list-group-item-warning"><span style="font-size: 32px;">编号</span></li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Ctype</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Cver</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">IMEI</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">BBCon</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Gsen</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">BTMac</li><!--duo-->
+<!--                            <li class="list-group-item list-group-item-warning">BTkey</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">GPSSt</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">GPRSSt</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Btype</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Bver</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">BTStat</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">I2C</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">OWCin</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">OWCout</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Lock</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Volt</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Online</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">Odomte</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">SPEED</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">DGPS</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">DGSM</li>-->
+<!--                            <li class="list-group-item list-group-item-warning">MInfo</li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--        </div>-->
+
+        <div class="box">
+
+
+
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+
+</html>
+<script>
+
+    var input_sn = $(".input_sn");
+
+    var t;
+
+    var check = false;
+
+    $(function(){
+        var sn = '';
+        $(".btn_sn").click(function(){
+            check =false;
+            clearInterval(t);
+            sn = input_sn.val();
+            console.log(sn);
+            if(!sn){
+                return false;
+            }
+
+            init($(".myul li"));
+
+            intervalAjax(sn);
+            t = setInterval(function(){
+                intervalAjax(sn);
+            },5000);
+
+
+        })
+    })
+
+    function intervalAjax(sn){
+        $.ajax({
+            url:'/support/postDetect',
+            data:{sn:sn},
+            dataType:'jsonp',
+            jsonp:'jsonpCallback',
+            success: function(res){
+
+                if(res.code==200){
+
+                    if(!check){
+                        checking($(".myli"));
+                    }
+
+                    check = true;
+
+                    if(!res.basic){
+                        checking($(".myli"));
+                        return false;
+                    }else{
+                        $("#minfo").html(res.basic.MInfo);
+                    }
+
+                    var data = res.data;
+                    for(x in data){
+                        var row = data[x];
+
+                        var item = $("#" + x);
+                        if(!row){
+                            continue;
+                        }
+
+                        //console.log(row);
+
+                        if(row.CPAct == 0){
+                            //clear && loading
+                            clear(item);
+                            loading(item);
+                        }else if(row.CPAct == 1){
+                            //update
+                            update(item,row);
+                        }else if(row.CPAct == 2){
+                            //clear && update
+                            clear(item);
+                            update(item,row);
+                        }else if(row.CPAct == 3){
+                            //update && success
+                            update(item,row);
+                            success(item);
+                        }
+                        exception(item,row);
+
+
+                    }
+
+                }
+            }
+        });
+    }
+
+    function clear(item){
+        item.find("li").html('&nbsp');
+    }
+
+    function loading(item){
+        checking(item.find("li"));
+    }
+
+    function success(item){
+        pass(item.find("li"));
+    }
+
+    function exception(item,row){
+        //        'OWCin' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'OWCout' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'I2C' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'Lock' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'GPRSSt' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'GPSSt' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'BBCon' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'Online' => [0 => '离线', 1 => '正常', 2 => '不支持'],
+//        'SBStat' => [0 => '丢失', 1 => '接入', 2 => '不支持'],
+//        'Gsen' => [0 => '异常', 1 => '正常', 2 => '不支持'],
+//        'BTStat' => [0 => '未初始化', 1 => '等待检测', 2 => '重试检测', 3 => '正在检测中', 4 => '检测失败', 5 => '检测OK'],
+//        'PowGate' => [0 => '关闭', 1 => '开启'],
+
+        if(row['IMEI']!= null && row['IMEI']!=undefined){
+            if( row['IMEI'].substr(-1) == ')'){
+                fail(item.find(".IMEI"));
+            }
+        }
+
+        if(row['OWCin'] == '异常'){
+            fail(item.find(".OWCin"));
+        }
+        if(row['OWCout'] == '异常'){
+            fail(item.find(".OWCout"));
+        }
+        if(row['I2C'] == '异常'){
+            fail(item.find(".I2C"));
+        }
+        if(row['Lock'] == '异常'){
+            fail(item.find(".Lock"));
+        }
+        if(row['GPRSSt'] == '异常'){
+            fail(item.find(".GPRSSt"));
+        }
+        if(row['GPSSt'] == '异常'){
+            fail(item.find(".GPSSt"));
+        }
+        if(row['BBCon'] == '异常'){
+            fail(item.find(".BBCon"));
+        }
+        if(row['Online'] == '离线'){
+            fail(item.find(".Online"));
+        }
+        if(row['SBStat'] == '丢失'){
+            fail(item.find(".SBStat"));
+        }
+        if(row['Gsen'] == '异常'){
+            fail(item.find(".Gsen"));
+        }
+        if(row['BTStat'] == '检测失败'){
+            fail(item.find(".BTStat"));
+        }
+        if(row['PowGate'] == '关闭'){
+            fail(item.find(".PowGate"));
+        }
+        if(row['DGPS'] == 0){
+            fail(item.find(".DGPS"));
+        }
+        if(row['DGSM'] == 0){
+            fail(item.find(".DGSM"));
+        }
+    }
+
+    function update(item,row){
+
+        beforeUpdate(item.find("li"));
+
+        myhtml(item.find(".Ctype"),'核心板:' + row['Ctype']);
+        myhtml(item.find(".Cver"),'核心板版本:' + row['Cver']);
+        myhtml(item.find(".IMEI"),'imei:' + row['IMEI']);
+        myhtml(item.find(".BBCon"),'底板通信:' + row['BBCon']);
+        myhtml(item.find(".Gsen"),'加速度传感器:' + row['Gsen']);
+        myhtml(item.find(".BTMac"),'蓝牙MAC:' + row['BTMac']);
+        myhtml(item.find(".BTkey"),'蓝牙key:' + row['BTkey']);
+        myhtml(item.find(".GPSSt"),'GPS定位:' + row['GPSSt']);
+        myhtml(item.find(".GPRSSt"),'GPRS连接:' + row['GPRSSt']);
+        myhtml(item.find(".Btype"),'底板:' + row['Btype']);
+        myhtml(item.find(".Bver"),'底板版本:' + row['Bver']);
+        myhtml(item.find(".BTStat"),'蓝牙状态:' + row['BTStat']);
+        myhtml(item.find(".I2C"),'I2C状态:' + row['I2C']);
+        myhtml(item.find(".OWCin"), '一线通输入:' + row['OWCin']);
+        myhtml(item.find(".OWCout"),'一线通输出:' + row['OWCout']);
+        myhtml(item.find(".Lock"),'锁车信号:' + row['Lock']);
+        myhtml(item.find(".Volt"),'电压:' + row['Volt']/10 + 'v');
+        myhtml(item.find(".Online"),'在位状态:' + row['Online']);
+        myhtml(item.find(".Odomte"),'里程:' + row['Odomte']);
+        myhtml(item.find(".SPEED"),'速度:' + row['SPEED']);
+        myhtml(item.find(".DGPS"),'GPS卫星:' + row['DGPS']);
+        myhtml(item.find(".DGSM"),'GSM基站:' + row['DGSM']);
+        myhtml(item.find(".Imsi"),'Imsi:' + row['imsi']);
+        myhtml(item.find(".PowGate"),'电门状态:' + row['PowGate']);
+        //myhtml(item.find(".MInfo"),row['MInfo']);
+    }
+
+    function myhtml(item,content){
+        if(content){
+            item.html(content).addClass('list-group-item-info');
+        }
+    }
+
+    //检测通过
+    function pass(li) {
+        li.removeClass('list-group-item-warning list-group-item-danger list-group-item-info').addClass('list-group-item-success');
+    }
+
+    //检测不通过
+    function fail(li){
+        li.removeClass('list-group-item-warning list-group-item-success list-group-item-info').addClass('list-group-item-danger');
+    }
+
+    //检测中
+    function checking(li)
+    {
+        li.removeClass('list-group-item-danger list-group-item-success list-group-item-warning').addClass('list-group-item-info').html('<img width="18" src="http://detect.vipcare.com/img/loading.gif">');
+    }
+
+    //检测未知
+    function unkown(li)
+    {
+        li.removeClass('list-group-item-danger list-group-item-success list-group-item-info').addClass('list-group-item-warning').html('未知');
+    }
+
+    function beforeUpdate(li)
+    {
+        li.removeClass('list-group-item-danger');
+    }
+
+    //初始化
+    function init(li)
+    {
+        li.removeClass('list-group-item-danger list-group-item-success list-group-item-info list-group-item-warning').html('&nbsp');
+    }
+
+    $(function(){
+        var items=document.getElementsByClassName('input_sn');
+
+        //检测地址栏自动获取焦点
+        items[0].focus();
+        //监听输入事件，输入到15位的时候自动检测
+//        $(items).on('input', function () {
+//            if($(this).val().trim().length === 15) {
+//                $(this).parents(".col_div").find('.btn_check').trigger('click');
+//            }
+//        });
+
+    });
+
+</script>
+
+<script src="https://cdn.bootcss.com/mustache.js/2.3.0/mustache.min.js"></script>
+
+<script id="template" type="x-tmpl-mustache">
+    {{#data}}
+    <div id="{{id}}" class="col-xs- col_div" style="width:10%">
+        <div class="well">
+        <div class="row">
+        <div class="col-xs-12">
+        <span class="list-group-item"><span style="font-size: 40px;">{{id}}</span></span>
+    </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+        <ul class="list-group myul">
+        <li class="list-group-item myli Ctype">&nbsp</li>
+        <li class="list-group-item myli Cver">&nbsp</li>
+        <li class="list-group-item myli IMEI">&nbsp</li>
+        <li class="list-group-item myli Imsi">&nbsp</li>
+        <li class="list-group-item myli BBCon">&nbsp</li>
+        <li class="list-group-item myli Gsen">&nbsp</li>
+        <li class="list-group-item myli BTMac">&nbsp</li>
+        <li class="list-group-item myli BTkey">&nbsp</li>
+        <li class="list-group-item myli GPSSt">&nbsp</li>
+        <li class="list-group-item myli GPRSSt">&nbsp</li>
+        <li class="list-group-item myli Btype">&nbsp</li>
+        <li class="list-group-item myli Bver">&nbsp</li>
+        <li class="list-group-item myli BTStat">&nbsp</li>
+        <li class="list-group-item myli I2C">&nbsp</li>
+        <li class="list-group-item myli OWCin">&nbsp</li>
+        <li class="list-group-item myli OWCout">&nbsp</li>
+        <li class="list-group-item myli Lock">&nbsp</li>
+        <li class="list-group-item myli Volt">&nbsp</li>
+        <li class="list-group-item myli Online">&nbsp</li>
+        <li class="list-group-item myli Odomte">&nbsp</li>
+        <li class="list-group-item myli SPEED">&nbsp</li>
+        <li class="list-group-item myli DGPS">&nbsp</li>
+        <li class="list-group-item myli DGSM">&nbsp</li>
+        <li class="list-group-item myli PowGate">&nbsp</li>
+
+
+
+
+        <!--<li class="list-group-item list-group-item-info"><img width="18" src="http://detect.vipcare.com/img/loading.gif"></li>
+        <li class="list-group-item list-group-item-success">pass</li>
+        <li class="list-group-item list-group-item-danger">fail</li>-->
+        </ul>
+        </div>
+        </div>
+
+        </div>
+    {{/data}}
+</script>
+
+<script>
+    var template = $('#template').html();
+    Mustache.parse(template);   // optional, speeds up future uses
+    var target = $(".box");
+    var config = {data:[
+        {id:1},
+        {id:2},
+        {id:3},
+        {id:4},
+        {id:5},
+        {id:6},
+        {id:7},
+        {id:8},
+        {id:9},
+        {id:10}
+    ]};
+    var rendered = Mustache.render(template, config);
+    target.html(rendered);
+</script>

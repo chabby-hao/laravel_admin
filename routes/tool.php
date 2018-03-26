@@ -17,6 +17,10 @@ Route::get('/',function(){
     echo 5;exit;
 });
 
+Route::any('xinpu/detect','Tool\XinpuController@detect');
+
+Route::any('command/refreshGsm','Tool\CommandController@refreshGsm');
+
 
 Route::get('/phpinfo',function(){
     phpinfo();

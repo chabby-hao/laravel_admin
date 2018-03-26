@@ -3,10 +3,14 @@
 namespace App\Logics;
 
 //封装一下redis类
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class RedisLogic extends BaseLogic
 {
+
+    const REDIS_LIST_KEY_PRE = 'CommandList_';//多进程队列
+
     private static $redis = null;
 
     private static $devData = [];//imei=>array
@@ -23,11 +27,6 @@ class RedisLogic extends BaseLogic
             self::$redis = Redis::connection();
         }
         return self::$redis;
-    }
-
-    public static function __callStatic($name, $arguments)
-    {
-        return self::getRedis()->$name($arguments);
     }
 
     public static function getDevDataByImei($imei)
@@ -47,30 +46,65 @@ class RedisLogic extends BaseLogic
         return self::getDevDataByImei($imei);
     }
 
-    public static function getLoctionByImei($imei)
+    /**
+     * @param $imei
+     * @param string $lastKey  last|lastGSM
+     * @return array|mixed
+     */
+    public static function getLocationByImei($imei, $lastKey = 'last')
     {
         //加个类缓存
         if (isset(self::$locData[$imei])) {
             return self::$locData[$imei];
         }
         $devData = self::getDevDataByImei($imei);
-        if (isset($devData['last']) && $devData['last']) {
-            $key = 'loc:' . $devData['last'];
+        if (isset($devData[$lastKey]) && $devData[$lastKey]) {
+            $key = 'loc:' . $devData[$lastKey];
             $data = self::getRedis()->hGetAll($key) ?: [];
             return self::$locData[$imei] = $data;
         }
         return [];
     }
 
-    public static function getLocationByUdid($udid)
+    public static function getLocationByUdid($udid, $lastKey = 'last')
     {
         $imei = DeviceLogic::getImei($udid);
-        return self::getLoctionByImei($imei);
+        return self::getLocationByImei($imei, $lastKey);
     }
 
-    public static function sendCmd($imei, int $commandId)
+    public static function lPush($key, $val)
     {
+        return self::getRedis()->lPush($key, $val);
+    }
 
+    public static function hGet($key, $hashKey)
+    {
+        return self::getRedis()->hGet($key, $hashKey);
+    }
+
+    public static function hGetAll($key)
+    {
+        return self::getRedis()->hGetAll($key);
+    }
+
+    public static function sendCmd($imei, int $cmd)
+    {
+        self::getRedis()->select(6);
+        $listNumber = self::hGet('device_server', $imei);
+        if(!$listNumber){
+            $listNumber = 1;
+        }
+        $listNumber = trim($listNumber);
+
+        $a = pack('P', $imei);
+        $b = pack('V', $cmd);
+        $val = $a . $b;
+        Log::notice("cloud/command imei:$imei , cmd: $cmd, push redis ". $val .' list key :' . self::REDIS_LIST_KEY_PRE . ($listNumber - 1));
+
+        //日志
+        //$logLogic = new LogLogic();
+        //$logLogic->addCmdLog($imei, $cmd, LogLogic::CMD_LOG_TYPE_REMOTE, $channel);
+        return self::lPush(self::REDIS_LIST_KEY_PRE . ($listNumber - 1), $val);
     }
 
     public static function sendCmdByUdid($udid, int $commandId)

@@ -125,6 +125,17 @@ class DeviceLogic extends BaseLogic
         }
     }
 
+    public static function getUdidImei($udidOrImei)
+    {
+        if($imei = self::getImei($udidOrImei)){
+            return [$udidOrImei, $imei];
+        }elseif($udid = self::getUdid($udidOrImei)){
+            return [$udid, $udidOrImei];
+        }else{
+            return false;
+        }
+    }
+
     private static function deviceCodeCallBack($udid, $func)
     {
         $deviceCode = TDeviceCode::getByUdid($udid);
@@ -303,9 +314,14 @@ class DeviceLogic extends BaseLogic
         return static::isContanct($imei, $delay);
     }
 
+    public static function getLastGsmLocationInfo($imei)
+    {
+        return RedisLogic::getLocationByImei($imei, 'lastGSM');
+    }
+
     public static function getLastLocationInfo($imei)
     {
-        return RedisLogic::getDevDataByImei($imei);
+        return RedisLogic::getLocationByImei($imei);
         //位置数据
         /*$location = array(
             'id' => intval($lid),	//位置数据唯一ID
@@ -348,7 +364,7 @@ class DeviceLogic extends BaseLogic
         $gsm = 0;
         if (isset($devData['gsmStrength']) && $devData['gsmStrength']) {
             $gsm = $devData['gsmStrength'];
-        } elseif ($locData = RedisLogic::getLoctionByImei($imei) && isset($locData['gsmStrength'])) {
+        } elseif ($locData = RedisLogic::getLocationByImei($imei) && isset($locData['gsmStrength'])) {
             $gsm = $locData['gsmStrength'];
         }
         return $gsm;
@@ -653,7 +669,7 @@ class DeviceLogic extends BaseLogic
      */
     public static function getLastContact($imei)
     {
-        $loc = RedisLogic::getLoctionByImei($imei);
+        $loc = RedisLogic::getLocationByImei($imei);
         if ($loc && array_key_exists('time', $loc)) {
             return date('Y-m-d H:i:s', $loc['time']);
         }

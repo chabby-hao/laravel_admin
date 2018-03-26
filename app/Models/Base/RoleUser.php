@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 19 Mar 2018 17:43:42 +0800.
+ * Date: Mon, 26 Mar 2018 15:46:27 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,15 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class RoleUser
- *
+ * 
  * @property int $user_id
  * @property int $role_id
+ * 
  * @property \App\Models\Role $role
  * @property \App\Models\BiUser $bi_user
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\RoleUser whereRoleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\RoleUser whereUserId($value)
- * @mixin \Eloquent
  */
 class RoleUser extends Eloquent
 {
