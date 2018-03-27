@@ -18,6 +18,14 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet"
+          href="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.css') ?>">
+
+    <script src="<?php echo asset('js/date/date.js') ?>"></script>
+    <script src="<?php echo asset('js/bootstrap-daterangepicker/moment.min.js') ?>"></script>
+    <script src="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
+    <script src="<?php echo asset('js/common/g-datepicker.js') ?>"></script>
+
     <style>
         .col-xs-1 {
             padding-left: 0;
@@ -61,10 +69,12 @@
             <div class="well">
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="input-group">
-                            <textarea style="margin: 0px; width: 100px; height: 87px;" type="text" class="form-control" disabled>工装检测</textarea>
-                            <span class="input-group-btn">
-                                <button class="btn btn-default btn-large" type="button">导出</button>
+                        <div class="list-group" style="margin-bottom: 0">
+
+                                <input style="margin: 5px 0;margin-bottom: 20px; width: 100%; height: 45px;padding: 5px;" type="text" class="date">
+<!--                            <textarea style="margin: 0px; width: 100px; height: 87px;" type="text" class="form-control" ></textarea>-->
+                            <span class="input-group-btn text-center">
+                                <button id="history" class="btn btn-info btn-large" type="button">导出检测记录</button>
                             </span>
                         </div>
                     </div>
@@ -130,6 +140,7 @@
                 //inputObj.attr("disabled", true);
                 countdown[id] = wait;
                 var t = function () {
+                    countdown[id]--;
                     if (countdown[id] <= 0) {
                         countdown[id] = 0;
                         //解除检测按钮的禁用状态
@@ -137,7 +148,6 @@
                     }
                     //$('#content .d-form .btn-detection').html(countdown + 's');
                     objBt.attr("disabled", true).html(countdown[id] + 's');
-                    countdown[id]--;
                 };
                 t();
                 timer[id] = setInterval(function () {
@@ -235,6 +245,7 @@
     var gps_text = [];
     var gsm_text = [];
     var vol_text = [];
+    var imeis = [];
 
     function initData(i) {
         rom[i] = null;
@@ -248,12 +259,13 @@
         gps_text[i] = null;
         gsm_text[i] = null;
         vol_text[i] = null;
+        imeis[i] = null;
     }
 
-    function changeColor(item, $val){
-        if($val){
+    function changeColor(item, $val) {
+        if ($val) {
             pass(item);
-        }else{
+        } else {
             fail(item);
         }
     }
@@ -282,6 +294,38 @@
         changeColor(col_div.find('.vol'), vol[i]);
         myhtml(col_div.find('.myresult'), myresult[i] ? '正常' : '异常');
         changeColor(col_div.find('.myresult'), myresult[i]);
+
+        //上传测试结果日志
+        uploadResult(i);
+
+    }
+
+    function uploadResult(i) {
+        var data = {
+            rom: rom[i],
+            mcu: mcu[i],
+            bat_conn: batConn[i],
+            gsm: gsm[i],
+            net: net[i],
+            data_conn: net[i],
+            gps: gps[i],
+            vol: vol[i],
+            result: myresult[i],
+            gps_text: gps_text[i],
+            gsm_text: gsm_text[i],
+            vol_text: vol_text[i],
+            check_time: checkTime[i],
+            cost_time: costTime[i],
+            imei:imeis[i],
+        }
+        $.ajax({
+            url: '<?php echo URL::action('Tool\XinpuController@result') ?>',
+            method: 'post',
+            data: data,
+            success: function (res) {
+                console.log(res);
+            }
+        });
     }
 
     //obj=inputObj
@@ -295,7 +339,7 @@
             $.ajax({
                 type: 'get',
                 url: '<?php echo URL::action('Tool\XinpuController@detect'); ?>',
-                data: {'udid': imei,'time':checkTime[id]},
+                data: {'udid': imei, 'time': checkTime[id]},
                 //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
                 //dataType: 'jsonp',
                 success: function (data) {
@@ -308,6 +352,7 @@
                     }
                     data = data.data;
 
+                    imeis[id] = imei;
                     rom[id] = data.rom;
                     mcu[id] = data.mcu;
                     batConn[id] = data.batConn;
@@ -486,6 +531,11 @@
     {{/data}}
 
 
+
+
+
+
+
 </script>
 
 <script>
@@ -503,4 +553,15 @@
     };
     var rendered = Mustache.render(template, config);
     target.html(rendered);
+
+    console.log( window.gDatepicker);
+    window.gDatepicker.dateRangePicker($(".date"));
+
+    $(function(){
+        $("#history").click(function(){
+            var date = $(".date").val();
+            location.href = '<?php echo URL::action('Tool\XinpuController@result') ?>' + '?date='+date;
+        });
+    })
+
 </script>

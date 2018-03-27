@@ -7,7 +7,7 @@ namespace App\Models;
  *
  * @property int $id
  * @property int $rom
- * @property int $mcu
+ * @property string|null $mcu
  * @property int $net
  * @property int $bat_conn
  * @property int $gps
@@ -19,8 +19,12 @@ namespace App\Models;
  * @property string|null $vol_text
  * @property string|null $result
  * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $check_at
  * @property \Carbon\Carbon|null $updated_at
+ * @property int $cost_time
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereBatConn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereCheckAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereCostTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereDataConn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereGps($value)
@@ -51,6 +55,9 @@ class BiXinpuDetect extends \App\Models\Base\BiXinpuDetect
 		'data_conn',
 		'vol',
 		'vol_text',
-		'result'
+		'result',
+		'check_at',
+		'cost_time',
+        'imei',
 	];
 }

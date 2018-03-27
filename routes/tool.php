@@ -18,6 +18,7 @@ Route::get('/',function(){
 });
 
 Route::any('xinpu/detect','Tool\XinpuController@detect');
+Route::any('xinpu/result','Tool\XinpuController@result');
 
 Route::any('command/refreshGsm','Tool\CommandController@refreshGsm');
 

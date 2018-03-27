@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 26 Mar 2018 15:46:27 +0800.
+ * Date: Mon, 26 Mar 2018 17:08:59 +0800.
  */
 
 namespace App\Models\Base;
@@ -13,8 +13,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class BiXinpuDetect
  * 
  * @property int $id
+ * @property string $imei
  * @property int $rom
- * @property int $mcu
+ * @property string $mcu
  * @property int $net
  * @property int $bat_conn
  * @property int $gps
@@ -26,7 +27,9 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $vol_text
  * @property string $result
  * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $check_at
  * @property \Carbon\Carbon $updated_at
+ * @property int $cost_time
  *
  * @package App\Models\Base
  */
@@ -37,11 +40,15 @@ class BiXinpuDetect extends Eloquent
 
 	protected $casts = [
 		'rom' => 'int',
-		'mcu' => 'int',
 		'net' => 'int',
 		'bat_conn' => 'int',
 		'gps' => 'int',
 		'gsm' => 'int',
-		'vol' => 'int'
+		'vol' => 'int',
+		'cost_time' => 'int'
+	];
+
+	protected $dates = [
+		'check_at'
 	];
 }

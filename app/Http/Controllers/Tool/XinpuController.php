@@ -3,14 +3,45 @@
 namespace App\Http\Controllers\Tool;
 
 
+use App\Exports\XinpuDetectExport;
 use App\Http\Controllers\Controller;
 use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
+use App\Models\BiXinpuDetect;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class XinpuController extends Controller
 {
+
+    /**
+     * 检测结果
+     * @param Request $request
+     */
+    public function result(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            //上传检测结果
+            $input = $request->input();
+            $input['check_at'] = date('Y-m-d H:i:s', $input['check_time']);
+            $res = BiXinpuDetect::create($input);
+            if($res){
+                return Helper::response();
+            }
+            return Helper::responeseError();
+        }
+        $date = $request->input('date');
+        if($date){
+            list($begin, $end) = explode('-', $date);
+            $begin = date('Y-m-d 00:00:00', strtotime($begin));
+            $end = date('Y-m-d 23:59:59', strtotime($end));
+            BiXinpuDetect::whereBetween('check_at', [$begin, $end])->get();
+            return (new XinpuDetectExport($begin, $end))->download('历史记录.xlsx');
+        }
+
+        return abort(403);
+    }
 
     public function detect(Request $request)
     {
@@ -25,8 +56,8 @@ class XinpuController extends Controller
                 'net' => mt_rand(0, 1),
                 'gps' => mt_rand(0, 1),
                 'vol' => mt_rand(0, 1),
-                'result' => 0,
-                //'result' => mt_rand(0, 1),
+                //'result' => 0,
+                'result' => mt_rand(0, 1),
                 'gps_text' => '(43)',
                 'gsm_text' => '(53)',
                 'vol_text' => '(43V)',
