@@ -78,7 +78,7 @@ class XinpuController extends Controller
             $devData = RedisLogic::getDevDataByImei($imei);
             $zhangfeiData = RedisLogic::getZhangfeiByImei($imei);
             //$vol = DeviceLogic::getCurrentVoltage($imei);
-            $vol = $zhangfeiData['BatteryVoltage'];//mv
+            $vol = $zhangfeiData['batteryVoltage'];//mv
 
             $data = [];
             $data['rom'] = 2503;
