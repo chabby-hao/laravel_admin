@@ -11,6 +11,7 @@ use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
 use App\Models\BiXinpuDetect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class XinpuController extends Controller
 {
@@ -123,6 +124,7 @@ class XinpuController extends Controller
 
     private function checkBatteryId($data)
     {
+        Log::debug('battery', $data);
         if (preg_match('/^XPFactTest.*/', $data['batteryId'])) {
             return true;
         }
