@@ -97,19 +97,24 @@ class XinpuController extends Controller
 
             if ($this->checkGps($gps, $gsm, $time)) {
                 $data['gps'] = 1;
+            }
+            if($gps['time'] > $time){
                 $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
             }
+
             if ($this->checkGsm($gsm, $time)) {
                 $data['gsm'] = 1;
+            }
+            if($gsm['time'] > $time){
                 $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
             }
 
             if ($this->checkBatteryId($zhangfeiData)) {
                 $data['net'] = 1;
                 $data['batConn'] = 1;
-                $data['vol_text'] = '(' . $vol / 1000 . 'V)';
             }
             if ($vol) {
+                $data['vol_text'] = '(' . $vol / 1000 . 'V)';
                 $data['vol'] = 1;
             }
 
