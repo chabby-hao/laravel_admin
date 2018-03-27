@@ -13,6 +13,7 @@ return array(
     'App\\Console\\Commands\\WarningMile' => $baseDir . '/app/Console/Commands/WarningMile.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\XinpuDetectExport' => $baseDir . '/app/Exports/XinpuDetectExport.php',
     'App\\Http\\Controllers\\Admin\\AuthController' => $baseDir . '/app/Http/Controllers/Admin/AuthController.php',
     'App\\Http\\Controllers\\Admin\\BaseController' => $baseDir . '/app/Http/Controllers/Admin/BaseController.php',
     'App\\Http\\Controllers\\Admin\\DeviceController' => $baseDir . '/app/Http/Controllers/Admin/DeviceController.php',

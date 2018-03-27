@@ -400,6 +400,7 @@ class ComposerStaticInita26b380ba7bf1f14ae61c50ebd621c79
         'App\\Console\\Commands\\WarningMile' => __DIR__ . '/../..' . '/app/Console/Commands/WarningMile.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\XinpuDetectExport' => __DIR__ . '/../..' . '/app/Exports/XinpuDetectExport.php',
         'App\\Http\\Controllers\\Admin\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AuthController.php',
         'App\\Http\\Controllers\\Admin\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BaseController.php',
         'App\\Http\\Controllers\\Admin\\DeviceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DeviceController.php',

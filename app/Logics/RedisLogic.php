@@ -36,7 +36,9 @@ class RedisLogic extends BaseLogic
             return self::$devData[$imei];
         }
         $key = 'dev:' . $imei;
+        self::getRedis()->select(1);
         $data = self::getRedis()->hGetAll($key) ?: [];
+        Log::debug("redis hgetall $key", $data);
         return self::$devData[$imei] = $data;
     }
 
