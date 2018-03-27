@@ -143,7 +143,7 @@ class XinpuController extends Controller
     private function checkGsm($gsm, $time)
     {
         //基站数量大于2且主基站信号强度大于-90db判断合格；
-        if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 2 && -$gsm['gsmStrength'] > -90) {
+        if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 2 && $gsm['gsmStrength'] && -$gsm['gsmStrength'] > -90) {
             return true;
         }
         return false;
