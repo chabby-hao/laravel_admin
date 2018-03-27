@@ -145,6 +145,9 @@
                         countdown[id] = 0;
                         //解除检测按钮的禁用状态
                         objBt.removeAttr('disabled').html('检测');
+                        inputObj.attr("disabled", false);
+                        clearInterval(timer[id]);
+                        return;
                     }
                     //$('#content .d-form .btn-detection').html(countdown + 's');
                     objBt.attr("disabled", true).html(countdown[id] + 's');
@@ -264,9 +267,11 @@
         var colDiv = $("#" + i);
         init(colDiv.find("li"));
 
+
         countdown[i] = 0;
         //解除检测按钮的禁用状态
-        colDiv.find(".btn_check").removeAttr('disabled').html('检测');
+        //var objBt = colDiv.find('.btn_check');
+        //objBt.removeAttr('disabled').html('检测');
 
     }
 
@@ -394,11 +399,11 @@
                                     fail($(this));
                                 });
                                 //解除检测按钮的禁用状态
-                                colDiv.find(".btn_check").removeAttr('disabled').html('检测');
                                 /*$('#content .details .check .result').html('');
                                  $('#content .details .rom .result').html('');*/
                                 //$('#content .total-result').removeClass('normal abnormal').addClass('unknown').find('.txt').html('电动车未知');
                                 clearInterval(timer[id]);
+                                colDiv.find(".btn_check").removeAttr('disabled').html('检测');
                                 inputObj.attr("disabled", false);
                             } else {
                                 result(inputObj, imei);
