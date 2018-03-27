@@ -75,6 +75,7 @@ class XinpuController extends Controller
 
             $gps = DeviceLogic::getLastLocationInfo($imei);
             $gsm = DeviceLogic::getLastGsmLocationInfo($imei);
+            Log::debug('gsm', $gsm);
             $devData = RedisLogic::getDevDataByImei($imei);
             $zhangfeiData = RedisLogic::getZhangfeiByImei($imei);
             //$vol = DeviceLogic::getCurrentVoltage($imei);
@@ -89,20 +90,25 @@ class XinpuController extends Controller
             $data['gps'] = 0;
             $data['vol'] = 0;
             $data['result'] = 0;
-            $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
-            $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
-            $data['vol_text'] = '(' . $vol / 1000 . 'V)';
+
+
+            $data['gps_text'] = '(0个)';
+            $data['gsm_text'] = '(-0db/0)';
+            $data['vol_text'] = '(0V)';
 
             if ($this->checkGps($gps, $gsm, $time)) {
                 $data['gps'] = 1;
+                $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
             }
             if ($this->checkGsm($gsm, $time)) {
                 $data['gsm'] = 1;
+                $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
             }
 
             if ($this->checkBatteryId($zhangfeiData)) {
                 $data['net'] = 1;
                 $data['batConn'] = 1;
+                $data['vol_text'] = '(' . $vol / 1000 . 'V)';
             }
             if ($vol) {
                 $data['vol'] = 1;

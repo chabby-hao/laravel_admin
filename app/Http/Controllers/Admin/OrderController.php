@@ -29,6 +29,8 @@ class OrderController extends BaseController
     public function add(Request $request)
     {
 
+        return view('admin.order.add');
+
     }
 
 }

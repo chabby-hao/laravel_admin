@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 27 Mar 2018 15:24:43 +0800.
+ * Date: Tue, 27 Mar 2018 17:51:18 +0800.
  */
 
 namespace App\Models\Base;
@@ -21,6 +21,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $after_sale
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $remark
  *
  * @package App\Models\Base
  */

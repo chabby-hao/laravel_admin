@@ -48,5 +48,11 @@ Route::any('/permis/edit','Admin\PermisController@edit');
 Route::any('/device/list','Admin\DeviceController@list');
 
 
+Route::any('/order/list','Admin\OrderController@list');
+Route::any('/order/add','Admin\OrderController@add');
+
+
+
+
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');

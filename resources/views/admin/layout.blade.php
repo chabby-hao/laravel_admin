@@ -89,11 +89,11 @@
         </li>
 
         {{--订单--}}
-        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span></span>
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>客户订单</span>
             </a>
             <ul>
-                <li><a href="">订单列表</a></li>
-                <li><a href="">新增订单</a></li>
+                <li><a href="{{URL::action('Admin\OrderController@list')}}">订单列表</a></li>
+                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>
             </ul>
         </li>
 

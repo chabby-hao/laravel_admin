@@ -24,6 +24,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $remark 备注
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereRemark($value)
  */
 class BiOrder extends \App\Models\Base\BiOrder
 {
@@ -33,6 +35,7 @@ class BiOrder extends \App\Models\Base\BiOrder
 		'order_quantity',
 		'product_type',
 		'expect_delivery',
-		'after_sale'
+		'after_sale',
+        'remark',
 	];
 }
