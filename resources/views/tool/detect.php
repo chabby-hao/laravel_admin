@@ -71,8 +71,8 @@
                     <div class="col-xs-12">
                         <div class="list-group" style="margin-bottom: 0">
 
-                                <input style="margin: 5px 0;margin-bottom: 20px; width: 100%; height: 45px;padding: 5px;" type="text" class="date">
-<!--                            <textarea style="margin: 0px; width: 100px; height: 87px;" type="text" class="form-control" ></textarea>-->
+                            <input style="margin: 5px 0;margin-bottom: 20px; width: 100%; height: 45px;padding: 5px;" type="text" class="date">
+                            <!--                            <textarea style="margin: 0px; width: 100px; height: 87px;" type="text" class="form-control" ></textarea>-->
                             <span class="input-group-btn text-center">
                                 <button id="history" class="btn btn-info btn-large" type="button">导出检测记录</button>
                             </span>
@@ -260,6 +260,14 @@
         gsm_text[i] = null;
         vol_text[i] = null;
         imeis[i] = null;
+
+        var colDiv = $("#" + i);
+        init(colDiv.find("li"));
+
+        countdown[i] = 0;
+        //解除检测按钮的禁用状态
+        colDiv.find(".btn_check").removeAttr('disabled').html('检测');
+
     }
 
     function changeColor(item, $val) {
@@ -316,7 +324,7 @@
             vol_text: vol_text[i],
             check_time: checkTime[i],
             cost_time: costTime[i],
-            imei:imeis[i],
+            imei: imeis[i],
         }
         $.ajax({
             url: '<?php echo URL::action('Tool\XinpuController@result') ?>',
@@ -347,7 +355,8 @@
                     console.log(data);
 
                     if (data.code !== 200) {
-                        initData(i);
+                        initData(id);
+                        alert(data.msg);
                         return false;
                     }
                     data = data.data;
@@ -536,6 +545,8 @@
 
 
 
+
+
 </script>
 
 <script>
@@ -554,13 +565,13 @@
     var rendered = Mustache.render(template, config);
     target.html(rendered);
 
-    console.log( window.gDatepicker);
+    console.log(window.gDatepicker);
     window.gDatepicker.dateRangePicker($(".date"));
 
-    $(function(){
-        $("#history").click(function(){
+    $(function () {
+        $("#history").click(function () {
             var date = $(".date").val();
-            location.href = '<?php echo URL::action('Tool\XinpuController@result') ?>' + '?date='+date;
+            location.href = '<?php echo URL::action('Tool\XinpuController@result') ?>' + '?date=' + date;
         });
     })
 
