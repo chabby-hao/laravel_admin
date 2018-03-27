@@ -11,7 +11,6 @@ use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
 use App\Models\BiXinpuDetect;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class XinpuController extends Controller
 {
@@ -56,7 +55,7 @@ class XinpuController extends Controller
                 return Helper::responeseError(ErrorCode::$errInvalidUdid);
             }
 
-            $data = [
+            /*$data = [
                 'rom' => 2503,
                 'mcu' => '1.2.34',
                 'batConn' => mt_rand(0, 1),
@@ -70,7 +69,7 @@ class XinpuController extends Controller
                 'gsm_text' => '(-75db/7)',
                 'vol_text' => '(43.5V)',
             ];
-            return Helper::response($data);
+            return Helper::response($data);*/
 
 
             $gps = DeviceLogic::getLastLocationInfo($imei);
