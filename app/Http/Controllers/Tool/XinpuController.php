@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Tool;
 
 use App\Exports\XinpuDetectExport;
 use App\Http\Controllers\Controller;
+use App\Libs\ErrorCode;
 use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
@@ -48,6 +49,13 @@ class XinpuController extends Controller
 
         if ($request->isXmlHttpRequest() && $request->isMethod('GET')) {
 
+            $imei = $request->input('imei');
+            $time = $request->input('time');//开始检测的时间
+            list(, $imei) = DeviceLogic::getUdidImei($imei);
+            if(!$imei){
+                return Helper::responeseError(ErrorCode::$errInvalidUdid);
+            }
+
             $data = [
                 'rom' => 2503,
                 'mcu' => '1.2.34',
@@ -64,9 +72,7 @@ class XinpuController extends Controller
             ];
             return Helper::response($data);
 
-            $imei = $request->input('imei');
-            $time = $request->input('time');//开始检测的时间
-            list(, $imei) = DeviceLogic::getUdidImei($imei);
+
             $gps = DeviceLogic::getLastLocationInfo($imei);
             $gsm = DeviceLogic::getLastGsmLocationInfo($imei);
             $devData = RedisLogic::getDevDataByImei($imei);
