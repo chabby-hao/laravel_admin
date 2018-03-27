@@ -415,8 +415,7 @@
                     }
                 },
                 error: function () {
-                    inputObj.attr("disabled", false);
-                    alert('请求失败，请检查网络重试');
+
                 }
             })
         }
