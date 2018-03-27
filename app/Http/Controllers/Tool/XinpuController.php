@@ -66,9 +66,9 @@ class XinpuController extends Controller
                 'vol' => mt_rand(0, 1),
                 //'result' => 0,
                 'result' => mt_rand(0, 1),
-                'gps_text' => '(43)',
-                'gsm_text' => '(53)',
-                'vol_text' => '(43V)',
+                'gps_text' => '(12个)',
+                'gsm_text' => '(-75db/7)',
+                'vol_text' => '(43.5V)',
             ];
             return Helper::response($data);
 
