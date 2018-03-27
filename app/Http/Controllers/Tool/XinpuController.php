@@ -21,18 +21,18 @@ class XinpuController extends Controller
      */
     public function result(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             //上传检测结果
             $input = $request->input();
             $input['check_at'] = date('Y-m-d H:i:s', $input['check_time']);
             $res = BiXinpuDetect::create($input);
-            if($res){
+            if ($res) {
                 return Helper::response();
             }
             return Helper::responeseError();
         }
         $date = $request->input('date');
-        if($date){
+        if ($date) {
             list($begin, $end) = explode('-', $date);
             $begin = date('Y-m-d 00:00:00', strtotime($begin));
             $end = date('Y-m-d 23:59:59', strtotime($end));
@@ -51,7 +51,7 @@ class XinpuController extends Controller
             $imei = $request->input('imei');
             $time = $request->input('time');//开始检测的时间
             list(, $imei) = DeviceLogic::getUdidImei($imei);
-            if(!$imei){
+            if (!$imei) {
                 return Helper::responeseError(ErrorCode::$errInvalidUdid);
             }
 
@@ -91,19 +91,28 @@ class XinpuController extends Controller
             $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
             $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
             $data['vol_text'] = '(' . $vol / 1000 . 'V)';
+
+            if ($this->checkGps($gps, $gsm, $time)) {
+                $data['gps'] = 1;
+            }
+            if ($this->checkGsm($gsm, $time)) {
+                $data['gsm'] = 1;
+            }
+
+            if ($this->checkBatteryId($zhangfeiData)) {
+                $data['net'] = 1;
+                $data['batConn'] = 1;
+            }
+            if ($vol) {
+                $data['vol'] = 1;
+            }
+
             if ($this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
                 $this->checkBatteryId($zhangfeiData) &&
                 $vol
             ) {
                 //检测成功
-                $data['rom'] = 2503;
-                $data['mcu'] = $devData['mcuVersion'];
-                $data['batConn'] = 1;
-                $data['gsm'] = 1;
-                $data['net'] = 1;
-                $data['gps'] = 1;
-                $data['vol'] = 1;
                 $data['result'] = 1;
             }
             return Helper::response($data);
@@ -114,7 +123,7 @@ class XinpuController extends Controller
 
     private function checkBatteryId($data)
     {
-        if (preg_match('/^XPFactTest.*/',$data['batteryId'])) {
+        if (preg_match('/^XPFactTest.*/', $data['batteryId'])) {
             return true;
         }
         return false;
