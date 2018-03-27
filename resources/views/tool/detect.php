@@ -115,7 +115,7 @@
 </html>
 <script>
 
-    var wait = 30;
+    var wait = 300;
     var countdown = [];
     var interval = [];
     var timer = [];
