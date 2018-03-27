@@ -415,6 +415,7 @@
                     }
                 },
                 error: function () {
+                    updateData(id);
                     countdown[id] = 0;
                 }
             })
