@@ -98,14 +98,14 @@ class XinpuController extends Controller
             if ($this->checkGps($gps, $gsm, $time)) {
                 $data['gps'] = 1;
             }
-            if($gps['time'] > $time){
+            if ($gps['time'] > $time) {
                 $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
             }
 
             if ($this->checkGsm($gsm, $time)) {
                 $data['gsm'] = 1;
             }
-            if($gsm['time'] > $time){
+            if ($gsm['time'] > $time) {
                 $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
             }
 
@@ -120,7 +120,7 @@ class XinpuController extends Controller
 
             if ($this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
-                $this->checkBatteryId($zhangfeiData) &&
+                $this->checkBatteryId($zhangfeiData, $time) &&
                 $vol
             ) {
                 //检测成功
@@ -132,9 +132,9 @@ class XinpuController extends Controller
         return view('tool.detect');
     }
 
-    private function checkBatteryId($data)
+    private function checkBatteryId($data, $time)
     {
-        if (preg_match('/^XPFactTest.*/', $data['batteryID'])) {
+        if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
         return false;
