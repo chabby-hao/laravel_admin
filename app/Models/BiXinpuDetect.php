@@ -40,6 +40,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereVol($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereVolText($value)
  * @mixin \Eloquent
+ * @property string $imei
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiXinpuDetect whereImei($value)
  */
 class BiXinpuDetect extends \App\Models\Base\BiXinpuDetect
 {

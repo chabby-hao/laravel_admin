@@ -36,7 +36,7 @@ class XinpuDetectExport implements FromCollection, WithHeadings, WithMapping, Wi
         return [
             '设备号',
             '检测时间',
-            '检测用时(s)',
+            //'检测用时(s)',
             '固件版本',
             'mcu版本',
             '锂电池通讯',
@@ -58,7 +58,7 @@ class XinpuDetectExport implements FromCollection, WithHeadings, WithMapping, Wi
         return [
             $row->imei,
             $row->check_at,
-            $row->cost_time,
+            //$row->cost_time,
             $row->rom,
             $row->mcu,
             $row->bat_conn ? '正常' : '异常',

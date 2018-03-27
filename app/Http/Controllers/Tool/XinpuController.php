@@ -114,7 +114,7 @@ class XinpuController extends Controller
 
     private function checkBatteryId($data)
     {
-        if ($data['batteryId'] == 'Factory testbatX') {
+        if (preg_match('/^XPFactTest.*/',$data['batteryId'])) {
             return true;
         }
         return false;

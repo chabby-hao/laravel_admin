@@ -88,6 +88,15 @@
             </ul>
         </li>
 
+        {{--订单--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span></span>
+            </a>
+            <ul>
+                <li><a href="">订单列表</a></li>
+                <li><a href="">新增订单</a></li>
+            </ul>
+        </li>
+
         {{--地图--}}
         <li class="">
             <a target="_blank" href="http://anxinchong.vipcare.com/map.html"><i class="icon icon-th-list"></i>
