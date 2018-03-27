@@ -352,7 +352,7 @@
             $.ajax({
                 type: 'get',
                 url: '<?php echo URL::action('Tool\XinpuController@detect'); ?>',
-                data: {'udid': imei, 'time': checkTime[id]},
+                data: {'imei': imei, 'time': checkTime[id]},
                 //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
                 //dataType: 'jsonp',
                 success: function (data) {
