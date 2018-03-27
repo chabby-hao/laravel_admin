@@ -75,7 +75,9 @@ class XinpuController extends Controller
             $gps = DeviceLogic::getLastLocationInfo($imei);
             $gsm = DeviceLogic::getLastGsmLocationInfo($imei);
             $devData = RedisLogic::getDevDataByImei($imei);
-            $vol = DeviceLogic::getCurrentVoltage($imei);
+            $zhangfeiData = RedisLogic::getZhangfeiByImei($imei);
+            //$vol = DeviceLogic::getCurrentVoltage($imei);
+            $vol = $zhangfeiData['BatteryVoltage'];//mv
 
             $data = [];
             $data['rom'] = 2503;
@@ -88,10 +90,10 @@ class XinpuController extends Controller
             $data['result'] = 0;
             $data['gps_text'] = '(' . max($gps['satCount'], $gsm['satCount']) . '个)';
             $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
-            $data['vol_text'] = '(' . $vol / 10 . 'V)';
+            $data['vol_text'] = '(' . $vol / 1000 . 'V)';
             if ($this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
-                $this->checkBatteryId($devData) &&
+                $this->checkBatteryId($zhangfeiData) &&
                 $vol
             ) {
                 //检测成功
@@ -110,9 +112,9 @@ class XinpuController extends Controller
         return view('tool.detect');
     }
 
-    private function checkBatteryId($devData)
+    private function checkBatteryId($data)
     {
-        if ($devData['batteryId'] == 'Factory testbatX') {
+        if ($data['batteryId'] == 'Factory testbatX') {
             return true;
         }
         return false;

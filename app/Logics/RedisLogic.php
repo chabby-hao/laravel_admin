@@ -17,6 +17,8 @@ class RedisLogic extends BaseLogic
 
     private static $locData = [];//imei=>array
 
+    private static $zhangfeiData = [];//imei=>array
+
     /**
      * 获取redis示例
      * @return \Redis
@@ -40,6 +42,19 @@ class RedisLogic extends BaseLogic
         $data = self::getRedis()->hGetAll($key) ?: [];
         Log::debug("redis hgetall $key", $data);
         return self::$devData[$imei] = $data;
+    }
+
+    public static function getZhangfeiByImei($imei)
+    {
+        //加个类缓存
+        if (isset(self::$zhangfeiData[$imei])) {
+            return self::$zhangfeiData[$imei];
+        }
+        $key = 'zhangfei_charge:' . $imei;
+        self::getRedis()->select(1);
+        $data = self::getRedis()->hGetAll($key) ?: [];
+        Log::debug("redis hgetall $key", $data);
+        return self::$zhangfeiData[$imei] = $data;
     }
 
     public static function getDevDataByUdid($udid)
