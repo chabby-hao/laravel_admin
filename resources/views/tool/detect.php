@@ -395,9 +395,9 @@
                                 //检测失败
                                 clearTimeout(interval[id]);
                                 console.log('检测结果超时');
-                                colDiv.find('li').each(function () {
+                                /*colDiv.find('li').each(function () {
                                     fail($(this));
-                                });
+                                });*/
                                 //解除检测按钮的禁用状态
                                 /*$('#content .details .check .result').html('');
                                  $('#content .details .rom .result').html('');*/
