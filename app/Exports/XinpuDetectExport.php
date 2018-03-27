@@ -67,7 +67,7 @@ class XinpuDetectExport implements FromCollection, WithHeadings, WithMapping, Wi
             $row->data_conn ? '正常' : '异常',
             $row->gps_text . ($row->gps ? '正常' : '异常'),
             $row->vol_text . ($row->vol ? '正常' : '异常'),
-            $row->result ? '正常' : '异常',
+            $row->result ? 'Pass' : 'Fail',
         ];
     }
 

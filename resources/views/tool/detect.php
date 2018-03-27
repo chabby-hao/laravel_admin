@@ -305,7 +305,7 @@
         changeColor(col_div.find('.gps'), gps[i]);
         myhtml(col_div.find('.vol'), vol_text[i] + (vol[i] ? '正常' : '异常'));
         changeColor(col_div.find('.vol'), vol[i]);
-        myhtml(col_div.find('.myresult'), myresult[i] ? '正常' : '异常');
+        myhtml(col_div.find('.myresult'), myresult[i] ? 'Pass' : 'Fail');
         changeColor(col_div.find('.myresult'), myresult[i]);
 
         //上传测试结果日志
@@ -477,6 +477,12 @@
                         items[next].focus();
                     }
                 }
+                $(item).on('input',function(){
+                    if ($(this).val().trim().length === 15) {
+                        items[next].focus();
+                        $(this).parents(".col_div").find('.btn_check').trigger('click');
+                    }
+                })
             })();
         }
         $("body").bind('keydown', function (e) {
@@ -494,11 +500,14 @@
         //检测地址栏自动获取焦点
         items[0].focus();
         //监听输入事件，输入到15位的时候自动检测
-        $(items).on('input', function () {
+        /*$(items).on('input', function (e) {
+
             if ($(this).val().trim().length === 15) {
-                $(this).parents(".col_div").find('.btn_check').trigger('click');
+                console.log(e);
+                $("body").trigger('keydown');
+                //$(this).parents(".col_div").find('.btn_check').trigger('click');
             }
-        });
+        });*/
 
     });
 
