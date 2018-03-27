@@ -109,7 +109,7 @@ class XinpuController extends Controller
                 $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
             }
 
-            if ($this->checkBatteryId($zhangfeiData)) {
+            if ($this->checkBatteryId($zhangfeiData, $time)) {
                 $data['net'] = 1;
                 $data['batConn'] = 1;
             }
