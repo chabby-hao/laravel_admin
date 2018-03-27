@@ -124,11 +124,5 @@ class RedisLogic extends BaseLogic
         return self::lPush(self::REDIS_LIST_KEY_PRE . ($listNumber - 1), $val);
     }
 
-    public static function sendCmdByUdid($udid, int $commandId)
-    {
-        $imei = DeviceLogic::getImei($udid);
-        return self::sendCmd($imei, $commandId);
-    }
-
 
 }
