@@ -71,14 +71,14 @@ class RedisLogic extends BaseLogic
     public static function getLocationByImei($imei, $lastKey = 'last')
     {
         //加个类缓存
-        if (isset(self::$locData[$imei])) {
-            return self::$locData[$imei];
+        if (isset(self::$locData[$lastKey.$imei])) {
+            return self::$locData[$lastKey.$imei];
         }
         $devData = self::getDevDataByImei($imei);
         if (isset($devData[$lastKey]) && $devData[$lastKey]) {
             $key = 'loc:' . $devData[$lastKey];
             $data = self::getRedis()->hGetAll($key) ?: [];
-            return self::$locData[$imei] = $data;
+            return self::$locData[$lastKey.$imei] = $data;
         }
         return [];
     }

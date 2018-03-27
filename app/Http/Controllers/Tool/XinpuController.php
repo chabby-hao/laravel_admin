@@ -75,7 +75,6 @@ class XinpuController extends Controller
 
             $gps = DeviceLogic::getLastLocationInfo($imei);
             $gsm = DeviceLogic::getLastGsmLocationInfo($imei);
-            Log::debug('gsm', $gsm);
             $devData = RedisLogic::getDevDataByImei($imei);
             $zhangfeiData = RedisLogic::getZhangfeiByImei($imei);
             //$vol = DeviceLogic::getCurrentVoltage($imei);
