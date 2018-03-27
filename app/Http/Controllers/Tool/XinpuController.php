@@ -124,8 +124,7 @@ class XinpuController extends Controller
 
     private function checkBatteryId($data)
     {
-        Log::debug('battery', $data);
-        if (preg_match('/^XPFactTest.*/', $data['batteryId'])) {
+        if (preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
         return false;
