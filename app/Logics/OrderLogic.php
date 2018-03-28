@@ -45,4 +45,19 @@ class OrderLogic extends BaseLogic
         }
     }
 
+    /**
+     * 作废订单
+     * @param $id
+     */
+    public function cancelOrder($id)
+    {
+        $order = BiOrder::find($id);
+        $res = false;
+        if($order->state == BiOrder::ORDER_STATE_INIT && $order->ship_quantity == 0) {
+            $order->state = BiOrder::ORDER_STATE_CANCEL;//作废
+            $res = $order->save();
+        }
+        return $res;
+    }
+
 }

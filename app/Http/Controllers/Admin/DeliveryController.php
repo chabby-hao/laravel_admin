@@ -20,7 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
-class OrderController extends BaseController
+class DeliveryController extends BaseController
 {
 
     public function list(Request $request)

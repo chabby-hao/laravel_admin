@@ -47,13 +47,17 @@ Route::any('/permis/edit','Admin\PermisController@edit');
 
 Route::any('/device/list','Admin\DeviceController@list');
 
-
+//订单
 Route::any('/order/list','Admin\OrderController@list');
 Route::any('/order/add','Admin\OrderController@add');
 Route::any('/order/edit','Admin\OrderController@edit');
 Route::any('/order/delete','Admin\OrderController@delete');
 
-
+//出货单
+Route::any('/delivery/list','Admin\DeliveryController@list');
+Route::any('/delivery/add','Admin\DeliveryController@add');
+Route::any('/delivery/edit','Admin\DeliveryController@edit');
+Route::any('/delivery/delete','Admin\DeliveryController@delete');
 
 
 //放在最后
