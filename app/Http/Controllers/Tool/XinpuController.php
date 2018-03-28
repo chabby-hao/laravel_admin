@@ -11,7 +11,6 @@ use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
 use App\Models\BiXinpuDetect;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class XinpuController extends Controller
 {
@@ -81,7 +80,7 @@ class XinpuController extends Controller
             $vol = $zhangfeiData['batteryVoltage'];//mv
 
             $data = [];
-            $data['rom'] = 2503;
+            $data['rom'] = $devData['rom'];
             $data['mcu'] = $devData['mcuVersion'];
             $data['batConn'] = 0;
             $data['gsm'] = 0;
