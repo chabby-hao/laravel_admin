@@ -50,6 +50,9 @@ class XinpuController extends Controller
 
             $imei = $request->input('imei');
             $time = $request->input('time');//开始检测的时间
+
+            $time = $time - 600;//时间放宽松
+
             list(, $imei) = DeviceLogic::getUdidImei($imei);
             if (!$imei) {
                 return Helper::responeseError(ErrorCode::$errInvalidUdid);
