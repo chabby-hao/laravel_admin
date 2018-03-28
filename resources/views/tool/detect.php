@@ -380,8 +380,12 @@
                     vol_text[id] = data.vol_text;
 
 
-                    myhtml(colDiv.find(".rom"), data.rom)
-                    myhtml(colDiv.find(".mcu"), data.mcu)
+                    if(rom){
+                        myhtml(colDiv.find(".rom"), data.rom)
+                    }
+                    if(mcu){
+                        myhtml(colDiv.find(".mcu"), data.mcu)
+                    }
 
                     if (data.result === 1) {
                         //成功
