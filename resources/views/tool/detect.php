@@ -290,10 +290,14 @@
         var col_div = $('#' + i);
 
         myhtml(col_div.find('.rom'), rom[i]);
-        pass(col_div.find('.rom'));
+        if(rom[i]){
+            changeColor(col_div.find('.rom'), rom[i]);
+        }
 
         myhtml(col_div.find('.mcu'), mcu[i] ? mcu[i] : '异常');
-        changeColor(col_div.find('.mcu'), mcu[i]);
+        if(mcu[i]){
+            changeColor(col_div.find('.mcu'), mcu[i]);
+        }
 
         myhtml(col_div.find('.batConn'), batConn[i] ? '正常' : '异常');
         changeColor(col_div.find('.batConn'), batConn[i]);
@@ -439,7 +443,7 @@
     }
 
     function myhtml(item, content) {
-        item.html(content).addClass('list-group-item-info');
+        item.html(content !== null ? content : '未获取到').addClass('list-group-item-info');
     }
 
     //检测通过
