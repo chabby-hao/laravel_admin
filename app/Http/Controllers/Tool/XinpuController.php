@@ -91,7 +91,7 @@ class XinpuController extends Controller
 
 
             $data['gps_text'] = '(0个)';
-            $data['gsm_text'] = '(-0db/0)';
+            $data['gsm_text'] = '(0个)';
             $data['vol_text'] = '(0V)';
 
             if ($this->checkGps($gps, $gsm, $time)) {
@@ -105,7 +105,7 @@ class XinpuController extends Controller
                 $data['gsm'] = 1;
             }
             if ($gsm['time'] > $time) {
-                $data['gsm_text'] = '(' . -$gsm['gsmStrength'] . 'db/' . $gsm['cellTowerCount'] . ')';
+                $data['gsm_text'] = '(' . $gsm['cellTowerCount'] . '个)';
             }
 
             if ($this->checkBatteryId($zhangfeiData, $time)) {
@@ -142,7 +142,7 @@ class XinpuController extends Controller
     private function checkGsm($gsm, $time)
     {
         //基站数量大于2且主基站信号强度大于-90db判断合格；
-        if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 2 && $gsm['gsmStrength'] && -$gsm['gsmStrength'] > -90) {
+        if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 3) {
             return true;
         }
         return false;
