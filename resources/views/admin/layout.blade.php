@@ -14,12 +14,16 @@
     <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}"/>
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
+    <link href="{{asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"/>
 <!--<link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}"/>-->
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.ui.custom.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
+
 </head>
 <body>
 

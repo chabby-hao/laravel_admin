@@ -32,10 +32,10 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>设备型号:</label>
                                 <div class="controls">
-                                    <select name="product_type" class="span11">
+                                    <select name="device_type" class="span11">
                                         <option value="">请选择设备型号</option>
-                                        @foreach(\App\Models\BiProductType::() as $channelId=> $channelName)
-                                            <option value="{{$channelId}}">{{$channelName}}</option>
+                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $id=> $name)
+                                            <option value="{{$id}}">{{$name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -44,17 +44,24 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>期望交货:</label>
                                 <div class="controls">
-                                    <input name="order_quantity" name="expect_delivery" value="" type="text" class="span11"/>
-                                    <span class="help-block">例：100</span>
+                                    <input id="expect_delivery" name="expect_delivery" value="" type="text" class="span11"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>售后订单:</label>
                                 <div class="controls">
+                                    <label>
+                                        <input name="after_sale" type="radio" value="{{\App\Models\BiOrder::AFTER_SALE_NO}}" checked  />
+                                        否</label>
+                                    <label>
+                                        <input type="radio" value="{{\App\Models\BiOrder::AFTER_SALE_YES}}" name="after_sale" />
+                                        是</label>
+                                </div>
+                                {{--<div class="controls">
                                     <input name="order_quantity" name="after_sale" value="" type="text" class="span11"/>
                                     <span class="help-block">例：100</span>
-                                </div>
+                                </div>--}}
                             </div>
 
                             <div class="control-group">
@@ -75,6 +82,14 @@
         </div>
     </div>
     <script>
+
+        $('#expect_delivery').datepicker({
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            startDate: '+1d',
+            startView: 1,
+            todayHighlight: true,
+        });
 
         $(function () {
 

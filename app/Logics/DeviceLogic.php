@@ -154,7 +154,7 @@ class DeviceLogic extends BaseLogic
     public static function isEb001b($udid)
     {
         $deviceType = self::getDeviceTypeByUdid($udid);
-        if (in_array($deviceType, [BiProductType::DEVICE_TYPE_EB001B, BiProductType::DEVICE_TYPE_EB001D])) {
+        if (in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001B, BiProductType::PRODUCT_TYPE_EB001D])) {
             return true;
         } else {
             return false;

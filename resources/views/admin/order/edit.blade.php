@@ -5,31 +5,67 @@
             <div class="span6">
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>{{\App\Logics\AuthLogic::getPermisName()}}</h5>
+                        <h5>编辑</h5>
                     </div>
                     <div class="widget-content">
-                        <form id="myform" action="<?php ?>" method="post" class="form-horizontal">
-                            <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>权限名(英文) :</label>
+                        <form id="myform" method="post" class="form-horizontal">
+                            <input type="hidden" name="id" value="{{$data->id}}">
+                            {{--<div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>渠道名称:</label>
                                 <div class="controls">
-                                    <input name="name" value="{{$permis->name}}" type="text" class="span11"/>
-                                    <span class="help-block">例：user/add</span>
+                                    <select name="channel_id" class="span11">
+                                        <option value="">请选择渠道</option>
+                                        @foreach(\App\Models\BiChannel::getChannelMap() as $channelId=> $channelName)
+                                            <option @if($channelId == $data->channel_id) selected @endif value="{{$channelId}}">{{$channelName}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>--}}
+
+                            {{--<div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>订单数量:</label>
+                                <div class="controls">
+                                    <input name="order_quantity" value="{{$data->order_quantity}}" type="text" class="span11"/>
+                                    <span class="help-block">例：100</span>
+                                </div>
+                            </div>--}}
+
+                            {{--<div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>设备型号:</label>
+                                <div class="controls">
+                                    <select name="device_type" class="span11">
+                                        <option value="">请选择设备型号</option>
+                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $id=> $name)
+                                            <option @if($id==$data->device_type) selected @endif value="{{$id}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>--}}
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>期望交货:</label>
+                                <div class="controls">
+                                    <input id="expect_delivery" name="expect_delivery" value="{{$data->expect_delivery}}" type="text" class="span11"/>
                                 </div>
                             </div>
 
-                            <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>权限展示名称(中文) :</label>
+                            {{--<div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>售后订单:</label>
                                 <div class="controls">
-                                    <input name="display_name" value="{{$permis->display_name}}" type="text" class="span11"/>
-                                    <span class="help-block">例：添加账号</span>
+
+                                    @foreach(\App\Models\BiOrder::getAfterSaleTypeName() as $id=>$name)
+                                        <label>
+                                            <input @if($id==$data->after_sale) checked @endif name="after_sale" type="radio" value="{{$id}}"  />
+                                            {{$name}}</label>
+                                        @endforeach
+
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>权限描述 :</label>
+                                <label class="control-label">备注:</label>
                                 <div class="controls">
-                                    <input name="description" value="{{$permis->description}}" type="text" class="span11"/>
-                                    <span class="help-block">例：可以添加一个新的账号用来登录系统</span>
+                                    <textarea name="remark" type="text" class="span11">{{$data->remark}}</textarea>
                                 </div>
                             </div>
 
@@ -43,6 +79,18 @@
             </div>
         </div>
     </div>
-    @include('admin.common_submitjs')
+    <script>
+
+        $('#expect_delivery').datepicker({
+            format: "yyyy-mm-dd",
+            language: "zh-CN",
+            startDate: '+1d',
+            startView: 1,
+            todayHighlight: true,
+        });
+
+    </script>
+
+@include('admin.common_submitjs')
 @endsection
 
