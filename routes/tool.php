@@ -21,6 +21,7 @@ Route::any('xinpu/detect','Tool\XinpuController@detect');
 Route::any('xinpu/result','Tool\XinpuController@result');
 
 Route::any('command/refreshGsm','Tool\CommandController@refreshGsm');
+Route::any('command/bt2503','Tool\CommandController@bt2503');
 
 
 Route::get('/phpinfo',function(){
