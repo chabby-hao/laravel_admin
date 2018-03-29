@@ -101,6 +101,15 @@
             </ul>
         </li>
 
+        {{--出货--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备出货</span>
+            </a>
+            <ul>
+                <li><a href="{{URL::action('Admin\DeliveryController@list')}}">出货单列表</a></li>
+                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>
+            </ul>
+        </li>
+
         {{--地图--}}
         <li class="">
             <a target="_blank" href="http://anxinchong.vipcare.com/map.html"><i class="icon icon-th-list"></i>

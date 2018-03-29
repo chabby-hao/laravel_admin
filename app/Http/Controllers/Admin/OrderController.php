@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
+
 class OrderController extends BaseController
 {
 
@@ -30,10 +31,12 @@ class OrderController extends BaseController
         $id = $this->getId($request);
         $data = BiOrder::find($id);
         if($data){
+            $data->channel_name = BiChannel::getChannelMap()[$data['channel_id']];
+            $data->device_type_name = BiDeviceType::getNameMap()[$data['device_type']];
             $output = $data->toArray();
-            $output['channel_name'] = BiChannel::getChannelMap()[$data['channel_id']];
+            /*$output['channel_name'] = BiChannel::getChannelMap()[$data['channel_id']];
             $output['device_type_name'] = BiDeviceType::getNameMap()[$data['device_type']];
-            $output['expect_delivery'] = $data->expect_delivery->format('Y-m-d');
+            $output['expect_delivery'] = $data->expect_delivery->format('Y-m-d');*/
             return $this->outPut($output);
         }else{
             return $this->outPutError();
@@ -124,7 +127,7 @@ class OrderController extends BaseController
             if ($res) {
                 return $this->outPutSuccess();
             }
-            return $this->outPutError();
+            return $this->outPutError('作废失败，请确认');
         }
         return abort(403);
     }

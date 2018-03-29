@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Mar 2018 14:54:57 +0800.
+ * Date: Thu, 29 Mar 2018 19:47:25 +0800.
  */
 
 namespace App\Models\Base;
@@ -13,7 +13,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class BiEbikeType
  * 
  * @property int $id
- * @property int $ev_model
  * @property string $ebike_name
  * @property string $ebike_remark
  * @property int $brand_id
@@ -27,7 +26,6 @@ class BiEbikeType extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'ev_model' => 'int',
 		'brand_id' => 'int'
 	];
 }

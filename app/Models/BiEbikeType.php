@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Libs\Helper;
+
 /**
  * App\Models\BiEbikeType
  *
@@ -26,4 +28,10 @@ class BiEbikeType extends \App\Models\Base\BiEbikeType
         'id',
         'ev_model',
 	];
+
+    public static function getTypeName()
+    {
+        $rs = self::orderByDesc('id')->get()->toArray();
+        return Helper::transToKeyValueArray($rs, 'id', 'ebike_name');
+    }
 }

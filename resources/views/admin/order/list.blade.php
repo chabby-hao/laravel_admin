@@ -35,8 +35,8 @@
                                 <tr class="gradeX">
                                     <td>{{$data->order_no}}</td>
                                     <td>{{$data->order_quantity}}</td>
-                                    <td>{{$data->expect_delivery->format('Y-m-d')}}</td>
-                                    <td>{{$data->ship_quantity}}</td>
+                                    <td>{{$data->expect_delivery}}</td>
+                                    <td>{{$data->actuall_quantity}}</td>
                                     <td>{{$data->name}}</td>
                                     <td>{{\App\Models\BiChannel::getChannelMap()[$data->channel_id]}}</td>
                                     <td>{{$data->username}}</td>

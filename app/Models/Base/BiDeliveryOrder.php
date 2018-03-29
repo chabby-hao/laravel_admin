@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Mar 2018 14:54:56 +0800.
+ * Date: Thu, 29 Mar 2018 19:47:25 +0800.
  */
 
 namespace App\Models\Base;
@@ -15,7 +15,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property int $user_id
  * @property int $state
- * @property int $ship_no
+ * @property string $ship_no
  * @property int $order_id
  * @property string $part_number
  * @property int $fact_id
@@ -35,7 +35,6 @@ class BiDeliveryOrder extends Eloquent
 	protected $casts = [
 		'user_id' => 'int',
 		'state' => 'int',
-		'ship_no' => 'int',
 		'order_id' => 'int',
 		'fact_id' => 'int',
 		'delivery_quantity' => 'int',

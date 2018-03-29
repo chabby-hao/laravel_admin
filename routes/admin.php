@@ -61,5 +61,8 @@ Route::any('/delivery/edit','Admin\DeliveryController@edit');
 Route::any('/delivery/delete','Admin\DeliveryController@delete');
 
 
+Route::any('/delivery/detail','Admin\BrandController@detail');
+
+
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');

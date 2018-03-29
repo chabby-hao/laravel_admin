@@ -10,9 +10,12 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Libs\MyPage;
+use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
 use App\Logics\OrderLogic;
 use App\Models\BiBrand;
+use App\Models\BiDeliveryOrder;
+use App\Models\BiEbikeType;
 use App\Models\BiOrder;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
@@ -25,10 +28,26 @@ class DeliveryController extends BaseController
 
     public function list(Request $request)
     {
-        $paginate = BiOrder::join('bi_users', 'user_id', '=', 'bi_users.id')->join('bi_device_types', 'device_type', '=', 'bi_device_types.id')->orderBy('state')->orderByDesc('bi_orders.id')->select(['bi_orders.*', 'bi_device_types.name', 'bi_users.username'])->paginate();
+        $paginate = BiDeliveryOrder::join('bi_users', 'user_id', '=', 'bi_users.id')
+            ->join('bi_orders','order_id','=','bi_orders.id')
+            ->join('bi_device_types', 'device_type', '=', 'bi_device_types.id')
+            ->join('bi_channels', 'channel_id', '=', 'bi_channels.id')
+            ->orderBy('bi_delivery_orders.state')
+            ->orderByDesc('bi_delivery_orders.id')
+            ->select(['bi_delivery_orders.*', 'bi_orders.order_no', 'bi_users.username', 'bi_device_types.name as device_type_name','bi_channels.channel_name'])
+            ->paginate();
 
-        return view('admin.order.list', [
-            'datas' => $paginate->items(),
+        $datas = $paginate->items();
+
+
+        /** @var BiDeliveryOrder $data */
+        foreach ($datas as $data){
+            $data->brand_name = $data->brand_id ? BiBrand::getBrandMap()[$data->brand_id] : '';
+            $data->ebike_type_name = $data->ebike_type_id ? BiEbikeType::getTypeName()[$data->ebike_type_id] : '';
+        }
+
+        return view('admin.delivery.list', [
+            'datas' => $datas,
             'page_nav' => MyPage::showPageNav($paginate),
         ]);
 
@@ -37,23 +56,26 @@ class DeliveryController extends BaseController
     public function add(Request $request)
     {
 
-
         if ($request->isXmlHttpRequest()) {
             $input = $this->checkParams([
-                'channel_id',
-                'order_quantity',
-                'device_type',
-                'expect_delivery',
-                'after_sale',
-                'remark',
-            ], $request->input(), ['remark']);
+                'order_id',
+                'part_number',
+                'fact_id',
+                'delivery_date',
+                'delivery_quantity',
+                'brand_id',
+                'ebike_type_id',
+            ], $request->input(), ['brand_id', 'ebike_type_id']);
 
             $input['user_id'] = Auth::id();
 
-            $orderLogic = new OrderLogic();
-            if ($orderLogic->createOrder($input)) {
+            $logic = new DeliveryLogic();
+            if (!$logic->checkShipQuantity($input['order_id'], $input['delivery_quantity'])) {
+                return $this->outPutError('出货数量不正确');
+            }
+            if ($logic->createDeliveryOrder($input)) {
                 //return $this->outPutSuccess();
-                return $this->outPutRedirect(URL::action('Admin\OrderController@list'));
+                return $this->outPutRedirect(URL::action('Admin\DeliveryController@list'));
             }
 
             return $this->outPutError('添加失败 ');
@@ -70,28 +92,24 @@ class DeliveryController extends BaseController
 
         if ($request->isXmlHttpRequest()) {
             $input = $this->checkParams([
-                //'channel_id',
-                //'order_quantity',
-                //'device_type',
-                'expect_delivery',
-                //'after_sale',
-                'remark',
-            ], $request->input(), ['remark']);
+                'delivery_date',
+                'delivery_quantity',
+            ], $request->input());
 
             //$input['user_id'] = Auth::id();
 
-            $orderLogic = new OrderLogic();
-            if ($orderLogic->editOrder($id, $input)) {
+            $orderLogic = new DeliveryLogic();
+            if ($orderLogic->editDeliveryOrder($id, $input)) {
                 //return $this->outPutSuccess();
-                return $this->outPutRedirect(URL::action('Admin\OrderController@list'));
+                return $this->outPutRedirect(URL::action('Admin\DeliveryController@list'));
             }
 
-            return $this->outPutError('操作失败 ');
+            return $this->outPutError('操作失败,请确认出货数量正确');
         }
 
-        $data = BiOrder::find($id);
+        $data = BiDeliveryOrder::find($id);
 
-        return view('admin.order.edit', [
+        return view('admin.delivery.edit', [
             'data' => $data,
         ]);
 
@@ -102,8 +120,8 @@ class DeliveryController extends BaseController
 
         if ($request->isXmlHttpRequest()) {
             $id = $this->getId($request);
-            $orderLogic = new OrderLogic();
-            $res = $orderLogic->cancelOrder($id);
+            $orderLogic = new DeliveryLogic();
+            $res = $orderLogic->cancelDeliveryOrder($id);
             if ($res) {
                 return $this->outPutSuccess();
             }

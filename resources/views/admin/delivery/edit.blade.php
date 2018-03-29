@@ -10,42 +10,19 @@
                     <div class="widget-content">
                         <form id="myform" method="post" class="form-horizontal">
                             <input type="hidden" name="id" value="{{$data->id}}">
-                            {{--<div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>渠道名称:</label>
-                                <div class="controls">
-                                    <select name="channel_id" class="span11">
-                                        <option value="">请选择渠道</option>
-                                        @foreach(\App\Models\BiChannel::getChannelMap() as $channelId=> $channelName)
-                                            <option @if($channelId == $data->channel_id) selected @endif value="{{$channelId}}">{{$channelName}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>--}}
-
-                            {{--<div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>订单数量:</label>
-                                <div class="controls">
-                                    <input name="order_quantity" value="{{$data->order_quantity}}" type="text" class="span11"/>
-                                    <span class="help-block">例：100</span>
-                                </div>
-                            </div>--}}
-
-                            {{--<div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>设备型号:</label>
-                                <div class="controls">
-                                    <select name="device_type" class="span11">
-                                        <option value="">请选择设备型号</option>
-                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $id=> $name)
-                                            <option @if($id==$data->device_type) selected @endif value="{{$id}}">{{$name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>--}}
 
                             <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>期望交货:</label>
+                                <label class="control-label"><span class="text-error">*</span>出货时间:</label>
                                 <div class="controls">
-                                    <input id="expect_delivery" name="expect_delivery" value="{{$data->expect_delivery}}" type="text" class="span11"/>
+                                    <input required id="delivery_date" name="delivery_date" value="{{$data->delivery_date}}" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>出货数量:</label>
+                                <div class="controls">
+                                    <input required name="delivery_quantity" value="{{$data->delivery_quantity}}" type="number" class="span11"/>
+                                    <span class="help-block">大于0小于等于该订单未出货的数量</span>
                                 </div>
                             </div>
 
@@ -62,13 +39,6 @@
                                 </div>
                             </div>--}}
 
-                            <div class="control-group">
-                                <label class="control-label">备注:</label>
-                                <div class="controls">
-                                    <textarea name="remark" type="text" class="span11">{{$data->remark}}</textarea>
-                                </div>
-                            </div>
-
 
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
@@ -81,7 +51,7 @@
     </div>
     <script>
 
-        $('#expect_delivery').datepicker({
+        $('#delivery_date').datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN",
             startDate: '+1d',

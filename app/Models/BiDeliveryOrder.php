@@ -47,4 +47,22 @@ class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 		'brand_id',
 		'ebike_type_id'
 	];
+
+	protected $dates = [];
+
+    const DELIVERY_ORDER_STATE_INIT = 0;//代工厂处理
+    const DELIVERY_ORDER_STATE_FINISH = 1;//已完成
+    const DELIVERY_ORDER_STATE_CANCEL = 2;//已作废
+
+    public static function getStateTypeName($type = null)
+    {
+        $map = [
+            self::DELIVERY_ORDER_STATE_INIT =>'待工厂处理',
+            self::DELIVERY_ORDER_STATE_FINISH =>'已完成',
+            self::DELIVERY_ORDER_STATE_CANCEL =>'已废弃',
+        ];
+        return $type === null ? $map : $map[$type];
+    }
+
+
 }

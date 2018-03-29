@@ -19,7 +19,7 @@ class OrderLogic extends BaseLogic
         try {
             $order = new BiOrder();
             $order->user_id = $data['user_id'];
-            $order->order_no = date('YmdHis') . mt_rand(1000,9999);
+            $order->order_no = 'O' . date('YmdHis') . mt_rand(1000,9999);
             $order->state = BiOrder::ORDER_STATE_INIT;
             $order->channel_id = $data['channel_id'];
             $order->order_quantity = $data['order_quantity'];
@@ -40,7 +40,7 @@ class OrderLogic extends BaseLogic
             $res = BiOrder::find($id)->update($data);
             return $res;
         } catch (\Exception $e) {
-            Log::error('edit order db error:' . $e->getMessage());
+            Log::error('edit order db error:' . $e->getMessage(), $data);
             return false;
         }
     }
@@ -53,7 +53,8 @@ class OrderLogic extends BaseLogic
     {
         $order = BiOrder::find($id);
         $res = false;
-        if($order->state == BiOrder::ORDER_STATE_INIT && $order->ship_quantity == 0) {
+        //没有可用出货单，且实际出货为0
+        if($order->state == BiOrder::ORDER_STATE_INIT && $order->ship_quantity == 0 && $order->actuall_quantity == 0) {
             $order->state = BiOrder::ORDER_STATE_CANCEL;//作废
             $res = $order->save();
         }

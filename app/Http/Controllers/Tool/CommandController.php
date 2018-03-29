@@ -30,8 +30,6 @@ class CommandController extends Controller
         $imei = $request->input('imei');
         $mac = $request->input('mac');
         $res = false;
-        //var_dump($mac);
-        //dd($imei, $mac);
         if($imei && $mac){
             RedisLogic::getRedis()->select(6);
             $res = RedisLogic::hSet('pairbt',$mac, $imei);
