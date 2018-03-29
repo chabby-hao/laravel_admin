@@ -208,7 +208,7 @@
                                 //clearInterval(interval[id]);
                                 clearTimeout(checkInterval[id]);
                                 clearInterval(timer[id]);
-                                console.log('检测结果未知2');
+                                console.log('检测结果未知');
                                 colDiv.find('li').each(function () {
                                     unkown($(this));
                                 });
@@ -354,7 +354,7 @@
             method: 'post',
             data: data,
             success: function (res) {
-                console.log(res);
+                //console.log(res);
             }
         });
     }
@@ -375,7 +375,7 @@
                 //dataType: 'jsonp',
                 success: function (data) {
 
-                    console.log(data);
+                    //console.log(data);
 
                     if (data.code !== 200) {
                         initData(id);
@@ -605,7 +605,7 @@
     var rendered = Mustache.render(template, config);
     target.html(rendered);
 
-    console.log(window.gDatepicker);
+    //console.log(window.gDatepicker);
     window.gDatepicker.dateRangePicker($(".date"));
 
     $(function () {
