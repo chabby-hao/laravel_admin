@@ -62,7 +62,15 @@
 </head>
 
 <body>
+
+<div style="padding:0;margin: 0;" class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+    推荐优先使用Chrome浏览器
+</div>
+
 <div class="container-fluid">
+
     <div class="row show-grid">
 
         <div class="col-xs-2">
@@ -290,12 +298,12 @@
         var col_div = $('#' + i);
 
         myhtml(col_div.find('.rom'), rom[i]);
-        if(rom[i]){
+        if (rom[i]) {
             changeColor(col_div.find('.rom'), rom[i]);
         }
 
         myhtml(col_div.find('.mcu'), mcu[i] ? mcu[i] : '异常');
-        if(mcu[i]){
+        if (mcu[i]) {
             changeColor(col_div.find('.mcu'), mcu[i]);
         }
 
@@ -384,10 +392,10 @@
                     vol_text[id] = data.vol_text;
 
 
-                    if(data.rom){
+                    if (data.rom) {
                         myhtml(colDiv.find(".rom"), data.rom)
                     }
-                    if(data.mcu){
+                    if (data.mcu) {
                         myhtml(colDiv.find(".mcu"), data.mcu)
                     }
 
@@ -407,8 +415,8 @@
                                 clearTimeout(interval[id]);
                                 console.log('检测结果超时');
                                 /*colDiv.find('li').each(function () {
-                                    fail($(this));
-                                });*/
+                                 fail($(this));
+                                 });*/
                                 //解除检测按钮的禁用状态
                                 /*$('#content .details .check .result').html('');
                                  $('#content .details .rom .result').html('');*/
@@ -488,7 +496,7 @@
                         items[next].focus();
                     }
                 }
-                $(item).on('input',function(){
+                $(item).on('input', function () {
                     if ($(this).val().trim().length === 15) {
                         items[next].focus();
                         $(this).parents(".col_div").find('.btn_check').trigger('click');
@@ -513,12 +521,12 @@
         //监听输入事件，输入到15位的时候自动检测
         /*$(items).on('input', function (e) {
 
-            if ($(this).val().trim().length === 15) {
-                console.log(e);
-                $("body").trigger('keydown');
-                //$(this).parents(".col_div").find('.btn_check').trigger('click');
-            }
-        });*/
+         if ($(this).val().trim().length === 15) {
+         console.log(e);
+         $("body").trigger('keydown');
+         //$(this).parents(".col_div").find('.btn_check').trigger('click');
+         }
+         });*/
 
     });
 
@@ -563,6 +571,7 @@
 
         </div>
     {{/data}}
+
 
 
 
