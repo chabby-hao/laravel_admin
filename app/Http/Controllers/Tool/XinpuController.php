@@ -120,8 +120,8 @@ class XinpuController extends Controller
                 $data['vol'] = 1;
             }
 
-            if ($data['rom'] &&
-                $data['mcu'] &&
+            if ($data['rom'] == '2335' &&
+                $data['mcu'] == '1.0.2366' &&
                 $this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
                 $this->checkBatteryId($zhangfeiData, $time) &&
