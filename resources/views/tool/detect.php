@@ -298,13 +298,19 @@
         var col_div = $('#' + i);
 
         myhtml(col_div.find('.rom'), rom[i]);
-        if (rom[i]) {
-            changeColor(col_div.find('.rom'), rom[i]);
+        if (rom[i] === '2335') {
+            pass(col_div.find('.rom'));
+            //changeColor(col_div.find('.rom'), rom[i]);
+        }else{
+            fail(col_div.find('.rom'));
         }
 
         myhtml(col_div.find('.mcu'), mcu[i] ? mcu[i] : '异常');
-        if (mcu[i]) {
-            changeColor(col_div.find('.mcu'), mcu[i]);
+        if (mcu[i] === '1.0.2366') {
+            pass(col_div.find('.mcu'));
+            //changeColor(col_div.find('.mcu'), mcu[i]);
+        }else{
+            fail(col_div.find('.mcu'));
         }
 
         myhtml(col_div.find('.batConn'), batConn[i] ? '正常' : '异常');
