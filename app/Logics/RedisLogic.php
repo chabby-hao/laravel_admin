@@ -127,7 +127,12 @@ class RedisLogic extends BaseLogic
     public static function hSet($key, $hashKey, $value)
     {
         Log::info("redis hset $key $hashKey $value");
-        return self::getRedis()->hSet($key, $hashKey, $value);
+        $res = self::getRedis()->hSet($key, $hashKey, $value);
+        if($res !== false){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
