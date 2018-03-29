@@ -115,15 +115,17 @@ class XinpuController extends Controller
                 $data['net'] = 1;
                 $data['batConn'] = 1;
             }
-            if ($vol) {
+            if ($this->checkVol($vol)) {
                 $data['vol_text'] = '(' . $vol / 1000 . 'V)';
                 $data['vol'] = 1;
             }
 
-            if ($this->checkGps($gps, $gsm, $time) &&
+            if ($data['rom'] &&
+                $data['mcu'] &&
+                $this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
                 $this->checkBatteryId($zhangfeiData, $time) &&
-                $vol
+                $this->checkVol($vol)
             ) {
                 //检测成功
                 $data['result'] = 1;
@@ -134,8 +136,17 @@ class XinpuController extends Controller
         return view('tool.detect');
     }
 
+    private function checkVol($vol)
+    {
+        //for test
+        return true;
+        return $vol;
+    }
+
     private function checkBatteryId($data, $time)
     {
+        //for test
+        return true;
         if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
@@ -144,6 +155,8 @@ class XinpuController extends Controller
 
     private function checkGsm($gsm, $time)
     {
+        //for test
+        return true;
         //基站数量大于2且主基站信号强度大于-90db判断合格；
         if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 3) {
             return true;
