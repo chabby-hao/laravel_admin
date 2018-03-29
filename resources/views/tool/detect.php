@@ -305,7 +305,7 @@
             fail(col_div.find('.rom'));
         }
 
-        myhtml(col_div.find('.mcu'), mcu[i] ? mcu[i] : '异常');
+        myhtml(col_div.find('.mcu'), mcu[i]);
         if (mcu[i] === '1.0.2366') {
             pass(col_div.find('.mcu'));
             //changeColor(col_div.find('.mcu'), mcu[i]);
