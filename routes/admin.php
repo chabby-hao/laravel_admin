@@ -52,6 +52,7 @@ Route::any('/order/list','Admin\OrderController@list');
 Route::any('/order/add','Admin\OrderController@add');
 Route::any('/order/edit','Admin\OrderController@edit');
 Route::any('/order/delete','Admin\OrderController@delete');
+Route::any('/order/detail','Admin\OrderController@detail');
 
 //出货单
 Route::any('/delivery/list','Admin\DeliveryController@list');

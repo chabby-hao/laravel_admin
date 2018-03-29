@@ -59,7 +59,7 @@ class DeliveryController extends BaseController
             return $this->outPutError('添加失败 ');
         }
 
-        return view('admin.order.add');
+        return view('admin.delivery.add');
 
     }
 

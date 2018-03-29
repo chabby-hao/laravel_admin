@@ -13,6 +13,8 @@ use App\Libs\MyPage;
 use App\Logics\DeviceLogic;
 use App\Logics\OrderLogic;
 use App\Models\BiBrand;
+use App\Models\BiChannel;
+use App\Models\BiDeviceType;
 use App\Models\BiOrder;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
@@ -22,6 +24,21 @@ use Illuminate\Support\Facades\URL;
 
 class OrderController extends BaseController
 {
+
+    public function detail(Request $request)
+    {
+        $id = $this->getId($request);
+        $data = BiOrder::find($id);
+        if($data){
+            $output = $data->toArray();
+            $output['channel_name'] = BiChannel::getChannelMap()[$data['channel_id']];
+            $output['device_type_name'] = BiDeviceType::getNameMap()[$data['device_type']];
+            $output['expect_delivery'] = $data->expect_delivery->format('Y-m-d');
+            return $this->outPut($output);
+        }else{
+            return $this->outPutError();
+        }
+    }
 
     public function list(Request $request)
     {

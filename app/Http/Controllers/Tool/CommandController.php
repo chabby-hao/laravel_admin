@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Libs\Helper;
 use App\Logics\CommandLogic;
 use App\Logics\DeviceLogic;
+use App\Logics\RedisLogic;
 use Illuminate\Http\Request;
 
 class CommandController extends Controller
@@ -21,6 +22,21 @@ class CommandController extends Controller
         }else{
             return Helper::responeseError();
         }
+    }
+
+    //for debug
+    public function bt2503(Request $request)
+    {
+        $imei = $request->input('imei');
+        $mac = $request->input('mac');
+        $res = false;
+        if($imei && $mac){
+            $res = RedisLogic::hSet('pairbt',$mac, $imei);
+        }
+        if($res){
+            return Helper::response();
+        }
+        return Helper::responeseError();
     }
 
 

@@ -34,6 +34,7 @@ class AuthLogic extends BaseLogic
         try {
             $user = new BiUser();
             $user->username = $data['username'];
+            $user->nickname = $data['nickname'];
             $user->password = bcrypt($data['password']);
             $user->user_type = $data['user_type'];
             $user->email = $data['email'];
@@ -54,6 +55,7 @@ class AuthLogic extends BaseLogic
         try {
             $user = BiUser::find($id);
             $user->username = $data['username'];
+            $user->nickname = $data['nickname'];
             //$user->password = bcrypt($data['password']);
             $user->user_type = $data['user_type'];
             $user->email = $data['email'];

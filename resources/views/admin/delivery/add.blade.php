@@ -10,10 +10,88 @@
                     <div class="widget-content">
                         <form id="myform" method="post" class="form-horizontal">
                             <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>订单号:</label>
+                                <div class="controls">
+                                    <select name="order_id" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\BiOrder::getUnfinishedordersMap() as $orderId=> $orderNo)
+                                            <option value="{{$orderId}}">{{$orderNo}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>渠道名称:</label>
                                 <div class="controls">
-                                    <select name="channel_id" class="span11">
-                                        <option value="">请选择渠道</option>
+                                    <input id="channel_name" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>订单数量:</label>
+                                <div class="controls">
+                                    <input id="order_quantity" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>设备型号:</label>
+                                <div class="controls">
+                                    <input id="device_type_name" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>期望出货:</label>
+                                <div class="controls">
+                                    <input id="expect_delivery" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>料号:</label>
+                                <div class="controls">
+                                    <input name="part_number" value="" type="text" class="span11"/>
+                                    <span class="help-block">支持数字和字母</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>出货工厂:</label>
+                                <div class="controls">
+                                    <select name="fact_id" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Logics\FactoryLogic::getAccountList() as $id=> $name)
+                                            <option value="{{$id}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>出货时间:</label>
+                                <div class="controls">
+                                    <input id="delivery_date" name="delivery_date" value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>出货数量:</label>
+                                <div class="controls">
+                                    <input name="delivery_quantity" value="" type="number" class="span11"/>
+                                    <span class="help-block">大于0小于等于该订单未出货的数量</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>车辆品牌:</label>
+                                <div class="controls">
+                                    <select name="brand_id" class="span11">
+                                        <option value="">请选择</option>
                                         @foreach(\App\Models\BiChannel::getChannelMap() as $channelId=> $channelName)
                                             <option value="{{$channelId}}">{{$channelName}}</option>
                                         @endforeach
@@ -22,55 +100,16 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>订单数量:</label>
+                                <label class="control-label"><span class="text-error">*</span>车辆型号:</label>
                                 <div class="controls">
-                                    <input name="order_quantity" value="" type="text" class="span11"/>
-                                    <span class="help-block">例：100</span>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>设备型号:</label>
-                                <div class="controls">
-                                    <select name="device_type" class="span11">
-                                        <option value="">请选择设备型号</option>
-                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $id=> $name)
-                                            <option value="{{$id}}">{{$name}}</option>
+                                    <select name="brand_id" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\BiChannel::getChannelMap() as $channelId=> $channelName)
+                                            <option value="{{$channelId}}">{{$channelName}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>期望交货:</label>
-                                <div class="controls">
-                                    <input id="expect_delivery" name="expect_delivery" value="" type="text" class="span11"/>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>售后订单:</label>
-                                <div class="controls">
-                                    <label>
-                                        <input name="after_sale" type="radio" value="{{\App\Models\BiOrder::AFTER_SALE_NO}}" checked  />
-                                        否</label>
-                                    <label>
-                                        <input type="radio" value="{{\App\Models\BiOrder::AFTER_SALE_YES}}" name="after_sale" />
-                                        是</label>
-                                </div>
-                                {{--<div class="controls">
-                                    <input name="order_quantity" name="after_sale" value="" type="text" class="span11"/>
-                                    <span class="help-block">例：100</span>
-                                </div>--}}
-                            </div>
-
-                            <div class="control-group">
-                                <label class="control-label">备注:</label>
-                                <div class="controls">
-                                    <textarea name="remark" type="text" class="span11"></textarea>
-                                </div>
-                            </div>
-
 
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
@@ -82,8 +121,7 @@
         </div>
     </div>
     <script>
-
-        $('#expect_delivery').datepicker({
+        $('#delivery_date').datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN",
             startDate: '+1d',
@@ -91,25 +129,26 @@
             todayHighlight: true,
         });
 
-        $(function () {
-
-            var myform = $("#myform");
-
-            $("#mysubmit").click(function () {
-                myform.submit();
-            });
-
-            myform.ajaxForm({
-                dataType: 'json',
-                //beforeSubmit : test,//ajax动画加载
-                success: function (data) {
-                    if (ajax_check_res(data)) {
-                        //myalert('保存成功');
-                    }
-                }
-            });
+        $("select[name='order_id']").on('change', function(){
+            var orderId = $(this).val();
+            if(orderId){
+                $.ajax({
+                    url:'{{URL::action('Admin\OrderController@detail')}}',
+                    data:{id:orderId},
+                    success:function(data){
+                        if(ajax_check_res(data)){
+                            console.log(data);
+                            $("#channel_name").val(data.channel_name);
+                            $("#order_quantity").val(data.order_quantity);
+                            $("#device_type_name").val(data.device_type_name);
+                            $("#expect_delivery").val(data.expect_delivery);
+                        }
+                    },
+                })
+            }
         });
 
     </script>
+    @include('admin.common_submitjs')
 @endsection
 

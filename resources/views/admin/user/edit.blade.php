@@ -18,6 +18,14 @@
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label">昵称 :</label>
+                                <div class="controls">
+                                    <input name="nickname" value="{{$user->nickname}}" type="text" class="span11"/>
+                                    <span class="help-block">例：王小二（注：如果此账号为工厂角色，请填写工厂名称）</span>
+                                </div>
+                            </div>
+
                             {{--<div class="control-group">--}}
                                 {{--<label class="control-label"><span class="text-error">*</span>密码 :</label>--}}
                                 {{--<div class="controls">--}}
@@ -89,7 +97,7 @@
                             </div>
 
                             <div class="form-actions">
-                                <button type="button" id="mysubmit" class="btn btn-success">添加</button>
+                                <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>
                         </form>
                     </div>

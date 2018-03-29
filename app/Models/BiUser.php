@@ -38,6 +38,8 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUserType($value)
  * @property string|null $login_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLoginAt($value)
+ * @property string|null $nickname
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereNickname($value)
  */
 class BiUser extends User
 {

@@ -80,13 +80,14 @@ class UserController extends BaseController
             'email',
             'brand_id',
             'channel_id',
-            'role_id'
+            'role_id',
+            'nickname'
         ];
         if($needPwd){
             $arrCheck[] = 'password';
             $arrCheck[] = 'password_confirm';
         }
-        if(!$input = Helper::arrayRequiredCheck($arrCheck,$input,false,['email','brand_id','channel_id'])){
+        if(!$input = Helper::arrayRequiredCheck($arrCheck,$input,false,['email','brand_id','channel_id','nickname'])){
             return $this->outPutError('信息不完整');
         }
         if($needPwd && ($input['password'] !== $input['password_confirm'])){

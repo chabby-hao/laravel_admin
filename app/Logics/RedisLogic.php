@@ -124,5 +124,10 @@ class RedisLogic extends BaseLogic
         return self::lPush(self::REDIS_LIST_KEY_PRE . ($listNumber - 1), $val);
     }
 
+    public static function hSet($key, $hashKey, $value)
+    {
+        Log::info("redis hset $key $hashKey $value");
+        return self::getRedis()->hSet($key, $hashKey, $value);
+    }
 
 }

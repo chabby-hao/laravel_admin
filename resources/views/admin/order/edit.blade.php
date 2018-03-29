@@ -25,7 +25,7 @@
                             {{--<div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>订单数量:</label>
                                 <div class="controls">
-                                    <input name="order_quantity" value="{{$data->order_quantity}}" type="text" class="span11"/>
+                                    <input name="order_quantity" value="{{$data->order_quantity}}" type="number" class="span11"/>
                                     <span class="help-block">例：100</span>
                                 </div>
                             </div>--}}

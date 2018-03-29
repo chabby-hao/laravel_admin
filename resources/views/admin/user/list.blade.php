@@ -33,6 +33,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>账号</th>
+                                <th>昵称</th>
                                 <th>账号类型</th>
                                 <th>角色</th>
                                 <th>email</th>
@@ -48,6 +49,7 @@
                                 <tr class="gradeX">
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->username}}</td>
+                                    <td>{{$user->nickname}}</td>
                                     <td>{{\App\Models\BiUser::getUserTypeMap( $user->user_type)}}</td>
                                     <td>{{\App\Models\Role::getRoleNameMap($user->role_id)}}</td>
                                     <td>{{$user->email}}</td>

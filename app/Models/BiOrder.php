@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiOrder
@@ -75,6 +76,16 @@ class BiOrder extends \App\Models\Base\BiOrder
             self::ORDER_STATE_CANCEL =>'已废弃',
         ];
         return $type === null ? $map : $map[$type];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getUnfinishedordersMap()
+    {
+        $data = self::whereState(self::ORDER_STATE_INIT)->get();
+        $data = $data ? $data->toArray() : [];
+        return Helper::transToKeyValueArray($data, 'id','order_no');
     }
 
 }
