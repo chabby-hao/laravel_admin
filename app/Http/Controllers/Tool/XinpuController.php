@@ -83,8 +83,8 @@ class XinpuController extends Controller
             $vol = $zhangfeiData['batteryVoltage'];//mv
 
             $data = [];
-            $data['rom'] = $devData['rom'];
-            $data['mcu'] = $devData['mcuVersion'];
+            $data['rom'] = $devData['rom'] ? : null;
+            $data['mcu'] = $devData['mcuVersion'] ? : null;
             $data['batConn'] = 0;
             $data['gsm'] = 0;
             $data['net'] = 0;
