@@ -61,6 +61,7 @@ Route::any('/delivery/edit','Admin\DeliveryController@edit');
 Route::any('/delivery/delete','Admin\DeliveryController@delete');
 Route::any('/delivery/factoryPanel','Admin\DeliveryController@factoryPanel');
 Route::any('/delivery/shipmentProcess','Admin\DeliveryController@shipmentProcess');
+Route::any('/delivery/listDevice','Admin\DeliveryController@listDevice');
 
 
 Route::any('/brand/detail','Admin\BrandController@detail');

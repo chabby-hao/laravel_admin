@@ -47,7 +47,7 @@
                                             @if($data->ship_quantity == 0)
                                                 <a class="btn btn-danger del" data-id="{{$data->id}}">作废</a>
                                             @else
-                                                <a class="btn btn-primary" href="{{\Illuminate\Support\Facades\URL::action('Admin\OrderController@edit', ['id'=>$data->id])}}">出货详情</a>
+                                                <a class="btn btn-primary" href="{{\Illuminate\Support\Facades\URL::action('Admin\DeliveryController@list', ['order_id'=>$data->id])}}">出货详情</a>
                                             @endif
                                             <a class="btn btn-warning" href="{{\Illuminate\Support\Facades\URL::action('Admin\OrderController@edit', ['id'=>$data->id])}}">修改</a>
                                         @endif

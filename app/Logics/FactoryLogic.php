@@ -5,7 +5,10 @@ namespace App\Logics;
 
 //工厂逻辑
 
+use App\Models\BiDeliveryDevice;
+use App\Models\BiDeliveryOrder;
 use App\Models\BiUser;
+use Carbon\Carbon;
 
 class FactoryLogic extends BaseLogic
 {
@@ -23,6 +26,37 @@ class FactoryLogic extends BaseLogic
             }
         }
         return $data;
+    }
+
+    public function shipment($id, $imeis)
+    {
+
+        $shipOrder = BiDeliveryOrder::find($id);
+        if(!$shipOrder || in_array($shipOrder->state,[BiDeliveryOrder::DELIVERY_ORDER_STATE_FINISH, BiDeliveryOrder::DELIVERY_ORDER_STATE_CANCEL])){
+            return false;
+        }
+
+        $insert = [];
+        foreach ($imeis as $imei){
+            if(!DeviceLogic::getUdid($imei)){
+                return false;
+            }
+            $insert[] = [
+                'delivery_order_id'=>$id,
+                'imei'=>$imei,
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now(),
+            ];
+        }
+
+        $res = BiDeliveryDevice::insert($insert);
+
+        if($res){
+            $shipOrder->state = BiDeliveryOrder::DELIVERY_ORDER_STATE_FINISH;//已完成
+            $shipOrder->actuall_date = Carbon::now()->format('Y-m-d');
+            $shipOrder->save();
+        }
+        return $res;
     }
 
 }

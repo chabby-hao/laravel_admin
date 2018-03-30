@@ -17,14 +17,27 @@ use App\Libs\Helper;
  */
 class BiDeviceType extends \App\Models\Base\BiDeviceType
 {
+
+    private static $data = [];
+
 	protected $fillable = [
 		'name',
 		'remark'
 	];
 
-    public static function getNameMap()
+    public static function getNameMap($cache = true)
     {
+        if(self::$data){
+            return self::$data;
+        }
         $rs = self::orderByDesc('id')->get();
-        return Helper::transToKeyValueArray($rs, 'id', 'name');
+        self::$data = Helper::transToKeyValueArray($rs, 'id', 'name');
+        return self::$data;
     }
+
+    public static function getNameMapNoCache()
+    {
+        return self::getNameMap(false);
+    }
+
 }

@@ -23,6 +23,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
+    <script src="{{asset('js/mustache/mustache.min.js')}}"></script>
 
 </head>
 <body>
@@ -97,7 +98,7 @@
             </a>
             <ul>
                 <li><a href="{{URL::action('Admin\OrderController@list')}}">订单列表</a></li>
-{{--                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>--}}
+                {{--                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>--}}
             </ul>
         </li>
 
@@ -106,7 +107,7 @@
             </a>
             <ul>
                 <li><a href="{{URL::action('Admin\DeliveryController@list')}}">出货单列表</a></li>
-{{--                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>--}}
+                {{--                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>--}}
                 <li><a href="{{URL::action('Admin\DeliveryController@factoryPanel')}}">工厂面板</a></li>
             </ul>
         </li>
@@ -124,7 +125,8 @@
 
 <div id="content">
     <div id="content-header">
-        <div id="breadcrumb"><a href="{{URL::route('admin-home')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+        <div id="breadcrumb">
+            <a href="{{URL::route('admin-home')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
             <a href="#" class="current"><?php echo \App\Logics\AuthLogic::getPermisName(); ?></a></div>
     </div>
     @section('content')
@@ -151,7 +153,7 @@
                 _this.addClass("active");
             }
         });
-        $("#sidebar li").each(function(){
+        $("#sidebar li").each(function () {
             var _this = $(this);
             var _href = _this.find("a").attr("href");
             if (url.indexOf(_href) !== -1) {
@@ -191,4 +193,12 @@
 <script src="{{ asset('js/matrix.js') }}"></script>
 <script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
 <script src="{{ asset('js/jquery-form/jquery.form.js') }}"></script>
-<!--<script src="{{ asset('js/matrix.dashboard.js') }}"></script>-->
+<script type="text/javascript" src="{{ asset('js/bootstrap-filestyle.min.js')}}"></script>
+<script>
+    $(":file").filestyle({classButton: "btn btn-info"});
+
+    //和blade模板分隔符冲突，特此修改
+    var customTags = [ '<%', '%>' ];
+    Mustache.tags = customTags;
+</script>
+{{--<!--<script src="{{ asset('js/matrix.dashboard.js') }}"></script>-->--}}

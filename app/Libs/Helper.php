@@ -3,6 +3,7 @@
 namespace App\Libs;
 
 use App\Libs\ucpass\Ucpass;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 
@@ -217,6 +218,22 @@ class Helper
             $data[$row[$key]] = $row[$value];
         }
         return $data;
+    }
+
+    public static function readExcelFromRequest(Request $request, $filename)
+    {
+        try{
+            $file = $request->file($filename)->getRealPath();
+            $inputFileType = \PHPExcel_IOFactory::identify($file);
+            $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($file);
+            $sheet = $objPHPExcel->getSheet(0);
+            $data = $sheet->toArray();
+            return $data;
+        }catch (\Exception $e){
+            Log::error('read excel error ' . $e->getMessage());
+            return false;
+        }
     }
 
 }

@@ -18,6 +18,8 @@ class DeviceLogic extends BaseLogic
 
     private static $imeisToUdids = [];//imei=>udid
 
+    private static $imeiToImsi = [];//imei=>imsi
+
     public static function getDevices()
     {
         return self::$devices;
@@ -132,6 +134,21 @@ class DeviceLogic extends BaseLogic
         }elseif($udid = self::getUdid($udidOrImei)){
             return [$udid, $udidOrImei];
         }else{
+            return false;
+        }
+    }
+
+    public static function getImsi($imei)
+    {
+        if (isset(self::$imeiToImsi[$imei])) {
+            return self::$imeiToImsi[$imei];
+        }
+        $deviceCode = TDeviceCode::whereImei($imei)->first();
+        if ($deviceCode) {
+            $imsi = $deviceCode->imsi;
+            self::$imeiToImsi[$imei] = $imsi;
+            return $imsi;
+        } else {
             return false;
         }
     }

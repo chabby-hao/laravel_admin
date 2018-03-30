@@ -13,7 +13,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>订单号</th>
+                                <th>出货单号</th>
                                 <th>数量</th>
                                 <th>型号</th>
                                 <th>料号</th>
@@ -27,7 +27,7 @@
                             <?php /** @var \App\Models\BiDeliveryOrder $data */ ?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
-                                    <td>{{$data->order_no}}</td>
+                                    <td>{{$data->ship_no}}</td>
                                     <td>{{$data->delivery_quantity}}</td>
                                     <td>{{$data->device_type_name}}</td>
                                     <td>{{$data->part_number}}</td>

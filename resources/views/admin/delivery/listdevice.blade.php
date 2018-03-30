@@ -18,16 +18,14 @@
                             <thead>
                             <tr>
                                 <th>出货单</th>
-                                <th>订单号</th>
-                                <th>数量</th>
+                                <th>交货日期</th>
+                                <th>设备号</th>
+                                <th>IMEI</th>
+                                <th>IMSI</th>
                                 <th>型号</th>
-                                <th>出货日期</th>
                                 <th>渠道</th>
                                 <th>品牌</th>
                                 <th>车型</th>
-                                <th>账号</th>
-                                <th>状态</th>
-                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,27 +33,14 @@
                             @foreach($datas as $data)
                                 <tr class="gradeX">
                                     <td>{{$data->ship_no}}</td>
-                                    <td>{{$data->order_no}}</td>
-                                    <td>{{$data->delivery_quantity}}</td>
+                                    <td>{{$data->actuall_date}}</td>
+                                    <td>{{$data->udid}}</td>
+                                    <td>{{$data->imei}}</td>
+                                    <td>{{$data->imsi}}</td>
                                     <td>{{$data->device_type_name}}</td>
-                                    <td>{{$data->delivery_date}}</td>
                                     <td>{{$data->channel_name}}</td>
                                     <td>{{$data->brand_name}}</td>
                                     <td>{{$data->ebike_type_name}}</td>
-                                    <td>{{$data->username}}</td>
-                                    <td>{{\App\Models\BiDeliveryOrder::getStateTypeName($data->state)}}</td>
-                                    <td>
-                                        @if($data->state == \App\Models\BiDeliveryOrder::DELIVERY_ORDER_STATE_INIT)
-                                            <a class="btn btn-danger del" data-id="{{$data->id}}">作废</a>
-                                            <a class="btn btn-warning" href="{{\Illuminate\Support\Facades\URL::action('Admin\DeliveryController@edit', ['id'=>$data->id])}}">修改</a>
-                                        @elseif($data->state == \App\Models\BiDeliveryOrder::DELIVERY_ORDER_STATE_FINISH)
-                                            <a class="btn btn-primary" href="{{\Illuminate\Support\Facades\URL::action('Admin\DeliveryController@listDevice', ['delivery_order_id'=>$data->id])}}">设备详情</a>
-                                        @endif
-                                    </td>
-                                    <!--                                        <td>-->
-                                    <!--                                            <a href="" class="btn btn-info">设置</a>-->
-                                    <!--<!--                                            <a href="javascript:;" class="btn btn-danger del">删除</a>-->
-                                    <!--                                        </td>-->
                                 </tr>
                             @endforeach
                             </tbody>
