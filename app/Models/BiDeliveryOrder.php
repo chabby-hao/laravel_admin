@@ -32,6 +32,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $actuall_date 实际出货日期
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereActuallDate($value)
  */
 class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 {
@@ -50,7 +52,7 @@ class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 
 	protected $dates = [];
 
-    const DELIVERY_ORDER_STATE_INIT = 0;//代工厂处理
+    const DELIVERY_ORDER_STATE_INIT = 0;//待工厂处理
     const DELIVERY_ORDER_STATE_FINISH = 1;//已完成
     const DELIVERY_ORDER_STATE_CANCEL = 2;//已作废
 

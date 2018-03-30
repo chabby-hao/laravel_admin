@@ -59,9 +59,11 @@ Route::any('/delivery/list','Admin\DeliveryController@list');
 Route::any('/delivery/add','Admin\DeliveryController@add');
 Route::any('/delivery/edit','Admin\DeliveryController@edit');
 Route::any('/delivery/delete','Admin\DeliveryController@delete');
+Route::any('/delivery/factoryPanel','Admin\DeliveryController@factoryPanel');
+Route::any('/delivery/shipmentProcess','Admin\DeliveryController@shipmentProcess');
 
 
-Route::any('/delivery/detail','Admin\BrandController@detail');
+Route::any('/brand/detail','Admin\BrandController@detail');
 
 
 //放在最后

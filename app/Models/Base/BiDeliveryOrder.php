@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 29 Mar 2018 19:47:25 +0800.
+ * Date: Fri, 30 Mar 2018 10:16:18 +0800.
  */
 
 namespace App\Models\Base;
@@ -20,6 +20,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $part_number
  * @property int $fact_id
  * @property \Carbon\Carbon $delivery_date
+ * @property \Carbon\Carbon $actuall_date
  * @property int $delivery_quantity
  * @property int $brand_id
  * @property int $ebike_type_id
@@ -43,6 +44,7 @@ class BiDeliveryOrder extends Eloquent
 	];
 
 	protected $dates = [
-		'delivery_date'
+		'delivery_date',
+		'actuall_date'
 	];
 }

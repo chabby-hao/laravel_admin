@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\URL;
 class DeliveryController extends BaseController
 {
 
-    public function list(Request $request)
+    private function getData()
     {
         $paginate = BiDeliveryOrder::join('bi_users', 'user_id', '=', 'bi_users.id')
             ->join('bi_orders','order_id','=','bi_orders.id')
@@ -36,6 +36,30 @@ class DeliveryController extends BaseController
             ->orderByDesc('bi_delivery_orders.id')
             ->select(['bi_delivery_orders.*', 'bi_orders.order_no', 'bi_users.username', 'bi_device_types.name as device_type_name','bi_channels.channel_name'])
             ->paginate();
+
+        return $paginate;
+    }
+
+    public function factoryPanel(Request $request)
+    {
+        $paginate = $this->getData();
+
+        return view('admin.delivery.factpanel',[
+            'datas'=>$paginate->items(),
+            'page_nav'=>MyPage::showPageNav($paginate),
+        ]);
+    }
+
+    public function shipmentProcess(Request $request)
+    {
+
+    }
+
+
+
+    public function list(Request $request)
+    {
+        $paginate = $this->getData();
 
         $datas = $paginate->items();
 

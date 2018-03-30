@@ -97,7 +97,7 @@
             </a>
             <ul>
                 <li><a href="{{URL::action('Admin\OrderController@list')}}">订单列表</a></li>
-                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>
+{{--                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>--}}
             </ul>
         </li>
 
@@ -106,7 +106,8 @@
             </a>
             <ul>
                 <li><a href="{{URL::action('Admin\DeliveryController@list')}}">出货单列表</a></li>
-                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>
+{{--                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>--}}
+                <li><a href="{{URL::action('Admin\DeliveryController@factoryPanel')}}">工厂面板</a></li>
             </ul>
         </li>
 
