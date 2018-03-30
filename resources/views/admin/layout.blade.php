@@ -89,7 +89,9 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
             </a>
             <ul>
-                <li><a href="{{URL::action('Admin\DeviceController@list')}}">设备列表</a></li>
+                @if(Auth::user()->can('device/list'))
+                    <li><a href="{{URL::action('Admin\DeviceController@list')}}">设备列表</a></li>
+                @endif
             </ul>
         </li>
 
@@ -97,8 +99,9 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>客户订单</span>
             </a>
             <ul>
-                <li><a href="{{URL::action('Admin\OrderController@list')}}">订单列表</a></li>
-                {{--                <li><a href="{{URL::action('Admin\OrderController@add')}}">新增订单</a></li>--}}
+                @if(Auth::user()->can('order/list'))
+                    <li><a href="{{URL::action('Admin\OrderController@list')}}">订单列表</a></li>
+                @endif
             </ul>
         </li>
 
@@ -106,18 +109,24 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备出货</span>
             </a>
             <ul>
-                <li><a href="{{URL::action('Admin\DeliveryController@list')}}">出货单列表</a></li>
-                {{--                <li><a href="{{URL::action('Admin\DeliveryController@add')}}">新增出货单</a></li>--}}
-                <li><a href="{{URL::action('Admin\DeliveryController@factoryPanel')}}">工厂面板</a></li>
+                @if(Auth::user()->can('delivery/list'))
+                    <li><a href="{{URL::action('Admin\DeliveryController@list')}}">出货单列表</a></li>
+                @endif
+                @if(Auth::user()->can('delivery/factoryPanel'))
+                    <li><a href="{{URL::action('Admin\DeliveryController@factoryPanel')}}">工厂面板</a></li>
+                @endif
             </ul>
         </li>
 
         {{--地图--}}
-        <li class="">
-            <a target="_blank" href="http://anxinchong.vipcare.com/map.html"><i class="icon icon-th-list"></i>
-                <span>地图管理</span>
-            </a>
-        </li>
+        @if(Auth::user()->can('map/show'))
+            <li class="">
+                <a target="_blank" href="http://anxinchong.vipcare.com/map.html"><i class="icon icon-th-list"></i>
+                    <span>地图管理</span>
+                </a>
+            </li>
+        @endif
+
 
     </ul>
 </div>
@@ -144,6 +153,14 @@
 <!--end-Footer-part-->
 
 <script>
+
+    $(".submenu").each(function(){
+        var li = $(this);
+        if(li.find('li').length == 0){
+            li.remove();
+        }
+    });
+
     $(function () {
         var url = window.location.href;
         $('.submenu li').each(function () {
@@ -198,7 +215,7 @@
     $(":file").filestyle({classButton: "btn btn-info"});
 
     //和blade模板分隔符冲突，特此修改
-    var customTags = [ '<%', '%>' ];
+    var customTags = ['<%', '%>'];
     Mustache.tags = customTags;
 </script>
 {{--<!--<script src="{{ asset('js/matrix.dashboard.js') }}"></script>-->--}}
