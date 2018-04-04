@@ -31,7 +31,7 @@ class DeliveryLogic extends BaseLogic
     public function createDeliveryOrder(array $data)
     {
         try {
-            $data['ship_no'] = 'D' . date('YmdHis') . mt_rand(1000, 9999);
+            $data['ship_no'] = 'D' . date('YmdHis') . mt_rand(10, 99);
             $data['state'] = BiDeliveryOrder::DELIVERY_ORDER_STATE_INIT;
             $res = BiDeliveryOrder::create($data);
             if ($res) {

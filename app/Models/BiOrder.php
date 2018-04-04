@@ -77,7 +77,7 @@ class BiOrder extends \App\Models\Base\BiOrder
         $map = [
             self::ORDER_STATE_INIT =>'未完成',
             self::ORDER_STATE_FINISH =>'已完成',
-            self::ORDER_STATE_CANCEL =>'已废弃',
+            self::ORDER_STATE_CANCEL =>'已作废',
         ];
         return $type === null ? $map : $map[$type];
     }

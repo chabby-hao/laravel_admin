@@ -10,37 +10,37 @@
                     <div class="widget-content">
                         <form id="myform" method="post" class="form-horizontal">
                             <input type="hidden" name="id" value="{{$data->id}}">
-                            {{--<div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>渠道名称:</label>
                                 <div class="controls">
-                                    <select name="channel_id" class="span11">
+                                    <select disabled name="channel_id" class="span11">
                                         <option value="">请选择渠道</option>
                                         @foreach(\App\Models\BiChannel::getChannelMap() as $channelId=> $channelName)
                                             <option @if($channelId == $data->channel_id) selected @endif value="{{$channelId}}">{{$channelName}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>--}}
+                            </div>
 
-                            {{--<div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>订单数量:</label>
                                 <div class="controls">
-                                    <input name="order_quantity" value="{{$data->order_quantity}}" type="number" class="span11"/>
+                                    <input disabled name="order_quantity" value="{{$data->order_quantity}}" type="number" class="span11"/>
                                     <span class="help-block">例：100</span>
                                 </div>
-                            </div>--}}
+                            </div>
 
-                            {{--<div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>设备型号:</label>
                                 <div class="controls">
-                                    <select name="device_type" class="span11">
+                                    <select disabled name="device_type" class="span11">
                                         <option value="">请选择设备型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $id=> $name)
                                             <option @if($id==$data->device_type) selected @endif value="{{$id}}">{{$name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>--}}
+                            </div>
 
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>期望交货:</label>
@@ -49,18 +49,18 @@
                                 </div>
                             </div>
 
-                            {{--<div class="control-group">
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>售后订单:</label>
                                 <div class="controls">
 
                                     @foreach(\App\Models\BiOrder::getAfterSaleTypeName() as $id=>$name)
                                         <label>
-                                            <input @if($id==$data->after_sale) checked @endif name="after_sale" type="radio" value="{{$id}}"  />
+                                            <input disabled @if($id==$data->after_sale) checked @endif name="after_sale" type="radio" value="{{$id}}"  />
                                             {{$name}}</label>
                                         @endforeach
 
                                 </div>
-                            </div>--}}
+                            </div>
 
                             <div class="control-group">
                                 <label class="control-label">备注:</label>
@@ -84,7 +84,7 @@
         $('#expect_delivery').datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN",
-            startDate: '+1d',
+            startDate: '+0d',
             startView: 1,
             todayHighlight: true,
         });

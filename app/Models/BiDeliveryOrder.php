@@ -61,7 +61,7 @@ class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
         $map = [
             self::DELIVERY_ORDER_STATE_INIT =>'待工厂处理',
             self::DELIVERY_ORDER_STATE_FINISH =>'已完成',
-            self::DELIVERY_ORDER_STATE_CANCEL =>'已废弃',
+            self::DELIVERY_ORDER_STATE_CANCEL =>'已作废',
         ];
         return $type === null ? $map : $map[$type];
     }

@@ -33,7 +33,7 @@
                             <?php /** @var \App\Models\BiOrder $data */ ?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
-                                    <td>{{$data->order_no}}</td>
+                                    <td><a href="{{\Illuminate\Support\Facades\URL::action('Admin\OrderController@edit', ['id'=>$data->id])}}">{{$data->order_no}}</a></td>
                                     <td>{{$data->order_quantity}}</td>
                                     <td>{{$data->expect_delivery}}</td>
                                     <td>{{$data->actuall_quantity}}</td>
@@ -54,10 +54,6 @@
 
 
                                     </td>
-                                    <!--                                        <td>-->
-                                    <!--                                            <a href="" class="btn btn-info">设置</a>-->
-                                    <!--<!--                                            <a href="javascript:;" class="btn btn-danger del">删除</a>-->
-                                    <!--                                        </td>-->
                                 </tr>
                             @endforeach
                             </tbody>

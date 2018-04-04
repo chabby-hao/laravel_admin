@@ -119,7 +119,7 @@
         $('#delivery_date').datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN",
-            startDate: '+1d',
+            startDate: '+0d',
             startView: 1,
             todayHighlight: true,
         });

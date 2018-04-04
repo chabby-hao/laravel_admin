@@ -2207,3 +2207,9 @@ form {
 .margintop{
     margin-top: 15px;
 }
+
+
+/*表格居中*/
+.table th, .table td{
+    text-align: center;
+}

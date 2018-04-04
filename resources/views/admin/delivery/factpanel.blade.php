@@ -13,7 +13,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>出货单号</th>
+                                <th>出货单</th>
                                 <th>数量</th>
                                 <th>型号</th>
                                 <th>料号</th>

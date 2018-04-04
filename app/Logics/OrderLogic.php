@@ -19,7 +19,7 @@ class OrderLogic extends BaseLogic
         try {
             $order = new BiOrder();
             $order->user_id = $data['user_id'];
-            $order->order_no = 'O' . date('YmdHis') . mt_rand(1000,9999);
+            $order->order_no = 'O' . date('YmdHis') . mt_rand(10,99);
             $order->state = BiOrder::ORDER_STATE_INIT;
             $order->channel_id = $data['channel_id'];
             $order->order_quantity = $data['order_quantity'];
