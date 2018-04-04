@@ -7,6 +7,7 @@ namespace App\Logics;
 
 use App\Models\BiDeliveryDevice;
 use App\Models\BiDeliveryOrder;
+use App\Models\BiOrder;
 use App\Models\BiUser;
 use Carbon\Carbon;
 
@@ -55,6 +56,15 @@ class FactoryLogic extends BaseLogic
             $shipOrder->state = BiDeliveryOrder::DELIVERY_ORDER_STATE_FINISH;//已完成
             $shipOrder->actuall_date = Carbon::now()->format('Y-m-d');
             $shipOrder->save();
+
+            $order = BiOrder::find($shipOrder->order_id);
+            $count = count($imeis);
+            $order->actuall_quantity += $count;//实际订单出货量
+            if($count >= $order->ship_quantity){
+                $order->state = BiOrder::ORDER_STATE_FINISH;//订单状态
+            }
+            $order->save();
+
         }
         return $res;
     }

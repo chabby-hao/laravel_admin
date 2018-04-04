@@ -28,13 +28,19 @@ use Illuminate\Support\Facades\URL;
 class DeliveryController extends BaseController
 {
 
-    private function getData($where = [])
+    private function getData($where = [], $showCancel = true)
     {
-        $paginate = BiDeliveryOrder::join('bi_users', 'user_id', '=', 'bi_users.id')
+        $model = BiDeliveryOrder::join('bi_users', 'user_id', '=', 'bi_users.id')
             ->join('bi_orders','order_id','=','bi_orders.id')
             ->join('bi_device_types', 'device_type', '=', 'bi_device_types.id')
             ->join('bi_channels', 'channel_id', '=', 'bi_channels.id')
-            ->where($where)
+            ->where($where);
+
+        if(!$showCancel){
+            $model->where('bi_delivery_orders.state','!=',BiDeliveryOrder::DELIVERY_ORDER_STATE_CANCEL);
+        }
+
+        $paginate = $model
             ->orderBy('bi_delivery_orders.state')
             ->orderByDesc('bi_delivery_orders.id')
             ->select(['bi_delivery_orders.*', 'bi_orders.order_no', 'bi_users.username', 'bi_device_types.name as device_type_name','bi_channels.channel_name'])
@@ -45,7 +51,10 @@ class DeliveryController extends BaseController
 
     public function factoryPanel(Request $request)
     {
-        $paginate = $this->getData();
+
+        $where = [];
+
+        $paginate = $this->getData($where, false);
 
         return view('admin.delivery.factpanel',[
             'datas'=>$paginate->items(),
@@ -149,6 +158,8 @@ class DeliveryController extends BaseController
         foreach ($datas as $data){
             $data->udid = DeviceLogic::getUdid($data->imei);
             $data->imsi = DeviceLogic::getImsi($data->imei);
+            $data->brand_name = DeviceLogic::getBrandName($data->imei);
+            $data->ebike_type_name = DeviceLogic::getEbikeTypeNameByUdid($data->udid);
         }
 
         return view('admin.delivery.listdevice', [
