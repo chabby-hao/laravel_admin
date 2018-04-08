@@ -12,6 +12,8 @@ class DeviceObject extends BaseObject
     public $imei = '';//imei号
     public $productType = 0;//产品型号id
     public $productTypeName = '';//产品型号，eb001*
+    public $deviceType = 0;//设备型号
+    public $deviceTypeName = '';//B800
     public $ebikeTypeId = 0;//车型Id
     public $ebikeTypeName = '';//车辆型号名称
     public $brandId = 0;//品牌Id
@@ -20,6 +22,7 @@ class DeviceObject extends BaseObject
     public $channelName = '';//渠道名称
     public $deliverdAt = '';//出货时间,datetime
     public $registerAt = '';//生成时间,datetime
+    public $activeAt = '';//激活时间,datetime
 
     public $isOnline = 0;//0=离线，1=在线
     public $isOnlineTrans = '';
@@ -27,6 +30,7 @@ class DeviceObject extends BaseObject
     public $isContactTrans = '';
     public $lat = 0;//百度坐标系
     public $lng = 0;//百度坐标系
+    public $lastGps = '';//最后一次GPS上报时间
     public $address = '';//地址(百度坐标系地址)
     public $gsm = '';//$list[$key]['GSM'] = $value['gsmstrength'] ? '-'.$value['gsmstrength'].'DB':'';//gsm信号
     public $chipPower = 0;//智慧芯电量
@@ -37,7 +41,7 @@ class DeviceObject extends BaseObject
     public $expectMile = 0;//预估里程,km
     public $turnon = 0;//是否启动,0=未启动，1=启动
     public $turnonTrans = '';
-    public $lastContact = '';
+    public $lastContact = '';//最后一次状态通讯时间,datetime
 
     /**
      * @return string
@@ -102,6 +106,40 @@ class DeviceObject extends BaseObject
     {
         $this->productTypeName = $productTypeName;
     }
+
+    /**
+     * @return int
+     */
+    public function getDeviceType(): int
+    {
+        return $this->deviceType;
+    }
+
+    /**
+     * @param int $deviceType
+     */
+    public function setDeviceType($deviceType)
+    {
+        $this->deviceType = $deviceType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeviceTypeName(): string
+    {
+        return $this->deviceTypeName;
+    }
+
+    /**
+     * @param string $deviceTypeName
+     */
+    public function setDeviceTypeName($deviceTypeName)
+    {
+        $this->deviceTypeName = $deviceTypeName;
+    }
+
+
 
     /**
      * @return int
@@ -229,6 +267,22 @@ class DeviceObject extends BaseObject
     public function setRegisterAt($registerAt)
     {
         $this->registerAt = $registerAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActiveAt(): string
+    {
+        return $this->activeAt;
+    }
+
+    /**
+     * @param string $activeAt
+     */
+    public function setActiveAt($activeAt)
+    {
+        $this->activeAt = $activeAt;
     }
 
     /**
@@ -501,7 +555,25 @@ class DeviceObject extends BaseObject
     public function setLastContact($lastContact)
     {
         $this->lastContact = $lastContact;
-    }//最后一次通讯时间,datetime
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastGps(): string
+    {
+        return $this->lastGps;
+    }
+
+    /**
+     * @param string $lastGps
+     */
+    public function setLastGps($lastGps)
+    {
+        $this->lastGps = $lastGps;
+    }
+
+
 
 
 

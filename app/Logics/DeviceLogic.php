@@ -4,11 +4,13 @@ namespace App\Logics;
 
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use App\Objects\DeviceObject;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 class DeviceLogic extends BaseLogic
@@ -52,6 +54,8 @@ class DeviceLogic extends BaseLogic
         $device->setImei($imei);
         $device->setProductType(static::getProductTypeByUdid($udid));
         $device->setProductTypeName(static::getProductTypeNameByUdid($udid));
+        $device->setDeviceType(static::getDeviceTypeByUdid($udid));
+        $device->setDeviceTypeName(static::getDeviceTypeNameByUdid($udid));
         $device->setEbikeTypeId(static::getEbikeTypeIdByUdid($udid));
         $device->setEbikeTypeName(static::getEbikeTypeNameByUdid($udid));
         $device->setBrandId(static::getBrandIdByUdid($udid));
@@ -60,6 +64,7 @@ class DeviceLogic extends BaseLogic
         $device->setChannelName(static::getChannelNameByUdid($udid));
         $device->setDeliverdAt(static::getDeliverdAtByUdid($udid));
         $device->setRegisterAt(static::getRegisterAtByUdid($udid));
+        $device->setActiveAt(static::getActiveAtByUdid($udid));
         $device->setIsOnline(static::isOnline($imei) ? 1 : 0);
         $device->setIsOnlineTrans($device->getisOnline() ? '在线' : '离线');
         $device->setIsContact(static::isContanct($imei) ? 1 : 0);
@@ -69,6 +74,7 @@ class DeviceLogic extends BaseLogic
             $device->setLat($loc['lat']);
             $device->setLng($loc['lng']);
             $device->setAddress($loc['address']);
+            $device->setLastGps(static::getLastGps($imei));
         }
         $device->setGsm(static::getGsm($imei));
         $device->setChipPower(static::getChipPower($imei));
@@ -78,7 +84,7 @@ class DeviceLogic extends BaseLogic
         $device->setBattery(static::getBattery($imei));
         $device->setExpectMile(static::getExpectMile($imei));
         $device->setTurnon(static::isTurnOn($imei) ? DeviceObject::SWITCH_STATUS_TURNON : DeviceObject::SWITCH_STATUS_TURNOFF);
-        $device->setTurnonTrans($device->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ? '启动' : '关闭');
+        $device->setTurnonTrans($device->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ? '骑行' : '停车');
         $device->setLastContact($device->setLastContact(static::getLastContact($imei)));
         self::$devices[$imei] = $device;
         return $device;
@@ -170,7 +176,7 @@ class DeviceLogic extends BaseLogic
      */
     public static function isEb001b($udid)
     {
-        $deviceType = self::getDeviceTypeByUdid($udid);
+        $deviceType = self::getProductTypeByUdid($udid);
         if (in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001B, BiProductType::PRODUCT_TYPE_EB001D])) {
             return true;
         } else {
@@ -179,13 +185,26 @@ class DeviceLogic extends BaseLogic
     }
 
     /**
-     * 别名
      * @param $udid
      * @return string
      */
     public static function getDeviceTypeByUdid($udid)
     {
-        return self::getProductTypeByUdid($udid);
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return $deviceCode->device_type;
+        });
+    }
+
+    /**
+     * @param $udid
+     * @return string
+     */
+    public static function getDeviceTypeNameByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            $data = BiDeviceType::find($deviceCode->device_type);
+            return $data ? $data->name : '';
+        });
     }
 
     public static function getProductTypeByUdid($udid)
@@ -291,7 +310,14 @@ class DeviceLogic extends BaseLogic
     public static function getRegisterAtByUdid($udid)
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            return $deviceCode->registerAt;
+            return $deviceCode->register;
+        });
+    }
+
+    public static function getActiveAtByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return Carbon::createFromTimestamp($deviceCode->active)->toDateTimeString();
         });
     }
 
@@ -478,7 +504,7 @@ class DeviceLogic extends BaseLogic
     public static function getBatteryCount($imei)
     {
 
-        //按照用户上传的品牌
+        //按照用户上传的电压
         $device = TDevice::whereImei($imei)->first();
         if ($device && $device->user_voltage) {
             return $device->user_voltage / 12;
@@ -686,9 +712,10 @@ class DeviceLogic extends BaseLogic
      */
     public static function getLastContact($imei)
     {
-        $loc = RedisLogic::getLocationByImei($imei);
-        if ($loc && array_key_exists('time', $loc)) {
-            return date('Y-m-d H:i:s', $loc['time']);
+        $data = RedisLogic::getDevDataByImei($imei);
+        if ($data) {
+            $time = max($data['time'], $data['online']);
+            return date('Y-m-d H:i:s', $time);
         }
         return '';
     }
@@ -698,6 +725,16 @@ class DeviceLogic extends BaseLogic
         $imei = self::getUdid($udid);
         return self::getLastContact($imei);
     }
+
+    public static function getLastGps($imei)
+    {
+        $loc = RedisLogic::getLocationByImei($imei);
+        if ($loc && array_key_exists('time', $loc)) {
+            return date('Y-m-d H:i:s', $loc['time']);
+        }
+        return '';
+    }
+
 
     public static function storeDeviceStatusToCache($key)
     {

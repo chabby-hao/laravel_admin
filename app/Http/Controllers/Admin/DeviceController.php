@@ -17,6 +17,10 @@ use App\Models\TDeviceCode;
 
 class DeviceController extends BaseController
 {
+    /**
+     * 缓存策略：按照ID缓存,in(1,2,3,4)
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function list()
     {
         $devices = TDeviceCode::getDeviceModel()->orderByDesc('sid')->select('t_device_code.*')->paginate();
@@ -29,10 +33,8 @@ class DeviceController extends BaseController
             $data[] = DeviceLogic::createDevice($device->imei);
         }
 
-        dd($data);
-
         return view('admin.device.list', [
-            'devices' => $data,
+            'datas' => $data,
             'page_nav' => MyPage::showPageNav($devices),
         ]);
 

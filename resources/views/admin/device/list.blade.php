@@ -3,23 +3,6 @@
     <div class="container-fluid">
         <hr>
 
-        {{--<div class="row-fluid">
-            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\UserController@add'); ?>" class="btn btn-success">新增账号</a></span>
-        </div>--}}
-
-        {{--<div class="row-fluid margintop">
-            <form class="form-search">
-                <div class="control-group">
-                    <div class="inline-block w1">
-                        <label for="">时间范围</label>
-                        <div>
-                            <input class="w10" type="text">
-                        </div>
-                    </div>
-
-                </div>
-            </form>
-        </div>--}}
 
         <div class="row-fluid">
             <div class="span12">
@@ -31,17 +14,36 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>设备ID</th>
+                                <th>设备型号</th>
+                                <th>渠道</th>
+                                <th>车辆品牌</th>
+                                <th>车辆型号</th>
+                                <th>激活时间</th>
+                                <th>设备周期</th>
+                                <th>设备状态</th>
+                                <th>状态上报时间</th>
+                                <th>设备位置</th>
+                                <th>位置上报时间</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            <?php /* @var \App\Objects\DeviceObject $data  */ ?>
+                            @foreach($datas as $data)
                                 <tr class="gradeX">
-                                    <td>1</td>
-                                    <!--                                        <td>-->
-                                    <!--                                            <a href="" class="btn btn-info">设置</a>-->
-                                    <!--<!--                                            <a href="javascript:;" class="btn btn-danger del">删除</a>-->
-                                    <!--                                        </td>-->
+                                    <td>{{$data->udid}}</td>
+                                    <td>{{$data->deviceTypeName}}</td>
+                                    <td>{{$data->channelName}}</td>
+                                    <td>{{$data->brandName}}</td>
+                                    <td>{{$data->ebikeTypeName}}</td>
+                                    <td>{{$data->activeAt}}</td>
+                                    <td></td>
+                                    <td>{{$data->isOnline ? $data->turnonTrans : $data->isOnlineTrans}}</td>
+                                    <td>{{$data->lastContact}}</td>
+                                    <td>{{$data->address}}</td>
+                                    <td>{{$data->lastGps}}</td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                             </tbody>
