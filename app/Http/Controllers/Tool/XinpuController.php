@@ -139,14 +139,12 @@ class XinpuController extends Controller
     private function checkVol($vol)
     {
         //for test
-        return true;
         return $vol;
     }
 
     private function checkBatteryId($data, $time)
     {
         //for test
-        return true;
         if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
@@ -156,7 +154,6 @@ class XinpuController extends Controller
     private function checkGsm($gsm, $time)
     {
         //for test
-        return true;
         //基站数量大于2且主基站信号强度大于-90db判断合格；
         if ($gsm['time'] > $time && $gsm['cellTowerCount'] > 3) {
             return true;
