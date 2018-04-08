@@ -46,6 +46,7 @@ Route::any('/permis/add','Admin\PermisController@add');
 Route::any('/permis/edit','Admin\PermisController@edit');
 
 Route::any('/device/list','Admin\DeviceController@list');
+Route::any('/device/detail','Admin\DeviceController@detail');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');

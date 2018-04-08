@@ -17,6 +17,13 @@ use App\Models\TDeviceCode;
 
 class DeviceController extends BaseController
 {
+
+
+    public function detail()
+    {
+        return view('admin.device.detail');
+    }
+
     /**
      * 缓存策略：按照ID缓存,in(1,2,3,4)
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -32,6 +39,7 @@ class DeviceController extends BaseController
         foreach ($deviceList as $device){
             $data[] = DeviceLogic::createDevice($device->imei);
         }
+
 
         return view('admin.device.list', [
             'datas' => $data,

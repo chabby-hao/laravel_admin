@@ -735,6 +735,28 @@ class DeviceLogic extends BaseLogic
         return '';
     }
 
+    /**
+     * 获取固件版本号，用户看到的
+     * @param $udid
+     * @return string
+     */
+    public static function getRomVersionByUdid($udid)
+    {
+        $deviceMod = self::getProductTypeNameByUdid($udid);
+        $data = RedisLogic::getDevDataByUdid($udid);
+        return $deviceMod . 'V' . $data['commercialVersion'] . 'Build' . $data['rom'];
+    }
+
+    public static function getAdminInfoByUdid($udid)
+    {
+
+    }
+
+    public static function getFollowersByUdid()
+    {
+
+    }
+
 
     public static function storeDeviceStatusToCache($key)
     {

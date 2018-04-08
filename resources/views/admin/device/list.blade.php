@@ -43,14 +43,16 @@
                                     <td>{{$data->lastContact}}</td>
                                     <td>{{$data->address}}</td>
                                     <td>{{$data->lastGps}}</td>
-                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail')}}">详情</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
                     <div class="pager">
-                        <?php echo $page_nav; ?>
+                        <?php echo $page_nav ?>
                     </div>
                 </div>
             </div>
