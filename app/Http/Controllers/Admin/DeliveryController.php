@@ -158,8 +158,8 @@ class DeliveryController extends BaseController
         foreach ($datas as $data){
             $data->udid = DeviceLogic::getUdid($data->imei);
             $data->imsi = DeviceLogic::getImsi($data->imei);
-            $data->brand_name = DeviceLogic::getBrandName($data->imei);
-            $data->ebike_type_name = DeviceLogic::getEbikeTypeNameByUdid($data->udid);
+            $data->brand_name = $data->brand_id ? BiBrand::getBrandMap()[$data->brand_id] : '';
+            $data->ebike_type_name = $data->ebike_type_id ? BiEbikeType::getTypeName()[$data->ebike_type_id] : '';
             /*$data->brand_name = DeviceLogic::getBrandName($data->imei);
             $data->ebike_type_name = DeviceLogic::getEbikeTypeNameByUdid($data->udid);*/
         }
