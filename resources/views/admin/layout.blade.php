@@ -67,9 +67,10 @@
 <div id="sidebar">
     <ul>
 
-        <li class=""><a href="{{URL::route('admin-home')}}"><i class="icon icon-home"></i>
-                <span>首页</span></a></li>
-
+        @if(Auth::user()->can('index/welcome'))
+            <li class=""><a href="{{URL::route('admin-home')}}"><i class="icon icon-home"></i>
+                    <span>首页</span></a></li>
+        @endif
 
 
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
