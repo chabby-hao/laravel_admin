@@ -13,16 +13,5 @@
         window.onresize=function(){ changeFrameHeight();}
         $(function(){changeFrameHeight();});
 
-       /* var ifm= document.getElementById("myiframe");
-
-        ifm.height=document.documentElement.clientHeight;
-        console.log(document.documentElement.clientHeight);*/
-        /*function reinitIframe() {
-            var h = $("#content").css('height');
-            $("#myiframe").height(h);
-            console.log(h);
-        }
-        reinitIframe();*/
-
     </script>
 @endsection
