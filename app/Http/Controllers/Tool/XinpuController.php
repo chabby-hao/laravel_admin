@@ -80,7 +80,7 @@ class XinpuController extends Controller
             $devData = RedisLogic::getDevDataByImei($imei);
             $zhangfeiData = RedisLogic::getZhangfeiByImei($imei);
             //$vol = DeviceLogic::getCurrentVoltage($imei);
-            $vol = $zhangfeiData['batteryVoltage'];//mv
+            $vol = $devData['localvoltage'];//mv
 
             $data = [];
             $data['rom'] = $devData['rom'] ? : null;
@@ -116,7 +116,7 @@ class XinpuController extends Controller
                 $data['batConn'] = 1;
             }
             if ($this->checkVol($vol)) {
-                $data['vol_text'] = '(' . $vol / 1000 . 'V)';
+                $data['vol_text'] = '(' . $vol / 10 . 'V)';
                 $data['vol'] = 1;
             }
 
