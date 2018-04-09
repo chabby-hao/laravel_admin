@@ -15,7 +15,7 @@ class FactoryLogic extends BaseLogic
 {
 
     //工厂角色名称
-    private static $roleName = 'factory';
+    public static $roleName = 'factory';
 
     public static function getAccountList()
     {

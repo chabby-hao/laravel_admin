@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Logics\FactoryLogic;
 use App\Models\BiUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,11 +51,14 @@ class AdminBeforeCheck
             /** @var BiUser $user */
             $user = Auth::user();
             if(!$user->can($permisName)){
+                if($user->hasRole(FactoryLogic::$roleName)){
+                    return Redirect::action('Admin\DeliveryController@factoryPanel');
+                }
                 //开发阶段暂时解除权限操作
-                /*if($request->isXmlHttpRequest()){
+                if($request->isXmlHttpRequest()){
                     return response(['code'=>403,'msg'=>'未经授权操作']);
                 }
-                return abort(403,'未经授权操作');*/
+                return abort(403,'未经授权操作');
             }
 
             return $next($request);
