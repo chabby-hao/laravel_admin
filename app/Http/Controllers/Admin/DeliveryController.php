@@ -160,6 +160,8 @@ class DeliveryController extends BaseController
             $data->imsi = DeviceLogic::getImsi($data->imei);
             $data->brand_name = DeviceLogic::getBrandName($data->imei);
             $data->ebike_type_name = DeviceLogic::getEbikeTypeNameByUdid($data->udid);
+            /*$data->brand_name = DeviceLogic::getBrandName($data->imei);
+            $data->ebike_type_name = DeviceLogic::getEbikeTypeNameByUdid($data->udid);*/
         }
 
         return view('admin.delivery.listdevice', [
