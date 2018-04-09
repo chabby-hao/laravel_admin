@@ -20,6 +20,7 @@ use App\Models\BiDeliveryOrder;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiOrder;
+use App\Models\BiUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,11 @@ class DeliveryController extends BaseController
     {
 
         $where = [];
+        /** @var BiUser $user */
+        $user = Auth::user();
+        if($user->hasRole(FactoryLogic::$roleName)){
+            $where['fact_id'] = $user->id;
+        }
 
         $paginate = $this->getData($where, false);
 

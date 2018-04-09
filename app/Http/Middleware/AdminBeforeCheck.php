@@ -25,7 +25,6 @@ class AdminBeforeCheck
     public function handle(Request $request, \Closure $next)
     {
 
-
         $a = session()->all();
         Log::debug('admin route : ' . $request->route()->getActionName());
         Log::debug('session  : ', $a);
@@ -45,7 +44,7 @@ class AdminBeforeCheck
             $permisName = trim(substr($uri, 5), '/');
 
             if(empty($permisName)){
-                return $next($request);
+                $permisName = 'index/welcome';//默认首页
             }
 
             /** @var BiUser $user */
