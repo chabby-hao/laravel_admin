@@ -61,7 +61,7 @@ class BaseController extends Controller
      * @param $url
      * @param bool $alert
      */
-    protected function outPutRedirect($url, $timeout = 1200)
+    protected function outPutRedirect($url, $timeout = 0)
     {
         return $this->outPut([
             'redirect'=>$url,
