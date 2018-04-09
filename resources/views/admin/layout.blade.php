@@ -108,13 +108,13 @@
         </li>
 
         {{--地图--}}
-        @if(Auth::user()->can('map/show'))
+        {{--@if(Auth::user()->can('map/show'))
             <li class="">
                 <a target="_blank" href="/map/index.html"><i class="icon icon-th-list"></i>
                     <span>地图管理</span>
                 </a>
             </li>
-        @endif
+        @endif--}}
 
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
             </a>
