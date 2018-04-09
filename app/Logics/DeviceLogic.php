@@ -9,6 +9,10 @@ use App\Models\BiEbikeType;
 use App\Models\BiProductType;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
+use App\Models\TEvCharge;
+use App\Models\TEvMileageGp;
+use App\Models\TUser;
+use App\Models\TUserDevice;
 use App\Objects\DeviceObject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -749,14 +753,47 @@ class DeviceLogic extends BaseLogic
 
     public static function getAdminInfoByUdid($udid)
     {
-
+        $row = TUserDevice::whereUdid($udid)->whereOwner(0)->first();
+        if($row){
+            $user = TUser::find($row->uid);
+            return $user;
+        }
+        return null;
     }
 
-    public static function getFollowersByUdid()
+    public static function getFollowersByUdid($udid)
     {
-
+        $rs = TUserDevice::join('t_user','t_user.uid','=','t_user_device.uid')->whereUdid($udid)->whereOwner(1)
+            ->select('t_user.*')
+            ->get();
+        return $rs;
     }
 
+    /**
+     * 获取骑行总里程
+     * @param $udid
+     * @return mixed
+     */
+    public static function getTotalMilesByUdid($udid)
+    {
+        return TEvMileageGp::whereUdid($udid)->sum('mile');
+    }
+
+    /**
+     * 获取骑行次数
+     * @param $udid
+     * @return int
+     */
+    public static function getRidingTimesByUdid($udid)
+    {
+        return TEvMileageGp::whereUdid($udid)->count();
+    }
+
+    public static function getChargingTimesByUdid($udid)
+    {
+        $row = TEvCharge::whereUdid($udid)->first();
+        return $row ? $row->cycle : 0;
+    }
 
     public static function storeDeviceStatusToCache($key)
     {

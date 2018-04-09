@@ -46,6 +46,8 @@ namespace App\Models;
  * @property bool|null $is_lost 是否丢失，0=未丢失，1=丢失
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereDeliveredAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereIsLost($value)
+ * @property int|null $device_type 设备型号
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereDeviceType($value)
  */
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {

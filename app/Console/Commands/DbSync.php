@@ -28,7 +28,7 @@ class DbSync extends BaseCommand
     public function handle()
     {
         $this->categoryDicNew();
-        $this->deviceCode();
+        //$this->deviceCode();
     }
 
     /**
@@ -67,7 +67,7 @@ class DbSync extends BaseCommand
                     ]);
                 }
 
-            } elseif ($row->level == 3) {
+            } elseif ($row->level == 3 && false) {
                 //渠道
                 BiChannel::firstOrCreate([
                     'channel_name' => $name,

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 06 Mar 2018 18:09:31 +0800.
+ * Date: Sun, 08 Apr 2018 15:01:27 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvMileageGp
- *
+ * 
  * @property string $udid
  * @property int $begin
  * @property int $end
@@ -20,16 +20,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $power
  * @property string $points
  * @property int $mid
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereBegin($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereDuration($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereEnd($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereMid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereMile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp wherePoints($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp wherePower($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileageGp whereUdid($value)
- * @mixin \Eloquent
  */
 class TEvMileageGp extends Eloquent
 {

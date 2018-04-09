@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 06 Mar 2018 18:09:31 +0800.
+ * Date: Sun, 08 Apr 2018 15:01:27 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceCode
- *
+ * 
  * @property int $sid
  * @property int $type
  * @property string $imei
@@ -29,31 +29,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $storage_time
  * @property int $ebike_type_id
  * @property int $channel_id
+ * @property int $brand_id
+ * @property int $device_type
+ * @property \Carbon\Carbon $delivered_at
+ * @property int $is_lost
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereChannelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereEbikeTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereFirst($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereImei($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereImsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereModel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereProductDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereProductType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereQr($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereRegister($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereRom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereSid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereStorageTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereVer($value)
- * @mixin \Eloquent
- * @property int|null $brand_id 品牌id
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereBrandId($value)
- * @property string|null $delivered_at 出货时间
- * @property bool|null $is_lost 是否丢失，0=未丢失，1=丢失
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereDeliveredAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCode whereIsLost($value)
  */
 class TDeviceCode extends Eloquent
 {
@@ -71,12 +52,16 @@ class TDeviceCode extends Eloquent
 		'model' => 'int',
 		'product_type' => 'int',
 		'ebike_type_id' => 'int',
-		'channel_id' => 'int'
+		'channel_id' => 'int',
+		'brand_id' => 'int',
+		'device_type' => 'int',
+		'is_lost' => 'int'
 	];
 
 	protected $dates = [
 		'register',
 		'product_date',
-		'storage_time'
+		'storage_time',
+		'delivered_at'
 	];
 }

@@ -70,27 +70,16 @@
         <li class=""><a href="{{URL::route('admin-home')}}"><i class="icon icon-home"></i>
                 <span>首页</span></a></li>
 
-        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
-            </a>
-            <ul>
-                @if(Auth::user()->can('user/list'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@list')}}">账号管理</a></li>
-                @endif
-                @if(Auth::user()->can('role/list'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@list')}}">角色管理</a></li>
-                @endif
-                @if(Auth::user()->can('permis/list'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\PermisController@list')}}">权限管理</a>
-                    </li>
-                @endif
-            </ul>
-        </li>
+
 
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
             </a>
             <ul>
                 @if(Auth::user()->can('device/list'))
                     <li><a href="{{URL::action('Admin\DeviceController@list')}}">设备列表</a></li>
+                @endif
+                @if(Auth::user()->can('device/detail'))
+                    <li><a href="{{URL::action('Admin\DeviceController@detail')}}">设备详情</a></li>
                 @endif
             </ul>
         </li>
@@ -121,11 +110,27 @@
         {{--地图--}}
         @if(Auth::user()->can('map/show'))
             <li class="">
-                <a target="_blank" href="http://anxinchong.vipcare.com/map.html"><i class="icon icon-th-list"></i>
+                <a target="_blank" href="/map/index.html"><i class="icon icon-th-list"></i>
                     <span>地图管理</span>
                 </a>
             </li>
         @endif
+
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>权限管理</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('user/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\UserController@list')}}">账号管理</a></li>
+                @endif
+                @if(Auth::user()->can('role/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\RoleController@list')}}">角色管理</a></li>
+                @endif
+                @if(Auth::user()->can('permis/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\PermisController@list')}}">权限管理</a>
+                    </li>
+                @endif
+            </ul>
+        </li>
 
 
     </ul>
@@ -154,9 +159,9 @@
 
 <script>
 
-    $(".submenu").each(function(){
+    $(".submenu").each(function () {
         var li = $(this);
-        if(li.find('li').length == 0){
+        if (li.find('li').length == 0) {
             li.remove();
         }
     });

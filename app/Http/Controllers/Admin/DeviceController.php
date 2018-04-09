@@ -14,13 +14,19 @@ use App\Logics\DeviceLogic;
 use App\Models\BiBrand;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
+use Illuminate\Http\Request;
 
 class DeviceController extends BaseController
 {
 
 
-    public function detail()
+    public function detail(Request $request)
     {
+
+        if($request->isXmlHttpRequest()){
+            //详情AJAX
+        }
+
         return view('admin.device.detail');
     }
 

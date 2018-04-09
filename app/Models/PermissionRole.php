@@ -10,6 +10,8 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PermissionRole wherePermissionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PermissionRole whereRoleId($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Permission $permission
+ * @property-read \App\Models\Role $role
  */
 class PermissionRole extends \App\Models\Base\PermissionRole
 {

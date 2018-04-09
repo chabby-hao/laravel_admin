@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 06 Mar 2018 18:09:30 +0800.
+ * Date: Sun, 08 Apr 2018 15:01:27 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDevice
- *
+ * 
  * @property int $id
  * @property string $udid
  * @property string $name
@@ -30,26 +30,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_brand
  * @property string $user_model
  * @property int $is_lose
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereAbmove($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereChassis($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereImei($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereIsLose($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereMode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereNotice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice wherePhoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice wherePush($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereRegistTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereRemind($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereUdid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereUserBrand($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereUserModel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDevice whereUserVoltage($value)
- * @mixin \Eloquent
  */
 class TDevice extends Eloquent
 {
