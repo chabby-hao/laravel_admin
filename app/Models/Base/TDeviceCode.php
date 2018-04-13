@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 08 Apr 2018 15:01:27 +0800.
+ * Date: Fri, 13 Apr 2018 16:11:54 +0800.
  */
 
 namespace App\Models\Base;
@@ -33,6 +33,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $device_type
  * @property \Carbon\Carbon $delivered_at
  * @property int $is_lost
+ * @property int $device_cycle
  *
  * @package App\Models\Base
  */
@@ -55,7 +56,8 @@ class TDeviceCode extends Eloquent
 		'channel_id' => 'int',
 		'brand_id' => 'int',
 		'device_type' => 'int',
-		'is_lost' => 'int'
+		'is_lost' => 'int',
+		'device_cycle' => 'int'
 	];
 
 	protected $dates = [

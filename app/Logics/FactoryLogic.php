@@ -9,6 +9,7 @@ use App\Models\BiDeliveryDevice;
 use App\Models\BiDeliveryOrder;
 use App\Models\BiOrder;
 use App\Models\BiUser;
+use App\Models\TDeviceCode;
 use Carbon\Carbon;
 
 class FactoryLogic extends BaseLogic
@@ -64,6 +65,10 @@ class FactoryLogic extends BaseLogic
                 $order->state = BiOrder::ORDER_STATE_FINISH;//订单状态
             }
             $order->save();
+
+            TDeviceCode::whereIn('imei',$imeis)->update([
+                'delivered_at'=>Carbon::now(),
+            ]);
 
         }
         return $res;

@@ -14,6 +14,7 @@ use App\Models\TEvMileageGp;
 use App\Models\TUser;
 use App\Models\TUserDevice;
 use App\Objects\DeviceObject;
+use App\Objects\FaultObject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 
@@ -83,15 +84,40 @@ class DeviceLogic extends BaseLogic
         $device->setGsm(static::getGsm($imei));
         $device->setChipPower(static::getChipPower($imei));
         $device->setCharge(static::isBatteryConnect($imei) ? 1 : 0);
+        $device->setChargeTrans($device->getCharge() ? '在位' : '断开');
         $device->setVoltage(static::getCurrentVoltage($imei));//0.1v
         $device->setBatteryCount(static::getBatteryCount($imei));
+        $device->setBatterySpecification($device->getBatteryCount() * 12);//多少V的电池
         $device->setBattery(static::getBattery($imei));
         $device->setExpectMile(static::getExpectMile($imei));
         $device->setTurnon(static::isTurnOn($imei) ? DeviceObject::SWITCH_STATUS_TURNON : DeviceObject::SWITCH_STATUS_TURNOFF);
-        $device->setTurnonTrans($device->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ? '骑行' : '停车');
-        $device->setLastContact($device->setLastContact(static::getLastContact($imei)));
+        $device->setTurnonTrans($device->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ? '开' : '关');
+        $device->setLastContact(static::getLastContact($imei));
+        $device->setIsLock(static::isLock($imei) ? DeviceObject::LOCK : DeviceObject::UNLOCK);
+        $device->setIsLockTrans($device->getisLock() === DeviceObject::LOCK ? '已锁' : '未锁');
+        $device->setDeviceCycle(static::getDeviceCycleByUdid($udid));
+        $device->setDeviceCycleTrans(TDeviceCode::getCycleMap($device->getDeviceCycle()));
+        $device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
         self::$devices[$imei] = $device;
         return $device;
+    }
+
+    private static function getDeviceStatus(DeviceObject $deviceObj)
+    {
+        if($deviceObj->getisOnline()){
+            if($deviceObj->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ){
+                $deviceStatus = '骑行';
+            }else{
+                $deviceStatus = '停车';
+            }
+        }else{
+            if($deviceObj->getisContact()){
+                $deviceStatus = '离线<48h';
+            }else{
+                $deviceStatus = '离线>48h';
+            }
+        }
+        return $deviceStatus;
     }
 
     /**
@@ -124,7 +150,7 @@ class DeviceLogic extends BaseLogic
 
         $udidsToImeis = array_flip(self::$imeisToUdids);
         if (isset($udidsToImeis[$udid])) {
-            return $udidsToImeis[$udidsToImeis];
+            return $udidsToImeis[$udid];
         }
 
         $deviceCode = TDeviceCode::whereQr($udid)->first();
@@ -139,11 +165,11 @@ class DeviceLogic extends BaseLogic
 
     public static function getUdidImei($udidOrImei)
     {
-        if($imei = self::getImei($udidOrImei)){
+        if ($imei = self::getImei($udidOrImei)) {
             return [$udidOrImei, $imei];
-        }elseif($udid = self::getUdid($udidOrImei)){
+        } elseif ($udid = self::getUdid($udidOrImei)) {
             return [$udid, $udidOrImei];
-        }else{
+        } else {
             return false;
         }
     }
@@ -161,6 +187,57 @@ class DeviceLogic extends BaseLogic
         } else {
             return false;
         }
+    }
+
+    public static function getUdidByImsi($imsi)
+    {
+        $deviceCode = TDeviceCode::whereImsi($imsi)->first();
+        if ($deviceCode) {
+            $udid = $deviceCode->qr;
+            return $udid;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getUdidByName($name)
+    {
+        $device = TDevice::whereName($name)->first();
+        if ($device) {
+            $udid = $device->udid;
+            return $udid;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getNameByUdid($udid)
+    {
+        $device = TDevice::whereUdid($udid)->first();
+        if ($device) {
+            $name = $device->name ?: $device->udid;
+            return $name;
+        } else {
+            return $udid;
+        }
+    }
+
+    public static function getChassisByUdid($udid)
+    {
+        $device = TDevice::whereUdid($udid)->first();
+        if ($device) {
+            $chassis = $device->chassis ?: '';
+            return $chassis;
+        } else {
+            return '';
+        }
+    }
+
+    public static function getDeviceCycleByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return $deviceCode->device_cycle;
+        });
     }
 
     private static function deviceCodeCallBack($udid, $func)
@@ -314,14 +391,14 @@ class DeviceLogic extends BaseLogic
     public static function getRegisterAtByUdid($udid)
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            return $deviceCode->register;
+            return $deviceCode->register->toDateTimeString();
         });
     }
 
-    public static function getActiveAtByUdid($udid)
+    public static function getActiveAtByUdid($udid, $format = 'Y-m-d')
     {
-        return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            return Carbon::createFromTimestamp($deviceCode->active)->toDateTimeString();
+        return self::deviceCodeCallBack($udid, function ($deviceCode) use ($format) {
+            return Carbon::createFromTimestamp($deviceCode->active)->format($format);
         });
     }
 
@@ -346,7 +423,7 @@ class DeviceLogic extends BaseLogic
         return false;
     }
 
-    public static function isContanct($imei, $delay = 1800)
+    public static function isContanct($imei, $delay = 48 * 3600)
     {
         $data = RedisLogic::getDevDataByImei($imei);
         if (isset($data['offline']) && $data['offline'] > time() - $delay) {
@@ -355,7 +432,7 @@ class DeviceLogic extends BaseLogic
         return false;
     }
 
-    public static function isContactByUdid($udid, $delay = 1800)
+    public static function isContactByUdid($udid, $delay = 48 * 3600)
     {
         $imei = static::getImei($udid);
         return static::isContanct($imei, $delay);
@@ -623,8 +700,7 @@ class DeviceLogic extends BaseLogic
      */
     private static function getMile($battery, $gcount, $total = 0)
     {
-
-        //如何设置了额定里程
+        //如果设置了额定里程
         if ($total) {
             return intval($battery * $total / 100);
         } elseif ($battery && $gcount) {
@@ -661,7 +737,7 @@ class DeviceLogic extends BaseLogic
 
         //得威电商的肯定比一般续航算出来的大，单独对得威进行判断
         //大坑 稳定后可以用id判断
-        if ($channelName == '得威电商') {
+        if ($channelName == '得威') {
             $mile = self::getMile($battery, $gcount, 90);
         } elseif (!empty($data['permile'])) {
             $perMiles = $data['permile'];
@@ -739,6 +815,55 @@ class DeviceLogic extends BaseLogic
         return '';
     }
 
+    public static function getGpsSatCount($imei)
+    {
+        $gps = DeviceLogic::getLastLocationInfo($imei);
+        $gsm = DeviceLogic::getLastGsmLocationInfo($imei);
+        return max($gps['satCount'], $gsm['satCount']) ?: 0;
+    }
+
+    public static function isLock($imei)
+    {
+        $devData = RedisLogic::getDevDataByImei($imei);
+        if ($devData && $devData['prelock'] == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * v3.0
+     * 获取电动车故障项
+     * @param $udid
+     * @return array
+     */
+    public static function getFault($imei)
+    {
+
+        $faults = FaultObject::$keyMap;
+
+        //电动车检测项目中有问题的项
+        $data = RedisLogic::getDevDataByImei($imei);
+        if (!$data) {
+            return [];
+        }
+
+        if (self::isTurnOn($imei) == DeviceObject::SWITCH_STATUS_TURNOFF) {
+            //电门未开,没有故障
+            return [];
+        }
+
+        $fault = array();
+        foreach ($faults as $key => $message) {
+            if (array_key_exists($key, $data) && $data[$key] == 1) {
+                $fault[] = $message;
+            }
+        }
+
+        return $fault;
+    }
+
     /**
      * 获取固件版本号，用户看到的
      * @param $udid
@@ -751,10 +876,17 @@ class DeviceLogic extends BaseLogic
         return $deviceMod . 'V' . $data['commercialVersion'] . 'Build' . $data['rom'];
     }
 
+    public static function getVerByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return $deviceCode->ver;
+        });
+    }
+
     public static function getAdminInfoByUdid($udid)
     {
         $row = TUserDevice::whereUdid($udid)->whereOwner(0)->first();
-        if($row){
+        if ($row) {
             $user = TUser::find($row->uid);
             return $user;
         }
@@ -763,7 +895,7 @@ class DeviceLogic extends BaseLogic
 
     public static function getFollowersByUdid($udid)
     {
-        $rs = TUserDevice::join('t_user','t_user.uid','=','t_user_device.uid')->whereUdid($udid)->whereOwner(1)
+        $rs = TUserDevice::join('t_user', 't_user.uid', '=', 't_user_device.uid')->whereUdid($udid)->whereOwner(1)
             ->select('t_user.*')
             ->get();
         return $rs;
@@ -795,14 +927,45 @@ class DeviceLogic extends BaseLogic
         return $row ? $row->cycle : 0;
     }
 
-    public static function storeDeviceStatusToCache($key)
+    /**
+     * @param $udid
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public static function getLastTripInfoByUdid($udid)
     {
-        TDeviceCode::getDeviceModel()->get();
+        $trip = TEvMileageGp::whereUdid($udid)->orderByDesc('mid')->first();
+        if ($trip) {
+            //因为轨迹点太卡，先去掉
+            /*$begin = $trip->begin;
+            $end = $trip->end;
+            $locations = LocationLogic::getLocationList($udid, $begin, $end);
+            $trip->addressBegin = array_shift($locations)['address'];
+            $trip->addressEnd = array_pop($locations)['address'];*/
+            return $trip;
+        }
+        return null;
     }
 
-    public static function getRuningUdidsByCache()
+    public static function getTripsListByUdid($udid)
     {
-        $udids = Cache::remember('');
+
+    }
+
+    /**
+     * 根据里程获取消耗电能
+     * @param $mileage
+     * @return float
+     */
+    public static function getEnergyByMileage($mileage)
+    {
+
+        //1格电池0.24km/h,能跑10Km，1km是0.024km/h
+        $energy = $mileage * 0.024;
+        if ($energy > 0 && $energy < 0.1) {
+            $energy = 0.1;
+        }
+
+        return number_format($energy, 1);
     }
 
 }

@@ -4,8 +4,10 @@ namespace App\Console\Commands;
 
 
 use App\Libs\Helper;
+use App\Logics\DeviceLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
 use App\Models\TDeviceCategory;
@@ -27,8 +29,8 @@ class DbSync extends BaseCommand
 
     public function handle()
     {
-        $this->categoryDicNew();
-        //$this->deviceCode();
+        //$this->categoryDicNew();
+        $this->deviceCode();
     }
 
     /**
@@ -159,9 +161,48 @@ class DbSync extends BaseCommand
 
                     $brandId = BiBrand::whereBrandName($brandName)->first()->id;
 
+                    $ebikeId = $ebike->id;
+
                     $deviceCode->channel_id = $channelId;
-                    $deviceCode->ebike_type_id = $ebike->id;
+                    $deviceCode->ebike_type_id = $ebikeId;
                     $deviceCode->brand_id = $brandId;
+
+
+
+                    //设备状态
+                    if($deviceCode->active > 0){
+                        $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_INUSE;
+                    }else{
+                        $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
+                    }
+
+                    $typeMap = BiDeviceType::getNameMap();
+                    $typeMap = array_flip($typeMap);
+                    //车型更新初始化
+                    if(DeviceLogic::isEb001b($udid)){
+
+                        if(in_array($ebikeId,[18,4,15])){
+                            $deviceCode->device_type = $typeMap['B600'];
+                        }elseif(in_array($ebikeId,[17])){
+                            $deviceCode->device_type = $typeMap['B605'];
+                        }elseif(in_array($ebikeId,[21,7])){
+                            $deviceCode->device_type = $typeMap['B800'];
+                        }elseif(in_array($ebikeId,[26,20,19])){
+                            $deviceCode->device_type = $typeMap['B610'];
+                        }elseif(in_array($ebikeId,[8])){
+                            $deviceCode->device_type = $typeMap['B611'];
+                        }elseif(in_array($ebikeId,[31,25])){
+                            $deviceCode->device_type = $typeMap['B620'];
+                        }elseif(in_array($ebikeId,[3])){
+                            $deviceCode->device_type = $typeMap['B621'];
+                        }elseif(in_array($ebikeId,[30])){
+                            $deviceCode->device_type = $typeMap['B630'];
+                        }elseif(in_array($ebikeId,[10])){
+                            $deviceCode->device_type = $typeMap['B660'];
+                        }elseif(in_array($ebikeId,[1])){
+                            $deviceCode->device_type = $typeMap['B661'];
+                        }
+                    }
 
                     //var_dump($deviceCode->toArray());
 

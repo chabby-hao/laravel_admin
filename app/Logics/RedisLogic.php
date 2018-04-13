@@ -3,6 +3,7 @@
 namespace App\Logics;
 
 //封装一下redis类
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
@@ -63,22 +64,31 @@ class RedisLogic extends BaseLogic
         return self::getDevDataByImei($imei);
     }
 
+    public static function getLocationByLid($lid)
+    {
+        $key = 'loc:' . $lid;
+        return self::getRedis()->hGetAll($key);
+    }
+
     /**
      * @param $imei
-     * @param string $lastKey  last|lastGSM
+     * @param string $lastKey last|lastGSM
      * @return array|mixed
      */
     public static function getLocationByImei($imei, $lastKey = 'last')
     {
         //加个类缓存
-        if (isset(self::$locData[$lastKey.$imei])) {
-            return self::$locData[$lastKey.$imei];
+        if (isset(self::$locData[$lastKey . $imei])) {
+            return self::$locData[$lastKey . $imei];
         }
         $devData = self::getDevDataByImei($imei);
         if (isset($devData[$lastKey]) && $devData[$lastKey]) {
             $key = 'loc:' . $devData[$lastKey];
             $data = self::getRedis()->hGetAll($key) ?: [];
-            return self::$locData[$lastKey.$imei] = $data;
+            if (isset($data['time'])) {
+                $data['dateTime'] = Carbon::createFromTimestamp($data['time'])->toDateTimeString();
+            }
+            return self::$locData[$lastKey . $imei] = $data;
         }
         return [];
     }
@@ -108,7 +118,7 @@ class RedisLogic extends BaseLogic
     {
         self::getRedis()->select(6);
         $listNumber = self::hGet('device_server', $imei);
-        if(!$listNumber){
+        if (!$listNumber) {
             $listNumber = 1;
         }
         $listNumber = trim($listNumber);
@@ -116,7 +126,7 @@ class RedisLogic extends BaseLogic
         $a = pack('P', $imei);
         $b = pack('V', $cmd);
         $val = $a . $b;
-        Log::notice("cloud/command imei:$imei , cmd: $cmd, push redis ". $val .' list key :' . self::REDIS_LIST_KEY_PRE . ($listNumber - 1));
+        Log::notice("cloud/command imei:$imei , cmd: $cmd, push redis " . $val . ' list key :' . self::REDIS_LIST_KEY_PRE . ($listNumber - 1));
 
         //日志
         //$logLogic = new LogLogic();
@@ -128,11 +138,21 @@ class RedisLogic extends BaseLogic
     {
         Log::info("redis hset $key $hashKey $value");
         $res = self::getRedis()->hSet($key, $hashKey, $value);
-        if($res !== false){
+        if ($res !== false) {
             return true;
-        }else{
+        } else {
             return false;
         }
+    }
+
+    public static function sMembers($key)
+    {
+        return self::getRedis()->sMembers($key);
+    }
+
+    public static function zRangeByScore($key, $start, $end, array $options = array())
+    {
+        return self::getRedis()->zRangeByScore($key, $start, $end, $options);
     }
 
 }

@@ -3,11 +3,13 @@
 namespace App\Logics;
 
 
+use App\Models\BiDeliveryDevice;
 use App\Models\BiDeliveryOrder;
 use App\Models\BiOrder;
 use App\Models\BiUser;
 use App\Models\Permission;
 use App\Models\Role;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -97,6 +99,20 @@ class DeliveryLogic extends BaseLogic
             }
         }
         return $res;
+    }
+
+    public static function getOrderShipInfo($imei)
+    {
+        $row = BiDeliveryDevice::join('bi_delivery_orders','delivery_order_id','=','bi_delivery_orders.id')
+            ->join('bi_orders','bi_orders.id','=','bi_delivery_orders.order_id')
+            ->whereImei($imei)
+            ->select('bi_orders.order_no','bi_orders.created_at as order_created_at','bi_delivery_orders.*')
+            ->first();
+        if($row){
+            $row->order_created_at = Carbon::createFromTimeString($row->order_created_at)->toDateString();
+        }
+        return $row;
+
     }
 
 }

@@ -48,9 +48,38 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereIsLost($value)
  * @property int|null $device_type 设备型号
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereDeviceType($value)
+ * @property bool|null $device_cycle 设备周期
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereDeviceCycle($value)
  */
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
+
+    const DEVICE_CYCLE_STORAGE = 0;//库存
+    const DEVICE_CYCLE_CHANNEL_STORAGE = 1;//渠道库存
+    const DEVICE_CYCLE_INUSE = 2;//使用中
+    const DEVICE_CYCLE_LOST = 3;//丢失
+    const DEVICE_CYCLE_SCRAP = 4;//报废
+    const DEVICE_CYCLE_CHANNEL_EXPIRE = 5;//渠道过期
+    const DEVICE_CYCLE_REFURBISHMENT_CHANNEL = 6;//翻新渠道
+    const DEVICE_CYCLE_REFURBISHMENT_USER = 7;//翻新用户
+    const DEVICE_CYCLE_USE_EXPIRE = 8;//使用过期
+
+    public static function getCycleMap($type = null)
+    {
+        $map = [
+            self::DEVICE_CYCLE_STORAGE => '库存',
+            self::DEVICE_CYCLE_CHANNEL_STORAGE => '渠道库存',
+            self::DEVICE_CYCLE_INUSE => '使用中',
+            self::DEVICE_CYCLE_LOST => '丢失',
+            self::DEVICE_CYCLE_SCRAP => '报废',
+            self::DEVICE_CYCLE_CHANNEL_EXPIRE => '渠道过期',
+            self::DEVICE_CYCLE_REFURBISHMENT_CHANNEL => '翻新渠道',
+            self::DEVICE_CYCLE_REFURBISHMENT_USER => '翻新用户',
+            self::DEVICE_CYCLE_USE_EXPIRE => '使用过期',
+        ];
+        return $type === null ? $map : $map[$type];
+    }
+
 	protected $fillable = [
 		'type',
 		'imei',
@@ -75,6 +104,9 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         return self::whereQr($udid)->first();
     }
 
+    /**
+     * @return $this
+     */
     public static function getDeviceModel()
     {
         $brandis = BiBrand::getAllBrandIds();

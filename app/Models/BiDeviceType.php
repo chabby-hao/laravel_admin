@@ -27,7 +27,7 @@ class BiDeviceType extends \App\Models\Base\BiDeviceType
 
     public static function getNameMap($cache = true)
     {
-        if(self::$data){
+        if($cache && self::$data){
             return self::$data;
         }
         $rs = self::orderByDesc('id')->get();

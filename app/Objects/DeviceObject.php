@@ -5,8 +5,20 @@ namespace App\Objects;
 class DeviceObject extends BaseObject
 {
 
+    //缓存前缀
+    const CACHE_LIST_PRE = 'dev_list:';
+    const CACHE_OBJ_PRE = 'dev:';
+
+    const CACHE_LIST_RIDING = 'riding';
+    const CACHE_LIST_PARK = 'park';
+    const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';
+    const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';
+
     const SWITCH_STATUS_TURNON = 1;//电门开
     const SWITCH_STATUS_TURNOFF = 0;//电门关
+
+    const LOCK = 1;//已锁
+    const UNLOCK = 0;//未锁
 
     public $udid = '';//设备号
     public $imei = '';//imei号
@@ -35,13 +47,20 @@ class DeviceObject extends BaseObject
     public $gsm = '';//$list[$key]['GSM'] = $value['gsmstrength'] ? '-'.$value['gsmstrength'].'DB':'';//gsm信号
     public $chipPower = 0;//智慧芯电量
     public $charge = 0;//电瓶是否在位
+    public $chargeTrans = '';
     public $voltage = 0;//当前电压,0.1v
     public $batteryCount = 0;//电池数量
+    public $batterySpecification = 0;//电池规格
     public $battery = 0;//电量
     public $expectMile = 0;//预估里程,km
     public $turnon = 0;//是否启动,0=未启动，1=启动
     public $turnonTrans = '';
+    public $ebikeStatus = '';//设备状态，骑行，停车，离线48小时内，离线48小时外
     public $lastContact = '';//最后一次状态通讯时间,datetime
+    public $isLock = 0;//0=未锁，1=已锁
+    public $isLockTrans = '';
+    public $deviceCycle = 0;//设备周期
+    public $deviceCycleTrans = '';// 设备周期翻译
 
     /**
      * @return string
@@ -573,8 +592,117 @@ class DeviceObject extends BaseObject
         $this->lastGps = $lastGps;
     }
 
+    /**
+     * @return int
+     */
+    public function getBatterySpecification(): int
+    {
+        return $this->batterySpecification;
+    }
 
+    /**
+     * @param int $batterySpecification
+     */
+    public function setBatterySpecification($batterySpecification)
+    {
+        $this->batterySpecification = $batterySpecification;
+    }
 
+    /**
+     * @return int
+     */
+    public function getisLock(): int
+    {
+        return $this->isLock;
+    }
+
+    /**
+     * @param int $isLock
+     */
+    public function setIsLock($isLock)
+    {
+        $this->isLock = $isLock;
+    }
+
+    /**
+     * @return string
+     */
+    public function getisLockTrans(): string
+    {
+        return $this->isLockTrans;
+    }
+
+    /**
+     * @param string $isLockTrans
+     */
+    public function setIsLockTrans($isLockTrans)
+    {
+        $this->isLockTrans = $isLockTrans;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChargeTrans(): string
+    {
+        return $this->chargeTrans;
+    }
+
+    /**
+     * @param string $chargeTrans
+     */
+    public function setChargeTrans($chargeTrans)
+    {
+        $this->chargeTrans = $chargeTrans;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEbikeStatus(): string
+    {
+        return $this->ebikeStatus;
+    }
+
+    /**
+     * @param string $ebikeStatus
+     */
+    public function setEbikeStatus($ebikeStatus)
+    {
+        $this->ebikeStatus = $ebikeStatus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDeviceCycle(): int
+    {
+        return $this->deviceCycle;
+    }
+
+    /**
+     * @param int $deviceCycle
+     */
+    public function setDeviceCycle($deviceCycle)
+    {
+        $this->deviceCycle = $deviceCycle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeviceCycleTrans(): string
+    {
+        return $this->deviceCycleTrans;
+    }
+
+    /**
+     * @param string $deviceCycleTrans
+     */
+    public function setDeviceCycleTrans($deviceCycleTrans)
+    {
+        $this->deviceCycleTrans = $deviceCycleTrans;
+    }
 
 
 

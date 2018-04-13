@@ -40,6 +40,12 @@
                     </div>
                 </div>
 
+                <div id="box">
+
+                </div>
+
+                <script id="template" type="x-tmpl-mustache">
+
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
                         <h5>基本信息</h5>
@@ -58,16 +64,17 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%udid%></td>
+                                <td><%ebikeTypeName%></td>
+                                <td><%imei%></td>
+                                <td><%imsi%></td>
+                                <td><%romVersion%></td>
+                                <td><%ver%></td>
                             </tr>
                             </tbody>
                         </table>
 
+                        <%#shipOrder%>
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
@@ -79,13 +86,14 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%order_no%></td>
+                                <td><%order_created_at%></td>
+                                <td><%ship_no%></td>
+                                <td><%actuall_date%></td>
                             </tr>
                             </tbody>
                         </table>
+                        <%/shipOrder%>
 
                         <table class="table table-bordered data-table">
                             <thead>
@@ -98,10 +106,14 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%activeAt%></td>
+                                <td><%name%></td>
+                                <td><%master.phone%></td>
+                                <td>
+                                    <%#followers%>
+                                        <%phone%>
+                                    <%/followers%>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -124,10 +136,10 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%isOnlineTrans%></td>
+                                <td>-<%gsm%>db</td>
+                                <td><%gpsSatCount%></td>
+                                <td><%lastGps%></td>
                             </tr>
                             </tbody>
                         </table>
@@ -146,13 +158,15 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%lastLocation.dateTime%></td>
+                                <td><%lastLocation.type%></td>
+                                <td><%#lastLocation.lng%>
+                                    <%lastLocation.lng%>,<%lastLocation.lat%>
+                                    <%/lastLocation.lng%></td>
+                                <td><%lastLocation.address%></td>
+                                <td><%lastLocation.landmark%></td>
+                                <td><%chipPower%></td>
+                                <td><a class="text-success" href="">历史定位</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -177,11 +191,11 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%channelName%></td>
+                                <td><%brandName%></td>
+                                <td><%ebikeTypeName%></td>
+                                <td><%chassis%></td>
+                                <td><%batterySpecification%></td>
                             </tr>
                             </tbody>
                         </table>
@@ -201,14 +215,18 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%lastContact%></td>
+                                <td><%turnonTrans%></td>
+                                <td><%isLockTrans%></td>
+                                <td><%voltage%></td>
+                                <td><%battery%></td>
+                                <td><%chipPower%></td>
+                                <td><%chargeTrans%></td>
+                                <td>
+                                    <a class="text-success">电门日志</a>
+                                    <a class="text-success">锁车日志</a>
+                                    <a class="text-success">历史状态</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -225,10 +243,10 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%faultControl%></td>
+                                <td><%faultSwitch%></td>
+                                <td><%faultMotor%></td>
+                                <td><%faultCharge%></td>
                             </tr>
                             </tbody>
                         </table>
@@ -253,10 +271,10 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%expectMile%></td>
+                                <td><%totalMiles%></td>
+                                <td><%ridingTimes%></td>
+                                <td><%chargingTimes%></td>
                             </tr>
                             </tbody>
                         </table>
@@ -265,8 +283,8 @@
                             <thead>
                             <tr>
                                 <th>最近用车</th>
-                                <th>起点</th>
-                                <th>终点</th>
+                                {{--<th>起点</th>
+                                <th>终点</th>--}}
                                 <th>行驶里程</th>
                                 <th>骑行时长</th>
                                 <th>平均速度</th>
@@ -276,20 +294,30 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%lastTrip.dateTime%></td>
+                                {{--<td><%lastTrip.addressBegin%></td>
+                                <td><%lastTrip.addressEnd%></td>--}}
+                                <td><%lastTrip.mile%>公里</td>
+                                <td><%lastTrip.duration%>分钟</td>
+                                <td><%lastTrip.speed%>km/h</td>
+                                <td><%lastTrip.energy%>kw/h</td>
+                                <td>
+                                    <a class="text-success">历史行程</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
 
                     </div>
                 </div>
+
+
+
+
+
+
+
+                </script>
 
 
             </div>
@@ -300,9 +328,35 @@
 
     <script>
 
+        $(function () {
+
+            var template = $('#template').html();
+            Mustache.parse(template);   // optional, speeds up future uses
+
+            var myform = $("#myform");
+
+            $("#mysubmit").click(function () {
+                myform.submit();
+            });
+
+            myform.ajaxForm({
+                dataType: 'json',
+                //beforeSubmit : test,//ajax动画加载
+                success: function (data) {
+                    if (ajax_check_res(data)) {
+
+                        var target = $("#box");
+                        var rendered = Mustache.render(template, data);
+                        target.html(rendered);
+                        //myalert('保存成功');
+                    }
+                }
+            });
+        })
+
+
     </script>
 
 
-    @include('admin.common_submitjs')
 @endsection
 
