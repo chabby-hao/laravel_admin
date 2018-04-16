@@ -120,8 +120,8 @@ class XinpuController extends Controller
                 $data['vol'] = 1;
             }
 
-            if ($data['rom'] == '2335' &&
-                $data['mcu'] == '1.0.2366' &&
+            if ($data['rom'] == '2502' &&
+                $data['mcu'] == '1.0.2508' &&
                 $this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
                 $this->checkBatteryId($zhangfeiData, $time) &&
@@ -145,6 +145,7 @@ class XinpuController extends Controller
     private function checkBatteryId($data, $time)
     {
         //for test
+        return true;
         if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
