@@ -298,7 +298,7 @@
         var col_div = $('#' + i);
 
         myhtml(col_div.find('.rom'), rom[i]);
-        if (rom[i] === '2335') {
+        if (rom[i] === '2502') {
             pass(col_div.find('.rom'));
             //changeColor(col_div.find('.rom'), rom[i]);
         }else{
@@ -306,7 +306,7 @@
         }
 
         myhtml(col_div.find('.mcu'), mcu[i]);
-        if (mcu[i] === '1.0.2366') {
+        if (mcu[i] === '1.0.2508') {
             pass(col_div.find('.mcu'));
             //changeColor(col_div.find('.mcu'), mcu[i]);
         }else{
