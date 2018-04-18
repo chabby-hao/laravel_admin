@@ -128,7 +128,7 @@ class DbSync extends BaseCommand
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $page = 1;
         $perPage = 30;
-        $model = TDeviceCode::getDeviceModel();
+        $model = TDeviceCode::getDeviceModel()->whereIn('type', $types);
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
 
