@@ -15,9 +15,18 @@ use App\Logics\DeviceLogic;
 use App\Models\BiBrand;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
+use App\Models\TLockLog;
+use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
+use App\Objects\LocationObject;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
 
 class DeviceController extends BaseController
 {
@@ -45,6 +54,7 @@ class DeviceController extends BaseController
             $data = (array)$deviceObj;
 
             //补充信息
+            $data['imsi'] = DeviceLogic::getImsi($data['imei']);
             $data['romVersion'] = DeviceLogic::getRomVersionByUdid($udid);
             $data['ver'] = DeviceLogic::getVerByUdid($udid);
 
@@ -61,21 +71,21 @@ class DeviceController extends BaseController
 
             $data['faultControl'] = $data['faultSwitch'] = $data['faultMotor'] = $data['faultCharge'] = '正常';
             $faults = DeviceLogic::getFault($data['imei']);
-            if($faults){
+            if ($faults) {
                 //控制器
-                if(in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_CONTROL,$faults)){
+                if (in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_CONTROL, $faults)) {
                     $data['faultControl'] = '异常';
                 }
                 //转把
-                if(in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_SWITCH, $faults)){
+                if (in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_SWITCH, $faults)) {
                     $data['faultSwitch'] = '异常';
                 }
                 //电机状态
-                if(in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_DRIVER, $faults)){
+                if (in_array(FaultObject::EV_MESSAGE_POWER_SYSTEM_DRIVER, $faults)) {
                     $data['faultMotor'] = '异常';
                 }
                 //电瓶故障
-                if(!$data['charge']){
+                if (!$data['charge']) {
                     $data['faultCharge'] = '异常';
                 }
             }
@@ -85,17 +95,23 @@ class DeviceController extends BaseController
             $data['chargingTimes'] = DeviceLogic::getChargingTimesByUdid($udid);
 
 
-            if($lastTrip = DeviceLogic::getLastTripInfoByUdid($udid)){
+            if ($lastTrip = DeviceLogic::getLastTripInfoByUdid($udid)) {
                 $tmp = [];
                 $tmp['dateTime'] = Carbon::createFromTimestamp($lastTrip->begin)->toDateTimeString();
                 $tmp['addressBegin'] = $lastTrip->addressBegin;
                 $tmp['addressEnd'] = $lastTrip->addressEnd;
                 $tmp['mile'] = $lastTrip->mile;
-                $tmp['duration'] = number_format($lastTrip->duration/60, 1);
-                $tmp['speed'] = number_format($tmp['mile'] / ($tmp['duration']/60), 1);
+                $tmp['duration'] = number_format($lastTrip->duration / 60, 1);
+                $tmp['speed'] = number_format($tmp['mile'] / ($tmp['duration'] / 60), 1);
                 $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
                 $data['lastTrip'] = $tmp;
             }
+
+
+            //url
+            $data['locationUrl'] = URL::action('Admin\DeviceController@locationList', ['imei' => $data['imei']]);
+            $data['lockLogUrl'] = URL::action('Admin\DeviceController@lockLogList', ['imei' => $data['imei']]);
+            $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
 
             //详情AJAX
             return $this->outPut($data);
@@ -124,25 +140,207 @@ class DeviceController extends BaseController
      * 缓存策略：按照ID缓存,in(1,2,3,4)
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list()
+    public function list(Request $request)
     {
-        $devices = TDeviceCode::getDeviceModel()->orderByDesc('sid')->select('t_device_code.*')->paginate();
+
+        $model = TDeviceCode::getDeviceModel();
+
+        $this->listSearch($model);
+
+        $devices = $model->orderByDesc('sid')->select('t_device_code.*')->paginate();
         $deviceList = $devices->items();
 
         $data = [];
 
-        /** @var TDevice $device */
+        /** @var TDeviceCode $device */
         foreach ($deviceList as $device) {
-            $data[] = DeviceLogic::createDevice($device->imei);
+            //$data[] = DeviceLogic::createDevice($device->imei);
+            $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::createDevice($device->imei);
         }
 
+        list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCacheKey();
 
         return view('admin.device.list', [
             'datas' => $data,
             'page_nav' => MyPage::showPageNav($devices),
+            'deviceStatusMap' => $deviceStatusMap,
+            'deviceCycleMap' => $deviceCycleMap,
         ]);
-
 
     }
 
+    /**
+     * @param TDeviceCode $model
+     * @return mixed
+     */
+    private function listSearch($model)
+    {
+        if ($status = \Request::input('status')) {
+            $cacheKey = DeviceObject::CACHE_LIST_PRE . $status;
+            $udids = Cache::store('file')->get($cacheKey);
+            $model->whereIn('qr', $udids);
+        }
+
+        if ($id = \Request::input('id')) {
+            $udid = $this->getUdid($id);
+            $model->whereQr($udid);
+        }
+
+        if ($deviceType = \Request::input('device_type')) {
+            $model->whereDeviceType($deviceType);
+        }
+
+        if ($channel = \Request::input('channel_id')) {
+            $model->whereChannelId($channel);
+        }
+
+        if ($brand = \Request::input('brand_id')) {
+            $model->whereBrandId($brand);
+        }
+
+        if ($ebikeType = \Request::input('ebike_type_id')) {
+            $model->whereEbikeTypeId($ebikeType);
+        }
+
+        return $model;
+    }
+
+    private function getDeviceCacheKey()
+    {
+        $deviceStatusMap = DeviceObject::getDeviceStatusCacheMap();
+        $deviceCycleMap = TDeviceCode::getCycleMap();
+        foreach ($deviceStatusMap as $k => $row) {
+            $deviceStatusMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+        }
+        foreach ($deviceCycleMap as $k => $row) {
+            $deviceCycleMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+        }
+        return [$deviceStatusMap, $deviceCycleMap];
+    }
+
+    public function locationList()
+    {
+
+        $imei = Input::get('imei');
+        $udid = DeviceLogic::getUdid($imei);
+
+        list($startDatetime, $endDatetime) = $this->getDaterange();
+
+        $where = [];
+        $where['udid'] = $imei;
+        if ($type = Input::get('type')) {
+            if ($type == LocationObject::TYPE_GPS_REPEAT) {
+                $where['type'] = LocationObject::TYPE_GPS;
+                $where['repeat'] = 1;
+            } elseif ($type == LocationObject::TYPE_GPS) {
+                $where['type'] = $type;
+                $where['repeat'] = 0;
+            } else {
+                $where['type'] = $type;
+            }
+        }
+
+        $whereBetween = ['create_time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $paginate = $this->getUnionTablePaginate('t_location_new_', $where, $whereBetween, 'location', $startDatetime, $endDatetime);
+
+        $data = $paginate->items();
+
+        foreach ($data as &$row) {
+            $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
+            $row->location_type = $row->type . '定位';
+            if ($row->repeat == 1 && $row->type == 'GPS') {
+                $row->location_type = 'GPS(repeat)';
+                $row->address = Carbon::createFromTimestamp($row->begin)->toDateTimeString() . $row->address;
+            }
+            $row->gsm = $row->gsmstrength ? '-' . $row->gsmstrength . 'DB' : '';
+            $row->usb_trans = $row->usb ? '是' : '否';
+        }
+
+        return view('admin.device.locationlist', [
+            'datas' => $data,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'udid' => $udid,
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+    }
+
+    public function historyState()
+    {
+        $imei = Input::get('imei');
+        $udid = DeviceLogic::getUdid($imei);
+        list($startDatetime, $endDatetime) = $this->getDaterange();
+
+        $where = ['udid'=>$udid];
+        $whereBetween = ['create_time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $paginate = $this->getUnionTablePaginate('t_ev_state_', $where, $whereBetween,'care', $startDatetime, $endDatetime);
+
+        $data = $paginate->items();
+
+        foreach ($data as $row) {
+            $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
+            $row->ev_key_trans = $row->eb_key ? '开' : '关';
+            $row->ev_lock_trans = $row->eb_lock ? '已锁' : '未锁';
+            $row->voltage = max($row->voltage, $row->local_voltage);
+            $row->usb_trans = $row->usb ? '是' : '否';
+        }
+
+        return view('admin.device.historystate', [
+            'datas' => $data,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'udid' => $udid,
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+
+    }
+
+    public function lockLogList()
+    {
+        $imei = Input::get('imei');
+        $udid = DeviceLogic::getUdid($imei);
+
+        list($startDatetime, $endDatetime) = $this->getDaterange();
+
+        $map = DeviceObject::getLockTypeMap();
+        $keys = array_keys($map);
+
+        $paginate = TLockLog::whereIn('act', $keys)->orderByDesc('id')->paginate();
+
+
+        $data = $paginate->items();
+        /** @var TLockLog $row */
+        foreach ($data as $row) {
+            $row->act_trans = $map[$row->act];
+            if (!$row->uid) {
+                list($user, $from) = explode('-', $row->username);
+                $row->user = $user;
+                $row->from = $from;
+            } else {
+                $row->from = '超牛管家';
+                $row->user = $row->phone;
+            }
+            $row->lock_type_trans = TLockLog::getLockTypeMap($row->type);
+        }
+
+        //$devices = TLockLog::->orderByDesc('sid')->select('t_device_code.*')->paginate();
+
+        return view('admin.device.lockloglist', [
+            'datas' => $data,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'udid' => $udid,
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+
+    }
+
+    public function mileageList()
+    {
+
+        $where = [];
+        if($type = Input::get('type')){
+            $where = ['mile'];
+        }
+    }
 }

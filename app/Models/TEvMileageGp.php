@@ -25,13 +25,14 @@ namespace App\Models;
  */
 class TEvMileageGp extends \App\Models\Base\TEvMileageGp
 {
-	protected $fillable = [
-		'udid',
-		'begin',
-		'end',
-		'duration',
-		'mile',
-		'power',
-		'points'
-	];
+
+    protected $fillable = [
+        'udid',
+        'begin',
+        'end',
+        'duration',
+        'mile',
+        'power',
+        'points'
+    ];
 }

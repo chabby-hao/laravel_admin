@@ -54,15 +54,15 @@ namespace App\Models;
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
 
-    const DEVICE_CYCLE_STORAGE = 0;//库存
-    const DEVICE_CYCLE_CHANNEL_STORAGE = 1;//渠道库存
-    const DEVICE_CYCLE_INUSE = 2;//使用中
-    const DEVICE_CYCLE_LOST = 3;//丢失
-    const DEVICE_CYCLE_SCRAP = 4;//报废
-    const DEVICE_CYCLE_CHANNEL_EXPIRE = 5;//渠道过期
-    const DEVICE_CYCLE_REFURBISHMENT_CHANNEL = 6;//翻新渠道
-    const DEVICE_CYCLE_REFURBISHMENT_USER = 7;//翻新用户
-    const DEVICE_CYCLE_USE_EXPIRE = 8;//使用过期
+    const DEVICE_CYCLE_STORAGE = 1;//库存
+    const DEVICE_CYCLE_CHANNEL_STORAGE = 2;//渠道库存
+    const DEVICE_CYCLE_INUSE = 3;//使用中
+    const DEVICE_CYCLE_LOST = 4;//丢失
+    const DEVICE_CYCLE_SCRAP = 5;//报废
+    const DEVICE_CYCLE_CHANNEL_EXPIRE = 6;//渠道过期
+    const DEVICE_CYCLE_REFURBISHMENT_CHANNEL = 7;//翻新渠道
+    const DEVICE_CYCLE_REFURBISHMENT_USER = 8;//翻新用户
+    const DEVICE_CYCLE_USE_EXPIRE = 9;//使用过期
 
     public static function getCycleMap($type = null)
     {
@@ -109,8 +109,9 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
      */
     public static function getDeviceModel()
     {
-        $brandis = BiBrand::getAllBrandIds();
-        return TDeviceCode::whereIn('type', $brandis);
+        return new TDeviceCode();
+        //$brandis = BiBrand::getAllBrandIds();
+        //return TDeviceCode::whereIn('type', $brandis);
     }
 
 }

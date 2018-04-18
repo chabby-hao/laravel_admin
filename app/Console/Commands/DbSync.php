@@ -130,8 +130,9 @@ class DbSync extends BaseCommand
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $page = 1;
         $perPage = 100;
+        $model = TDeviceCode::getDeviceModel();
         do {
-            $pagination = TDeviceCode::whereIn('type', $types)->simplePaginate($perPage, ['*'], 'page', $page++);
+            $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
 
             /** @var TDeviceCode $deviceCode */
             foreach ($pagination->items() as $deviceCode) {
@@ -172,9 +173,9 @@ class DbSync extends BaseCommand
                     //设备状态
                     if($deviceCode->active > 0){
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_INUSE;
-                    }else{
+                    }/*else{
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
-                    }
+                    }*/
 
                     $typeMap = BiDeviceType::getNameMap();
                     $typeMap = array_flip($typeMap);

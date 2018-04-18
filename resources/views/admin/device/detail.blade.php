@@ -15,7 +15,7 @@
                                     <label>输入搜索：</label>
                                 </div>
                                 <div class="inline-block">
-                                    <input type="text" id="id" name="id" placeholder="设备号/IMEI/IMSI">
+                                    <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
                                     <input type="text" id="name" name="name" placeholder="设备名称">
                                 </div>
 
@@ -166,7 +166,7 @@
                                 <td><%lastLocation.address%></td>
                                 <td><%lastLocation.landmark%></td>
                                 <td><%chipPower%></td>
-                                <td><a class="text-success" href="">历史定位</a></td>
+                                <td><a class="text-success" href="<%locationUrl%>">历史定位</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -223,9 +223,9 @@
                                 <td><%chipPower%></td>
                                 <td><%chargeTrans%></td>
                                 <td>
-                                    <a class="text-success">电门日志</a>
-                                    <a class="text-success">锁车日志</a>
-                                    <a class="text-success">历史状态</a>
+                                    {{--<a class="text-success">电门日志</a>--}}
+                                    <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
+                                    <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
                                 </td>
                             </tr>
                             </tbody>
@@ -352,6 +352,13 @@
                     }
                 }
             });
+
+
+            //设备列表跳转过来的，直接自动查询
+            if($("#id").val()){
+                myform.submit();
+            }
+
         })
 
 

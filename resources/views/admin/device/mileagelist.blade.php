@@ -7,13 +7,8 @@
 
         <div class="btn-group">
             <div>
-                @foreach($deviceCycleMap as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}"  data-key="{{$key}}" class="btn marginright">{{$row}}</a>
-                @endforeach
-            </div>
-            <div class="margintop">
-                @foreach($deviceStatusMap as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}"  data-key="{{$key}}" class="btn marginright margintop">{{$row}}</a>
+                @foreach(\App\Logics\MileageLogic::getMileMap() as $key => $row)
+                    <a href="{{URL::action('Admin\DeviceController@mileageList', ['type'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('type') == $key) btn-success @endif">{{$row}}</a>
                 @endforeach
             </div>
         </div>
@@ -27,9 +22,9 @@
                         <h5>筛选查询</h5>
                     </div>
                     <div class="widget-content">
-                        <form id="myform" action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search">
-                            @if(Request::has('status'))
-                                <input type="hidden" name="status" value="{{Request::input('status')}}">
+                        <form id="myform" method="get" class="form-search">
+                            @if(Request::input('type'))
+                                <input type="hidden" name="status" value="{{Request::input('type')}}">
                             @endif
                             <div class="control-group">
                                 <div class="inline-block">
@@ -37,28 +32,6 @@
                                 </div>
                                 <div class="inline-block w8">
                                     <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
-                                    <select class="w15" name="device_type">
-                                        <option value="">请选择型号</option>
-                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
-                                            <option @if(Request::input('device_type') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select class="w15" name="channel_id">
-                                        <option value="">请选择渠道</option>
-                                        @foreach(\App\Models\BiChannel::getChannelMap() as $k => $v)
-                                            <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select class="w15" name="brand_id">
-                                        <option value="">请选择品牌</option>
-                                        @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
-                                            <option @if(Request::input('brand_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select class="w15" name="ebike_type_id">
-                                        <option @if(Request::input('ebike_type_id') == $k) selected @endif value="">请选择车型</option>
-                                    </select>
-                                    <input type="submit" id="mysubmit" class="btn btn-info" value="查询">
                                 </div>
 
                             </div>
@@ -119,7 +92,6 @@
         </div>
     </div>
 
-    @include('admin.common_brand_ebikejs');
-    {{--    @include('admin.common_submitjs')--}}
+        @include('admin.common_submitjs')
 
 @endsection

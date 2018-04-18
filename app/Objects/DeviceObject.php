@@ -7,6 +7,7 @@ class DeviceObject extends BaseObject
 
     //缓存前缀
     const CACHE_LIST_PRE = 'dev_list:';
+    const CACHE_LIST_COUNT_PRE = 'dev_list_count:';
     const CACHE_OBJ_PRE = 'dev:';
 
     const CACHE_LIST_RIDING = 'riding';
@@ -19,6 +20,47 @@ class DeviceObject extends BaseObject
 
     const LOCK = 1;//已锁
     const UNLOCK = 0;//未锁
+
+
+    const LOCK_TYPE_ANQI = 'lock';//锁车
+    const UNLOCK_TYPE_ANQI = 'unlock';//解锁
+    const LOCK_TYPE_SWITCH_OFF = 'd_lock';//锁车开电门
+    const UNLOCK_TYPE_SIWTCH_ON = 'd_unlock';//锁车关电门
+    const LOCK_TYPE_BATTERY = 'p_lock';//电池锁
+    const UNLOCK_TYPE_BATTERY = 'p_unlock';//电池解锁
+    const LOCK_TYPE_SHANQI = 'sq_lock';//闪骑锁车
+    const UNLOCK_TYPE_SHANQI = 'sq_unlock';//闪骑解锁
+    const LOCK_TYPE_XIYOU = 'xy_lock';//西游锁车
+    const UNLOCK_TYPE_XIYOU = 'xy_unlock';//西游解锁
+
+    public static function getLockTypeMap($type = null)
+    {
+        $map = [
+            self::LOCK_TYPE_ANQI => '锁车',
+            self::UNLOCK_TYPE_ANQI => '解锁',
+            self::LOCK_TYPE_SWITCH_OFF => '锁车开电门',
+            self::UNLOCK_TYPE_SIWTCH_ON => '锁车关电门',
+            self::LOCK_TYPE_BATTERY => '电池锁',
+            self::UNLOCK_TYPE_BATTERY => '电池解锁',
+            self::LOCK_TYPE_SHANQI => '闪骑锁车',
+            self::UNLOCK_TYPE_SHANQI => '闪骑解锁',
+            self::LOCK_TYPE_XIYOU => '西游锁车',
+            self::UNLOCK_TYPE_XIYOU => '西游解锁',
+        ];
+        return $type === null ? $map : $map[$type];
+    }
+
+
+    public static function getDeviceStatusCacheMap()
+    {
+        $map = [
+            self::CACHE_LIST_RIDING => '骑行',
+            self::CACHE_LIST_PARK => '停车',
+            self::CACHE_LIST_OFFLINE_LESS_48 => '离线小于48h',
+            self::CACHE_LIST_OFFLINE_MORE_48 => '离线大于48h',
+        ];
+        return $map;
+    }
 
     public $udid = '';//设备号
     public $imei = '';//imei号
@@ -157,7 +199,6 @@ class DeviceObject extends BaseObject
     {
         $this->deviceTypeName = $deviceTypeName;
     }
-
 
 
     /**
@@ -703,7 +744,6 @@ class DeviceObject extends BaseObject
     {
         $this->deviceCycleTrans = $deviceCycleTrans;
     }
-
 
 
 }

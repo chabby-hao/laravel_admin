@@ -25,6 +25,14 @@
     <script src="{{ asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
     <script src="{{asset('js/mustache/mustache.min.js')}}"></script>
 
+    <link rel="stylesheet"
+          href="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.css') ?>">
+
+    <script src="<?php echo asset('js/date/date.js') ?>"></script>
+    <script src="<?php echo asset('js/bootstrap-daterangepicker/moment.min.js') ?>"></script>
+    <script src="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
+    <script src="<?php echo asset('js/common/g-datepicker.js') ?>"></script>
+
 </head>
 <body>
 

@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Cache;
 class DeviceLogic extends BaseLogic
 {
 
+    const DEVICE_CACHE_MINUTES = 24 * 60;//缓存1天
+
     private static $devices = [];//imei=>deviceObject
 
     private static $imeisToUdids = [];//imei=>udid
@@ -47,7 +49,7 @@ class DeviceLogic extends BaseLogic
     }
 
     /**
-     * 工厂模式生成1个数据
+     * 工厂模式生成1个数据,同时缓存
      * @param $imei
      * @return DeviceObject
      */
@@ -99,21 +101,23 @@ class DeviceLogic extends BaseLogic
         $device->setDeviceCycleTrans(TDeviceCode::getCycleMap($device->getDeviceCycle()));
         $device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
         self::$devices[$imei] = $device;
+        //同时缓存数据
+        Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
         return $device;
     }
 
     private static function getDeviceStatus(DeviceObject $deviceObj)
     {
-        if($deviceObj->getisOnline()){
-            if($deviceObj->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ){
+        if ($deviceObj->getisOnline()) {
+            if ($deviceObj->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON) {
                 $deviceStatus = '骑行';
-            }else{
+            } else {
                 $deviceStatus = '停车';
             }
-        }else{
-            if($deviceObj->getisContact()){
+        } else {
+            if ($deviceObj->getisContact()) {
                 $deviceStatus = '离线<48h';
-            }else{
+            } else {
                 $deviceStatus = '离线>48h';
             }
         }
@@ -128,6 +132,12 @@ class DeviceLogic extends BaseLogic
     {
         $imei = static::getImei($udid);
         return static::createDevice($imei);
+    }
+
+    public static function getDeviceFromCacheByUdid($udid)
+    {
+        $imei = self::getImei($udid);
+        return Cache::store('file')->get(DeviceObject::CACHE_OBJ_PRE . $imei);
     }
 
     public static function getUdid($imei)

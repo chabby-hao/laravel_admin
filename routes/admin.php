@@ -47,6 +47,10 @@ Route::any('/permis/edit','Admin\PermisController@edit');
 
 Route::any('/device/list','Admin\DeviceController@list');
 Route::any('/device/detail','Admin\DeviceController@detail');
+Route::any('/device/locationList','Admin\DeviceController@locationList');
+Route::any('/device/lockLogList','Admin\DeviceController@lockLogList');
+Route::any('/device/historyState','Admin\DeviceController@historyState');
+Route::any('/device/mileageList','Admin\DeviceController@mileageList');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');

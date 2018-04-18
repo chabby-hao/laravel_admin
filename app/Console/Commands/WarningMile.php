@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Logics\MileageLogic;
 use App\Models\TEvMileageGp;
 
 class WarningMile extends BaseWarning
@@ -14,8 +15,6 @@ class WarningMile extends BaseWarning
     {
         parent::__construct();
     }
-
-    private $maxMile = 100;
 
     public function handle()
     {
@@ -30,6 +29,7 @@ class WarningMile extends BaseWarning
 //    "prev_page_url":"http://localhost?page=1",
 //    "to":20
 
+        $maxFile = MileageLogic::MAX_MILE;
 
         $page = 1;
         $perPage = 100;
@@ -45,9 +45,9 @@ class WarningMile extends BaseWarning
 
             /** @var TEvMileageGp $item */
             foreach ($pagination->items() as $item) {
-                if ($item->mile > $this->maxMile) {
+                if ($item->mile > $maxFile) {
                     //满足报警条件，报警
-                    $log = 'find mile>' . $this->maxMile . ' with data:' . json_encode($item);
+                    $log = 'find mile>' . $maxFile . ' with data:' . json_encode($item);
                     $this->warning($log);
                     $mids[] = $item->mid;
                     $text = '设备: ' . $item->udid. ' 从 ' . date('Y-m-d H:i:s', $item->begin) . ' 至 ' . date('Y-m-d H:i:s', $item->end) . ' 单次行驶 ' . $item->mile . 'km';
