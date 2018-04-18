@@ -17,6 +17,7 @@ use App\Models\TPayment;
 use App\Models\TPaymentOrder;
 use App\Models\TUser;
 use App\Models\TUserDevice;
+use App\Models\TZoneMsg;
 use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
 use Carbon\Carbon;
@@ -1028,6 +1029,18 @@ class DeviceLogic extends BaseLogic
             $row->daterange = $row->insure_start->toDateTimeString() . ' ~ '  . $row->insure_end->toDateTimeString();
             $row->insure_type_name = $nameMap[$row->insure_type];
             $row->from = $row->mode ? '购买' : '赠送';
+        }
+        return $collect;
+    }
+
+    public static function getSafeZoneListByUdid($udid)
+    {
+        $collect = TZoneMsg::join('t_safe_zone','t_safe_zone.zid','=','t_zone_msg.zid')
+            ->whereUdid($udid)
+            ->select('t_safe_zone.*')
+            ->get();
+        foreach ($collect as $row){
+            $row->date = $row->create_time;
         }
         return $collect;
     }

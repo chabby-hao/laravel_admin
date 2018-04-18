@@ -337,7 +337,7 @@
                                 </tbody>
                             </table>
 
-                            <%#insureList%>
+                            <%#insureListHas%>
                             <table class="table table-bordered data-table">
                                 <thead>
                                 <tr>
@@ -349,18 +349,41 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <%#insureList%>
                                 <tr class="gradeX">
-                                    <%#insureList%>
                                     <td><%insure_type_name%></td>
                                     <td><%daterange%></td>
                                     <td><%from%></td>
                                     <td><%insure_id%></td>
                                     <td><%order_id%></td>
-                                    <%/insureList%>
                                 </tr>
+                                <%/insureList%>
                                 </tbody>
                             </table>
-                            <%/insureList%>
+                            <%/insureListHas%>
+
+
+                            {{--安全区域--}}
+                            <%#safeZoneListHas%>
+                            <table class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>安全区域</th>
+                                    <th>范围</th>
+                                    <th>设置时间</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%#safeZoneList%>
+                                <tr class="gradeX">
+                                    <td><%address%></td>
+                                    <td><%radius%>咪</td>
+                                    <td><%date%></td>
+                                </tr>
+                                <%/safeZoneList%>
+                                </tbody>
+                            </table>
+                            <%/safeZoneListHas%>
 
         </div>
     </div>

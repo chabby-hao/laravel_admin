@@ -115,6 +115,11 @@ class DeviceController extends BaseController
 
             //保险
             $data['insureList'] = DeviceLogic::getInsureOrderListByUdid($udid)->toArray();
+            $data['insureListHas'] = $data['insureList'] ? true : false;
+
+            //安全区域
+            $data['safeZoneList'] = DeviceLogic::getSafeZoneListByUdid($udid)->toArray();
+            $data['safeZoneListHas'] = $data['safeZoneList'] ? true : false;
 
             //详情AJAX
             return $this->outPut($data);
