@@ -62,7 +62,7 @@ class BaseController extends Controller
         return $paginate;
     }
 
-    protected function getDaterange()
+    protected function getDaterange($preDay = null)
     {
         $dateRange = Input::get('daterange');
         if ($dateRange) {
@@ -72,7 +72,8 @@ class BaseController extends Controller
                 list($startDatetime, $endDatetime) = explode('-', $dateRange);
             }
         } else {
-            list($startDatetime, $endDatetime) = [Carbon::now()->startOfDay()->toDateTimeString(), Carbon::now()->endOfDay()->toDateTimeString()];
+            $preDay = $preDay ? : Carbon::now()->startOfDay()->toDateTimeString();
+            list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->endOfDay()->toDateTimeString()];
         }
         return [trim($startDatetime), trim($endDatetime)];
     }

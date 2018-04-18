@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\DbSync;
+use App\Console\Commands\DeviceCache;
 use App\Console\Commands\Test;
 use App\Console\Commands\WarningMile;
 use Illuminate\Console\Scheduling\Schedule;
@@ -31,6 +32,7 @@ class Kernel extends ConsoleKernel
         //          ->hourly();
         $schedule->command(WarningMile::class)->hourly();
         $schedule->command(DbSync::class)->everyTenMinutes();
+        $schedule->command(DeviceCache::class)->everyTenMinutes();
     }
 
     /**

@@ -11,6 +11,10 @@ use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use App\Models\TEvCharge;
 use App\Models\TEvMileageGp;
+use App\Models\TInsureOrder;
+use App\Models\TInsureType;
+use App\Models\TPayment;
+use App\Models\TPaymentOrder;
 use App\Models\TUser;
 use App\Models\TUserDevice;
 use App\Objects\DeviceObject;
@@ -142,12 +146,18 @@ class DeviceLogic extends BaseLogic
 
     public static function getUdid($imei)
     {
+        if(!$imei){
+            return false;
+        }
         if (isset(self::$imeisToUdids[$imei])) {
             return self::$imeisToUdids[$imei];
         }
         $deviceCode = TDeviceCode::whereImei($imei)->first();
         if ($deviceCode) {
             $udid = $deviceCode->qr;
+            if(!$udid){
+                return false;
+            }
             self::$imeisToUdids[$imei] = $udid;
             return $udid;
         } else {
@@ -157,7 +167,9 @@ class DeviceLogic extends BaseLogic
 
     public static function getImei($udid)
     {
-
+        if(!$udid){
+            return false;
+        }
         $udidsToImeis = array_flip(self::$imeisToUdids);
         if (isset($udidsToImeis[$udid])) {
             return $udidsToImeis[$udid];
@@ -166,6 +178,9 @@ class DeviceLogic extends BaseLogic
         $deviceCode = TDeviceCode::whereQr($udid)->first();
         if ($deviceCode) {
             $imei = $deviceCode->imei;
+            if(!$imei){
+                return false;
+            }
             self::$imeisToUdids[$imei] = $udid;
             return $imei;
         } else {
@@ -401,7 +416,7 @@ class DeviceLogic extends BaseLogic
     public static function getRegisterAtByUdid($udid)
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            return $deviceCode->register->toDateTimeString();
+            return $deviceCode->register ? $deviceCode->register->toDateTimeString() : '';
         });
     }
 
@@ -956,11 +971,6 @@ class DeviceLogic extends BaseLogic
         return null;
     }
 
-    public static function getTripsListByUdid($udid)
-    {
-
-    }
-
     /**
      * 根据里程获取消耗电能
      * @param $mileage
@@ -976,6 +986,50 @@ class DeviceLogic extends BaseLogic
         }
 
         return number_format($energy, 1);
+    }
+
+    /**
+     * 获取服务期限等信息
+     */
+    public static function getPaymentInfoByUdid($udid)
+    {
+        $rtn = [
+            'sim_status'=>'未激活',//sim卡状态
+            'daterange'=>'',//有效期
+            'renew'=>0,//续费次数
+            'service_status'=>'',
+        ];
+        $active = self::getActiveAtByUdid($udid,'Y-m-d H:i:s');
+        $row = TPayment::whereUdid($udid)->first();
+        if($row){
+            //有记录
+            $rtn['daterange'] = $active . ' ~ ' . Carbon::createFromTimestamp($row->expire)->toDateTimeString();
+            $rtn['sim_status'] = '正常';
+            if($row->expire > time()){
+                //有效
+                $rtn['service_status'] = '服务期内';
+            }else{
+                //过期
+                $rtn['service_status'] = '服务到期';
+            }
+        }
+
+        $renews = TPaymentOrder::whereUdid($udid)->whereStatus(TPaymentOrder::PAY_STATUS_PAY)->count();
+        $rtn['renew'] = $renews;
+        return $rtn;
+
+    }
+
+    public static function getInsureOrderListByUdid($udid)
+    {
+        $collect = TInsureOrder::whereStatus(TInsureOrder::ORDER_STATUS_SUCCESS)->whereUdid($udid)->get();
+        $nameMap = TInsureType::getNameMap();
+        foreach ($collect as $row){
+            $row->daterange = $row->insure_start->toDateTimeString() . ' ~ '  . $row->insure_end->toDateTimeString();
+            $row->insure_type_name = $nameMap[$row->insure_type];
+            $row->from = $row->mode ? '购买' : '赠送';
+        }
+        return $collect;
     }
 
 }

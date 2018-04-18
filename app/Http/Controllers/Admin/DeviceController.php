@@ -12,9 +12,11 @@ namespace App\Http\Controllers\Admin;
 use App\Libs\MyPage;
 use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
+use App\Logics\MileageLogic;
 use App\Models\BiBrand;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
+use App\Models\TEvMileageGp;
 use App\Models\TLockLog;
 use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
@@ -58,6 +60,7 @@ class DeviceController extends BaseController
             $data['romVersion'] = DeviceLogic::getRomVersionByUdid($udid);
             $data['ver'] = DeviceLogic::getVerByUdid($udid);
 
+
             $shipOrder = DeliveryLogic::getOrderShipInfo($data['imei']);
 
             $data['shipOrder'] = $shipOrder;
@@ -96,15 +99,7 @@ class DeviceController extends BaseController
 
 
             if ($lastTrip = DeviceLogic::getLastTripInfoByUdid($udid)) {
-                $tmp = [];
-                $tmp['dateTime'] = Carbon::createFromTimestamp($lastTrip->begin)->toDateTimeString();
-                $tmp['addressBegin'] = $lastTrip->addressBegin;
-                $tmp['addressEnd'] = $lastTrip->addressEnd;
-                $tmp['mile'] = $lastTrip->mile;
-                $tmp['duration'] = number_format($lastTrip->duration / 60, 1);
-                $tmp['speed'] = number_format($tmp['mile'] / ($tmp['duration'] / 60), 1);
-                $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
-                $data['lastTrip'] = $tmp;
+                $data['lastTrip'] = $this->getMileageInfo($lastTrip);
             }
 
 
@@ -112,12 +107,34 @@ class DeviceController extends BaseController
             $data['locationUrl'] = URL::action('Admin\DeviceController@locationList', ['imei' => $data['imei']]);
             $data['lockLogUrl'] = URL::action('Admin\DeviceController@lockLogList', ['imei' => $data['imei']]);
             $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
+            $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList',['id'=>$udid]);
+
+
+            //服务信息
+            $data['paymentInfo'] = DeviceLogic::getPaymentInfoByUdid($udid);
+
+            //保险
+            $data['insureList'] = DeviceLogic::getInsureOrderListByUdid($udid)->toArray();
 
             //详情AJAX
             return $this->outPut($data);
         }
 
         return view('admin.device.detail');
+    }
+
+    private function getMileageInfo($mileRow)
+    {
+        $tmp = [];
+        $tmp['udid'] = $mileRow->udid;
+        $tmp['dateTime'] = Carbon::createFromTimestamp($mileRow->begin)->toDateTimeString();
+        /*$tmp['addressBegin'] = $lastTrip->addressBegin;
+        $tmp['addressEnd'] = $lastTrip->addressEnd;*/
+        $tmp['mile'] = $mileRow->mile;
+        $tmp['duration'] = number_format($mileRow->duration / 60, 1);
+        $tmp['speed'] = number_format($tmp['mile'] / ($tmp['duration'] / 60), 1);
+        $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
+        return $tmp;
     }
 
     private function getUdid($id)
@@ -271,9 +288,9 @@ class DeviceController extends BaseController
         $udid = DeviceLogic::getUdid($imei);
         list($startDatetime, $endDatetime) = $this->getDaterange();
 
-        $where = ['udid'=>$udid];
+        $where = ['udid' => $udid];
         $whereBetween = ['create_time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
-        $paginate = $this->getUnionTablePaginate('t_ev_state_', $where, $whereBetween,'care', $startDatetime, $endDatetime);
+        $paginate = $this->getUnionTablePaginate('t_ev_state_', $where, $whereBetween, 'care', $startDatetime, $endDatetime);
 
         $data = $paginate->items();
 
@@ -338,9 +355,48 @@ class DeviceController extends BaseController
     public function mileageList()
     {
 
+        $type = Input::get('type');
+        $id = Input::get('id');
+
+        $model = TEvMileageGp::where([]);
+
+
+        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->subMonth()->toDateTimeString());
+
+        $whereBetween = ['begin', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $model->whereBetween($whereBetween[0], $whereBetween[1]);
+
         $where = [];
-        if($type = Input::get('type')){
-            $where = ['mile'];
+        if ($id && $udid = $this->getUdid($id)) {
+            $where['udid'] = $udid;
+            $model->where($where);
         }
+
+        if ($type == MileageLogic::MILE_TYPE_NORMAL) {
+            $model->where('mile', '<', MileageLogic::MAX_MILE);
+        } elseif ($type == MileageLogic::MILE_TYPE_ABNORMAL) {
+            $model->where('mile', '>=', MileageLogic::MAX_MILE);
+        }
+
+        $paginate = $model->orderByDesc('mid')->paginate();
+
+        $data = $paginate->items();
+
+        $rs = [];
+        foreach ($data as $row) {
+            $rs[] = $this->getMileageInfo($row);
+        }
+
+        //数量
+
+
+        return view('admin.device.mileagelist', [
+            'datas' => $rs,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'countMap'=>MileageLogic::getMileCountMap($whereBetween, $where),
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+
     }
 }

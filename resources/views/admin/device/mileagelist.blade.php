@@ -8,7 +8,7 @@
         <div class="btn-group">
             <div>
                 @foreach(\App\Logics\MileageLogic::getMileMap() as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@mileageList', ['type'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('type') == $key) btn-success @endif">{{$row}}</a>
+                    <a href="{{URL::action('Admin\DeviceController@mileageList', ['type'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('type') == $key) btn-success @endif">{{$row}}(总:{{$countMap[$key]}})</a>
                 @endforeach
             </div>
         </div>
@@ -32,6 +32,8 @@
                                 </div>
                                 <div class="inline-block w8">
                                     <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
+                                    <input name="daterange" value="" class="w6 date" type="text">
+                                    <input class="btn btn-info" type="submit" value="查询">
                                 </div>
 
                             </div>
@@ -47,38 +49,23 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>设备ID</th>
-                                <th>设备型号</th>
-                                <th>渠道</th>
-                                <th>车辆品牌</th>
-                                <th>车辆型号</th>
-                                <th>激活时间</th>
-                                <th>设备周期</th>
-                                <th>设备状态</th>
-                                <th>状态上报时间</th>
-                                <th>设备位置</th>
-                                <th>位置上报时间</th>
-                                <th>操作</th>
+                                <th>设备号</th>
+                                <th>骑行时间</th>
+                                <th>行驶里程</th>
+                                <th>骑行时长</th>
+                                <th>平均速度</th>
+                                <th>使用电量</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php /* @var \App\Objects\DeviceObject $data */ ?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
-                                    <td>{{$data->udid}}</td>
-                                    <td>{{$data->deviceTypeName}}</td>
-                                    <td>{{$data->channelName}}</td>
-                                    <td>{{$data->brandName}}</td>
-                                    <td>{{$data->ebikeTypeName}}</td>
-                                    <td>{{$data->activeAt}}</td>
-                                    <td></td>
-                                    <td>{{$data->isOnline ? $data->turnonTrans : $data->isOnlineTrans}}</td>
-                                    <td>{{$data->lastContact}}</td>
-                                    <td>{{$data->address}}</td>
-                                    <td>{{$data->lastGps}}</td>
-                                    <td>
-                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">详情</a>
-                                    </td>
+                                    <td>{{$data['udid']}}</td>
+                                    <td>{{$data['dateTime']}}</td>
+                                    <td>{{$data['mile']}}公里</td>
+                                    <td>{{$data['duration']}}分钟</td>
+                                    <td>{{$data['speed']}}km/h</td>
+                                    <td>{{$data['energy']}}kw/h</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -92,6 +79,10 @@
         </div>
     </div>
 
-        @include('admin.common_submitjs')
+    <script>
+        window.gDatepicker.datetimeRangePicker($(".date"),'{{$start}}','{{$end}}');
+    </script>
+
+    {{--        @include('admin.common_submitjs')--}}
 
 @endsection

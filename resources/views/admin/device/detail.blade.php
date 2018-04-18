@@ -224,92 +224,148 @@
                                 <td><%chargeTrans%></td>
                                 <td>
                                     {{--<a class="text-success">电门日志</a>--}}
-                                    <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
-                                    <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
+                    <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
 
-                        <table class="table table-bordered data-table">
-                            <thead>
-                            <tr>
-                                <th>控制器状态</th>
-                                <th>转把状态</th>
-                                <th>电机状态</th>
-                                <th>电瓶状态</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="gradeX">
-                                <td><%faultControl%></td>
-                                <td><%faultSwitch%></td>
-                                <td><%faultMotor%></td>
-                                <td><%faultCharge%></td>
-                            </tr>
-                            </tbody>
-                        </table>
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>控制器状态</th>
+                <th>转把状态</th>
+                <th>电机状态</th>
+                <th>电瓶状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%faultControl%></td>
+                <td><%faultSwitch%></td>
+                <td><%faultMotor%></td>
+                <td><%faultCharge%></td>
+            </tr>
+            </tbody>
+        </table>
 
-                    </div>
-                </div>
+    </div>
+</div>
 
 
-                <div class="widget-box">
-                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>用车信息</h5>
-                    </div>
-                    <div class="widget-content">
-                        <table class="table table-bordered data-table">
-                            <thead>
-                            <tr>
-                                <th>预计续航</th>
-                                <th>行驶里程</th>
-                                <th>骑行次数</th>
-                                <th>充电次数</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="gradeX">
-                                <td><%expectMile%></td>
-                                <td><%totalMiles%></td>
-                                <td><%ridingTimes%></td>
-                                <td><%chargingTimes%></td>
-                            </tr>
-                            </tbody>
-                        </table>
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>用车信息</h5>
+    </div>
+    <div class="widget-content">
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>预计续航</th>
+                <th>行驶里程</th>
+                <th>骑行次数</th>
+                <th>充电次数</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%expectMile%></td>
+                <td><%totalMiles%></td>
+                <td><%ridingTimes%></td>
+                <td><%chargingTimes%></td>
+            </tr>
+            </tbody>
+        </table>
 
-                        <table class="table table-bordered data-table">
-                            <thead>
-                            <tr>
-                                <th>最近用车</th>
-                                {{--<th>起点</th>
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>最近用车</th>
+{{--<th>起点</th>
                                 <th>终点</th>--}}
-                                <th>行驶里程</th>
-                                <th>骑行时长</th>
-                                <th>平均速度</th>
-                                <th>使用电量</th>
-                                <th>操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr class="gradeX">
-                                <td><%lastTrip.dateTime%></td>
-                                {{--<td><%lastTrip.addressBegin%></td>
+                    <th>行驶里程</th>
+                    <th>骑行时长</th>
+                    <th>平均速度</th>
+                    <th>使用电量</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="gradeX">
+                    <td><%lastTrip.dateTime%></td>
+{{--<td><%lastTrip.addressBegin%></td>
                                 <td><%lastTrip.addressEnd%></td>--}}
-                                <td><%lastTrip.mile%>公里</td>
-                                <td><%lastTrip.duration%>分钟</td>
-                                <td><%lastTrip.speed%>km/h</td>
-                                <td><%lastTrip.energy%>kw/h</td>
-                                <td>
-                                    <a class="text-success">历史行程</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <td><%lastTrip.mile%>公里</td>
+                    <td><%lastTrip.duration%>分钟</td>
+                    <td><%lastTrip.speed%>km/h</td>
+                    <td><%lastTrip.energy%>kw/h</td>
+                    <td>
+                        <a href='<%mileageUrl%>' class="text-success">历史行程</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-                    </div>
-                </div>
+        </div>
+    </div>
+
+
+{{--服务信息--}}
+                    <div class="widget-box">
+                        <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                            <h5>服务信息</h5>
+                        </div>
+                        <div class="widget-content">
+                            <table class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>SIM状态</th>
+                                    <th>SIM卡有效期</th>
+                                    <th>续费次数</th>
+                                    <th>服务状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeX">
+                                    <td><%paymentInfo.sim_status%></td>
+                                    <td><%paymentInfo.daterange%></td>
+                                    <td><%paymentInfo.renew%></td>
+                                    <td><%paymentInfo.service_status%></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <%#insureList%>
+                            <table class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>险种</th>
+                                    <th>有效期</th>
+                                    <th>获取途径</th>
+                                    <th>保单号</th>
+                                    <th>单号</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeX">
+                                    <%#insureList%>
+                                    <td><%insure_type_name%></td>
+                                    <td><%daterange%></td>
+                                    <td><%from%></td>
+                                    <td><%insure_id%></td>
+                                    <td><%order_id%></td>
+                                    <%/insureList%>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <%/insureList%>
+
+        </div>
+    </div>
+
+
 
 
 
@@ -355,7 +411,7 @@
 
 
             //设备列表跳转过来的，直接自动查询
-            if($("#id").val()){
+            if ($("#id").val()) {
                 myform.submit();
             }
 

@@ -33,7 +33,7 @@ class DeviceCache extends BaseCommand
 
     public function handle()
     {
-        //$this->cacheDeviceObj();
+        $this->cacheDeviceObj();
         $this->cacheDeviceCycle();
         $this->cacheDeviceStatus();
     }
