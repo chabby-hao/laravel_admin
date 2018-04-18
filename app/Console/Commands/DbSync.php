@@ -118,8 +118,6 @@ class DbSync extends BaseCommand
      */
     private function deviceCode()
     {
-        $conn = DB::connection('care');
-        $conn->table('t_device_code')->get()->toArray();
 
         $dicNews = TDeviceCategoryDicNew::whereLevel(3)->whereProducts(6)->get()->keyBy('channel')->toArray();
 
