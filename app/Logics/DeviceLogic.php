@@ -107,7 +107,7 @@ class DeviceLogic extends BaseLogic
         $device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
         self::$devices[$imei] = $device;
         //同时缓存数据
-        Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
+        //Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
         return $device;
     }
 
