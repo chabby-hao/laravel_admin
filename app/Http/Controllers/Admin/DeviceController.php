@@ -247,8 +247,8 @@ class DeviceController extends BaseController
 
         /** @var TDeviceCode $device */
         foreach ($deviceList as $device) {
-            //$data[] = DeviceLogic::createDevice($device->imei);
-            $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::createDevice($device->imei);
+            $data[] = DeviceLogic::createDevice($device->imei);
+            //$data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::createDevice($device->imei);
         }
 
         if (Auth::user()->user_type == BiUser::USER_TYPE_ALL) {
