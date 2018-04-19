@@ -69,7 +69,7 @@ class DeviceCache extends BaseCommand
         $offlineMore48 = [];
         //$all = [];
         $this->batchSearch($model, function ($deviceCode) use (&$riding, &$park, &$offlineMore48, &$offlineLess48) {
-
+            static $t = 0;
             /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
@@ -79,6 +79,7 @@ class DeviceCache extends BaseCommand
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";
+            echo ++$t .".......\n";
             if (DeviceLogic::isOnline($imei)) {
                 if (DeviceLogic::isTurnOn($imei)) {
                     //骑行
