@@ -33,7 +33,7 @@ class DeviceCache extends BaseCommand
 
     public function handle()
     {
-        $this->cacheDeviceObj();
+        //$this->cacheDeviceObj();
         $this->cacheDeviceStatus();
         $this->cacheDeviceCycle();
     }
@@ -73,6 +73,11 @@ class DeviceCache extends BaseCommand
             /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
+
+            //缓存设备
+            DeviceLogic::createDevice($imei);
+            DeviceLogic::clear();
+
             echo "processing imei:$imei,udid:$udid...\n";
             if (DeviceLogic::isOnline($imei)) {
                 if (DeviceLogic::isTurnOn($imei)) {
