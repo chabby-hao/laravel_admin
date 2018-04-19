@@ -87,7 +87,7 @@ class DeviceLogic extends BaseLogic
         $device->setActiveAt(static::getActiveAtByUdid($udid));
         $device->setIsOnline(static::isOnline($imei) ? 1 : 0);
         $device->setIsOnlineTrans($device->getisOnline() ? '在线' : '离线');
-        //$device->setIsContact(static::isContanct($imei) ? 1 : 0);
+        $device->setIsContact(static::isContanct($imei) ? 1 : 0);
         //$device->setIsContactTrans($device->getisContact() ? '在联' : '失联');
         $loc = static::getLastLocationInfo($imei);
         if ($loc) {
@@ -112,7 +112,7 @@ class DeviceLogic extends BaseLogic
         //$device->setIsLockTrans($device->getisLock() === DeviceObject::LOCK ? '已锁' : '未锁');
         $device->setDeviceCycle(static::getDeviceCycleByUdid($udid));
         $device->setDeviceCycleTrans(TDeviceCode::getCycleMap($device->getDeviceCycle()));
-        //$device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
+        $device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
         //self::$devices[$imei] = $device;
         //同时缓存数据
         Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));

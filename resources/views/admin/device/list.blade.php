@@ -103,7 +103,7 @@
                                     <td>{{$data->ebikeTypeName}}</td>
                                     <td>{{$data->activeAt}}</td>
                                     <td></td>
-                                    <td>{{$data->isOnline ? $data->turnonTrans : $data->isOnlineTrans}}</td>
+                                    <td>{{$data->ebikeStatus}}</td>
                                     <td>{{$data->lastContact}}</td>
                                     <td>{{$data->address}}</td>
                                     <td>{{$data->lastGps}}</td>

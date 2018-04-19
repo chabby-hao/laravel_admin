@@ -27,9 +27,17 @@ class MapController extends BaseController
     {
         if($request->isXmlHttpRequest()){
             //请求数据
+
+
+
         }
 
         return view('admin.map.show');
+    }
+
+    private function getMapCacheData()
+    {
+
     }
 
 }
