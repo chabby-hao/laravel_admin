@@ -36,6 +36,7 @@ class DeviceLogic extends BaseLogic
 
     public static function clear()
     {
+        RedisLogic::clear();
         self::$devices = [];
         self::$imeisToUdids = [];
         self::$imeiToImsi = [];

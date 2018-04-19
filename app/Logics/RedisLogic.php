@@ -20,6 +20,13 @@ class RedisLogic extends BaseLogic
 
     private static $zhangfeiData = [];//imei=>array
 
+    public static function clear()
+    {
+        self::$devData = [];
+        self::$locData = [];
+        self::$zhangfeiData = [];
+    }
+
     /**
      * 获取redis示例
      * @return \Redis
