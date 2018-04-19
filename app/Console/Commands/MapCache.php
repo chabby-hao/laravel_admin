@@ -115,11 +115,11 @@ class MapCache extends BaseCommand
                     $data = [];
                     foreach ($rows as $udid) {
                         $data[] = $this->getLoc($udid);
-                        $count = count($data);
-                        Log::debug("file put $cacheKeyPre . $id . $k , count:$count success");
-                        echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
-                        Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
                     }
+                    $count = count($data);
+                    Log::debug("file put $cacheKeyPre . $id . $k , count:$count success");
+                    echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
+                    Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
                 }
 
             }
