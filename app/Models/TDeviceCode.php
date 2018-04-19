@@ -111,9 +111,9 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
      */
     public static function getDeviceModel()
     {
-        return TDeviceCode::where('type','>=',2);
-        //$brandis = BiBrand::getAllBrandIds();
-        //return TDeviceCode::whereIn('type', $brandis);
+        //return TDeviceCode::where('type','>=',2);
+        $brandis = BiBrand::getAllBrandIds();
+        return TDeviceCode::whereIn('type', $brandis);
     }
 
 }
