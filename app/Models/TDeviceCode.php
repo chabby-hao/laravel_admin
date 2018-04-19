@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\TDeviceCode
@@ -112,8 +113,13 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
     public static function getDeviceModel()
     {
         //return TDeviceCode::where('type','>=',2);
-        $brandis = BiBrand::getAllBrandIds();
-        return TDeviceCode::whereIn('type', $brandis);
+
+        //$brandis = BiBrand::getAllBrandIds();
+        //return TDeviceCode::whereIn('type', $brandis);
+
+        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = Helper::transToOneDimensionalArray($types, 'type');
+        return TDeviceCode::whereIn('type', $types);
     }
 
 }

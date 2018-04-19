@@ -28,11 +28,9 @@
                                     <label>最近查询：</label>
                                 </div>
                                 <div class="inline-block">
-                                    <a class="btn btn-default" href="">123456789012</a>
-                                    <a class="btn" href="">123456789012</a>
-                                    <a class="btn" href="">123456789012</a>
-                                    <a class="btn" href="">123456789012</a>
-                                    <a class="btn" href="">123456789012</a>
+                                    @foreach($lastIds as $id)
+                                        <a class="btn last">{{$id}}</a>
+                                    @endforeach
                                 </div>
 
                             </div>
@@ -475,6 +473,14 @@
             if ($("#id").val()) {
                 myform.submit();
             }
+
+            $(".last").click(function(){
+                var id = $(this).text();
+                if(id){
+                    $("#id").val(id);
+                    myform.submit();
+                }
+            })
 
         })
 

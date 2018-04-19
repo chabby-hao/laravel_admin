@@ -23,11 +23,17 @@ Route::get('/phpinfo',function(){
 });
 //Auth::routes();
 Route::get('/test', function(){
-    $carbon = \Carbon\Carbon::now()->addMinutes(24 * 60);
-    dd($carbon);
-    \Illuminate\Support\Facades\Cache::store('file')->put('lalala3',8888, $carbon);
-    $b = \Illuminate\Support\Facades\Cache::store('file')->get('lalala3');
-    var_dump($b);
+
+    $cookie = \Illuminate\Support\Facades\Cookie::make('test', 'hello, world');
+    $a =  \Illuminate\Support\Facades\Cookie::get('test');
+    var_dump($a);
+    return Resp('aaa')->cookie($cookie);
+
+//    $carbon = \Carbon\Carbon::now()->addMinutes(24 * 60);
+//    dd($carbon);
+//    \Illuminate\Support\Facades\Cache::store('file')->put('lalala3',8888, $carbon);
+//    $b = \Illuminate\Support\Facades\Cache::store('file')->get('lalala3');
+//    var_dump($b);
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

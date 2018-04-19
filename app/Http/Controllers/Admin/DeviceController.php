@@ -31,8 +31,10 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 
 class DeviceController extends BaseController
@@ -41,6 +43,9 @@ class DeviceController extends BaseController
 
     public function detail(Request $request)
     {
+
+        $cookieKey = 'lastIds';
+        $lastIds = $request->cookie($cookieKey, "[]");
 
         if ($request->isXmlHttpRequest()) {
 
@@ -55,6 +60,10 @@ class DeviceController extends BaseController
             }
             if (!$udid) {
                 return $this->outPutError('查找不到设备信息');
+            }
+
+            if (!TDeviceCode::where($this->getWhere())->first()) {
+                return $this->outPutError('设备码无权限查看');
             }
 
             $deviceObj = DeviceLogic::createDeviceByUdid($udid);
@@ -129,11 +138,25 @@ class DeviceController extends BaseController
             //提醒消息
             $data['msg'] = $this->getMsgCount($udid);
 
+
+            $lastIds = json_decode($lastIds, true);
+            if (($k = array_search($id, $lastIds)) !== false) {
+                unset($lastIds[$k]);
+                array_unshift($lastIds, $id);
+            } else {
+                array_unshift($lastIds, $id);
+                if (count($lastIds) > 5) {
+                    array_pop($lastIds);
+                }
+            }
+            $cookie = Cookie::make($cookieKey, json_encode($lastIds), 60 * 24 * 30);
             //详情AJAX
-            return $this->outPut($data);
+            return $this->outPutWithCookie($data, $cookie);
         }
 
-        return view('admin.device.detail');
+        return view('admin.device.detail', [
+            'lastIds' => json_decode($lastIds, true),
+        ]);
     }
 
     private function getMsgCount($udid)
@@ -228,10 +251,10 @@ class DeviceController extends BaseController
             $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::createDevice($device->imei);
         }
 
-        if(Auth::user()->user_type == BiUser::USER_TYPE_ALL){
+        if (Auth::user()->user_type == BiUser::USER_TYPE_ALL) {
             //全部使用缓存
             list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCacheKey();
-        }else{
+        } else {
             list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCountKey();
         }
 
@@ -269,10 +292,10 @@ class DeviceController extends BaseController
         $where = [];
         /** @var BiUser $user */
         $user = Auth::user();
-        if($user->user_type == BiUser::USER_TYPE_CHANNEL){
+        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
             //渠道商
             $where['channel_id'] = $user->type_id;
-        }elseif($user->user_type == BiUser::USER_TYPE_BRAND){
+        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
             //品牌商
             $where['brand_id'] = $user->type_id;
         }

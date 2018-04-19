@@ -78,7 +78,7 @@ class BaseController extends Controller
         return [trim($startDatetime), trim($endDatetime)];
     }
 
-    protected function outPut(array $data = [], $die = false)
+    protected function outPut(array $data = [], $die = false, $cookie = null)
     {
         if (!isset($data['code'])) {
             $data['code'] = 200;
@@ -86,8 +86,16 @@ class BaseController extends Controller
         if ($die) {
             die(json_encode($data));
         } else {
+            if($cookie){
+                return response($data)->cookie($cookie);
+            }
             return response($data);
         }
+    }
+
+    protected function outPutWithCookie(array $data = [],$cookie)
+    {
+        return $this->outPut($data, false ,$cookie);
     }
 
     protected function outPutSuccess()
