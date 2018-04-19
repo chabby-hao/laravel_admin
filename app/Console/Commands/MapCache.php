@@ -38,7 +38,7 @@ class MapCache extends BaseCommand
         $channels = BiChannel::getAllChannelIds();
 
         $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);
-        $this->cacheData($channels,'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
+        $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
 
     }
 
@@ -105,12 +105,13 @@ class MapCache extends BaseCommand
             ];
             $data = [];
             foreach ($map as $k) {
-                foreach ($map2 as $rows){
+                foreach ($map2 as $rows) {
                     foreach ($rows as $udid) {
                         $data[] = $this->getLoc($udid);
-                        Log::debug("file put $cacheKeyPre . $k success");
-                        echo "file put $cacheKeyPre . $k success" . "\n";
-                        Cache::store('file')->put($cacheKeyPre . $k, $data, $cacheTime);
+                        $count = count($data);
+                        Log::debug("file put $cacheKeyPre . $id . $k , count:$count success");
+                        echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
+                        Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
                     }
                 }
 
