@@ -110,8 +110,6 @@ class MapCache extends BaseCommand
                 &$storage,
             ];
 
-            var_dump($map2);exit;
-
             foreach ($map as $k) {
                 foreach ($map2 as $rows) {
                     $data = [];
