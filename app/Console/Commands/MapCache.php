@@ -120,6 +120,7 @@ class MapCache extends BaseCommand
                     Log::debug("file put $cacheKeyPre . $id . $k , count:$count success");
                     echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
                     Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
+                    unset($data);
                 }
 
             }
