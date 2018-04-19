@@ -26,4 +26,10 @@ class BiChannel extends \App\Models\Base\BiChannel
         $rs = self::orderByDesc('id')->get();
         return Helper::transToKeyValueArray($rs, 'id', 'channel_name');
     }
+
+    public static function getAllChannelIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
 }

@@ -5,6 +5,12 @@ namespace App\Objects;
 class DeviceObject extends BaseObject
 {
 
+    //渠道品牌缓存前缀
+    const CACHE_CHANNEL_PRE ='channel:';//渠道缓存前缀
+    const CACHE_BRAND_PRE = 'brand:';//品牌缓存前缀
+
+    const CACHE_MAP_PRE = 'map:';//地图缓存前缀
+
     //缓存前缀
     const CACHE_LIST_PRE = 'dev_list:';
     const CACHE_LIST_COUNT_PRE = 'dev_list_count:';
