@@ -63,6 +63,7 @@ class MapCache extends BaseCommand
 
                 echo "processing imei:$imei,udid:$udid...\n";
                 echo ++$t . ".......\n";
+                echo memory_get_usage() . "---------------\n";
 
                 $all[] = $udid;
 
@@ -145,7 +146,6 @@ class MapCache extends BaseCommand
             'time' => date('Y-m-d H:i', $gps['time']),
             'address' => $gps['address'] ?: '无',
         ];
-        echo memory_get_usage() . "---------------\n";
         return $data;
     }
 
