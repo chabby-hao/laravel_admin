@@ -48,7 +48,7 @@ class DeviceCache extends BaseCommand
             echo memory_get_usage() . "\n";
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
-            DeviceLogic::createDevice($imei);
+            //DeviceLogic::createDevice($imei);
             echo "processing imei:$imei,udid:$udid...\n";
             //Cache::set(DeviceObject::CACHE_OBJ_PRE . $imei, $deviceObj);
         });
