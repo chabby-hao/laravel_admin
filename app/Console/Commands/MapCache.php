@@ -111,9 +111,9 @@ class MapCache extends BaseCommand
 
             var_dump($map2);exit;
 
-            $data = [];
             foreach ($map as $k) {
                 foreach ($map2 as $rows) {
+                    $data = [];
                     foreach ($rows as $udid) {
                         $data[] = $this->getLoc($udid);
                         $count = count($data);

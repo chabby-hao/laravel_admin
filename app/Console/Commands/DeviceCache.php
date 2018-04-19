@@ -75,7 +75,7 @@ class DeviceCache extends BaseCommand
             $udid = $deviceCode->qr;
 
             //缓存设备
-            DeviceLogic::createDevice($imei);
+            DeviceLogic::simpleCreateDevice($imei);
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";

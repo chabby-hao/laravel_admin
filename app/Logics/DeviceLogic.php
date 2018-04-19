@@ -62,6 +62,64 @@ class DeviceLogic extends BaseLogic
     }
 
     /**
+     * 简单创建设备对象，主要用于定时脚本
+     * @param $imei
+     * @return DeviceObject
+     */
+    public static function simpleCreateDevice($imei)
+    {
+        $device = new DeviceObject();
+        $udid = static::getUdid($imei);
+        $device->setUdid($udid);
+        $device->setImei($imei);
+        //$device->setProductType(static::getProductTypeByUdid($udid));
+        //$device->setProductTypeName(static::getProductTypeNameByUdid($udid));
+        //$device->setDeviceType(static::getDeviceTypeByUdid($udid));
+        $device->setDeviceTypeName(static::getDeviceTypeNameByUdid($udid));
+        //$device->setEbikeTypeId(static::getEbikeTypeIdByUdid($udid));
+        $device->setEbikeTypeName(static::getEbikeTypeNameByUdid($udid));
+        //$device->setBrandId(static::getBrandIdByUdid($udid));
+        $device->setBrandName(static::getBrandNameByUdid($udid));
+        //$device->setChannelId(static::getChannelIdByUdid($udid));
+        $device->setChannelName(static::getChannelNameByUdid($udid));
+        //$device->setDeliverdAt(static::getDeliverdAtByUdid($udid));
+        //$device->setRegisterAt(static::getRegisterAtByUdid($udid));
+        $device->setActiveAt(static::getActiveAtByUdid($udid));
+        $device->setIsOnline(static::isOnline($imei) ? 1 : 0);
+        $device->setIsOnlineTrans($device->getisOnline() ? '在线' : '离线');
+        //$device->setIsContact(static::isContanct($imei) ? 1 : 0);
+        //$device->setIsContactTrans($device->getisContact() ? '在联' : '失联');
+        $loc = static::getLastLocationInfo($imei);
+        if ($loc) {
+            $device->setLat($loc['lat']);
+            $device->setLng($loc['lng']);
+            $device->setAddress($loc['address']);
+            $device->setLastGps(static::getLastGps($imei));
+        }
+        //$device->setGsm(static::getGsm($imei));
+        //$device->setChipPower(static::getChipPower($imei));
+        //$device->setCharge(static::isBatteryConnect($imei) ? 1 : 0);
+        //$device->setChargeTrans($device->getCharge() ? '在位' : '断开');
+        //$device->setVoltage(static::getCurrentVoltage($imei));//0.1v
+        //$device->setBatteryCount(static::getBatteryCount($imei));
+        //$device->setBatterySpecification($device->getBatteryCount() * 12);//多少V的电池
+        //$device->setBattery(static::getBattery($imei));
+        //$device->setExpectMile(static::getExpectMile($imei));
+        $device->setTurnon(static::isTurnOn($imei) ? DeviceObject::SWITCH_STATUS_TURNON : DeviceObject::SWITCH_STATUS_TURNOFF);
+        $device->setTurnonTrans($device->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON ? '开' : '关');
+        $device->setLastContact(static::getLastContact($imei));
+        //$device->setIsLock(static::isLock($imei) ? DeviceObject::LOCK : DeviceObject::UNLOCK);
+        //$device->setIsLockTrans($device->getisLock() === DeviceObject::LOCK ? '已锁' : '未锁');
+        $device->setDeviceCycle(static::getDeviceCycleByUdid($udid));
+        $device->setDeviceCycleTrans(TDeviceCode::getCycleMap($device->getDeviceCycle()));
+        //$device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
+        //self::$devices[$imei] = $device;
+        //同时缓存数据
+        Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
+        return $device;
+    }
+
+    /**
      * 工厂模式生成1个数据,同时缓存
      * @param $imei
      * @return DeviceObject
@@ -115,7 +173,7 @@ class DeviceLogic extends BaseLogic
         $device->setEbikeStatus(self::getDeviceStatus($device));//设备状态,骑行，停车,etc...
         self::$devices[$imei] = $device;
         //同时缓存数据
-        Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
+        //Cache::store('file')->put(DeviceObject::CACHE_OBJ_PRE . $imei, $device, Carbon::now()->addMinutes(self::DEVICE_CACHE_MINUTES));
         return $device;
     }
 

@@ -48,7 +48,7 @@ class RedisLogic extends BaseLogic
         $key = 'dev:' . $imei;
         self::getRedis()->select(1);
         $data = self::getRedis()->hGetAll($key) ?: [];
-        Log::debug("redis hgetall $key", $data);
+        //Log::debug("redis hgetall $key", $data);
         return self::$devData[$imei] = $data;
     }
 
@@ -61,7 +61,7 @@ class RedisLogic extends BaseLogic
         $key = 'zhangfei_charge:' . $imei;
         self::getRedis()->select(1);
         $data = self::getRedis()->hGetAll($key) ?: [];
-        Log::debug("redis hgetall $key", $data);
+        //Log::debug("redis hgetall $key", $data);
         return self::$zhangfeiData[$imei] = $data;
     }
 
