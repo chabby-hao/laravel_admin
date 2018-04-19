@@ -34,8 +34,8 @@ class DeviceCache extends BaseCommand
     public function handle()
     {
         $this->cacheDeviceObj();
-        $this->cacheDeviceCycle();
         $this->cacheDeviceStatus();
+        $this->cacheDeviceCycle();
     }
 
     private function cacheDeviceObj()
@@ -44,6 +44,8 @@ class DeviceCache extends BaseCommand
 
         $this->batchSearch($model, function ($deviceCode) {
             /** @var TDeviceCode $deviceCode */
+
+            echo memory_get_usage() . "\n";
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
             DeviceLogic::createDevice($imei);
@@ -64,6 +66,7 @@ class DeviceCache extends BaseCommand
         $park = [];
         $offlineLess48 = [];
         $offlineMore48 = [];
+        //$all = [];
         $this->batchSearch($model, function ($deviceCode) use (&$riding, &$park, &$offlineMore48, &$offlineLess48) {
 
             /** @var TDeviceCode $deviceCode */
@@ -87,6 +90,7 @@ class DeviceCache extends BaseCommand
                     $offlineMore48[] = $udid;
                 }
             }
+            //$all[] = $udid;
 
         });
         $carbon = Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES);
@@ -98,6 +102,9 @@ class DeviceCache extends BaseCommand
         Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_OFFLINE_LESS_48, count($offlineLess48), $carbon);
         Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48, $offlineMore48, $carbon);
         Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48, count($offlineMore48), $carbon);
+
+        //Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_ALL, $all, $carbon);
+        //Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_ALL, count($all), $carbon);
 
         Log::info('riding  -- ', $riding);
         Log::info('park  -- ', $park);

@@ -271,10 +271,10 @@
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%expectMile%></td>
-                <td><%totalMiles%></td>
-                <td><%ridingTimes%></td>
-                <td><%chargingTimes%></td>
+                <td><%expectMile%>km</td>
+                <td><%totalMiles%>km</td>
+                <td><%ridingTimes%>次</td>
+                <td><%chargingTimes%>次</td>
             </tr>
             </tbody>
         </table>
@@ -377,13 +377,51 @@
                                 <%#safeZoneList%>
                                 <tr class="gradeX">
                                     <td><%address%></td>
-                                    <td><%radius%>咪</td>
+                                    <td><%radius%>米</td>
                                     <td><%date%></td>
                                 </tr>
                                 <%/safeZoneList%>
                                 </tbody>
                             </table>
                             <%/safeZoneListHas%>
+
+
+                            <table class="table table-bordered data-table">
+                                <thead>
+                                <tr>
+                                    <th>安全</th>
+                                    <th>用车</th>
+                                    <th>关怀</th>
+                                    <th>故障</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="gradeX">
+                                    <td><%msg.safe.0%></td>
+                                    <td><%msg.inuse.0%></td>
+                                    <td><%msg.care.0%></td>
+                                    <td><%msg.fault.0%></td>
+                                </tr>
+                                <tr class="gradeX">
+                                    <td><%msg.safe.1%></td>
+                                    <td><%msg.inuse.1%></td>
+                                    <td><%msg.care.1%></td>
+                                    <td><%msg.fault.1%></td>
+                                </tr>
+                                <tr class="gradeX">
+                                    <td><%msg.safe.2%></td>
+                                    <td><%msg.inuse.2%></td>
+                                    <td><%msg.care.2%></td>
+                                    <td><%msg.fault.2%></td>
+                                </tr>
+                                <tr class="gradeX">
+                                    <td><%msg.safe.3%></td>
+                                    <td><%msg.inuse.3%></td>
+                                    <td><%msg.care.3%></td>
+                                    <td><%msg.fault.3%></td>
+                                </tr>
+                                </tbody>
+                            </table>
 
         </div>
     </div>

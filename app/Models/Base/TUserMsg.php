@@ -10,25 +10,29 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class TZoneMsg
+ * Class TUserMsg
  * 
- * @property int $mid
- * @property string $udid
- * @property int $zid
+ * @property int $id
+ * @property string $source
+ * @property int $reciever
+ * @property int $type
+ * @property string $desc
  * @property int $state
  * @property int $time
+ * @property string $title
+ * @property string $extra
  *
  * @package App\Models\Base
  */
-class TZoneMsg extends Eloquent
+class TUserMsg extends Eloquent
 {
 	protected $connection = 'care';
-	protected $table = 't_zone_msg';
-	protected $primaryKey = 'mid';
+	protected $table = 't_user_msg';
 	public $timestamps = false;
 
 	protected $casts = [
-		'zid' => 'int',
+		'reciever' => 'int',
+		'type' => 'int',
 		'state' => 'int',
 		'time' => 'int'
 	];

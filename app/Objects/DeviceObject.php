@@ -10,6 +10,7 @@ class DeviceObject extends BaseObject
     const CACHE_LIST_COUNT_PRE = 'dev_list_count:';
     const CACHE_OBJ_PRE = 'dev:';
 
+    //const CACHE_LIST_ALL = 'all';
     const CACHE_LIST_RIDING = 'riding';
     const CACHE_LIST_PARK = 'park';
     const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';
@@ -54,6 +55,7 @@ class DeviceObject extends BaseObject
     public static function getDeviceStatusCacheMap()
     {
         $map = [
+            //self::CACHE_LIST_ALL => '全部',
             self::CACHE_LIST_RIDING => '骑行',
             self::CACHE_LIST_PARK => '停车',
             self::CACHE_LIST_OFFLINE_LESS_48 => '离线小于48h',

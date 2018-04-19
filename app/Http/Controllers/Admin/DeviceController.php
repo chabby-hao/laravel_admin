@@ -13,11 +13,14 @@ use App\Libs\MyPage;
 use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
 use App\Logics\MileageLogic;
+use App\Logics\MsgLogic;
 use App\Models\BiBrand;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use App\Models\TEvMileageGp;
 use App\Models\TLockLog;
+use App\Models\TUser;
+use App\Models\TUserMsg;
 use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
 use App\Objects\LocationObject;
@@ -107,7 +110,7 @@ class DeviceController extends BaseController
             $data['locationUrl'] = URL::action('Admin\DeviceController@locationList', ['imei' => $data['imei']]);
             $data['lockLogUrl'] = URL::action('Admin\DeviceController@lockLogList', ['imei' => $data['imei']]);
             $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
-            $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList',['id'=>$udid]);
+            $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList', ['id' => $udid]);
 
 
             //服务信息
@@ -121,11 +124,54 @@ class DeviceController extends BaseController
             $data['safeZoneList'] = DeviceLogic::getSafeZoneListByUdid($udid)->toArray();
             $data['safeZoneListHas'] = $data['safeZoneList'] ? true : false;
 
+            //提醒消息
+            $data['msg'] = $this->getMsgCount($udid);
+
             //详情AJAX
             return $this->outPut($data);
         }
 
         return view('admin.device.detail');
+    }
+
+    private function getMsgCount($udid)
+    {
+        $typeMap = [
+            'safe' => [
+                //安全
+                TUserMsg::MESSAGE_TYPE_INSIDE,//进入安全
+                TUserMsg::MESSAGE_TYPE_NEW_OUTSIDE,//离开安全
+                TUserMsg::MESSAGE_TYPE_NEW_MOTOR_SHAKE,
+                TUserMsg::MESSAGE_TYPE_NEW_MOTOR_FORGET,
+            ],
+
+            'inuse' => [
+                //用车
+                TUserMsg::MESSAGE_TYPE_MOTOR_LOCK,//锁车提醒
+                TUserMsg::MESSAGE_TYPE_MOTOR_UNLOCK,//解锁
+                TUserMsg::MESSAGE_TYPE_NEW_MOTOR_BATTERY,//电瓶断开
+            ],
+
+            'care' => [
+                //关怀
+                TUserMsg::MESSAGE_TYPE_LOW_POWER,//低电量
+                TUserMsg::MESSAGE_TYPE_WEATHER_NOTICE,//天气提醒
+                TUserMsg::MESSAGE_TYPE_CARE_NOTICE,//保养提醒
+            ],
+
+            'fault' => [
+                //故障
+                TUserMsg::MESSAGE_TYPE_FAULT_NOTICE,
+            ]
+        ];
+
+        $data = [];
+        foreach ($typeMap as $k => $types) {
+            $data[$k] = array_map(function ($type) use ($udid) {
+                return TUserMsg::getTypeNameMap($type) . MsgLogic::getMsgTypeCount($udid, $type) . '次';
+            }, $types);
+        }
+        return $data;
     }
 
     private function getMileageInfo($mileRow)
@@ -398,7 +444,7 @@ class DeviceController extends BaseController
         return view('admin.device.mileagelist', [
             'datas' => $rs,
             'page_nav' => MyPage::showPageNav($paginate),
-            'countMap'=>MileageLogic::getMileCountMap($whereBetween, $where),
+            'countMap' => MileageLogic::getMileCountMap($whereBetween, $where),
             'start' => $startDatetime,
             'end' => $endDatetime,
         ]);

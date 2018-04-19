@@ -54,6 +54,7 @@ namespace App\Models;
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
 
+    const DEVICE_CYCLE_ALL = 0;//全部
     const DEVICE_CYCLE_STORAGE = 1;//库存
     const DEVICE_CYCLE_CHANNEL_STORAGE = 2;//渠道库存
     const DEVICE_CYCLE_INUSE = 3;//使用中
@@ -67,6 +68,7 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
     public static function getCycleMap($type = null)
     {
         $map = [
+            self::DEVICE_CYCLE_ALL => '全部',
             self::DEVICE_CYCLE_STORAGE => '库存',
             self::DEVICE_CYCLE_CHANNEL_STORAGE => '渠道库存',
             self::DEVICE_CYCLE_INUSE => '使用中',
@@ -109,7 +111,7 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
      */
     public static function getDeviceModel()
     {
-        return new TDeviceCode();
+        return TDeviceCode::where('type','>=',2);
         //$brandis = BiBrand::getAllBrandIds();
         //return TDeviceCode::whereIn('type', $brandis);
     }
