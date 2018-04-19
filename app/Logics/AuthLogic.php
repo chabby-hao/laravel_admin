@@ -87,8 +87,8 @@ class AuthLogic extends BaseLogic
             $user->save();
             return true;
         }else{
-            session()->put('aabb',333);
-            session()->save();
+            //session()->put('aabb',333);
+            //session()->save();
             return false;
         }
     }

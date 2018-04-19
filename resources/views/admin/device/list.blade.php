@@ -8,12 +8,12 @@
         <div class="btn-group">
             <div>
                 @foreach($deviceCycleMap as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}"  data-key="{{$key}}" class="btn marginright">{{$row}}</a>
+                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright">{{$row}}</a>
                 @endforeach
             </div>
             <div class="margintop">
                 @foreach($deviceStatusMap as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}"  data-key="{{$key}}" class="btn marginright margintop">{{$row}}</a>
+                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop">{{$row}}</a>
                 @endforeach
             </div>
         </div>
@@ -43,21 +43,25 @@
                                             <option @if(Request::input('device_type') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
-                                    <select class="w15" name="channel_id">
-                                        <option value="">请选择渠道</option>
-                                        @foreach(\App\Models\BiChannel::getChannelMap() as $k => $v)
-                                            <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select class="w15" name="brand_id">
-                                        <option value="">请选择品牌</option>
-                                        @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
-                                            <option @if(Request::input('brand_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    <select class="w15" name="ebike_type_id">
-                                        <option @if(Request::input('ebike_type_id') == $k) selected @endif value="">请选择车型</option>
-                                    </select>
+                                    @if(Auth::user()->user_type == \App\Models\BiUser::USER_TYPE_ALL)
+                                        <select class="w15" name="channel_id">
+                                            <option value="">请选择渠道</option>
+                                            @foreach(\App\Models\BiChannel::getChannelMap() as $k => $v)
+                                                <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
+                                            @endforeach
+                                        </select>
+                                        <select class="w15" name="brand_id">
+                                            <option value="">请选择品牌</option>
+                                            @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
+                                                <option @if(Request::input('brand_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
+                                            @endforeach
+                                        </select>
+                                        <select class="w15" name="ebike_type_id">
+                                            <option @if(Request::input('ebike_type_id') == $k) selected @endif value="">
+                                                请选择车型
+                                            </option>
+                                        </select>
+                                    @endif
                                     <input type="submit" id="mysubmit" class="btn btn-info" value="查询">
                                 </div>
 

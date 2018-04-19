@@ -15,6 +15,7 @@ use App\Logics\DeviceLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Models\BiBrand;
+use App\Models\BiUser;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use App\Models\TEvMileageGp;
@@ -28,6 +29,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -226,7 +228,12 @@ class DeviceController extends BaseController
             $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::createDevice($device->imei);
         }
 
-        list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCacheKey();
+        if(Auth::user()->user_type == BiUser::USER_TYPE_ALL){
+            //全部使用缓存
+            list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCacheKey();
+        }else{
+            list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCountKey();
+        }
 
         return view('admin.device.list', [
             'datas' => $data,
@@ -235,6 +242,41 @@ class DeviceController extends BaseController
             'deviceCycleMap' => $deviceCycleMap,
         ]);
 
+    }
+
+    private function getDeviceCountKey()
+    {
+        $deviceStatusMap = DeviceObject::getDeviceStatusCacheMap();
+        $deviceCycleMap = TDeviceCode::getCycleMap();
+        $where = $this->getWhere();
+        foreach ($deviceStatusMap as $k => $row) {
+            $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
+            $udids = Cache::store('file')->get($cacheKey);
+            $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
+            $deviceStatusMap[$k] = $row . "($count)";
+        }
+        foreach ($deviceCycleMap as $k => $row) {
+            $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
+            $udids = Cache::store('file')->get($cacheKey);
+            $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
+            $deviceCycleMap[$k] = $row . "($count)";
+        }
+        return [$deviceStatusMap, $deviceCycleMap];
+    }
+
+    private function getWhere()
+    {
+        $where = [];
+        /** @var BiUser $user */
+        $user = Auth::user();
+        if($user->user_type == BiUser::USER_TYPE_CHANNEL){
+            //渠道商
+            $where['channel_id'] = $user->type_id;
+        }elseif($user->user_type == BiUser::USER_TYPE_BRAND){
+            //品牌商
+            $where['brand_id'] = $user->type_id;
+        }
+        return $where;
     }
 
     /**
@@ -269,6 +311,8 @@ class DeviceController extends BaseController
         if ($ebikeType = \Request::input('ebike_type_id')) {
             $model->whereEbikeTypeId($ebikeType);
         }
+
+        $model->where($this->getWhere());
 
         return $model;
     }
