@@ -37,17 +37,22 @@ class MapCache extends BaseCommand
         $brands = BiBrand::getAllBrandIds();
         $channels = BiChannel::getAllChannelIds();
 
-        $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);
-        $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
+        $this->cacheData([0],null, DeviceObject::CACHE_ALL_PRE);//全部
+        $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);//品牌
+        $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
 
     }
 
-    private function cacheData($ids, $whereName, $keyPre)
+    private function cacheData($ids, $whereName = null, $keyPre)
     {
         $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
             $model = TDeviceCode::getDeviceModel();
-            $where = [$whereName => $id];
+            if($whereName){
+                $where = [$whereName => $id];
+            }else{
+                $where = [];
+            }
             $model->where($where);
             $all = $riding = $park = $offlineLess48 = $offlineMore48 = $storage = [];
             $this->batchSearch($model, function ($deviceCode) use (&$all, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {

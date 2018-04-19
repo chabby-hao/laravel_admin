@@ -6,6 +6,7 @@ class DeviceObject extends BaseObject
 {
 
     //渠道品牌缓存前缀
+    const CACHE_ALL_PRE = 'all:';//全部缓存
     const CACHE_CHANNEL_PRE ='channel:';//渠道缓存前缀
     const CACHE_BRAND_PRE = 'brand:';//品牌缓存前缀
 
