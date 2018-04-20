@@ -1,14 +1,23 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ * Date: Tue, 27 Feb 2018 08:00:20 +0000.
+ */
+
 namespace App\Models;
 
+use Illuminate\Notifications\Notifiable;
+use Reliese\Database\Eloquent\Model as Eloquent;
+
 /**
- * App\Models\BiWarningUser
+ * Class BiWarningUser
  *
  * @property int $id
- * @property string|null $name
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property string $name
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @package App\Models
  * @property string|null $email_address
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiWarningUser whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiWarningUser whereEmailAddress($value)
@@ -17,10 +26,19 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiWarningUser whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class BiWarningUser extends \App\Models\Base\BiWarningUser
+class BiWarningUser extends Eloquent
 {
-	protected $fillable = [
-		'name',
-		'email_address'
-	];
+    use Notifiable;
+
+    protected $connection = 'bi';
+
+    protected $fillable = [
+        'name',
+        'email_address'
+    ];
+
+    public function routeNotificationForMail()
+    {
+        return $this->email_address;
+    }
 }
