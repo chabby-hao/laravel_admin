@@ -24,6 +24,9 @@ Route::get('/phpinfo',function(){
 //Auth::routes();
 Route::get('/test', function(){
 
+    $ids = Cache::get(\App\Objects\DeviceObject::CACHE_ONLINE);
+    dd($ids);
+
     $a = Cache::get('map:all00');
     var_dump($a);exit;
 
