@@ -310,9 +310,10 @@ class DeviceController extends BaseController
         $cacheTime = Carbon::now()->addMinutes(15);
         foreach ($map as $k => $row) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
-            $udids = Cache::store('file')->get($cacheKey);
-            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $keyPre . $k, $cacheTime, function () use ($udids, $where) {
-                $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
+            $sids = Cache::store('file')->get($cacheKey);
+            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $keyPre . $k, $cacheTime, function () use ($sids, $where) {
+                //$count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
+                $count = TDeviceCode::getDeviceModel()->whereIn('sid', $sids)->where($where)->count();
                 return $count;
             });
 
@@ -344,8 +345,8 @@ class DeviceController extends BaseController
     {
         if ($status = \Request::input('status')) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $status;
-            $udids = Cache::store('file')->get($cacheKey);
-            $model->whereIn('qr', $udids);
+            $ids = Cache::store('file')->get($cacheKey);
+            $model->whereIn('sid', $ids);
         }
 
         if ($id = \Request::input('id')) {
