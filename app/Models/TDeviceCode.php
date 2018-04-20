@@ -109,6 +109,14 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         return self::whereQr($udid)->first();
     }
 
+    public static function getDeviceModelHasType()
+    {
+        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = Helper::transToOneDimensionalArray($types, 'type');
+        $model = TDeviceCode::whereIn('type', $types);
+        return $model;
+    }
+
     /**
      * @return $this
      */
@@ -121,8 +129,8 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
 
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
-        $model = TDeviceCode::whereIn('type', $types);
-        $model->where('device_cycle','>', self::DEVICE_CYCLE_ALL);
+        $model = TDeviceCode::where('device_cycle','>', self::DEVICE_CYCLE_ALL);
+        $model->whereIn('type', $types);
 
         /*$ids = Cache::get(DeviceObject::CACHE_ONLINE);
         if($ids){

@@ -41,9 +41,12 @@ class DeviceCache extends BaseCommand
         $this->chmodCache0777();
     }
 
+    /**
+     * 刷新上过线的设备
+     */
     private function cacheOnlineDevices()
     {
-        $model = TDeviceCode::getDeviceModel();
+        $model = TDeviceCode::getDeviceModelHasType();
 
         $this->batchSearch($model, function ($deviceCode) {
             /** @var TDeviceCode $deviceCode */
