@@ -35,7 +35,9 @@ class DeviceCache extends BaseCommand
     {
         //$this->cacheDeviceObj();
         $this->cacheDeviceCycle();
+        chmod(storage_path(), 0777);
         $this->cacheDeviceStatus();
+        chmod(storage_path(), 0777);
     }
 
     /*private function cacheDeviceObj()
