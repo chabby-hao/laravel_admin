@@ -26,8 +26,9 @@ abstract class BaseCommand extends Command
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
             foreach ($pagination->items() as $row) {
-                if($tmp = $func[$row]){
-                    $rtn[] = $func($row);
+                $tmp = $func($row);
+                if($tmp){
+                    $rtn[] = $tmp;
                 }
             }
 

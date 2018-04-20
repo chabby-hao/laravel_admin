@@ -138,7 +138,12 @@ class DeviceCache extends BaseCommand
         $count = $model->count();
         Log::debug('cacheDeviceCycle count :' . $count);
         foreach ($map as $key => $cycleName) {
-            $count = $model->whereDeviceCycle($key)->count();
+            if(!$key){
+                $where = [];
+            }else{
+                $where = ['device_cycle'=>$key];
+            }
+            $count = $model->where($where)->count();
 
             Log::debug("cacheDeviceCycle key=$key, count=$count");
 
