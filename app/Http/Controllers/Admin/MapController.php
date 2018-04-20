@@ -33,7 +33,7 @@ class MapController extends BaseController
             //请求数据
             $k = $request->input('name');
             $data = $this->getMapCacheData($k);
-            $this->outPut($data);
+            return $this->outPut($data);
         }
 
         return view('admin.map.show');
