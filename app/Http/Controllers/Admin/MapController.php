@@ -34,7 +34,7 @@ class MapController extends BaseController
             if($request->has('count')){
                 //请求数量
                 return $this->outPut($this->getMapCount());
-            }elseif($k = $request->input('name')){
+            }elseif($request->has('name')){
                 //具体点
                 $k = $request->input('name');
                 $data = $this->getMapCacheData($k);
