@@ -126,7 +126,7 @@ class DeviceCache extends BaseCommand
         Log::info('offline<48  -- ', $offlineLess48);
         Log::info('offline>48  -- ', $offlineMore48);
 
-        echo "count " . count($riding) . count($park) . count($offlineLess48) . count($offlineMore48);
+        echo "count " . count($riding) . '--' . count($park) . '--' . count($offlineLess48) . '--' . count($offlineMore48) . "\n";
 
         echo "end";
     }
@@ -137,10 +137,10 @@ class DeviceCache extends BaseCommand
         $map = TDeviceCode::getCycleMap();
         foreach ($map as $key => $cycleName) {
             $model = TDeviceCode::getDeviceModel();
-            if(!$key){
+            if (!$key) {
                 $where = [];
-            }else{
-                $where = ['device_cycle'=>$key];
+            } else {
+                $where = ['device_cycle' => $key];
             }
             $count = $model->where($where)->count();
 
