@@ -178,27 +178,27 @@
 <div id="bottom">
     <img src="cheliang2@2x.png" id="che-img" alt="">
     <ul class="choose-ul">
-        <li class="choose-li" name="quanbu">
+        <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_ALL}}">
             <span class="intro">全部</span>
             <span class="quantity">0</span>
         </li>
-        <li class="choose-li active" name="qixing">
+        <li class="choose-li active" name="{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}">
             <span class="intro">骑行</span>
             <span class="quantity">0</span>
         </li>
-        <li class="choose-li" name="tingche">
+        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_PARK}}">
             <span class="intro">停车</span>
             <span class="quantity">0</span>
         </li>
-        <li class="choose-li" name="lixian">
+        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_LESS_48}}">
             <span class="intro">离线<48小时</span>
             <span class="quantity">0</span>
         </li>
-        <li class="choose-li" name="shilian">
+        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_MORE_48}}">
             <span class="intro">离线>48小时</span>
             <span class="quantity">0</span>
         </li>
-        <li class="choose-li" name="kucun">
+        <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_STORAGE}}">
             <span class="intro">库存</span>
             <span class="quantity">0</span>
         </li>
@@ -607,7 +607,7 @@
     });
 
     function triggerQixing() {
-        $("li[name='qixing']").trigger('click');
+        $("li[name='{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}']").trigger('click');
     }
 
     triggerQixing();

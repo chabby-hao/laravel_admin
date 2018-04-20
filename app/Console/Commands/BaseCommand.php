@@ -40,7 +40,8 @@ abstract class BaseCommand extends Command
     {
         $cachePath = storage_path("framework/cache");
         exec("chmod -R 0777 $cachePath", $out);
-        echo 'chmod error msg :' . json_encode($out) . "\n";
+        echo "\n";
+        echo 'exec chmod msg :' . json_encode($out) . "\n";
     }
 
 }
