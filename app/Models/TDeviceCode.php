@@ -2,6 +2,8 @@
 
 namespace App\Models;
 use App\Libs\Helper;
+use App\Objects\DeviceObject;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Models\TDeviceCode
@@ -121,6 +123,10 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model = TDeviceCode::whereIn('type', $types);
 
+        $ids = Cache::get(DeviceObject::CACHE_ONLINE);
+        if($ids){
+            $model->whereIn('sid', $ids);
+        }
         //for test
         //$model->whereBetween('sid',[60000,70000]);
 

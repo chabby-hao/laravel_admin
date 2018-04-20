@@ -16,12 +16,14 @@ class DeviceObject extends BaseObject
     const CACHE_LIST_PRE = 'dev_list:';
     const CACHE_LIST_COUNT_PRE = 'dev_list_count:';
     const CACHE_OBJ_PRE = 'dev:';
-
     //const CACHE_LIST_ALL = 'all';
+
     const CACHE_LIST_RIDING = 'riding';
     const CACHE_LIST_PARK = 'park';
     const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';
     const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';
+
+    const CACHE_ONLINE = 'online';//有过数据的
 
     const SWITCH_STATUS_TURNON = 1;//电门开
     const SWITCH_STATUS_TURNOFF = 0;//电门关

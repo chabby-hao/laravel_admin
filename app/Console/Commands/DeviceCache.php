@@ -33,29 +33,34 @@ class DeviceCache extends BaseCommand
 
     public function handle()
     {
-        //$this->cacheDeviceObj();
+        $this->cacheOnlineDevices();
+        $this->chmodCache0777();
         $this->cacheDeviceCycle();
         $this->chmodCache0777();
         $this->cacheDeviceStatus();
         $this->chmodCache0777();
     }
 
-    /*private function cacheDeviceObj()
+    private function cacheOnlineDevices()
     {
         $model = TDeviceCode::getDeviceModel();
 
-        $this->batchSearch($model, function ($deviceCode) {
-
-            echo memory_get_usage() . "\n";
+        $ids = $this->batchSearch($model, function ($deviceCode) {
+            /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
-            DeviceLogic::createDevice($imei);
-            DeviceLogic::clear();
+            $id = $deviceCode->sid;
             echo "processing imei:$imei,udid:$udid...\n";
-            //Cache::set(DeviceObject::CACHE_OBJ_PRE . $imei, $deviceObj);
+            if(!DeviceLogic::isDeviceNerverOnline($imei)){
+                return $id;
+            }else{
+                return false;
+            }
         });
+        $time = Carbon::now()->addDay();
+        Cache::put(DeviceObject::CACHE_ONLINE, $ids, $time);
         echo "end";
-    }*/
+    }
 
     /**
      * 同步骑行，停车，离线状态
