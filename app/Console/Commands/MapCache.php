@@ -152,6 +152,7 @@ class MapCache extends BaseCommand
             'time' => date('Y-m-d H:i', $gps['time']),
             'address' => $gps['address'] ?: '无',
         ];
+        echo "loc :" . json_encode($data) . "\n";
         return $data;
     }
 
