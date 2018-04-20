@@ -135,7 +135,6 @@ class DeviceCache extends BaseCommand
     {
 
         $map = TDeviceCode::getCycleMap();
-        Log::debug('cacheDeviceCycle count :' . $count);
         foreach ($map as $key => $cycleName) {
             $model = TDeviceCode::getDeviceModel();
             if(!$key){
