@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Logics\DeviceLogic;
+use App\Models\TDeviceCode;
 use Illuminate\Console\Command;
 
 
@@ -24,7 +26,9 @@ abstract class BaseCommand extends Command
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
             foreach ($pagination->items() as $row) {
-                $rtn[] = $func($row);
+                if($tmp = $func[$row]){
+                    $rtn[] = $func($row);
+                }
             }
 
         } while ($pagination->hasMorePages());

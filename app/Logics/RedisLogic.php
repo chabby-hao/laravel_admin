@@ -162,4 +162,16 @@ class RedisLogic extends BaseLogic
         return self::getRedis()->zRangeByScore($key, $start, $end, $options);
     }
 
+    public static function exists($key)
+    {
+        return self::getRedis()->exists($key);
+    }
+
+    public static function isDeviceNeverOnline($imei)
+    {
+        $key = 'dev:' . $imei;
+        $b = self::exists($key);
+        return !$b;
+    }
+
 }

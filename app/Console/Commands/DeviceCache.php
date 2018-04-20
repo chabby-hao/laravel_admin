@@ -34,16 +34,15 @@ class DeviceCache extends BaseCommand
     public function handle()
     {
         //$this->cacheDeviceObj();
-        $this->cacheDeviceStatus();
         $this->cacheDeviceCycle();
+        $this->cacheDeviceStatus();
     }
 
-    private function cacheDeviceObj()
+    /*private function cacheDeviceObj()
     {
         $model = TDeviceCode::getDeviceModel();
 
         $this->batchSearch($model, function ($deviceCode) {
-            /** @var TDeviceCode $deviceCode */
 
             echo memory_get_usage() . "\n";
             $imei = $deviceCode->imei;
@@ -54,7 +53,7 @@ class DeviceCache extends BaseCommand
             //Cache::set(DeviceObject::CACHE_OBJ_PRE . $imei, $deviceObj);
         });
         echo "end";
-    }
+    }*/
 
     /**
      * 同步骑行，停车，离线状态
@@ -63,23 +62,32 @@ class DeviceCache extends BaseCommand
     {
         $model = TDeviceCode::getDeviceModel();
 
+        $count = $model->count();
+        Log::debug('cacheDeviceStatus count :' . $count);
+
         $riding = [];
         $park = [];
         $offlineLess48 = [];
         $offlineMore48 = [];
         //$all = [];
         $this->batchSearch($model, function ($deviceCode) use (&$riding, &$park, &$offlineMore48, &$offlineLess48) {
+
             static $t = 0;
             /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
+
+            //跳过从未上线的设备
+            if (DeviceLogic::isDeviceNerverOnline($imei)) {
+                return [];
+            }
 
             //缓存设备
             DeviceLogic::simpleCreateDevice($imei);
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";
-            echo ++$t .".......\n";
+            echo ++$t . ".......\n";
             if (DeviceLogic::isOnline($imei)) {
                 if (DeviceLogic::isTurnOn($imei)) {
                     //骑行
@@ -127,10 +135,15 @@ class DeviceCache extends BaseCommand
     {
         $model = TDeviceCode::getDeviceModel();
         $map = TDeviceCode::getCycleMap();
-        foreach ($map as $key => $cycleName){
+        $count = $model->count();
+        Log::debug('cacheDeviceCycle count :' . $count);
+        foreach ($map as $key => $cycleName) {
             $count = $model->whereDeviceCycle($key)->count();
+
+            Log::debug("cacheDeviceCycle key=$key, count=$count");
+
             $udids = $model->whereDeviceCycle($key)->select('qr')->get()->toArray();
-            if($udids){
+            if ($udids) {
                 $udids = Helper::transToOneDimensionalArray($udids, 'qr');
             }
             //缓存数量

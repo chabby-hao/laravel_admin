@@ -1111,4 +1111,9 @@ class DeviceLogic extends BaseLogic
         return $collect;
     }
 
+    public static function isDeviceNerverOnline($imei)
+    {
+        return RedisLogic::isDeviceNeverOnline($imei);
+    }
+
 }
