@@ -24,6 +24,9 @@ Route::get('/phpinfo',function(){
 //Auth::routes();
 Route::get('/test', function(){
 
+    $a = Cache::get('map:all00');
+    var_dump($a);exit;
+
     $cookie = \Illuminate\Support\Facades\Cookie::make('test', 'hello, world');
     $a =  \Illuminate\Support\Facades\Cookie::get('test');
     var_dump($a);
