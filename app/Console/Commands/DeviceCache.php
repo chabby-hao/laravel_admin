@@ -88,9 +88,9 @@ class DeviceCache extends BaseCommand
             $sid = $deviceCode->sid;
 
             //跳过从未上线的设备
-            if (DeviceLogic::isDeviceNerverOnline($imei)) {
+            /*if (DeviceLogic::isDeviceNerverOnline($imei)) {
                 return [];
-            }
+            }*/
 
             //缓存设备
             DeviceLogic::simpleCreateDevice($imei);
