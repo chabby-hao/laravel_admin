@@ -150,7 +150,7 @@ class DeviceCache extends BaseCommand
 
             Log::debug("cacheDeviceCycle key=$key, count=$count");
 
-            $ids = $model->select('sid,qr,imei')->get()->toArray();
+            $ids = $model->select(['sid','qr'])->get()->toArray();
             if ($ids) {
                 $ids = Helper::transToOneDimensionalArray($ids, 'sid');
             }
