@@ -133,11 +133,11 @@ class DeviceCache extends BaseCommand
 
     private function cacheDeviceCycle()
     {
-        $model = TDeviceCode::getDeviceModel();
+
         $map = TDeviceCode::getCycleMap();
-        $count = $model->count();
         Log::debug('cacheDeviceCycle count :' . $count);
         foreach ($map as $key => $cycleName) {
+            $model = TDeviceCode::getDeviceModel();
             if(!$key){
                 $where = [];
             }else{
