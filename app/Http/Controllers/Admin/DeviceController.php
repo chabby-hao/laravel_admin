@@ -450,7 +450,7 @@ class DeviceController extends BaseController
         $map = DeviceObject::getLockTypeMap();
         $keys = array_keys($map);
 
-        $paginate = TLockLog::whereIn('act', $keys)->orderByDesc('id')->paginate();
+        $paginate = TLockLog::whereUdid($udid)->whereIn('act', $keys)->orderByDesc('id')->paginate();
 
 
         $data = $paginate->items();
