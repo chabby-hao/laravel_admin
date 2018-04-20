@@ -275,32 +275,7 @@ class DeviceController extends BaseController
         $deviceStatusMap = $this->getCountMap($deviceStatusMap);
         $deviceCycleMap = $this->getCountMap($deviceCycleMap);
 
-        /*foreach ($deviceStatusMap as $k => $row) {
-            $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
-            $udids = Cache::store('file')->get($cacheKey);
-            $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
-            $deviceStatusMap[$k] = $row . "($count)";
-        }
-        foreach ($deviceCycleMap as $k => $row) {
-            $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
-            $udids = Cache::store('file')->get($cacheKey);
-            $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
-            $deviceCycleMap[$k] = $row . "($count)";
-        }*/
         return [$deviceStatusMap, $deviceCycleMap];
-    }
-
-    private function getKeyPre()
-    {
-        $user = Auth::user();
-        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
-            //渠道商
-            return DeviceObject::CACHE_CHANNEL_PRE;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
-            //品牌商
-            return DeviceObject::CACHE_BRAND_PRE;
-        }
-        return '';
     }
 
     private function getCountMap($map)

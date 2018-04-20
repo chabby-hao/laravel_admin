@@ -10,13 +10,31 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Libs\Helper;
+use App\Models\BiUser;
+use App\Objects\DeviceObject;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class BaseController extends Controller
 {
+
+    protected function getKeyPre()
+    {
+        /** @var BiUser $user */
+        $user = Auth::user();
+        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
+            //渠道商
+            return DeviceObject::CACHE_CHANNEL_PRE;
+        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
+            //品牌商
+            return DeviceObject::CACHE_BRAND_PRE;
+        }else{
+            return DeviceObject::CACHE_ALL_PRE;
+        }
+    }
 
     protected function getId(Request $request, $id = 'id')
     {

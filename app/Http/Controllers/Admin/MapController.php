@@ -30,10 +30,17 @@ class MapController extends BaseController
     public function show(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            //请求数据
-            $k = $request->input('name');
-            $data = $this->getMapCacheData($k);
-            return $this->outPut(['gps'=>&$data]);
+
+            if($request->has('count')){
+                //请求数量
+                return $this->outPut($this->getMapCount());
+            }elseif($k = $request->input('name')){
+                //具体点
+                $k = $request->input('name');
+                $data = $this->getMapCacheData($k);
+                return $this->outPut(['gps'=>&$data]);
+            }
+
         }
 
         return view('admin.map.show');
@@ -41,43 +48,36 @@ class MapController extends BaseController
 
     private function getMapCacheData($k)
     {
-        /** @var BiUser $user */
+        $keyPre = $this->getKeyPre();
         $user = Auth::user();
-        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
-            $keyPre = DeviceObject::CACHE_CHANNEL_PRE;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
-            $keyPre = DeviceObject::CACHE_BRAND_PRE;
-        } else {
-            $keyPre = DeviceObject::CACHE_ALL_PRE;
-        }
         $typeId = $user->type_id;
         $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre . $typeId;
         $cachekey = $cacheKeyPre . $k;
         return Cache::store('file')->get($cachekey) ? : [];
     }
 
-    public function getEbikeDataAction()
-    {
-        $name = $this->request->get('name', null, 'qixing');
-        $cacheFile = APP_PATH . 'app/' . $name . '.json';
-        $data = file_get_contents($cacheFile);
-        $data = json_decode($data, true);
-        return $this->responseJson(['gps' => $data]);
-    }
-
-    public function getEbikeCountAction()
+    private function getMapCount()
     {
         $caches = [
-            'qixing','tingche','lixian','shilian','jijiangguoqi','guoqi','quanbu','kucun',
+            TDeviceCode::DEVICE_CYCLE_ALL,//全部
+            TDeviceCode::DEVICE_CYCLE_STORAGE,//库存
+            DeviceObject::CACHE_LIST_RIDING,
+            DeviceObject::CACHE_LIST_PARK,
+            DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
+            DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
         ];
+
         $out = [];
-        foreach ($caches as $cache){
-            $data = file_get_contents(APP_PATH . 'app/' . $cache . '.json');
-            $data = json_decode($data, true);
-            $out[$cache] = count($data);
+        $keyPre = $this->getKeyPre();
+        $user = Auth::user();
+        $typeId = $user->type_id;
+        $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre . $typeId;
+        foreach ($caches as $k){
+            $cachekey = $cacheKeyPre . $k;
+            $data = Cache::store('file')->get($cachekey) ? : [];
+            $out[$k] = count($data);
         }
-//        $out['quanbu'] = $out['qixing'] + $out['tingche'] + $out['lixian'] + $out['shilian'];
-        return $this->responseJson($out);
+        return $out;
     }
 
 }

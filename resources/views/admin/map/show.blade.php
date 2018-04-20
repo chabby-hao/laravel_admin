@@ -576,7 +576,7 @@
 
 
     //var url = 'http://api.vipcare.com/map/getEbikeData';
-    var url2 = 'http://api.vipcare.com/map/getEbikeCount';
+    //var url2 = 'http://api.vipcare.com/map/getEbikeCount';
     var url = '{{URL::action('Admin\MapController@show')}}';
 
     var bottoms = $("#bottom");
@@ -617,10 +617,11 @@
 
     $.ajax({
         type: "get",
-        dataType: 'jsonp',
+        dataType: 'json',
         //async:false,
-        url: url2,//数据类型为jsonp
-        jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
+        url: url,//数据类型为jsonp
+        data:{count:1},
+        //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
         success: function (res) {
             console.log(res);
             $(".choose-li").each(function () {
