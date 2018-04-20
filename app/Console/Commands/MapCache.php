@@ -41,7 +41,7 @@ class MapCache extends BaseCommand
         $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);//品牌
         $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
 
-        chmod(storage_path(), 0777);
+        $this->chmodCache0777();
     }
 
     private function cacheData($ids, $whereName = null, $keyPre)
