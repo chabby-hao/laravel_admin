@@ -240,7 +240,7 @@ class DeviceController extends BaseController
 
         $this->listSearch($model);
 
-        $devices = $model->orderByDesc('sid')->select('t_device_code.*')->paginate();
+        $devices = $model->orderByDesc('sid')->paginate();
         $deviceList = $devices->items();
 
         $data = [];
@@ -271,8 +271,11 @@ class DeviceController extends BaseController
     {
         $deviceStatusMap = DeviceObject::getDeviceStatusCacheMap();
         $deviceCycleMap = TDeviceCode::getCycleMap();
-        $where = $this->getWhere();
-        foreach ($deviceStatusMap as $k => $row) {
+
+        $deviceStatusMap = $this->getCountMap($deviceStatusMap);
+        $deviceCycleMap = $this->getCountMap($deviceCycleMap);
+
+        /*foreach ($deviceStatusMap as $k => $row) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
             $udids = Cache::store('file')->get($cacheKey);
             $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
@@ -283,8 +286,25 @@ class DeviceController extends BaseController
             $udids = Cache::store('file')->get($cacheKey);
             $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
             $deviceCycleMap[$k] = $row . "($count)";
-        }
+        }*/
         return [$deviceStatusMap, $deviceCycleMap];
+    }
+
+    private function getCountMap($map)
+    {
+        $where = $this->getWhere();
+        $cacheTime = Carbon::now()->addMinutes(15);
+        foreach ($map as $k => $row) {
+            $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
+            $udids = Cache::store('file')->get($cacheKey);
+            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $k, $cacheTime, function () use ($udids, $where) {
+                $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
+                return $count;
+            });
+
+            $map[$k] = $row . "($count)";
+        }
+        return $map;
     }
 
     private function getWhere()
