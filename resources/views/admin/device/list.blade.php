@@ -78,6 +78,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
+                                <th>序号</th>
                                 <th>设备ID</th>
                                 <th>设备型号</th>
                                 <th>渠道</th>
@@ -94,8 +95,10 @@
                             </thead>
                             <tbody>
                             <?php /* @var \App\Objects\DeviceObject $data */ ?>
+                            <?php $t = 0; ?>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
+                                    <td>{{++$t}}</td>
                                     <td>{{$data->udid}}</td>
                                     <td>{{$data->deviceTypeName}}</td>
                                     <td>{{$data->channelName}}</td>

@@ -33,7 +33,7 @@ class MapController extends BaseController
             //请求数据
             $k = $request->input('name');
             $data = $this->getMapCacheData($k);
-            return $this->outPut(['gps'=>$data]);
+            return $this->outPut(['gps'=>&$data]);
         }
 
         return view('admin.map.show');
@@ -52,10 +52,8 @@ class MapController extends BaseController
         }
         $typeId = $user->type_id;
         $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre . $typeId;
-        $data = [];
         $cachekey = $cacheKeyPre . $k;
-        $data[] = Cache::store('file')->get($cachekey);
-        return $data;
+        return Cache::store('file')->get($cachekey) ? : [];
     }
 
     public function getEbikeDataAction()

@@ -886,7 +886,7 @@ class DeviceLogic extends BaseLogic
     {
         $data = RedisLogic::getDevDataByImei($imei);
         if ($data) {
-            $time = max($data['time'], $data['online'], $data['refresh']);
+            $time = max($data['time'], $data['online'], $data['refresh'], $data['offline']);
             return date('Y-m-d H:i:s', $time);
         }
         return '';

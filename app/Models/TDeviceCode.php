@@ -119,7 +119,12 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
 
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
-        return TDeviceCode::whereIn('type', $types);
+        $model = TDeviceCode::whereIn('type', $types);
+
+        //for test
+        $model->whereBetween('sid',[60000,70000]);
+
+        return $model;
     }
 
 }

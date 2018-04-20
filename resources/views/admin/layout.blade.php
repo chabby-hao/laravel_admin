@@ -19,6 +19,7 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>-->
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
     <script src="{{ asset('js/jquery.ui.custom.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
@@ -222,7 +223,6 @@
 </body>
 </html>
 <script src="{{ asset('js/matrix.js') }}"></script>
-<script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
 <script src="{{ asset('js/jquery-form/jquery.form.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap-filestyle.min.js')}}"></script>
 <script>
