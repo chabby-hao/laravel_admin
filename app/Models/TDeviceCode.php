@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Cache;
 class TDeviceCode extends \App\Models\Base\TDeviceCode
 {
 
-    const DEVICE_CYCLE_ALL = 0;//全部
+    const DEVICE_CYCLE_ALL = 0;//全部,也可表示初始化init
     const DEVICE_CYCLE_STORAGE = 1;//库存
     const DEVICE_CYCLE_CHANNEL_STORAGE = 2;//渠道库存
     const DEVICE_CYCLE_INUSE = 3;//使用中
@@ -122,11 +122,12 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model = TDeviceCode::whereIn('type', $types);
+        $model->where('device_cycle','>', self::DEVICE_CYCLE_ALL);
 
-        $ids = Cache::get(DeviceObject::CACHE_ONLINE);
+        /*$ids = Cache::get(DeviceObject::CACHE_ONLINE);
         if($ids){
             $model->whereIn('sid', $ids);
-        }
+        }*/
         //for test
         //$model->whereBetween('sid',[60000,70000]);
 

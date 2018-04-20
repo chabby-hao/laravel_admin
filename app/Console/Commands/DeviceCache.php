@@ -45,20 +45,19 @@ class DeviceCache extends BaseCommand
     {
         $model = TDeviceCode::getDeviceModel();
 
-        $ids = $this->batchSearch($model, function ($deviceCode) {
+        $this->batchSearch($model, function ($deviceCode) {
             /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
-            $id = $deviceCode->sid;
             echo "processing imei:$imei,udid:$udid...\n";
-            if(!DeviceLogic::isDeviceNerverOnline($imei)){
-                return $id;
-            }else{
-                return false;
+            $isNeverOnline = DeviceLogic::isDeviceNerverOnline($imei);
+            if(!$isNeverOnline && $deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_ALL){
+                $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_STORAGE;//库存
+                $deviceCode->save();
             }
         });
-        $time = Carbon::now()->addDay();
-        Cache::put(DeviceObject::CACHE_ONLINE, $ids, $time);
+        //$time = Carbon::now()->addDay();
+        //Cache::put(DeviceObject::CACHE_ONLINE, $ids, $time);
         echo "end";
     }
 
