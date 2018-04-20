@@ -8,7 +8,7 @@
         <div class="btn-group">
             <div>
                 @foreach(\App\Logics\MileageLogic::getMileMap() as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@mileageList', ['type'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('type') == $key) btn-success @endif">{{$row}}(总:{{$countMap[$key]}})</a>
+                    <a href="{{URL::action('Admin\DeviceController@mileageList', ['type'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('type') == $key) btn-success @endif">{{$row}}</a>
                 @endforeach
             </div>
         </div>

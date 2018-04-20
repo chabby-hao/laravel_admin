@@ -546,7 +546,7 @@ class DeviceController extends BaseController
         return view('admin.device.mileagelist', [
             'datas' => $rs,
             'page_nav' => MyPage::showPageNav($paginate),
-            'countMap' => MileageLogic::getMileCountMap($whereBetween, $where),
+            //'countMap' => MileageLogic::getMileCountMap($whereBetween, $where),
             'start' => $startDatetime,
             'end' => $endDatetime,
         ]);
