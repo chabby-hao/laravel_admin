@@ -157,26 +157,26 @@
     <ul class="right-ul">
         <li class="cheliang current">
             <div class="item">
-                <img src="cheliang@2x.png" alt="">
+                <img src="{{asset('map/cheliang@2x.png')}}" alt="">
                 <span class="right-text">车辆</span>
             </div>
         </li>
         <li class="chongdianpeng">
             <div class="item">
-                <img src="chongdianpeng@2x.png" alt="">
+                <img src="{{asset('map/chongdianpeng@2x.png')}}" alt="">
                 <span class="right-text">充电棚</span>
             </div>
         </li>
         <li class="wangdian">
             <div class="item">
-                <img src="wangdian@2x.png" alt="">
+                <img src="{{asset('map/wangdian@2x.png')}}" alt="">
                 <span class="right-text">服务网点</span>
             </div>
         </li>
     </ul>
 </div>
 <div id="bottom">
-    <img src="cheliang2@2x.png" id="che-img" alt="">
+    <img src="{{asset('map/cheliang2@2x.png')}}" id="che-img" alt="">
     <ul class="choose-ul">
         <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_ALL}}">
             <span class="intro">全部</span>
@@ -575,8 +575,9 @@
     myChart.setOption(option);
 
 
-    var url = 'http://api.vipcare.com/map/getEbikeData';
+    //var url = 'http://api.vipcare.com/map/getEbikeData';
     var url2 = 'http://api.vipcare.com/map/getEbikeCount';
+    var url = '{{URL::action('Admin\MapController@show')}}';
 
     var bottoms = $("#bottom");
 
@@ -589,11 +590,12 @@
         var name = that.attr('name');
         $.ajax({
             type: "get",
-            dataType: 'jsonp',
+            //dataType: 'jsonp',
+            dataType:'json',
             //async:false,
             url: url,//数据类型为jsonp
             data: {name: name},
-            jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
+            //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
             success: function (res) {
                 //console.log(res);
                 //that.find('.quantity').html(res.gps.length);
