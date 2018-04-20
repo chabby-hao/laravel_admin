@@ -290,14 +290,28 @@ class DeviceController extends BaseController
         return [$deviceStatusMap, $deviceCycleMap];
     }
 
+    private function getKeyPre()
+    {
+        $user = Auth::user();
+        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
+            //渠道商
+            return DeviceObject::CACHE_CHANNEL_PRE;
+        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
+            //品牌商
+            return DeviceObject::CACHE_BRAND_PRE;
+        }
+        return '';
+    }
+
     private function getCountMap($map)
     {
+        $keyPre = $this->getKeyPre();
         $where = $this->getWhere();
         $cacheTime = Carbon::now()->addMinutes(15);
         foreach ($map as $k => $row) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
             $udids = Cache::store('file')->get($cacheKey);
-            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $k, $cacheTime, function () use ($udids, $where) {
+            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $keyPre . $k, $cacheTime, function () use ($udids, $where) {
                 $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
                 return $count;
             });
