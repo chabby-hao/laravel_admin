@@ -52,6 +52,7 @@ class DbSync extends BaseCommand
             '6'=>'EB001W',
             '7'=>'B640',
             '8'=>'EB003A',
+            '9'=>'EB485',
         ];
 
         $arrFlip = array_flip($arr);
@@ -69,7 +70,7 @@ class DbSync extends BaseCommand
                     ]);
                 }
 
-            } elseif ($row->level == 3 && false) {
+            } elseif ($row->level == 3) {
                 //渠道
                 BiChannel::firstOrCreate([
                     'channel_name' => $name,
