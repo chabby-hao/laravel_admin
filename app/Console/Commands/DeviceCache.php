@@ -78,6 +78,7 @@ class DeviceCache extends BaseCommand
             /** @var TDeviceCode $deviceCode */
             $imei = $deviceCode->imei;
             $udid = $deviceCode->qr;
+            $sid = $deviceCode->sid;
 
             //跳过从未上线的设备
             if (DeviceLogic::isDeviceNerverOnline($imei)) {
@@ -93,18 +94,18 @@ class DeviceCache extends BaseCommand
             if (DeviceLogic::isOnline($imei)) {
                 if (DeviceLogic::isTurnOn($imei)) {
                     //骑行
-                    $riding[] = $udid;
+                    $riding[] = $sid;
                 } else {
                     //停车
-                    $park[] = $udid;
+                    $park[] = $sid;
                 }
             } else {
                 if (DeviceLogic::isContanct($imei, 48 * 3600)) {
                     //离线小于48小时
-                    $offlineLess48[] = $udid;
+                    $offlineLess48[] = $sid;
                 } else {
                     //离线大于48小时
-                    $offlineMore48[] = $udid;
+                    $offlineMore48[] = $sid;
                 }
             }
             //$all[] = $udid;
@@ -149,14 +150,14 @@ class DeviceCache extends BaseCommand
 
             Log::debug("cacheDeviceCycle key=$key, count=$count");
 
-            $udids = $model->select('qr')->get()->toArray();
-            if ($udids) {
-                $udids = Helper::transToOneDimensionalArray($udids, 'qr');
+            $ids = $model->get()->toArray();
+            if ($ids) {
+                $ids = Helper::transToOneDimensionalArray($ids, 'sid');
             }
             //缓存数量
             Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . $key, $count, Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES));
             //缓存udid
-            Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . $key, $udids, Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES));
+            Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . $key, $ids, Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES));
             echo "processing cycle: $cycleName, key: $key, count: $count \n";
         }
 
