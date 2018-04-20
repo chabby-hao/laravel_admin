@@ -281,7 +281,6 @@ class DeviceController extends BaseController
         foreach ($deviceCycleMap as $k => $row) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
             $udids = Cache::store('file')->get($cacheKey);
-            var_dump($k, count($udids));
             $count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
             $deviceCycleMap[$k] = $row . "($count)";
         }

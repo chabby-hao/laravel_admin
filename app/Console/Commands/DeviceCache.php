@@ -142,11 +142,12 @@ class DeviceCache extends BaseCommand
             } else {
                 $where = ['device_cycle' => $key];
             }
-            $count = $model->where($where)->count();
+            $model->where($where);
+            $count = $model->count();
 
             Log::debug("cacheDeviceCycle key=$key, count=$count");
 
-            $udids = $model->whereDeviceCycle($key)->select('qr')->get()->toArray();
+            $udids = $model->select('qr')->get()->toArray();
             if ($udids) {
                 $udids = Helper::transToOneDimensionalArray($udids, 'qr');
             }
