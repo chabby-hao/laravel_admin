@@ -102,7 +102,7 @@
                                     <td>{{$data->brandName}}</td>
                                     <td>{{$data->ebikeTypeName}}</td>
                                     <td>{{$data->activeAt}}</td>
-                                    <td></td>
+                                    <td>{{$data->deviceCycleTrans}}</td>
                                     <td>{{$data->ebikeStatus}}</td>
                                     <td>{{$data->lastContact}}</td>
                                     <td>{{$data->address}}</td>
