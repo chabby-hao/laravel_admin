@@ -38,7 +38,7 @@ abstract class BaseCommand extends Command
 
     protected function chmodCache0777()
     {
-        $cachePath = storage_path("cache/framework/cache");
+        $cachePath = storage_path("framework/cache");
         exec("chmod -R 0777 $cachePath", $out);
         echo $out . "\n";
     }
