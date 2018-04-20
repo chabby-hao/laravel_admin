@@ -37,7 +37,7 @@ class MapCache extends BaseCommand
         $brands = BiBrand::getAllBrandIds();
         $channels = BiChannel::getAllChannelIds();
 
-        $this->cacheData([0],null, DeviceObject::CACHE_ALL_PRE);//全部
+        $this->cacheData([0], null, DeviceObject::CACHE_ALL_PRE);//全部
         $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);//品牌
         $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
 
@@ -49,9 +49,9 @@ class MapCache extends BaseCommand
         $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
             $model = TDeviceCode::getDeviceModel();
-            if($whereName){
+            if ($id && $whereName) {
                 $where = [$whereName => $id];
-            }else{
+            } else {
                 $where = [];
             }
             $model->where($where);
@@ -67,7 +67,7 @@ class MapCache extends BaseCommand
                 echo memory_get_usage() . "---------------\n";
 
                 //过滤没有定位的
-                if(!DeviceLogic::getLastLocationInfo($imei)){
+                if (!DeviceLogic::getLastLocationInfo($imei)) {
                     return [];
                 }
 
@@ -109,26 +109,24 @@ class MapCache extends BaseCommand
             ];
             $map2 = [
                 &$all,
+                &$storage,
                 &$riding,
                 &$park,
                 &$offlineLess48,
                 &$offlineMore48,
-                &$storage,
             ];
 
             foreach ($map as $k) {
-                foreach ($map2 as $rows) {
-                    $data = [];
-                    foreach ($rows as $udid) {
-                        $loc = $this->getLoc($udid);
-                        $loc && $data[] = $loc;
-                    }
-                    $count = count($data);
-                    Log::debug("file put $cacheKeyPre . $id . $k , count:$count success");
-                    echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
-                    Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
-                    unset($data);
+                $data = [];
+                foreach ($map2[$k] as $udid) {
+                    $loc = $this->getLoc($udid);
+                    $loc && $data[] = $loc;
                 }
+                $count = count($data);
+                Log::debug("file put $cacheKeyPre . $id . $k , count:$count success", $data);
+                echo "file put $cacheKeyPre . $id . $k ,  count:$count  success" . "\n";
+                Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
+                unset($data);
 
             }
 
@@ -152,7 +150,7 @@ class MapCache extends BaseCommand
             'time' => date('Y-m-d H:i', $gps['time']),
             'address' => $gps['address'] ?: '无',
         ];
-        echo "loc :" . json_encode($data) . "\n";
+        echo "loc : $udid get success"  . "\n";
         return $data;
     }
 
