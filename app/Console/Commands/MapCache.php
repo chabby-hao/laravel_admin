@@ -66,6 +66,11 @@ class MapCache extends BaseCommand
                 echo ++$t . ".......\n";
                 echo memory_get_usage() . "---------------\n";
 
+                //过滤没有定位的
+                if(!DeviceLogic::getLastLocationInfo($imei)){
+                    return [];
+                }
+
                 $all[] = $udid;
 
                 if (DeviceLogic::isOnline($imei)) {
