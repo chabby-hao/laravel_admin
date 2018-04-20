@@ -121,10 +121,11 @@ class MapCache extends BaseCommand
                 $offlineMore48,
             ];
 
-            foreach ($map as $k) {
+
+            foreach ($map as $t => $k) {
                 $data = [];
-                if ($map2[$k]) {
-                    foreach ($map2[$k] as $udid) {
+                if ($map2[$t]) {
+                    foreach ($map2[$t] as $udid) {
                         $loc = $this->getLoc($udid);
                         $loc && $data[] = $loc;
                     }
@@ -133,9 +134,7 @@ class MapCache extends BaseCommand
                 Log::debug("file put $cacheKeyPre-$id-$k , count:$count success");
                 echo "file put $cacheKeyPre-$id-$k ,  count:$count  success" . "\n";
                 Cache::store('file')->put($cacheKeyPre . $id . $k, $data, $cacheTime);
-
                 unset($data);
-
             }
 
         }
