@@ -122,7 +122,7 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         $model = TDeviceCode::whereIn('type', $types);
 
         //for test
-        //$model->whereBetween('sid',[60000,70000]);
+        $model->whereBetween('sid',[60000,70000]);
 
         return $model;
     }

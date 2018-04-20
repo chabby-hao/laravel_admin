@@ -55,7 +55,12 @@ class MapCache extends BaseCommand
                 $where = [];
             }
             $model->where($where);
-            $all = $riding = $park = $offlineLess48 = $offlineMore48 = $storage = [];
+            $all = [];
+            $riding = [];
+            $park = [];
+            $offlineLess48 = [];
+            $offlineMore48 = [];
+            $storage = [];
             $this->batchSearch($model, function ($deviceCode) use (&$all, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
                 static $t = 0;
                 /** @var TDeviceCode $deviceCode */
@@ -108,17 +113,17 @@ class MapCache extends BaseCommand
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
             ];
             $map2 = [
-                &$all,
-                &$storage,
-                &$riding,
-                &$park,
-                &$offlineLess48,
-                &$offlineMore48,
+                $all,
+                $storage,
+                $riding,
+                $park,
+                $offlineLess48,
+                $offlineMore48,
             ];
 
             foreach ($map as $k) {
                 $data = [];
-                if($map2[$k]){
+                if ($map2[$k]) {
                     foreach ($map2[$k] as $udid) {
                         $loc = $this->getLoc($udid);
                         $loc && $data[] = $loc;
@@ -153,7 +158,7 @@ class MapCache extends BaseCommand
             'time' => date('Y-m-d H:i', $gps['time']),
             'address' => $gps['address'] ?: '无',
         ];
-        echo "loc : $udid get success"  . "\n";
+        //echo "loc : $udid get success" . "\n";
         return $data;
     }
 
