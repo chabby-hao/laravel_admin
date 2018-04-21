@@ -130,6 +130,7 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model = TDeviceCode::where('device_cycle','>', self::DEVICE_CYCLE_ALL);
+        //$model->where('onlined', 1);
         $model->whereIn('type', $types);
 
         /*$ids = Cache::get(DeviceObject::CACHE_ONLINE);

@@ -48,6 +48,7 @@ class DeviceCache extends BaseCommand
     {
         $model = TDeviceCode::getDeviceModelHasType();
         $model->whereDeviceCycle(TDeviceCode::DEVICE_CYCLE_ALL);//初始化的设备
+        //$model->where('onlined', 0);
 
         $this->batchSearch($model, function ($deviceCode) {
             /** @var TDeviceCode $deviceCode */
@@ -57,6 +58,7 @@ class DeviceCache extends BaseCommand
             $isNeverOnline = DeviceLogic::isDeviceNerverOnline($imei);
             if(!$isNeverOnline){
                 $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_STORAGE;//库存
+                $deviceCode->onlined = 1;//
                 $deviceCode->save();
             }
         });
