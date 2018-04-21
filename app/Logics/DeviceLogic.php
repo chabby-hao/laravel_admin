@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Cache;
 class DeviceLogic extends BaseLogic
 {
 
-    const DEVICE_CACHE_MINUTES = 24 * 60;//缓存1天
+    const DEVICE_CACHE_MINUTES = 15;//缓存时间
 
     private static $devices = [];//imei=>deviceObject
 
@@ -490,7 +490,11 @@ class DeviceLogic extends BaseLogic
     public static function getActiveAtByUdid($udid, $format = 'Y-m-d')
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) use ($format) {
-            return Carbon::createFromTimestamp($deviceCode->active)->format($format);
+            if($deviceCode->active){
+                return Carbon::createFromTimestamp($deviceCode->active)->format($format);
+            }else{
+                return '';
+            }
         });
     }
 
@@ -578,8 +582,8 @@ class DeviceLogic extends BaseLogic
     {
         $devData = RedisLogic::getDevDataByImei($imei);
         $gsm = 0;
-        if (isset($devData['gsmStrength']) && $devData['gsmStrength']) {
-            $gsm = $devData['gsmStrength'];
+        if (isset($devData['GSMsignal']) && $devData['GSMsignal']) {
+            $gsm = $devData['GSMsignal'];
         } elseif ($locData = RedisLogic::getLocationByImei($imei) && isset($locData['gsmStrength'])) {
             $gsm = $locData['gsmStrength'];
         }

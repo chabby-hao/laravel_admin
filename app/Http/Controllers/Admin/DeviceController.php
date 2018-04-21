@@ -506,7 +506,7 @@ class DeviceController extends BaseController
             $model->where('mile', '>=', MileageLogic::MAX_MILE);
         }
 
-        $paginate = $model->orderByDesc('mid')->paginate();
+        $paginate = $model->orderByDesc('begin')->paginate();
 
         $data = $paginate->items();
 

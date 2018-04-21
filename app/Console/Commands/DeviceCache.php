@@ -47,6 +47,7 @@ class DeviceCache extends BaseCommand
     private function cacheOnlineDevices()
     {
         $model = TDeviceCode::getDeviceModelHasType();
+        $model->whereDeviceCycle(TDeviceCode::DEVICE_CYCLE_ALL);//初始化的设备
 
         $this->batchSearch($model, function ($deviceCode) {
             /** @var TDeviceCode $deviceCode */
@@ -54,7 +55,7 @@ class DeviceCache extends BaseCommand
             $udid = $deviceCode->qr;
             echo "processing imei:$imei,udid:$udid...\n";
             $isNeverOnline = DeviceLogic::isDeviceNerverOnline($imei);
-            if(!$isNeverOnline && $deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_ALL){
+            if(!$isNeverOnline){
                 $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_STORAGE;//库存
                 $deviceCode->save();
             }
@@ -79,7 +80,8 @@ class DeviceCache extends BaseCommand
         $offlineLess48 = [];
         $offlineMore48 = [];
         //$all = [];
-        $this->batchSearch($model, function ($deviceCode) use (&$riding, &$park, &$offlineMore48, &$offlineLess48) {
+        $beginTime = Carbon::now()->startOfDay()->getTimestamp();
+        $this->batchSearch($model, function ($deviceCode) use ($beginTime, &$riding, &$park, &$offlineMore48, &$offlineLess48) {
 
             static $t = 0;
             /** @var TDeviceCode $deviceCode */
@@ -92,8 +94,10 @@ class DeviceCache extends BaseCommand
                 return [];
             }*/
 
-            //缓存设备
-            DeviceLogic::simpleCreateDevice($imei);
+            //缓存设备,激活时间大于今天才缓存
+            if($deviceCode->active > $beginTime){
+                DeviceLogic::simpleCreateDevice($imei);
+            }
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";
