@@ -34,13 +34,13 @@ class WarningMile extends BaseWarning
         $page = 1;
         $perPage = 100;
         $mids = [];
-        $whereBegin = [
+        $whereEnd = [
             strtotime('-1 hours'),
             time(),
         ];
         $warningData = [];
         do {
-            $pagination = TEvMileageGp::whereBetween('begin',$whereBegin)->simplePaginate($perPage, ['*'], 'page', $page++);
+            $pagination = TEvMileageGp::whereBetween('end',$whereEnd)->simplePaginate($perPage, ['*'], 'page', $page++);
             //$pagination = TEvMileageGp::simplePaginate($perPage, ['*'], 'page', $page++); //test
 
             /** @var TEvMileageGp $item */
