@@ -44,15 +44,15 @@ class DbSync extends BaseCommand
         $res = $db->where(['products' => 6])->orderByDesc('type')->get()->toArray();
 
         $arr = [
-            '1'=>'EB001',
-            '2'=>'EB001B',
-            '3'=>'EB001C',
-            '4'=>'EB001A',
-            '5'=>'EB001D',
-            '6'=>'EB001W',
-            '7'=>'B640',
-            '8'=>'EB003A',
-            '9'=>'EB485',
+            BiProductType::PRODUCT_TYPE_EB001 => 'EB001',
+            BiProductType::PRODUCT_TYPE_EB001B => 'EB001B',
+            BiProductType::PRODUCT_TYPE_EB001C => 'EB001C',
+            BiProductType::PRODUCT_TYPE_EB001A => 'EB001A',
+            BiProductType::PRODUCT_TYPE_EB001D => 'EB001D',
+            BiProductType::PRODUCT_TYPE_EB001W => 'EB001W',
+            BiProductType::PRODUCT_TYPE_B640 => 'B640',
+            BiProductType::PRODUCT_TYPE_EB003 => 'EB003A',
+            BiProductType::PRODUCT_TYPE_EB485 => 'EB485',
         ];
 
         $arrFlip = array_flip($arr);
@@ -60,11 +60,11 @@ class DbSync extends BaseCommand
         foreach ($res as $row) {
             $name = $row->name;
             if ($row->level == 2) {
-                if(isset($arrFlip[$name])){
+                if (isset($arrFlip[$name])) {
                     //产品类型
                     BiProductType::firstOrCreate([
                         'product_name' => $name,
-                        'id'=>$arrFlip[$name],
+                        'id' => $arrFlip[$name],
                     ], [
                         'product_remark' => $row->remark
                     ]);
@@ -84,7 +84,7 @@ class DbSync extends BaseCommand
                 BiBrand::firstOrCreate([
                     'brand_name' => $name,
                 ], [
-                    'id'=>$row->type,
+                    'id' => $row->type,
                     'brand_remark' => $row->remark,
                 ]);
             }
@@ -95,17 +95,17 @@ class DbSync extends BaseCommand
                 //车型
                 $name = $row->name;
                 $type = $row->type;
-                $val = TDeviceCategoryDicNew::where(['type'=>$type,'level'=>5])->first();
-                if($val){
+                $val = TDeviceCategoryDicNew::where(['type' => $type, 'level' => 5])->first();
+                if ($val) {
                     $brandName = $val->name;
                     $brandModel = BiBrand::whereBrandName($brandName)->first();
                     $brandId = $brandModel->id;
                     BiEbikeType::firstOrCreate([
-                        'ebike_name'=>$name,
+                        'ebike_name' => $name,
                         //'ev_model'=>$row->ev_model,
-                    ],[
-                        'ebike_remark'=>$row->remark,
-                        'brand_id'=>$brandId,
+                    ], [
+                        'ebike_remark' => $row->remark,
+                        'brand_id' => $brandId,
                     ]);
                 }
             }
@@ -123,7 +123,7 @@ class DbSync extends BaseCommand
         $dicNews = TDeviceCategoryDicNew::whereLevel(3)->whereProducts(6)->get()->keyBy('channel')->toArray();
 
         //手动修改漏掉的渠道
-        $dicNews[11] = ['name'=>'双马'];
+        $dicNews[11] = ['name' => '双马'];
 
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
@@ -138,20 +138,20 @@ class DbSync extends BaseCommand
                 $udid = $deviceCode->qr;
                 echo "begin processing udid: $udid" . "\n";
                 $type = $deviceCode->type;
-                if($row = TDeviceCategory::whereUdid($udid)->first()){
+                if ($row = TDeviceCategory::whereUdid($udid)->first()) {
                     $evModel = substr($row->model, -3);
 
                     $dicNew = TDeviceCategoryDicNew::whereType($type)->whereEvModel($evModel)->whereLevel(6)->first();
-                    if(!$dicNew){
+                    if (!$dicNew) {
                         $dicNew = TDeviceCategoryDicNew::whereType($type)->whereLevel(6)->first();
-                        if(!$dicNew){
+                        if (!$dicNew) {
                             continue;
                         }
                     }
 
                     $brandName = TDeviceCategoryDicNew::whereType($type)->whereLevel(5)->first()->name;
 
-                    $oldEvName =$dicNew->name;
+                    $oldEvName = $dicNew->name;
                     $channel = $dicNew->channel;
                     $channelName = $dicNews[$channel]['name'];
 
@@ -168,9 +168,8 @@ class DbSync extends BaseCommand
                     $deviceCode->brand_id = $brandId;
 
 
-
                     //设备状态
-                    if($deviceCode->active > 0){
+                    if ($deviceCode->active > 0) {
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_INUSE;
                     }/*else{
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
@@ -179,29 +178,35 @@ class DbSync extends BaseCommand
                     $typeMap = BiDeviceType::getNameMap();
                     $typeMap = array_flip($typeMap);
                     //车型更新初始化
-                    if(DeviceLogic::isEb001b($udid)){
+                    if (DeviceLogic::isEb001b($udid)) {
 
-                        if(in_array($ebikeId,[18,4,15])){
+                        if (in_array($ebikeId, [18, 4, 15])) {
                             $deviceCode->device_type = $typeMap['B600'];
-                        }elseif(in_array($ebikeId,[17])){
+                        } elseif (in_array($ebikeId, [17])) {
                             $deviceCode->device_type = $typeMap['B605'];
-                        }elseif(in_array($ebikeId,[21,7])){
+                        } elseif (in_array($ebikeId, [21, 7])) {
                             $deviceCode->device_type = $typeMap['B800'];
-                        }elseif(in_array($ebikeId,[26,20,19])){
+                        } elseif (in_array($ebikeId, [26, 20, 19])) {
                             $deviceCode->device_type = $typeMap['B610'];
-                        }elseif(in_array($ebikeId,[8])){
+                        } elseif (in_array($ebikeId, [8])) {
                             $deviceCode->device_type = $typeMap['B611'];
-                        }elseif(in_array($ebikeId,[31,25])){
+                        } elseif (in_array($ebikeId, [31, 25])) {
                             $deviceCode->device_type = $typeMap['B620'];
-                        }elseif(in_array($ebikeId,[3])){
+                        } elseif (in_array($ebikeId, [3])) {
                             $deviceCode->device_type = $typeMap['B621'];
-                        }elseif(in_array($ebikeId,[30])){
+                        } elseif (in_array($ebikeId, [30])) {
                             $deviceCode->device_type = $typeMap['B630'];
-                        }elseif(in_array($ebikeId,[10])){
+                        } elseif (in_array($ebikeId, [10])) {
                             $deviceCode->device_type = $typeMap['B660'];
-                        }elseif(in_array($ebikeId,[1])){
+                        } elseif (in_array($ebikeId, [1])) {
                             $deviceCode->device_type = $typeMap['B661'];
                         }
+                    }
+
+                    if($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001){
+                        $deviceCode->device_type = $typeMap['EB001'];
+                    }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C){
+                        $deviceCode->device_type = $typeMap['EB001C'];
                     }
 
                     //var_dump($deviceCode->toArray());

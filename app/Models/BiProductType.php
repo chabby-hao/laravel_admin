@@ -25,11 +25,12 @@ class BiProductType extends \App\Models\Base\BiProductType
 	const PRODUCT_TYPE_EB001 = 1;
 	const PRODUCT_TYPE_EB001B = 2;
 	const PRODUCT_TYPE_EB001C = 3;
-	const PRODUCT_TYPE_EB001A = 4;
+	const PRODUCT_TYPE_EB001A = 4;//测试用的，可以废弃
 	const PRODUCT_TYPE_EB001D = 5;
 	const PRODUCT_TYPE_EB001W = 6;
 	const PRODUCT_TYPE_B640 = 7;
 	const PRODUCT_TYPE_EB003 = 8;
+	const PRODUCT_TYPE_EB485 = 9;
 
 
 

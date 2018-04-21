@@ -213,7 +213,7 @@ class DeviceLogic extends BaseLogic
 
     public static function getUdid($imei)
     {
-        if(!$imei){
+        if (!$imei) {
             return false;
         }
         if (isset(self::$imeisToUdids[$imei])) {
@@ -222,7 +222,7 @@ class DeviceLogic extends BaseLogic
         $deviceCode = TDeviceCode::whereImei($imei)->first();
         if ($deviceCode) {
             $udid = $deviceCode->qr;
-            if(!$udid){
+            if (!$udid) {
                 return false;
             }
             self::$imeisToUdids[$imei] = $udid;
@@ -234,7 +234,7 @@ class DeviceLogic extends BaseLogic
 
     public static function getImei($udid)
     {
-        if(!$udid){
+        if (!$udid) {
             return false;
         }
         $udidsToImeis = array_flip(self::$imeisToUdids);
@@ -245,7 +245,7 @@ class DeviceLogic extends BaseLogic
         $deviceCode = TDeviceCode::whereQr($udid)->first();
         if ($deviceCode) {
             $imei = $deviceCode->imei;
-            if(!$imei){
+            if (!$imei) {
                 return false;
             }
             self::$imeisToUdids[$imei] = $udid;
@@ -350,7 +350,7 @@ class DeviceLogic extends BaseLogic
     public static function isEb001b($udid)
     {
         $deviceType = self::getProductTypeByUdid($udid);
-        if (in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001B, BiProductType::PRODUCT_TYPE_EB001D])) {
+        if (!in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001C, BiProductType::PRODUCT_TYPE_EB001A, BiProductType::PRODUCT_TYPE_EB001])) {
             return true;
         } else {
             return false;
@@ -490,9 +490,9 @@ class DeviceLogic extends BaseLogic
     public static function getActiveAtByUdid($udid, $format = 'Y-m-d')
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) use ($format) {
-            if($deviceCode->active){
+            if ($deviceCode->active) {
                 return Carbon::createFromTimestamp($deviceCode->active)->format($format);
-            }else{
+            } else {
                 return '';
             }
         });
@@ -1065,21 +1065,21 @@ class DeviceLogic extends BaseLogic
     public static function getPaymentInfoByUdid($udid)
     {
         $rtn = [
-            'sim_status'=>'未激活',//sim卡状态
-            'daterange'=>'',//有效期
-            'renew'=>0,//续费次数
-            'service_status'=>'',
+            'sim_status' => '未激活',//sim卡状态
+            'daterange' => '',//有效期
+            'renew' => 0,//续费次数
+            'service_status' => '',
         ];
-        $active = self::getActiveAtByUdid($udid,'Y-m-d H:i:s');
+        $active = self::getActiveAtByUdid($udid, 'Y-m-d H:i:s');
         $row = TPayment::whereUdid($udid)->first();
-        if($row){
+        if ($row) {
             //有记录
             $rtn['daterange'] = $active . ' ~ ' . Carbon::createFromTimestamp($row->expire)->toDateTimeString();
             $rtn['sim_status'] = '正常';
-            if($row->expire > time()){
+            if ($row->expire > time()) {
                 //有效
                 $rtn['service_status'] = '服务期内';
-            }else{
+            } else {
                 //过期
                 $rtn['service_status'] = '服务到期';
             }
@@ -1095,8 +1095,8 @@ class DeviceLogic extends BaseLogic
     {
         $collect = TInsureOrder::whereStatus(TInsureOrder::ORDER_STATUS_SUCCESS)->whereUdid($udid)->get();
         $nameMap = TInsureType::getNameMap();
-        foreach ($collect as $row){
-            $row->daterange = $row->insure_start->toDateTimeString() . ' ~ '  . $row->insure_end->toDateTimeString();
+        foreach ($collect as $row) {
+            $row->daterange = $row->insure_start->toDateTimeString() . ' ~ ' . $row->insure_end->toDateTimeString();
             $row->insure_type_name = $nameMap[$row->insure_type];
             $row->from = $row->mode ? '购买' : '赠送';
         }
@@ -1105,11 +1105,11 @@ class DeviceLogic extends BaseLogic
 
     public static function getSafeZoneListByUdid($udid)
     {
-        $collect = TZoneMsg::join('t_safe_zone','t_safe_zone.zid','=','t_zone_msg.zid')
+        $collect = TZoneMsg::join('t_safe_zone', 't_safe_zone.zid', '=', 't_zone_msg.zid')
             ->whereUdid($udid)
             ->select('t_safe_zone.*')
             ->get();
-        foreach ($collect as $row){
+        foreach ($collect as $row) {
             $row->date = $row->create_time;
         }
         return $collect;
