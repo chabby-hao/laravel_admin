@@ -70,7 +70,10 @@ class DeviceCache extends BaseCommand
      */
     private function cacheDeviceStatus()
     {
-        $model = TDeviceCode::getDeviceModel();
+        $model = TDeviceCode::getDeviceModelHasType();
+
+        $model->where('device_cycle','>=', TDeviceCode::DEVICE_CYCLE_INUSE);
+
 
         $count = $model->count();
         Log::debug('cacheDeviceStatus count :' . $count);
@@ -122,7 +125,7 @@ class DeviceCache extends BaseCommand
             //$all[] = $udid;
 
         });
-        $carbon = Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES);
+        $carbon = Carbon::now()->addDay();
         Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_RIDING, $riding, $carbon);
         Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_RIDING, count($riding), $carbon);
         Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_PARK, $park, $carbon);
@@ -166,9 +169,9 @@ class DeviceCache extends BaseCommand
                 $ids = Helper::transToOneDimensionalArray($ids, 'sid');
             }
             //缓存数量
-            Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . $key, $count, Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES));
+            Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . $key, $count, Carbon::now()->addDay());
             //缓存udid
-            Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . $key, $ids, Carbon::now()->addMinutes(DeviceLogic::DEVICE_CACHE_MINUTES));
+            Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . $key, $ids, Carbon::now()->addDay());
             echo "processing cycle: $cycleName, key: $key, count: $count \n";
         }
 
