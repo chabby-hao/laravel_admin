@@ -13,7 +13,7 @@
             </div>
             <div class="margintop">
                 @foreach($deviceStatusMap as $key => $row)
-                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
+                    <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
                 @endforeach
             </div>
         </div>
