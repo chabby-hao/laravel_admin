@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
         if(env('APP_ENV') != 'local'){
             $schedule->command(WarningMile::class)->hourly();
             $schedule->command(DbSync::class)->everyTenMinutes();
-            $schedule->command(DeviceCache::class)->everyFifteenMinutes();
-            $schedule->command(MapCache::class)->everyThirtyMinutes();
+            $schedule->command(DeviceCache::class)->everyTenMinutes();
+            $schedule->command(MapCache::class)->everyTenMinutes();
         }
     }
 
