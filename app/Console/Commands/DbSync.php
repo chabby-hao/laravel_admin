@@ -171,7 +171,10 @@ class DbSync extends BaseCommand
                     //设备状态
                     if ($deviceCode->active > 0) {
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_INUSE;
-                    }/*else{
+                    }else{
+                        $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;//渠道库存
+                    }
+                    /*else{
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
                     }*/
 

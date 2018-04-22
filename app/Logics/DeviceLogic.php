@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Cache;
 class DeviceLogic extends BaseLogic
 {
 
-    const DEVICE_CACHE_MINUTES = 15;//缓存时间
+    const DEVICE_CACHE_MINUTES = 60 * 24;//缓存时间
 
     private static $devices = [];//imei=>deviceObject
 

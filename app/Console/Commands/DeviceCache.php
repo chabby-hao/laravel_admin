@@ -99,10 +99,10 @@ class DeviceCache extends BaseCommand
                 return [];
             }*/
 
-            //缓存设备,激活时间大于今天才缓存
-            if($deviceCode->active > $beginTime){
-                DeviceLogic::simpleCreateDevice($imei);
-            }
+            //缓存设备,激活时间大于今天才缓存 ,这样会导致后台列表tab 和 list不一致
+            //if($deviceCode->active > $beginTime){
+            DeviceLogic::simpleCreateDevice($imei);
+            //}
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";
