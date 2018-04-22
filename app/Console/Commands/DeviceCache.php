@@ -58,7 +58,7 @@ class DeviceCache extends BaseCommand
             $isNeverOnline = DeviceLogic::isDeviceNerverOnline($imei);
             if(!$isNeverOnline){
                 $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_STORAGE;//库存
-                $deviceCode->onlined = 1;//
+                //$deviceCode->onlined = 1;//
                 $deviceCode->save();
             }
         });
