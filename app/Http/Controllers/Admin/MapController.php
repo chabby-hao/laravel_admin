@@ -59,8 +59,8 @@ class MapController extends BaseController
     private function getMapCount()
     {
         $caches = [
-            TDeviceCode::DEVICE_CYCLE_ALL,//全部
             TDeviceCode::DEVICE_CYCLE_STORAGE,//库存
+            TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE,//渠道库存
             DeviceObject::CACHE_LIST_RIDING,
             DeviceObject::CACHE_LIST_PARK,
             DeviceObject::CACHE_LIST_OFFLINE_LESS_48,

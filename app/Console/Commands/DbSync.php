@@ -210,8 +210,6 @@ class DbSync extends BaseCommand
                         $deviceCode->device_type = $typeMap['EB001'];
                     }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C){
                         $deviceCode->device_type = $typeMap['EB001C'];
-                    }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001A){
-                        $deviceCode->device_type = $typeMap['EB001A'];
                     }
 
                     //var_dump($deviceCode->toArray());
