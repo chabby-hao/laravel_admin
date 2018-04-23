@@ -280,7 +280,7 @@ class DeviceController extends BaseController
 
     private function getCountMap($map)
     {
-        $keyPre = $this->getKeyPre();
+        $keyPre = $this->getCustomerKeyPre();
         $where = $this->getWhere();
         $cacheTime = Carbon::now()->addMinutes(15);
         foreach ($map as $k => $row) {
@@ -486,7 +486,7 @@ class DeviceController extends BaseController
         $type = Input::get('type');
         $id = Input::get('id');
 
-        $model = TEvMileageGp::where([]);
+        $model = TEvMileageGp::join('t_device_code','udid','=','qr')->where($this->getWhere());
 
 
         list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->subMonth()->toDateTimeString());
@@ -506,7 +506,7 @@ class DeviceController extends BaseController
             $model->where('mile', '>=', MileageLogic::MAX_MILE);
         }
 
-        $paginate = $model->orderByDesc('begin')->paginate();
+        $paginate = $model->orderByDesc('begin')->select('t_ev_mileage_gps.*')->paginate();
 
         $data = $paginate->items();
 

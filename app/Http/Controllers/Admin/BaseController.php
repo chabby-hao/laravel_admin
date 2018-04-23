@@ -21,7 +21,18 @@ use Illuminate\Support\Facades\Input;
 class BaseController extends Controller
 {
 
-    protected function getKeyPre()
+
+    protected function isCustomer()
+    {
+        if (Auth::user()->user_type == BiUser::USER_TYPE_ALL) {
+            //全部使用缓存
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    protected function getCustomerKeyPre()
     {
         /** @var BiUser $user */
         $user = Auth::user();
