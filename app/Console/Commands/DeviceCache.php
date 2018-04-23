@@ -74,7 +74,8 @@ class DeviceCache extends BaseCommand
     {
         $model = TDeviceCode::getDeviceModelHasType();
 
-        $model->where('device_cycle','>=', TDeviceCode::DEVICE_CYCLE_INUSE);
+        //使用状态
+        $model->where('device_cycle','=', TDeviceCode::DEVICE_CYCLE_INUSE);
 
 
         $count = $model->count();

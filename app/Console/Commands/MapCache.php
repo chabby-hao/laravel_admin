@@ -55,13 +55,14 @@ class MapCache extends BaseCommand
                 $where = [];
             }
             $model->where($where);
-            $all = [];
+            //$all = [];
             $riding = [];
             $park = [];
             $offlineLess48 = [];
             $offlineMore48 = [];
             $storage = [];
-            $this->batchSearch($model, function ($deviceCode) use (&$all, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
+            $channelStorage = [];
+            $this->batchSearch($model, function ($deviceCode) use (&$channelStorage, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
                 static $t = 0;
                 /** @var TDeviceCode $deviceCode */
                 $imei = $deviceCode->imei;
@@ -76,7 +77,7 @@ class MapCache extends BaseCommand
                     return [];
                 }
 
-                $all[] = $udid;
+                //$all[] = $udid;
 
                 if (DeviceLogic::isOnline($imei)) {
                     if (DeviceLogic::isTurnOn($imei)) {
@@ -99,22 +100,24 @@ class MapCache extends BaseCommand
                 //库存
                 if ($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_STORAGE) {
                     $storage[] = $udid;
+                }elseif($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE){
+                    $channelStorage[] = $udid;
                 }
 
             });
 
             $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre;
             $map = [
-                TDeviceCode::DEVICE_CYCLE_ALL,//全部
                 TDeviceCode::DEVICE_CYCLE_STORAGE,//库存
+                TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE,//渠道库存
                 DeviceObject::CACHE_LIST_RIDING,
                 DeviceObject::CACHE_LIST_PARK,
                 DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
             ];
             $map2 = [
-                $all,
                 $storage,
+                $channelStorage,
                 $riding,
                 $park,
                 $offlineLess48,
