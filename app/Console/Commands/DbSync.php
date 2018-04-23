@@ -41,7 +41,7 @@ class DbSync extends BaseCommand
         $dbOperate = DB::connection('care_operate');
         $db = $dbOperate->table('t_device_category_dic_new');
 
-        $res = $db->where(['products' => 6])->orderByDesc('type')->get()->toArray();
+        $res = $db->where(['products' => 6])->orderBy('type')->get()->toArray();
 
         $arr = [
             BiProductType::PRODUCT_TYPE_EB001 => 'EB001',
@@ -183,25 +183,25 @@ class DbSync extends BaseCommand
                     //车型更新初始化
                     if (DeviceLogic::isEb001b($udid)) {
 
-                        if (in_array($ebikeId, [18, 4, 15])) {
+                        if (in_array($ebikeId, [47, 61, 51])) {
                             $deviceCode->device_type = $typeMap['B600'];
-                        } elseif (in_array($ebikeId, [17])) {
+                        } elseif (in_array($ebikeId, [48])) {
                             $deviceCode->device_type = $typeMap['B605'];
-                        } elseif (in_array($ebikeId, [21, 7])) {
+                        } elseif (in_array($ebikeId, [44, 58])) {
                             $deviceCode->device_type = $typeMap['B800'];
-                        } elseif (in_array($ebikeId, [26, 20, 19])) {
+                        } elseif (in_array($ebikeId, [27, 39, 45])) {
                             $deviceCode->device_type = $typeMap['B610'];
-                        } elseif (in_array($ebikeId, [8])) {
+                        } elseif (in_array($ebikeId, [57])) {
                             $deviceCode->device_type = $typeMap['B611'];
-                        } elseif (in_array($ebikeId, [31, 25])) {
+                        } elseif (in_array($ebikeId, [35, 41])) {
                             $deviceCode->device_type = $typeMap['B620'];
-                        } elseif (in_array($ebikeId, [3])) {
+                        } elseif (in_array($ebikeId, [62])) {
                             $deviceCode->device_type = $typeMap['B621'];
-                        } elseif (in_array($ebikeId, [30])) {
+                        } elseif (in_array($ebikeId, [36])) {
                             $deviceCode->device_type = $typeMap['B630'];
-                        } elseif (in_array($ebikeId, [10])) {
+                        } elseif (in_array($ebikeId, [55])) {
                             $deviceCode->device_type = $typeMap['B660'];
-                        } elseif (in_array($ebikeId, [1])) {
+                        } elseif (in_array($ebikeId, [63])) {
                             $deviceCode->device_type = $typeMap['B661'];
                         }
                     }
