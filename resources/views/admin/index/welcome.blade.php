@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('content')
-    <iframe name="myiframe" id="myiframe" src="/map/index.html" width="100%" style="min-height: 300px" frameborder="0" scrolling="no">
+    <iframe name="myiframe" id="myiframe" src="{{URL::action('Admin\MapController@show')}}" width="100%" style="min-height: 300px" frameborder="0" scrolling="no">
         <p>你的浏览器不支持iframe标签</p>
     </iframe>
 
