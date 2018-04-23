@@ -53,7 +53,12 @@
         vertical-align: bottom;
         display: inline-block;
         list-style: none;
-        width: 10%;
+        @if($isCustomer)
+               width: 10%;
+        @else
+               width: 3%;
+    @endif
+ /*width: 10%;*/
         height: 4.5rem;
         background-color: white;
         border-radius: 10px;
@@ -63,7 +68,12 @@
     }
 
     .active {
-        width: 14%;
+        @if($isCustomer)
+               width: 14%;
+        @else
+               width: 10%;
+    @endif
+  /*width: 14%;*/
         height: 5.5rem;
         background-color: rgb(46, 224, 224);
     }
@@ -82,7 +92,10 @@
     }
 
     #right {
-        /*background: url("./anniu@2x.png");*/
+        /*background: url("./anniu
+
+
+    @   2x.png");*/
         border-radius: 10px;
         width: 86px;
         height: 250px;
@@ -184,33 +197,33 @@
                 <span class="intro">{{$v}}</span>
                 <span class="quantity">0</span>
             </li>
-        @endforeach
+    @endforeach
 
-        {{--<li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_STORAGE}}">
-            <span class="intro">库存</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE}}">
-            <span class="intro">渠道库存</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li active" name="{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}">
-            <span class="intro">骑行</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_PARK}}">
-            <span class="intro">停车</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_LESS_48}}">
-            <span class="intro">离线<48小时</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_MORE_48}}">
-            <span class="intro">离线>48小时</span>
-            <span class="quantity">0</span>
-        </li>--}}
-        <!--<li class="choose-li" name="jijiangguoqi">
+    {{--<li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_STORAGE}}">
+        <span class="intro">库存</span>
+        <span class="quantity">0</span>
+    </li>
+    <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE}}">
+        <span class="intro">渠道库存</span>
+        <span class="quantity">0</span>
+    </li>
+    <li class="choose-li active" name="{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}">
+        <span class="intro">骑行</span>
+        <span class="quantity">0</span>
+    </li>
+    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_PARK}}">
+        <span class="intro">停车</span>
+        <span class="quantity">0</span>
+    </li>
+    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_LESS_48}}">
+        <span class="intro">离线<48小时</span>
+        <span class="quantity">0</span>
+    </li>
+    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_MORE_48}}">
+        <span class="intro">离线>48小时</span>
+        <span class="quantity">0</span>
+    </li>--}}
+    <!--<li class="choose-li" name="jijiangguoqi">
             <span class="intro">即将过期</span>
             <span class="quantity">0</span>
         </li>
@@ -599,7 +612,7 @@
         $.ajax({
             type: "get",
             //dataType: 'jsonp',
-            dataType:'json',
+            dataType: 'json',
             //async:false,
             url: url,//数据类型为jsonp
             data: {name: name},
@@ -628,7 +641,7 @@
         dataType: 'json',
         //async:false,
         url: url,//数据类型为jsonp
-        data:{count:1},
+        data: {count: 1},
         //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
         success: function (res) {
             console.log(res);

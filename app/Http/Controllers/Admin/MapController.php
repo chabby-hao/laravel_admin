@@ -45,6 +45,7 @@ class MapController extends BaseController
 
         return view('admin.map.show',[
             'keyMap'=>$this->getKeyMap(),
+            'isCustomer'=>$this->isCustomer(),
         ]);
     }
 
