@@ -59,7 +59,7 @@ class MapController extends BaseController
                 DeviceObject::CACHE_LIST_OFFLINE_LESS_48 => '离线<48小时',
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48 => '离线>48小时',
                 TDeviceCode::DEVICE_CYCLE_LOST => '丢失',
-                DeviceObject::CACHE_LIST_OFFLINE_MORE_48 => '报废',
+                TDeviceCode::DEVICE_CYCLE_SCRAP => '报废',
             ];
         } else {
             $map = [
@@ -70,7 +70,7 @@ class MapController extends BaseController
                 DeviceObject::CACHE_LIST_OFFLINE_LESS_48 => '离线<48小时',
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48 => '离线>48小时',
                 TDeviceCode::DEVICE_CYCLE_LOST => '丢失',
-                DeviceObject::CACHE_LIST_OFFLINE_MORE_48 => '报废',
+                TDeviceCode::DEVICE_CYCLE_SCRAP => '报废',
                 TDeviceCode::DEVICE_CYCLE_CHANNEL_EXPIRE => '渠道过期',//渠道过期
                 TDeviceCode::DEVICE_CYCLE_REFURBISHMENT_CHANNEL => '翻新渠道',//翻新渠道
                 TDeviceCode::DEVICE_CYCLE_REFURBISHMENT_USER => '翻新用户',//翻新用户
