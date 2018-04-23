@@ -489,7 +489,7 @@ class DeviceController extends BaseController
         $model = TEvMileageGp::join('t_device_code','udid','=','qr')->where($this->getWhere());
 
 
-        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->subMonth()->toDateTimeString());
+        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->subDays(3)->toDateTimeString());
 
         $whereBetween = ['begin', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
         $model->whereBetween($whereBetween[0], $whereBetween[1]);
