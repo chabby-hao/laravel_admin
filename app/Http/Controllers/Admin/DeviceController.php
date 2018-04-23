@@ -270,7 +270,7 @@ class DeviceController extends BaseController
     private function getDeviceCountKey()
     {
         $deviceStatusMap = DeviceObject::getDeviceStatusCacheMap();
-        $deviceCycleMap = TDeviceCode::getCycleMap();
+        $deviceCycleMap = TDeviceCode::getChannelCycleMap();
 
         $deviceStatusMap = $this->getCountMap($deviceStatusMap);
         $deviceCycleMap = $this->getCountMap($deviceCycleMap);

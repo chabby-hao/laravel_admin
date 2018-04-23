@@ -85,6 +85,25 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         return $type === null ? $map : $map[$type];
     }
 
+    /**
+     * 获取渠道登录下的周期map
+     */
+    public static function getChannelCycleMap()
+    {
+        $map = [
+            self::DEVICE_CYCLE_ALL => '全部',
+            self::DEVICE_CYCLE_CHANNEL_STORAGE => '渠道库存',
+            self::DEVICE_CYCLE_INUSE => '使用中',
+            self::DEVICE_CYCLE_LOST => '丢失',
+            self::DEVICE_CYCLE_SCRAP => '报废',
+            self::DEVICE_CYCLE_CHANNEL_EXPIRE => '渠道过期',
+            //self::DEVICE_CYCLE_REFURBISHMENT_CHANNEL => '翻新渠道',//在报废下面
+            //self::DEVICE_CYCLE_REFURBISHMENT_USER => '翻新用户',//在报废下面
+            self::DEVICE_CYCLE_USE_EXPIRE => '使用过期',
+        ];
+        return $map;
+    }
+
 	protected $fillable = [
 		'type',
 		'imei',
