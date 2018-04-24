@@ -47,7 +47,7 @@ class DeviceCache extends BaseCommand
     private function cacheOnlineDevices()
     {
         $model = TDeviceCode::where([]);
-        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->where('type', '!=', 2)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model->whereDeviceCycle(TDeviceCode::DEVICE_CYCLE_ALL);//初始化的设备
         $model->whereNotIn('type', $types);
@@ -59,7 +59,7 @@ class DeviceCache extends BaseCommand
             $udid = $deviceCode->qr;
             echo "processing imei:$imei,udid:$udid...\n";
             $isNeverOnline = DeviceLogic::isDeviceNerverOnline($imei);
-            if(!$isNeverOnline){
+            if (!$isNeverOnline) {
                 $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_STORAGE;//库存
                 //$deviceCode->onlined = 1;//
                 $deviceCode->save();
@@ -78,7 +78,7 @@ class DeviceCache extends BaseCommand
         $model = TDeviceCode::getDeviceModelHasType();
 
         //使用状态
-        $model->where('device_cycle','=', TDeviceCode::DEVICE_CYCLE_INUSE);
+        $model->where('device_cycle', '=', TDeviceCode::DEVICE_CYCLE_INUSE);
 
 
         $count = $model->count();
@@ -170,7 +170,7 @@ class DeviceCache extends BaseCommand
 
             Log::debug("cacheDeviceCycle key=$key, count=$count");
 
-            $ids = $model->select(['sid','qr'])->get()->toArray();
+            $ids = $model->select(['sid', 'qr'])->get()->toArray();
             if ($ids) {
                 $ids = Helper::transToOneDimensionalArray($ids, 'sid');
             }
