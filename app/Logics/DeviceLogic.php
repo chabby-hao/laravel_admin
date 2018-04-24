@@ -2,6 +2,7 @@
 
 namespace App\Logics;
 
+use App\Libs\Helper;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiDeviceType;
@@ -22,6 +23,7 @@ use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class DeviceLogic extends BaseLogic
 {
@@ -1118,6 +1120,61 @@ class DeviceLogic extends BaseLogic
     public static function isDeviceNerverOnline($imei)
     {
         return RedisLogic::isDeviceNeverOnline($imei);
+    }
+
+    /**
+     * 导入城市
+     */
+    public static function importCity(array $data)
+    {
+        try {
+            foreach ($data as $row) {
+                $udid = $row[0];
+                $province = $row[1];
+                $city = $row[2];
+                $chassis = $row[3];
+
+                $province = str_replace('省', '', $province);
+                $city = str_replace('市', '', $city);
+
+                TDevice::firstOrCreate([
+                    'udid' => $udid,
+                ], [
+                    'rate' => 10,
+                    'name' => $udid,
+                    'imei' => DeviceLogic::getImei($udid),
+                    'type' => DeviceLogic::getBrandIdByUdid($udid),
+                ])->update([
+                    'province' => $province,
+                    'city' => $city,
+                    'chassis' => $chassis,
+                ]);
+            }
+        } catch (\Exception $e) {
+            Log::error("importCity db error: {$e->getMessage()}");
+            return false;
+        }
+        return true;
+    }
+
+    public static function getProvinceList($where = [])
+    {
+        return self::getAreaList($where, 'province');
+    }
+
+    public static function getCityList($where = [])
+    {
+        return self::getAreaList($where, 'city');
+    }
+
+    private static function getAreaList($where, $column)
+    {
+        $rs = TDevice::join('t_device_code', 'qr', '=', 'udid')
+            ->where($where)
+            ->whereNotNull($column)
+            ->select($column)->distinct()
+            ->get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, $column);
     }
 
 }

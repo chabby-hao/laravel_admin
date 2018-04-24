@@ -120,7 +120,12 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
 		'product_type',
 		'storage_time',
         'ebike_type_id',
-        'channel_id'
+        'channel_id',
+        'brand_id',
+        'device_type',
+        'delivered_at',
+        'is_lost',
+        'device_cycle',
 	];
 
     public static function getByUdid($udid)
@@ -150,7 +155,7 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model = TDeviceCode::where('device_cycle','>', self::DEVICE_CYCLE_ALL);
         //$model->where('onlined', 1);
-        $model->whereIn('type', $types);
+        $model->whereIn('t_device_code.type', $types);
 
         /*$ids = Cache::get(DeviceObject::CACHE_ONLINE);
         if($ids){

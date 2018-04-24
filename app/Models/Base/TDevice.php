@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 19 Apr 2018 09:49:12 +0800.
+ * Date: Mon, 23 Apr 2018 16:16:53 +0800.
  */
 
 namespace App\Models\Base;
@@ -30,6 +30,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_brand
  * @property string $user_model
  * @property int $is_lose
+ * @property string $province
+ * @property string $city
  *
  * @package App\Models\Base
  */

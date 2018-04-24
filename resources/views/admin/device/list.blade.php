@@ -25,47 +25,66 @@
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-search"></i> </span>
                         <h5>筛选查询</h5>
+                        @if(Auth::user()->can('device/importCity'))
+                            <form id="myform" method="post" enctype="multipart/form-data" action="{{URL::action('Admin\DeviceController@importCity')}}" class="form-search">
+                                <span class="pull-right"><input type="file" name="myfile"/></span>
+                            </form>
+                        @endif
                     </div>
                     <div class="widget-content">
-                        <form id="myform" action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search">
+                        <form action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search">
                             @if(Request::input('status'))
                                 <input type="hidden" name="status" value="{{Request::input('status')}}">
                             @endif
                             <div class="control-group">
-                                <div class="inline-block">
-                                    <label>输入搜索：</label>
-                                </div>
-                                <div class="inline-block w8">
-                                    <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
-                                    <select class="w15" name="device_type">
+                                <div class="inline-block w10">
+                                    <input class="w15 margintop" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
+                                    <select class="w1 margintop" name="device_type">
                                         <option value="">请选择型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
                                             <option @if(Request::input('device_type') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
                                     @if(Auth::user()->user_type == \App\Models\BiUser::USER_TYPE_ALL)
-                                        <select class="w15" name="channel_id">
+                                        <select class="w1 margintop" name="channel_id">
                                             <option value="">请选择渠道</option>
                                             @foreach(\App\Models\BiChannel::getChannelMap() as $k => $v)
                                                 <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
-                                        <select class="w15" name="brand_id">
+                                        <select class="w1 margintop" name="brand_id">
                                             <option value="">请选择品牌</option>
                                             @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
                                                 <option @if(Request::input('brand_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
-                                        <select class="w15" name="ebike_type_id">
-                                            <option @if(Request::input('ebike_type_id') == $k) selected @endif value="">
+                                        <select class="w1 margintop" name="ebike_type_id">
+                                            <option value="">
                                                 请选择车型
                                             </option>
                                         </select>
+
+                                        @if(Auth::user()->can('device/importCity'))
+                                            <select name="province" class="w1 margintop">
+                                                <option value="">请选择省份</option>
+                                                @foreach($provinceList as $province)
+                                                    <option @if(Request::input('province') == $province) selected @endif value="{{$province}}">{{$province}}</option>
+                                                @endforeach
+                                            </select>
+
+                                            <select name="city" class="w1 margintop">
+                                                <option value="">请选择城市</option>
+                                            </select>
+                                        @endif
+
+
                                     @endif
-                                    <input type="submit" id="mysubmit" class="btn btn-info" value="查询">
+
+                                    <input type="submit" class="btn btn-info margintop" value="查询">
                                 </div>
 
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -127,6 +146,59 @@
     </div>
 
     @include('admin.common_brand_ebikejs');
-    {{--    @include('admin.common_submitjs')--}}
+
+    <script>
+        $(":file").filestyle({input: false, classButton: "btn btn-success", buttonText: "导入地区"});
+
+        $(function () {
+            var myform = $("#myform");
+            $(":file").on("change", function () {
+                myform.submit();
+                $(this).val('');//操作结束清空input中的内容
+            });
+
+            if ($("select[name='province']").val()) {
+                getCity();
+            }
+
+            function getCity() {
+                var province = $("select[name='province']").val();
+                var select = $("select[name='city']");
+                select.html("<option value=''>请选择城市</option>");
+                if (province) {
+                    $.ajax({
+                        url: '{{URL::action('Admin\DeviceController@searchCity')}}',
+                        data: {province: province},
+                        beforeSend: function () {
+
+                        },
+                        success: function (data) {
+                            if (ajax_check_res(data)) {
+                                if (data.list) {
+                                    for (var i = 0; i < data.list.length; i++) {
+                                        var row = data['list'][i];
+                                        var option = $("<option value='" + row + "'>" + row + "</option>")
+                                        option.appendTo(select);
+                                    }
+                                }
+                            }
+                        }
+                    })
+                } else {
+                    select.val('');
+                }
+            }
+
+            //省市筛选
+            $("select[name='province']").on('change', function () {
+                getCity();
+            });
+
+
+        })
+
+    </script>
+
+    @include('admin.common_submitjs')
 
 @endsection

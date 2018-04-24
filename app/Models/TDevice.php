@@ -23,8 +23,11 @@ namespace App\Models;
  * @property int $user_brand 用户上传品牌
  * @property string|null $user_model 用户上传车辆型号
  * @property int $is_lose 是否丢失，0-没有丢失，1-丢失
+ * @property string|null $province 省
+ * @property string|null $city 市
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereAbmove($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereChassis($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereImei($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereIsLose($value)
@@ -32,6 +35,7 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereNotice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice wherePhoto($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereProvince($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice wherePush($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDevice whereRegistTime($value)
@@ -62,7 +66,8 @@ class TDevice extends \App\Models\Base\TDevice
 		'user_voltage',
 		'user_brand',
 		'user_model',
-		'is_lose'
+		'is_lose',
+		'province',
+		'city'
 	];
-
 }

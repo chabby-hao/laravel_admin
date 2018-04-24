@@ -34,6 +34,8 @@
     <script src="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.js') ?>"></script>
     <script src="<?php echo asset('js/common/g-datepicker.js') ?>"></script>
 
+
+    <script type="text/javascript" src="{{ asset('js/bootstrap-filestyle.min.js')}}"></script>
 </head>
 <body>
 
@@ -227,7 +229,6 @@
 </html>
 <script src="{{ asset('js/matrix.js') }}"></script>
 <script src="{{ asset('js/jquery-form/jquery.form.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/bootstrap-filestyle.min.js')}}"></script>
 <script>
     $(":file").filestyle({classButton: "btn btn-info"});
 

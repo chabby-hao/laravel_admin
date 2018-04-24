@@ -25,6 +25,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiWarningUser whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiWarningUser whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  */
 class BiWarningUser extends Eloquent
 {

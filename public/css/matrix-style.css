@@ -2105,65 +2105,72 @@ form {
     margin-right: 30px;
 }
 
-.w1{
-    width:10%;
+.w1 {
+    width: 10%;
 }
 
-.w15{
-    width:15%;
+.w15 {
+    width: 15%;
 }
 
-.w2{
-    width:20%;
+.w2 {
+    width: 20%;
 }
 
-.w25{
-    width:25%;
+.w25 {
+    width: 25%;
 }
 
-.w3{
-    width:30%;
-}
-.w4{
-    width:40%;
-}
-.w5{
-    width:50%;
-}
-.w6{
-    width:60%;
-}
-.w7{
-    width:70%;
-}
-.w8{
-    width:80%;
-}
-.w9{
-    width:90%;
-}
-.w10{
-    width:100%;
+.w3 {
+    width: 30%;
 }
 
-.w100{
-    width:100px;
+.w4 {
+    width: 40%;
 }
 
-.w150{
-    width:150px;
+.w5 {
+    width: 50%;
 }
 
-.w200{
-    width:200px;
+.w6 {
+    width: 60%;
 }
 
-.w250{
-    width:250px;
+.w7 {
+    width: 70%;
 }
 
-.w300{
-    width:300px;
+.w8 {
+    width: 80%;
+}
+
+.w9 {
+    width: 90%;
+}
+
+.w10 {
+    width: 100%;
+}
+
+.w100 {
+    width: 100px;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.w200 {
+    width: 200px;
+}
+
+.w250 {
+    width: 250px;
+}
+
+.w300 {
+    width: 300px;
 }
 
 .cursor {
@@ -2234,20 +2241,23 @@ form {
 !important;
 }
 
-.margintop{
+.margintop {
     margin-top: 15px;
 }
 
-.margintop50{
-    margin-top:50px;
+.marginbottom {
+    margin-bottom: 15px;
 }
 
-.marginright{
+.margintop50 {
+    margin-top: 50px;
+}
+
+.marginright {
     margin-right: 15px;
 }
 
-
 /*表格居中*/
-.table th, .table td{
+.table th, .table td {
     text-align: center;
 }

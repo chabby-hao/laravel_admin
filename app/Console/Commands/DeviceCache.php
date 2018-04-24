@@ -46,8 +46,11 @@ class DeviceCache extends BaseCommand
      */
     private function cacheOnlineDevices()
     {
-        $model = TDeviceCode::getDeviceModelHasType();
+        $model = TDeviceCode::where([]);
+        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = Helper::transToOneDimensionalArray($types, 'type');
         $model->whereDeviceCycle(TDeviceCode::DEVICE_CYCLE_ALL);//初始化的设备
+        $model->whereNotIn('type', $types);
         //$model->where('onlined', 0);
 
         $this->batchSearch($model, function ($deviceCode) {

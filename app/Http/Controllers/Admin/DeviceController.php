@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Libs\Helper;
 use App\Libs\MyPage;
 use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
@@ -251,18 +252,22 @@ class DeviceController extends BaseController
             $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::simpleCreateDevice($device->imei);
         }
 
-        if (Auth::user()->user_type == BiUser::USER_TYPE_ALL) {
-            //全部使用缓存
+        if (!$this->isCustomer()) {
+            //全部使用缓存,
             list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCacheKey();
         } else {
+            //渠道,品牌
             list($deviceStatusMap, $deviceCycleMap) = $this->getDeviceCountKey();
         }
+
+        $provinceList = DeviceLogic::getProvinceList($this->getWhere());
 
         return view('admin.device.list', [
             'datas' => $data,
             'page_nav' => MyPage::showPageNav($devices),
             'deviceStatusMap' => $deviceStatusMap,
             'deviceCycleMap' => $deviceCycleMap,
+            'provinceList' => $provinceList,
         ]);
 
     }
@@ -343,6 +348,19 @@ class DeviceController extends BaseController
 
         if ($ebikeType = \Request::input('ebike_type_id')) {
             $model->whereEbikeTypeId($ebikeType);
+        }
+
+        //省市筛选
+        if(\Request::input('province') || $city = \Request::input('city')){
+            $where = [
+                'province'=>\Request::input('province'),
+                'city'=>\Request::input('city'),
+            ];
+            $where = array_filter($where);
+            $model->join('t_device','qr','=','udid')
+                ->where($where)
+                ->select('t_device_code.*')
+            ;
         }
 
         $model->where($this->getWhere());
@@ -452,7 +470,6 @@ class DeviceController extends BaseController
 
         $paginate = TLockLog::whereUdid($udid)->whereIn('act', $keys)->orderByDesc('id')->paginate();
 
-
         $data = $paginate->items();
         /** @var TLockLog $row */
         foreach ($data as $row) {
@@ -486,7 +503,7 @@ class DeviceController extends BaseController
         $type = Input::get('type');
         $id = Input::get('id');
 
-        $model = TEvMileageGp::join('t_device_code','udid','=','qr')->where($this->getWhere());
+        $model = TEvMileageGp::join('t_device_code', 'udid', '=', 'qr')->where($this->getWhere());
 
 
         list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->subDays(3)->toDateTimeString());
@@ -526,5 +543,66 @@ class DeviceController extends BaseController
             'end' => $endDatetime,
         ]);
 
+    }
+
+    /**
+     * 导入地区
+     */
+    public function importCity(Request $request)
+    {
+        $inputFileName = 'myfile';
+        if ($request->isXmlHttpRequest() && $request->hasFile($inputFileName)) {
+            //上传文件
+
+            $data = Helper::readExcelFromRequest($request, $inputFileName);
+
+            if (!$data) {
+                return $this->outPutError('请确认文件格式正确');
+            }
+
+            //取出第一行
+            array_shift($data);
+
+            $udids = Helper::transToOneDimensionalArray($data, 0);
+
+            //重复
+            if (max(array_count_values($udids)) > 1) {
+                $unique = array_unique($udids);
+                $diff = array_diff_assoc($udids, $unique);
+                $repeat = array_values(array_unique($diff));
+                $text = implode("<br>", $repeat);
+                return $this->outPutError('设备码重复:<br>' . $text);//重复的IMEI返回回去
+            }
+
+            $rs = TDeviceCode::whereIn('qr', $udids)->select('qr')->get()->toArray();
+
+            $realUdids = Helper::transToOneDimensionalArray($rs, 'qr');
+
+            if (count($realUdids) !== count($udids)) {
+                //udid有不正确的
+                $arr = array_diff($udids, $realUdids);
+                $text = implode("<br>", $arr);
+                return $this->outPutError('设备码错误:<br>' . $text);
+            }
+
+            if (DeviceLogic::importCity($data)) {
+                return $this->outPutSuccess();
+            } else {
+                return $this->outPutError('导入失败,请稍后重试');
+            }
+
+        }
+    }
+
+    public function searchCity(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            $province = $request->input('province');
+
+            $rs = TDevice::whereProvince($province)->select('city')->distinct()->get()->toArray();
+            $citys = Helper::transToOneDimensionalArray($rs, 'city');
+
+            return $this->outPut(['list'=>$citys]);
+        }
     }
 }

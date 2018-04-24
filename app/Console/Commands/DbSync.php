@@ -125,11 +125,11 @@ class DbSync extends BaseCommand
         //手动修改漏掉的渠道
         $dicNews[11] = ['name' => '双马'];
 
-        $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
-        $types = Helper::transToOneDimensionalArray($types, 'type');
+        /*$types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
+        $types = Helper::transToOneDimensionalArray($types, 'type');*/
         $page = 1;
         $perPage = 100;
-        $model = TDeviceCode::getDeviceModel()->whereIn('type', $types);
+        $model = TDeviceCode::getDeviceModelHasType();
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
 

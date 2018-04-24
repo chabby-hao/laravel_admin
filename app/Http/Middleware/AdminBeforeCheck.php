@@ -15,6 +15,12 @@ class AdminBeforeCheck
     //不用登录就可以访问的路由
     protected $noLoginRoutes = ['admin-login', 'admin-logout'];
 
+    //不需要验证权限的路由
+    protected $noPermisVerify = [
+        'device/searchCity',
+        'brand/detail',
+    ];
+
     /**
      * Handle an incoming request.
      *
@@ -47,13 +53,20 @@ class AdminBeforeCheck
                 $permisName = 'index/welcome';//默认首页
             }
 
+            //无需配置权限
+            if(in_array($permisName, $this->noPermisVerify)){
+                return $next($request);
+            }
+
             /** @var BiUser $user */
             $user = Auth::user();
             if(!$user->can($permisName)){
+
+                //工厂跳转特殊
                 if($user->hasRole(FactoryLogic::$roleName)){
                     return Redirect::action('Admin\DeliveryController@factoryPanel');
                 }
-                //开发阶段暂时解除权限操作
+
                 if($request->isXmlHttpRequest()){
                     return response(['code'=>403,'msg'=>'未经授权操作']);
                 }
