@@ -53,12 +53,12 @@
         vertical-align: bottom;
         display: inline-block;
         list-style: none;
-        {{--@if($isCustomer)--}}
-               {{--width: 10%;--}}
-        {{--@else--}}
-               {{--width: 7%;--}}
-        {{--@endif--}}
-        width: 7%;
+        @if($isCustomer)
+               width: 8%;
+        @else
+               width: 8%;
+        @endif
+        /*width: 7%;*/
         height: 4.5rem;
         background-color: white;
         border-radius: 10px;
@@ -69,10 +69,10 @@
 
     .active {
         @if($isCustomer)
-                width: 14%;
+                width: 11%;
         @else
                 width: 11%;
-    @endif
+        @endif
  /*width: 14%;*/
         height: 5.5rem;
         background-color: rgb(46, 224, 224);
