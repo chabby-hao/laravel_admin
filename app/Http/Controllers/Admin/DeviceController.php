@@ -141,13 +141,17 @@ class DeviceController extends BaseController
 
 
             $lastIds = json_decode($lastIds, true);
-            if (($k = array_search($id, $lastIds)) !== false) {
-                unset($lastIds[$k]);
-                array_unshift($lastIds, $id);
-            } else {
-                array_unshift($lastIds, $id);
-                if (count($lastIds) > 5) {
-                    array_pop($lastIds);
+
+            if ($id) {
+                //只存设备码，imei，imsi,不存name
+                if (($k = array_search($id, $lastIds)) !== false) {
+                    unset($lastIds[$k]);
+                    array_unshift($lastIds, $id);
+                } else {
+                    array_unshift($lastIds, $id);
+                    if (count($lastIds) > 5) {
+                        array_pop($lastIds);
+                    }
                 }
             }
             $cookie = Cookie::make($cookieKey, json_encode($lastIds), 60 * 24 * 30);
@@ -351,16 +355,15 @@ class DeviceController extends BaseController
         }
 
         //省市筛选
-        if(\Request::input('province') || $city = \Request::input('city')){
+        if (\Request::input('province') || $city = \Request::input('city')) {
             $where = [
-                'province'=>\Request::input('province'),
-                'city'=>\Request::input('city'),
+                'province' => \Request::input('province'),
+                'city' => \Request::input('city'),
             ];
             $where = array_filter($where);
-            $model->join('t_device','qr','=','udid')
+            $model->join('t_device', 'qr', '=', 'udid')
                 ->where($where)
-                ->select('t_device_code.*')
-            ;
+                ->select('t_device_code.*');
         }
 
         $model->where($this->getWhere());
@@ -596,13 +599,13 @@ class DeviceController extends BaseController
 
     public function searchCity(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $province = $request->input('province');
 
             $rs = TDevice::whereProvince($province)->select('city')->distinct()->get()->toArray();
             $citys = Helper::transToOneDimensionalArray($rs, 'city');
 
-            return $this->outPut(['list'=>$citys]);
+            return $this->outPut(['list' => $citys]);
         }
     }
 }

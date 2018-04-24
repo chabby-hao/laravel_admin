@@ -178,6 +178,11 @@
                                     for (var i = 0; i < data.list.length; i++) {
                                         var row = data['list'][i];
                                         var option = $("<option value='" + row + "'>" + row + "</option>")
+                                        if(row === '{{Request::input('city')}}'){
+                                            option.attr({
+                                                selected:true
+                                            })
+                                        }
                                         option.appendTo(select);
                                     }
                                 }

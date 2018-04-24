@@ -13,6 +13,8 @@ use App\Libs\MyPage;
 use App\Logics\AuthLogic;
 use App\Models\BiUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 
 class AuthController extends BaseController
@@ -26,6 +28,10 @@ class AuthController extends BaseController
             $data = $this->checkParams($check, $request->input());
             $authLogic = new AuthLogic();
             if($authLogic->login($data['name'], $data['pwd'], $request->ip())){
+                $preUrl = Session::get('lastUrl');
+                if($preUrl){
+                    return $this->outPutRedirect($preUrl);
+                }
                 return $this->outPutRedirect(URL::action('Admin\IndexController@welcome'), 0);
             }
             return $this->outPutError('用户名或者密码错误');

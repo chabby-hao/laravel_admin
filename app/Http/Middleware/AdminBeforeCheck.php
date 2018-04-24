@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class AdminBeforeCheck
 {
@@ -75,6 +76,7 @@ class AdminBeforeCheck
 
             return $next($request);
         }else{
+            Session::flash('lastUrl',$request->fullUrl());
             return Redirect::route('admin-login');
         }
     }
