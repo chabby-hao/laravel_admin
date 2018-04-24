@@ -56,8 +56,8 @@
         @if($isCustomer)
                width: 10%;
         @else
-               width: 3%;
-    @endif
+               width: 7%;
+        @endif
  /*width: 10%;*/
         height: 4.5rem;
         background-color: white;
@@ -71,8 +71,8 @@
         @if($isCustomer)
                width: 14%;
         @else
-               width: 10%;
-    @endif
+               width: 11%;
+        @endif
   /*width: 14%;*/
         height: 5.5rem;
         background-color: rgb(46, 224, 224);
