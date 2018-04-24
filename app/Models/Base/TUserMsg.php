@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TUserMsg
- * 
+ *
  * @property int $id
  * @property string $source
  * @property int $reciever
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $time
  * @property string $title
  * @property string $extra
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereExtra($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereReciever($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereSource($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TUserMsg whereType($value)
+ * @mixin \Eloquent
  */
 class TUserMsg extends Eloquent
 {

@@ -415,8 +415,8 @@ class DeviceController extends BaseController
                 $row->location_type = 'GPS(repeat)';
                 $row->address = Carbon::createFromTimestamp($row->begin)->toDateTimeString() . $row->address;
             }
-            $row->gsm = $row->gsmstrength ? '-' . $row->gsmstrength . 'DB' : '';
-            $row->usb_trans = $row->usb ? '是' : '否';
+            $row->gsm = $row->gsmStrength ? '-' . $row->gsmStrength . 'DB' : '';
+            $row->usb_trans = is_numeric($row->usb) ? ($row->usb ? '是' : '否') : '';
         }
 
         return view('admin.device.locationlist', [

@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvCharge
- * 
+ *
  * @property string $udid
  * @property int $mid
  * @property int $mid_time
@@ -22,8 +22,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $loop
  * @property int $loop_mid
  * @property int $loop_last_mile
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereCycle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereLoop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereLoopLastMile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereLoopMid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereMid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereMidTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge wherePrevol($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereRefreshTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvCharge whereVol($value)
+ * @mixin \Eloquent
  */
 class TEvCharge extends Eloquent
 {

@@ -18,11 +18,13 @@ use App\Models\TPayment;
 use App\Models\TPaymentOrder;
 use App\Models\TUser;
 use App\Models\TUserDevice;
+use App\Models\TVersionUpdateInfo;
 use App\Models\TZoneMsg;
 use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class DeviceLogic extends BaseLogic
@@ -971,6 +973,12 @@ class DeviceLogic extends BaseLogic
     {
         $deviceMod = self::getProductTypeNameByUdid($udid);
         $data = RedisLogic::getDevDataByUdid($udid);
+        if (!self::isEb001b($udid)) {
+            $romVersion = $data['romVersion'];
+            $row = TVersionUpdateInfo::whereSvnVersion($romVersion)->first();
+            $bigVersion = $row ? $row->big_version : '';
+            return $deviceMod . 'V' . $bigVersion . 'Build' . $data['romVersion'];
+        }
         return $deviceMod . 'V' . $data['commercialVersion'] . 'Build' . $data['rom'];
     }
 
