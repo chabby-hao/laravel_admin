@@ -53,12 +53,12 @@
         vertical-align: bottom;
         display: inline-block;
         list-style: none;
-        @if($isCustomer)
-               width: 10%;
-        @else
-               width: 7%;
-        @endif
- /*width: 10%;*/
+        {{--@if($isCustomer)--}}
+               {{--width: 10%;--}}
+        {{--@else--}}
+               {{--width: 7%;--}}
+        {{--@endif--}}
+        width: 7%;
         height: 4.5rem;
         background-color: white;
         border-radius: 10px;
@@ -69,11 +69,11 @@
 
     .active {
         @if($isCustomer)
-               width: 14%;
+                width: 14%;
         @else
-               width: 11%;
-        @endif
-  /*width: 14%;*/
+                width: 11%;
+    @endif
+ /*width: 14%;*/
         height: 5.5rem;
         background-color: rgb(46, 224, 224);
     }
@@ -95,7 +95,8 @@
         /*background: url("./anniu
 
 
-    @   2x.png");*/
+
+    @    2x.png");*/
         border-radius: 10px;
         width: 86px;
         height: 250px;
