@@ -63,22 +63,21 @@
                                                 请选择车型
                                             </option>
                                         </select>
-
-                                        @if(Auth::user()->can('device/importCity'))
-                                            <select name="province" class="w1 margintop">
-                                                <option value="">请选择省份</option>
-                                                @foreach($provinceList as $province)
-                                                    <option @if(Request::input('province') == $province) selected @endif value="{{$province}}">{{$province}}</option>
-                                                @endforeach
-                                            </select>
-
-                                            <select name="city" class="w1 margintop">
-                                                <option value="">请选择城市</option>
-                                            </select>
-                                        @endif
-
-
                                     @endif
+
+                                    @if(Auth::user()->can('device/importCity'))
+                                        <select name="province" class="w1 margintop">
+                                            <option value="">请选择省份</option>
+                                            @foreach($provinceList as $province)
+                                                <option @if(Request::input('province') == $province) selected @endif value="{{$province}}">{{$province}}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <select name="city" class="w1 margintop">
+                                            <option value="">请选择城市</option>
+                                        </select>
+                                    @endif
+
 
                                     <input type="submit" class="btn btn-info margintop" value="查询">
                                 </div>
@@ -178,9 +177,9 @@
                                     for (var i = 0; i < data.list.length; i++) {
                                         var row = data['list'][i];
                                         var option = $("<option value='" + row + "'>" + row + "</option>")
-                                        if(row === '{{Request::input('city')}}'){
+                                        if (row === '{{Request::input('city')}}') {
                                             option.attr({
-                                                selected:true
+                                                selected: true
                                             })
                                         }
                                         option.appendTo(select);
