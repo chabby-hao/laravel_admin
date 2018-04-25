@@ -7,7 +7,7 @@
             <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\UserController@add'); ?>" class="btn btn-success">新增账号</a></span>
         </div>
 
-        <div class="row-fluid margintop">
+        {{--<div class="row-fluid margintop">
             <form class="form-search">
                 <div class="control-group">
                     <div class="inline-block w1">
@@ -19,7 +19,7 @@
 
                 </div>
             </form>
-        </div>
+        </div>--}}
 
         <div class="row-fluid">
             <div class="span12">

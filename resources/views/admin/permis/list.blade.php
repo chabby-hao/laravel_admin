@@ -7,7 +7,7 @@
             <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\PermisController@add'); ?>" class="btn btn-success">新增权限</a></span>
         </div>
 
-        <div class="row-fluid margintop">
+        {{--<div class="row-fluid margintop">
             <form class="form-search">
                 <div class="control-group">
                     <div class="controls controls-row">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>--}}
 
         <div class="row-fluid">
             <div class="span12">
