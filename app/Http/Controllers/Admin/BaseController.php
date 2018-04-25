@@ -154,6 +154,11 @@ class BaseController extends Controller
         return $this->outPutRedirect($url, 0, $msg);
     }
 
+    protected function outputRedictWithoutMsg($url)
+    {
+        return $this->outPutRedirect($url, 0, '');
+    }
+
     /**
      * 是否弹框
      * @param $url
@@ -162,7 +167,7 @@ class BaseController extends Controller
     protected function outPutRedirect($url, $timeout = 0, $msg = '处理成功')
     {
 
-        if ($timeout === 0) {
+        if ($timeout === 0 && $msg) {
             Session::flash('msg', $msg);
         }
 

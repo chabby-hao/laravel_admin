@@ -32,7 +32,7 @@ class AuthController extends BaseController
                 if($preUrl){
                     return $this->outPutRedirect($preUrl);
                 }
-                return $this->outPutRedirect(URL::action('Admin\IndexController@welcome'), 0);
+                return $this->outputRedictWithoutMsg(URL::action('Admin\IndexController@welcome'));
             }
             return $this->outPutError('用户名或者密码错误');
         }
