@@ -213,7 +213,7 @@ class DeviceController extends BaseController
         $tmp['addressEnd'] = $lastTrip->addressEnd;*/
         $tmp['mile'] = $mileRow->mile;
         $tmp['duration'] = number_format($mileRow->duration / 60, 1);
-        $tmp['speed'] = number_format($tmp['mile'] / ($mileRow->duration / 60), 1);
+        $tmp['speed'] = number_format($tmp['mile'] / ($mileRow->duration / 60 / 60), 1);
         $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
         return $tmp;
     }
