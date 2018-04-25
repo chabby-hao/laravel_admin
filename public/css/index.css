@@ -524,3 +524,7 @@ a:hover {
 .bi-icon img{
     width: 100%;
 }
+
+.bi-login-error{
+    color:red;
+}

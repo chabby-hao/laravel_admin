@@ -51,7 +51,7 @@
 
         <div class="form-actions">
             <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-            <span class="pull-right"><a class="btn btn-info"/>Reecover</a></span>
+            <span class="pull-right"><a class="btn btn-info" >Reecover</a></span>
         </div>
     </form>
 </div>

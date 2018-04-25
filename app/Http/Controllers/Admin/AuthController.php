@@ -40,7 +40,10 @@ class AuthController extends BaseController
         if($preUrl){
             Session::flash('lastUrl', $preUrl);
         }
-        return view('admin.auth.login');
+
+        return view('index');
+
+        //return view('admin.auth.login');
     }
 
 }

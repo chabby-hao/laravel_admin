@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/index.css">
@@ -18,9 +21,9 @@
         <div class="bi-nav">
             <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
             <div class="bi-nav-a">
-                <a href="">关于我们</a>
-                <a href="">技术支持</a>
-                <a href="">成为伙伴</a>
+                <a href="javascript:;">关于我们</a>
+                <a href="javascript:;">技术支持</a>
+                <a href="javascript:;">成为伙伴</a>
             </div>
         </div>
         <div class="bi-login">
@@ -59,32 +62,37 @@
         <label class="bi-history-text">历史访问请求量</label>
     </div>
 
-    <div class="bi-login-model">
-        <div class="bi-login-logo">
-            <img src="/image/logo@2x.png" alt="">
+    <form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
+        <div class="bi-login-model">
+            <div class="bi-login-logo">
+                <img src="/image/logo@2x.png" alt="">
+            </div>
+            <div class="bi-login-group">
+                <div class="bi-close"><img src="/image/guanbi@2x.png" alt=""></div>
+                <div class="bi-login-box">
+                    <span class="bi-login-icon"><img src="/image/zhanghao@2x.png" alt=""></span>
+                    <input type="text" name="name" placeholder="账户名称"/>
+                </div>
+                <div class="bi-login-box">
+                    <span class="bi-login-icon"><img src="/image/mima@2x.png" alt=""></span>
+                    <input type="text" name="pwd" placeholder="用户密码"/>
+                </div>
+                <div class="bi-login-box">
+                    <span class="bi-login-error"></span>
+                </div>
+
+                <div class="bi-login-go">
+                    <button class="btn">登录</button>
+                </div>
+
+                <div class="bi-login-bottom">
+                    <div class="forget"><a href="javascript:;">忘记密码</a></div>
+                    <div class="register-now"><a href="javascript:;">立即注册 ></a></div>
+                </div>
+
+            </div>
         </div>
-        <div class="bi-login-group">
-            <div class="bi-close"><img src="/image/guanbi@2x.png" alt=""></div>
-            <div class="bi-login-box">
-                <span class="bi-login-icon"><img src="/image/zhanghao@2x.png" alt=""></span>
-                <input type="text" name="user" placeholder="账户名称" />
-            </div>
-            <div class="bi-login-box">
-                <span class="bi-login-icon"><img src="/image/mima@2x.png" alt=""></span>
-                <input type="text" name="pwd" placeholder="用户密码" />
-            </div>
-
-            <div class="bi-login-go">
-                <button class="btn">登录</button>
-            </div>
-
-            <div class="bi-login-bottom">
-                <div class="forget"><a href="">忘记密码</a></div>
-                <div class="register-now"><a href="">立即注册 ></a></div>
-            </div>
-
-        </div>
-    </div>
+    </form>
 
     <div class="login-shade">
     </div>
@@ -114,26 +122,26 @@
 
     <div class="bi-footer-content">
         <div class="bi-footer-item">
-            <a href="">产品</a href="">
-            <a href="">超牛管家</a>
-            <a href="">安心充</a>
-            <a href="">运营系统</a>
+            <a href="javascript:;">产品</a>
+            <a href="javascript:;">超牛管家</a>
+            <a href="https://anxinchong.vipcare.com/admin">安心充</a>
+            <a href="http://admin.vipcare.com">运营系统</a>
         </div>
         <div class="bi-footer-item">
-            <a href="">工具</a>
-            <a href="">API文档</a>
-            <a href="">智慧芯测试</a>
-            <a href="">操作手册</a>
+            <a href="javascript:;">工具</a>
+            <a href="javascript:;">API文档</a>
+            <a href="javascript:;">智慧芯测试</a>
+            <a href="javascript:;">操作手册</a>
         </div>
         <div class="bi-footer-item">
-            <a href="">品牌</a>
-            <a href="">公众号</a>
-            <a href="">小程序</a>
+            <a href="javascript:;">品牌</a>
+            <a href="javascript:;">公众号</a>
+            <a href="javascript:;">小程序</a>
         </div>
         <div class="bi-footer-item">
-            <a href="">关于我们</a>
-            <a href="">联系我们</a>
-            <a href="">加入我们</a>
+            <a href="javascript:;">关于我们</a>
+            <a href="javascript:;">联系我们</a>
+            <a href="javascript:;">加入我们</a>
         </div>
     </div>
 
@@ -150,21 +158,43 @@
     </div>
 </div>
 
-
+</body>
+</html>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/jquery3/jquery.slim.min.js"></script>
 <script src="/popper/umd/popper.min.js"></script>
 <script src="/bootstrap4/js/bootstrap.min.js"></script>
-</body>
-</html>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery-form/jquery.form.js"></script>
 <script>
-    $("#login").click(function(){
+
+    $(function () {
+
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+
+        var myform = $("#loginform");
+        myform.ajaxForm({
+            dataType: 'json',
+            success: function (res) {
+                if (res.code=== 200) {
+                    location.href=res.redirect;
+                }else{
+                    $(".bi-login-error").text(res.msg);
+                }
+            }
+        })
+    })
+
+</script>
+
+<script>
+    $("#login").click(function () {
         $(".bi-login-model,.login-shade").show();
         $(".bi-point,.bi-history").hide();
     })
 
-    $(".bi-close").click(function(){
+    $(".bi-close").click(function () {
         $(".bi-login-model,.login-shade").hide();
         $(".bi-point,.bi-history").show();
     })
