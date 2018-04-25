@@ -103,7 +103,7 @@ class BaseController extends Controller
             }
         } else {
             $preDay = $preDay ?: Carbon::now()->startOfDay()->toDateTimeString();
-            list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->toDateTimeString()];
+            list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->endOfDay()->toDateTimeString()];
         }
         return [trim($startDatetime), trim($endDatetime)];
     }
