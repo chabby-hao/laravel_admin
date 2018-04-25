@@ -445,8 +445,8 @@ class DeviceController extends BaseController
 
         foreach ($data as $row) {
             $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
-            $row->ev_key_trans = $row->eb_key ? '开' : '关';
-            $row->ev_lock_trans = $row->eb_lock ? '已锁' : '未锁';
+            $row->ev_key_trans = $row->ev_key ? '开' : '关';
+            $row->ev_lock_trans = $row->ev_lock ? '已锁' : '未锁';
             $row->voltage = max($row->voltage, $row->local_voltage);
             $row->usb_trans = $row->usb ? '是' : '否';
         }
