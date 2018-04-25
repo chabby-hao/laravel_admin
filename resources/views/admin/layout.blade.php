@@ -156,7 +156,18 @@
     <div id="content-header">
         <div id="breadcrumb">
             <a href="{{URL::route('admin-home')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
-            <a href="#" class="current"><?php echo \App\Logics\AuthLogic::getPermisName(); ?></a></div>
+            <a href="#" class="current"><?php echo \App\Logics\AuthLogic::getPermisName(); ?></a>
+        </div>
+        @if($msg = Session::get('msg'))
+            <div class="alert alert-success mymsg">
+                <strong>{{$msg}}</strong>
+            </div>
+            <script>
+                setTimeout(function () {
+                    $(".mymsg").fadeOut().remove();
+                }, 3000)
+            </script>
+        @endif
     </div>
     @section('content')
         <hr>

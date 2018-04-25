@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 class BaseController extends Controller
 {
@@ -42,7 +43,7 @@ class BaseController extends Controller
         } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
             //品牌商
             return DeviceObject::CACHE_BRAND_PRE;
-        }else{
+        } else {
             return DeviceObject::CACHE_ALL_PRE;
         }
     }
@@ -69,11 +70,11 @@ class BaseController extends Controller
 
             $model = DB::table("$table{$i->format('Ymd')}")
                 ->where($where);
-            if($whereBetween){
+            if ($whereBetween) {
                 $model->whereBetween($whereBetween[0], $whereBetween[1]);
             }
             $queries->push($model);
-                //->whereBetween('create_time', [$start->getTimestamp(), $end->getTimestamp()]));
+            //->whereBetween('create_time', [$start->getTimestamp(), $end->getTimestamp()]));
         }
 
         // 出列一张表作为union的开始
@@ -101,7 +102,7 @@ class BaseController extends Controller
                 list($startDatetime, $endDatetime) = explode('-', $dateRange);
             }
         } else {
-            $preDay = $preDay ? : Carbon::now()->startOfDay()->toDateTimeString();
+            $preDay = $preDay ?: Carbon::now()->startOfDay()->toDateTimeString();
             list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->endOfDay()->toDateTimeString()];
         }
         return [trim($startDatetime), trim($endDatetime)];
@@ -115,16 +116,16 @@ class BaseController extends Controller
         if ($die) {
             die(json_encode($data));
         } else {
-            if($cookie){
+            if ($cookie) {
                 return response($data)->cookie($cookie);
             }
             return response($data);
         }
     }
 
-    protected function outPutWithCookie(array $data = [],$cookie)
+    protected function outPutWithCookie(array $data = [], $cookie)
     {
-        return $this->outPut($data, false ,$cookie);
+        return $this->outPut($data, false, $cookie);
     }
 
     protected function outPutSuccess()
@@ -147,13 +148,24 @@ class BaseController extends Controller
         return $this->outPutError($msg, $data, true);
     }
 
+
+    protected function outputRedirectWithMsg($url, $msg = '处理成功')
+    {
+        return $this->outPutRedirect($url, 0, $msg);
+    }
+
     /**
      * 是否弹框
      * @param $url
      * @param bool $alert
      */
-    protected function outPutRedirect($url, $timeout = 0)
+    protected function outPutRedirect($url, $timeout = 0, $msg = '处理成功')
     {
+
+        if ($timeout === 0) {
+            Session::flash('msg', $msg);
+        }
+
         return $this->outPut([
             'redirect' => $url,
             'timeout' => $timeout,

@@ -29,7 +29,7 @@ class BiProductType extends \App\Models\Base\BiProductType
 	const PRODUCT_TYPE_EB001D = 5;
 	const PRODUCT_TYPE_EB001W = 6;
 	const PRODUCT_TYPE_B640 = 7;
-	const PRODUCT_TYPE_EB003 = 8;
+	const PRODUCT_TYPE_EB003A = 8;
 	const PRODUCT_TYPE_EB485 = 9;
 
 

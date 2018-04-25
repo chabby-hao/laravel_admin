@@ -23,12 +23,12 @@ class AuthController extends BaseController
     public function login(Request $request)
     {
 
+        $preUrl = Session::get('lastUrl');
         if($request->isXmlHttpRequest()){
             $check = ['name','pwd'];
             $data = $this->checkParams($check, $request->input());
             $authLogic = new AuthLogic();
             if($authLogic->login($data['name'], $data['pwd'], $request->ip())){
-                $preUrl = Session::get('lastUrl');
                 if($preUrl){
                     return $this->outPutRedirect($preUrl);
                 }
@@ -37,6 +37,9 @@ class AuthController extends BaseController
             return $this->outPutError('用户名或者密码错误');
         }
 
+        if($preUrl){
+            Session::flash('lastUrl', $preUrl);
+        }
         return view('admin.auth.login');
     }
 
