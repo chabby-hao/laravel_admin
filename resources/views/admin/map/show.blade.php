@@ -260,7 +260,7 @@
             ],
             formatter: function (params, ticket, callback) {
                 //console.log(params);
-                return '<img src="cheliang2@2x.png"/>&nbsp;&nbsp;&nbsp;&nbsp;最近一次定位' + '<br>· ' + params.data.name + '<br>· ' + params.data.time + '<br>· ' + params.data.address;
+                return '<img src="{{asset("map/cheliang2@2x.png")}}"/>&nbsp;&nbsp;&nbsp;&nbsp;最近一次定位' + '<br>· ' + params.data.name + '<br>· ' + params.data.time + '<br>· ' + params.data.address;
             },
 //                    backgroundColor:'rgb(46,224,224)',
         },
