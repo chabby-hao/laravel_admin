@@ -565,28 +565,28 @@
     rightLis.click(function () {
         rightLis.removeClass('current');
         $(this).addClass('current');
-        cheliang.attr({src: 'cheliang_black@2x.png'});
-        chongdianpeng.attr({src: 'chongdianpeng@2x.png'});
-        wangdian.attr({src: 'wangdian@2x.png'});
+        cheliang.attr({src: '{{asset("map/cheliang_black@2x.png")}}'});
+        chongdianpeng.attr({src: '{{asset("map/chongdianpeng@2x.png")}}'});
+        wangdian.attr({src: '{{asset("map/wangdian@2x.png")}}'});
     });
 
     rightLis.each(function (index) {
         if (index === 0) {
             $(this).click(function () {
                 $(this).find('img').attr({
-                    src: 'cheliang@2x.png',
+                    src: '{{asset("map/cheliang@2x.png")}}',
                 })
             });
         } else if (index === 1) {
             $(this).click(function () {
                 $(this).find('img').attr({
-                    src: 'chongdianpeng_White@2x.png',
+                    src: '{{asset("map/chongdianpeng_White@2x.png")}}',
                 })
             });
         } else if (index === 2) {
             $(this).click(function () {
                 $(this).find('img').attr({
-                    src: 'wangdian_White@2x.png',
+                    src: '{{asset("map/wangdian_White@2x.png")}}',
                 })
             });
         }
