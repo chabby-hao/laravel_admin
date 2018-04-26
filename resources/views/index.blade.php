@@ -75,7 +75,7 @@
                 </div>
                 <div class="bi-login-box">
                     <span class="bi-login-icon"><img src="/image/mima@2x.png" alt=""></span>
-                    <input type="text" name="pwd" placeholder="用户密码"/>
+                    <input type="password" name="pwd" placeholder="用户密码"/>
                 </div>
                 <div class="bi-login-box">
                     <span class="bi-login-error"></span>
