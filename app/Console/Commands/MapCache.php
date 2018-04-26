@@ -48,11 +48,9 @@ class MapCache extends BaseCommand
     {
         $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
-            $model = TDeviceCode::getDeviceModelHasType();
 
-            //使用状态
-            $model->where('device_cycle', '=', TDeviceCode::DEVICE_CYCLE_INUSE);
-            //$model = TDeviceCode::getDeviceModel();
+            $model = TDeviceCode::getDeviceModel();
+
             if ($id && $whereName) {
                 $where = [$whereName => $id];
             } else {
@@ -83,23 +81,26 @@ class MapCache extends BaseCommand
 
                 //$all[] = $udid;
 
-                if (DeviceLogic::isOnline($imei)) {
-                    if (DeviceLogic::isTurnOn($imei)) {
-                        //骑行
-                        $riding[] = $udid;
+                if($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_INUSE){
+                    if (DeviceLogic::isOnline($imei)) {
+                        if (DeviceLogic::isTurnOn($imei)) {
+                            //骑行
+                            $riding[] = $udid;
+                        } else {
+                            //停车
+                            $park[] = $udid;
+                        }
                     } else {
-                        //停车
-                        $park[] = $udid;
-                    }
-                } else {
-                    if (DeviceLogic::isContanct($imei, 48 * 3600)) {
-                        //离线小于48小时
-                        $offlineLess48[] = $udid;
-                    } else {
-                        //离线大于48小时
-                        $offlineMore48[] = $udid;
+                        if (DeviceLogic::isContanct($imei, 48 * 3600)) {
+                            //离线小于48小时
+                            $offlineLess48[] = $udid;
+                        } else {
+                            //离线大于48小时
+                            $offlineMore48[] = $udid;
+                        }
                     }
                 }
+
 
                 //库存
                 if ($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_STORAGE) {
