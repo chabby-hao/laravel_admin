@@ -69,6 +69,9 @@ class FactoryLogic extends BaseLogic
             TDeviceCode::whereIn('imei',$imeis)->update([
                 'delivered_at'=>Carbon::now(),
                 'device_cycle'=>TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE,
+                'channel_id'=>$order->channel_id,
+                'brand_id'=>$shipOrder->brand_id,
+                'ebike_type_id'=>$shipOrder->ebike_type_id,
             ]);
 
         }
