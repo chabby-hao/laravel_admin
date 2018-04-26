@@ -28,6 +28,7 @@
                         @if(Auth::user()->can('device/importCity'))
                             <form id="myform" method="post" enctype="multipart/form-data" action="{{URL::action('Admin\DeviceController@importCity')}}" class="form-search">
                                 <span class="pull-right"><input type="file" name="myfile"/></span>
+                                <span class="pull-right"><a class="btn btn-info" href="{{asset('demo/importcity.xlsx')}}">导入示例</a></span>
                             </form>
                         @endif
                     </div>
@@ -147,7 +148,7 @@
     @include('admin.common_brand_ebikejs');
 
     <script>
-        $(":file").filestyle({input: false, classButton: "btn btn-success", buttonText: "导入地区"});
+        $(":file").filestyle({input: false, classButton: "btn btn-success", buttonText: "导入"});
 
         $(function () {
             var myform = $("#myform");
