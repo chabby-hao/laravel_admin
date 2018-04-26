@@ -48,7 +48,11 @@ class MapCache extends BaseCommand
     {
         $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
-            $model = TDeviceCode::getDeviceModel();
+            $model = TDeviceCode::getDeviceModelHasType();
+
+            //使用状态
+            $model->where('device_cycle', '=', TDeviceCode::DEVICE_CYCLE_INUSE);
+            //$model = TDeviceCode::getDeviceModel();
             if ($id && $whereName) {
                 $where = [$whereName => $id];
             } else {
