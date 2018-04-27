@@ -646,7 +646,7 @@ class DeviceLogic extends BaseLogic
             //EB001B当前电压
             $vcur = intval($data['localvoltage']);
         }
-        return $vcur;
+        return $vcur / 10;
     }
 
     public static function getCurrentVoltageByUdid($udid)

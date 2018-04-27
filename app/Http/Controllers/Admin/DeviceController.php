@@ -70,9 +70,6 @@ class DeviceController extends BaseController
             $deviceObj = DeviceLogic::createDeviceByUdid($udid);
             $data = (array)$deviceObj;
 
-            //电压
-            $data['voltage'] /= 10;
-
             //补充信息
             $data['imsi'] = DeviceLogic::getImsi($data['imei']);
             $data['romVersion'] = DeviceLogic::getRomVersionByUdid($udid);

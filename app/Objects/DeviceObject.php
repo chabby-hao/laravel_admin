@@ -101,7 +101,7 @@ class DeviceObject extends BaseObject
     public $chipPower = 0;//智慧芯电量
     public $charge = 0;//电瓶是否在位
     public $chargeTrans = '';
-    public $voltage = 0;//当前电压,0.1v
+    public $voltage = 0;//当前电压,v
     public $batteryCount = 0;//电池数量
     public $batterySpecification = 0;//电池规格
     public $battery = 0;//电量
