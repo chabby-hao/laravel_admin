@@ -51,6 +51,8 @@ class XinpuController extends Controller
             $imei = $request->input('imei');
             $time = $request->input('time');//开始检测的时间
 
+            $isCheck = $request->input('check') ? true : false;
+
             $time = $time - 600;//时间放宽松
 
             list(, $imei) = DeviceLogic::getUdidImei($imei);
@@ -111,7 +113,7 @@ class XinpuController extends Controller
                 $data['gsm_text'] = '(' . $gsm['cellTowerCount'] . '个)';
             }
 
-            if ($this->checkBatteryId($zhangfeiData, $time)) {
+            if ($this->checkBatteryId($zhangfeiData, $time, $isCheck)) {
                 $data['net'] = 1;
                 $data['batConn'] = 1;
             }
@@ -124,7 +126,7 @@ class XinpuController extends Controller
                 $data['mcu'] == '1.0.2508' &&
                 $this->checkGps($gps, $gsm, $time) &&
                 $this->checkGsm($gsm, $time) &&
-                $this->checkBatteryId($zhangfeiData, $time) &&
+                $this->checkBatteryId($zhangfeiData, $time, $isCheck) &&
                 $this->checkVol($vol)
             ) {
                 //检测成功
@@ -142,10 +144,14 @@ class XinpuController extends Controller
         return $vol;
     }
 
-    private function checkBatteryId($data, $time)
+    private function checkBatteryId($data, $time, $isCheck = false)
     {
         //for test
-        return true;
+
+        if(!$isCheck){
+            return true;
+        }
+
         if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
             return true;
         }
