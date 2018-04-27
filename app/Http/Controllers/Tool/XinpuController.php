@@ -11,6 +11,7 @@ use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
 use App\Models\BiXinpuDetect;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class XinpuController extends Controller
 {
@@ -152,7 +153,14 @@ class XinpuController extends Controller
             return true;
         }
 
-        if ($data['timeStamp'] > $time && preg_match('/^XPFactTest.*/', $data['batteryID'])) {
+        if ($data['timeStamp'] > $time) {
+            if(Input::get('xp')){
+                if(preg_match('/^XPFactTest.*/', $data['batteryID'])){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
             return true;
         }
         return false;

@@ -24,7 +24,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js') }}"></script>
-    <script src="{{asset('js/mustache/mustache.min.js')}}"></script>
+    <script src="{{ asset('js/mustache/mustache.min.js')}}"></script>
 
     <link rel="stylesheet"
           href="<?php echo asset('js/bootstrap-daterangepicker/daterangepicker.css') ?>">
@@ -164,7 +164,7 @@
             </div>
             <script>
                 setTimeout(function () {
-                    $(".mymsg").fadeOut().remove();
+                    $(".mymsg").fadeOut();
                 }, 3000)
             </script>
         @endif
