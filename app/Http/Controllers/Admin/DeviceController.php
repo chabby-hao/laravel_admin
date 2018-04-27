@@ -518,6 +518,8 @@ class DeviceController extends BaseController
         if ($id && $udid = $this->getUdid($id)) {
             $where['udid'] = $udid;
             $model->where($where);
+        }else{
+            $model->where(['udid'=>'66666666666']);//查不到哎
         }
 
         if ($type == MileageLogic::MILE_TYPE_NORMAL) {

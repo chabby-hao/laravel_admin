@@ -129,7 +129,6 @@
                                 <th>设备状态</th>
                                 <th>GSM信号</th>
                                 <th>卫星数量</th>
-                                <th>最近一次通信时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -137,7 +136,6 @@
                                 <td><%isOnlineTrans%></td>
                                 <td>-<%gsm%>db</td>
                                 <td><%gpsSatCount%></td>
-                                <td><%lastGps%></td>
                             </tr>
                             </tbody>
                         </table>
@@ -145,7 +143,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>上报时间</th>
+                                <th>定位上报时间</th>
                                 <th>定位类型</th>
                                 <th>经纬度</th>
                                 <th>详细位置</th>
@@ -201,7 +199,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>上报时间</th>
+                                <th>状态上报时间</th>
                                 <th>电门状态</th>
                                 <th>锁车状态</th>
                                 <th>电瓶电压</th>

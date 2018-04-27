@@ -130,6 +130,10 @@ class DbSync extends BaseCommand
         $page = 1;
         $perPage = 100;
         $model = TDeviceCode::getDeviceModelHasType();
+
+        $typeMap = BiDeviceType::getNameMap();
+        $typeMap = array_flip($typeMap);
+
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
 
@@ -138,6 +142,11 @@ class DbSync extends BaseCommand
                 $udid = $deviceCode->qr;
                 echo "begin processing udid: $udid" . "\n";
                 $type = $deviceCode->type;
+                if($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001){
+                    $deviceCode->device_type = $typeMap['EB001'];
+                }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C){
+                    $deviceCode->device_type = $typeMap['EB001C'];
+                }
                 if ($row = TDeviceCategory::whereUdid($udid)->first()) {
                     $evModel = substr($row->model, -3);
 
@@ -178,8 +187,7 @@ class DbSync extends BaseCommand
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
                     }*/
 
-                    $typeMap = BiDeviceType::getNameMap();
-                    $typeMap = array_flip($typeMap);
+
                     //车型更新初始化
                     if (DeviceLogic::isEb001b($udid)) {
 
@@ -206,18 +214,7 @@ class DbSync extends BaseCommand
                         }
                     }
 
-                    if($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001){
-                        $deviceCode->device_type = $typeMap['EB001'];
-                    }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C){
-                        $deviceCode->device_type = $typeMap['EB001C'];
-                    }
-
                     //var_dump($deviceCode->toArray());
-
-                    $deviceCode->save();
-
-                    echo "process success udid: $udid, chanel_id:$channelId, eb_type_id:{$ebike->id}" . "\n";
-
 
                     /*$brandName = $dicNew->name;
                     $brandId = BiBrand::whereBrandName($brandName)->first()->id;
@@ -235,6 +232,10 @@ class DbSync extends BaseCommand
                         }
                     }*/
                 }
+
+                $deviceCode->save();
+                echo "process success udid: $udid" . "\n";
+
             }
 
         } while ($pagination->hasMorePages());
