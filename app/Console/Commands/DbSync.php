@@ -154,6 +154,7 @@ class DbSync extends BaseCommand
                     if (!$dicNew) {
                         $dicNew = TDeviceCategoryDicNew::whereType($type)->whereLevel(6)->first();
                         if (!$dicNew) {
+                            $deviceCode->save();
                             continue;
                         }
                     }
