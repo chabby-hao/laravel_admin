@@ -70,6 +70,9 @@ class DeviceController extends BaseController
             $deviceObj = DeviceLogic::createDeviceByUdid($udid);
             $data = (array)$deviceObj;
 
+            //电压
+            $data['voltage'] /= 10;
+
             //补充信息
             $data['imsi'] = DeviceLogic::getImsi($data['imei']);
             $data['romVersion'] = DeviceLogic::getRomVersionByUdid($udid);
@@ -447,7 +450,7 @@ class DeviceController extends BaseController
             $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
             $row->ev_key_trans = $row->ev_key ? '开' : '关';
             $row->ev_lock_trans = $row->ev_lock ? '已锁' : '未锁';
-            $row->voltage = max($row->voltage, $row->local_voltage);
+            $row->voltage = max($row->voltage, $row->local_voltage) / 10;
             $row->usb_trans = $row->usb ? '是' : '否';
         }
 
@@ -518,8 +521,8 @@ class DeviceController extends BaseController
         if ($id && $udid = $this->getUdid($id)) {
             $where['udid'] = $udid;
             $model->where($where);
-        }else{
-            $model->where(['udid'=>'66666666666']);//查不到哎
+        } else {
+            $model->where(['udid' => '66666666666']);//查不到哎
         }
 
         if ($type == MileageLogic::MILE_TYPE_NORMAL) {
