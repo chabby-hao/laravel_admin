@@ -253,7 +253,7 @@ class DeviceController extends BaseController
         $deviceCycleMap = TDeviceCode::getCycleMap();
 
         $data = [];
-        foreach ($deviceList as $device) {
+        foreach ($deviceList as $k => $device) {
             //$data[] = DeviceLogic::createDevice($device->imei);
             //$tmp = DeviceLogic::getDeviceFromCacheByUdid($device['qr']) ?: DeviceLogic::simpleCreateDevice($device['imei']);
             $data[] = [
@@ -266,6 +266,7 @@ class DeviceController extends BaseController
                 'deviceCycleTrans' => $deviceCycleMap[$device['device_cycle']],
                 'productType' => $productTypeMap[$device['model']],
             ];
+            unset($deviceList[$k]);
         }
 
         $file = '设备列表-'.date('YmdHis');
