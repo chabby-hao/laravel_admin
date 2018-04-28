@@ -61,7 +61,7 @@
                                     <td>{{$data->datetime}}</td>
                                     <td>{{$data->location_type}}</td>
                                     <td>{{$data->lat}},{{$data->lng}}</td>
-                                    <td>{{$data->address}}</td>
+                                    <td><a href="{{URL::action('Admin\DeviceController@map',['lat'=>$data->lat,'lng'=>$data->lng])}}">{{$data->address}}</a></td>
                                     <td>{{$data->landmark}}</td>
                                     <td>{{$data->battery}}</td>
                                     <td>{{$data->gsm}}</td>

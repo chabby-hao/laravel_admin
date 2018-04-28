@@ -662,4 +662,9 @@ class DeviceController extends BaseController
             return $this->outPut(['list' => $citys]);
         }
     }
+
+    public function map()
+    {
+        RETURN view('admin.device.map');
+    }
 }

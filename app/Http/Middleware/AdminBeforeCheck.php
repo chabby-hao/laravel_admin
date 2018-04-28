@@ -21,6 +21,7 @@ class AdminBeforeCheck
         'device/searchCity',
         'brand/detail',
         'device/exportList',
+        'device/map',
     ];
 
     /**
