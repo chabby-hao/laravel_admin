@@ -234,6 +234,34 @@ class DeviceController extends BaseController
         }
     }
 
+    public function exportList()
+    {
+        $model = TDeviceCode::getDeviceModel();
+
+        $this->listSearch($model);
+        $deviceList = $model->orderByDesc('active')->select(['qr', 'imei'])->get()->toArray();
+//        $data = [];
+//        foreach ($deviceList as $device) {
+//            //$data[] = DeviceLogic::createDevice($device->imei);
+//            $tmp = DeviceLogic::getDeviceFromCacheByUdid($device['qr']) ?: DeviceLogic::simpleCreateDevice($device['imei']);
+//            $data[] = [
+//                'udid' => $tmp->udid,
+//                'deviceTypeName' => $tmp->deviceTypeName,
+//                'channelName' => $tmp->channelName,
+//                'brandName' => $tmp->brandName,
+//                'ebikeTypeName' => $tmp->ebikeTypeName,
+//                'activeAt' => $tmp->activeAt,
+//                'deviceCycleTrans' => $tmp->deviceCycleTrans,
+//                'ebikeStatus' => $tmp->ebikeStatus,
+//                'lastContact' => $tmp->lastContact,
+//                'address' => $tmp->address,
+//                'lastGps' => $tmp->lastGps,
+//            ];
+//        }
+        Helper::simpleExportExcel('lalala.csv',[], $deviceList);
+        exit;
+    }
+
     /**
      * 缓存策略：按照ID缓存,in(1,2,3,4)
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -329,7 +357,7 @@ class DeviceController extends BaseController
     {
         if ($status = \Request::input('status')) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $status;
-            $ids = Cache::store('file')->get($cacheKey);
+            $ids = Cache::store('file')->get($cacheKey) ?: [];
             $model->whereIn('sid', $ids);
         }
 
@@ -518,7 +546,7 @@ class DeviceController extends BaseController
         if ($id && $udid = $this->getUdid($id)) {
             $where['udid'] = $udid;
             $model->where($where);
-        } else {
+        } elseif(empty($udid)) {
             $model->where(['udid' => '66666666666']);//查不到哎
         }
 
