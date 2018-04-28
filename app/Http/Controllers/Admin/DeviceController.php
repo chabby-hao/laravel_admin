@@ -240,8 +240,6 @@ class DeviceController extends BaseController
 
     public function exportList()
     {
-        error_reporting(2047);
-        ini_set('display_errors', 1);
         $model = TDeviceCode::getDeviceModel();
 
         $this->listSearch($model);
