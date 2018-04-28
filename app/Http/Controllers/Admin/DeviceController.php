@@ -269,7 +269,7 @@ class DeviceController extends BaseController
             unset($deviceList[$k]);
         }
 
-        $file = '设备列表-'.date('YmdHis');
+        $file = 'export-'.date('YmdHis');
         $path = 'export/excel/';
 
         Helper::exportExcel([
