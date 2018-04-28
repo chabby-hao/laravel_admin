@@ -546,7 +546,7 @@ class DeviceController extends BaseController
         if ($id && $udid = $this->getUdid($id)) {
             $where['udid'] = $udid;
             $model->where($where);
-        } elseif(empty($udid)) {
+        } elseif($id && empty($udid)) {
             $model->where(['udid' => '66666666666']);//查不到哎
         }
 
