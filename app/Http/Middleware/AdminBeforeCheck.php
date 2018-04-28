@@ -20,6 +20,7 @@ class AdminBeforeCheck
     protected $noPermisVerify = [
         'device/searchCity',
         'brand/detail',
+        'device/exportList',
     ];
 
     /**

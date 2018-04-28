@@ -80,7 +80,8 @@
                                     @endif
 
 
-                                    <input type="submit" class="btn btn-info margintop" value="查询">
+                                    <input type="submit" class="btn btn-success margintop search" value="查询">
+                                    <input type="button" class="btn btn-info margintop export" value="导出">
                                 </div>
 
                             </div>
@@ -155,6 +156,25 @@
             $(":file").on("change", function () {
                 myform.submit();
                 $(this).val('');//操作结束清空input中的内容
+            });
+
+            //导出excel
+            $(".export").click(function () {
+                var form = $(this).parents("form");
+                var sendData = form.serialize();
+                $.ajax({
+                    url:'{{URL::action('Admin\DeviceController@exportList')}}',
+                    data:sendData,
+                    success:function (res) {
+                        if(ajax_check_res(res)){
+
+                        }
+                    }
+                })
+                //form.attr('action', '{{URL::action('Admin\DeviceController@exportList')}}');
+                //form.ajaxf();
+                return;
+                form.submit();
             });
 
             if ($("select[name='province']").val()) {

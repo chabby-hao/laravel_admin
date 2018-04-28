@@ -46,7 +46,7 @@ class Helper
         ];
         if ($replaces) {
             $newReplaces = [];
-            foreach ($replaces as $k=>$replace){
+            foreach ($replaces as $k => $replace) {
                 $newReplaces['{' . $k . '}'] = $replace;
             }
             $content['msg'] = strtr($content['msg'], $newReplaces);
@@ -160,7 +160,7 @@ class Helper
         foreach ($arrFilter as $filter) {
             if (array_key_exists($filter, $arrData) && $arrData[$filter] !== '' && $arrData[$filter] !== null) {
                 $data[$filter] = $arrData[$filter];
-            }elseif(in_array($filter, $allowEmptys)){
+            } elseif (in_array($filter, $allowEmptys)) {
                 $data[$filter] = null;
             } else {
                 if ($returnKey) {
@@ -198,8 +198,8 @@ class Helper
      */
     public static function transToOneDimensionalArray(array $array, $keyname)
     {
-        if($array){
-            foreach ($array as &$item){
+        if ($array) {
+            foreach ($array as &$item) {
                 $item = $item[$keyname];
             }
         }
@@ -214,7 +214,7 @@ class Helper
     public static function transToKeyValueArray($array, $key, $value)
     {
         $data = [];
-        foreach ($array as $row){
+        foreach ($array as $row) {
             $data[$row[$key]] = $row[$value];
         }
         return $data;
@@ -222,7 +222,7 @@ class Helper
 
     public static function readExcelFromRequest(Request $request, $filename)
     {
-        try{
+        try {
             $file = $request->file($filename)->getRealPath();
             $inputFileType = \PHPExcel_IOFactory::identify($file);
             $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
@@ -230,10 +230,117 @@ class Helper
             $sheet = $objPHPExcel->getSheet(0);
             $data = $sheet->toArray();
             return $data;
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             Log::error('read excel error ' . $e->getMessage());
             return false;
         }
     }
+
+    /**
+     * 数据导出
+     * @param array $title 标题行名称
+     * @param array $data 导出数据
+     * @param string $fileName 文件名
+     * @param string $savePath 保存路径
+     * @param bool $type false--保存   true--下载
+     * @return string   返回文件全路径
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     */
+    public static function exportExcel($title = array(), $data = array(), $fileName = '', $savePath = './', $isDown = true)
+    {
+        $obj = new \PHPExcel();
+
+        //横向单元格标识
+        $cellName = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ');
+
+        $obj->getActiveSheet()->setTitle('sheet名称');   //设置sheet名称
+        $_row = 1;   //设置纵向单元格标识
+        if ($title) {
+            $_cnt = count($title);
+            $obj->getActiveSheet()->mergeCells('A' . $_row . ':' . $cellName[$_cnt - 1] . $_row);   //合并单元格
+            $obj->setActiveSheetIndex(0)->setCellValue('A' . $_row, '数据导出：' . date('Y-m-d H:i:s'));  //设置合并后的单元格内容
+            $_row++;
+            $i = 0;
+            foreach ($title AS $v) {   //设置列标题
+                $obj->setActiveSheetIndex(0)->setCellValue($cellName[$i] . $_row, $v);
+                $i++;
+            }
+            $_row++;
+        }
+
+        //填写数据
+        if ($data) {
+            $i = 0;
+            foreach ($data AS $_v) {
+                $j = 0;
+                foreach ($_v AS $_cell) {
+                    $obj->getActiveSheet()->setCellValue($cellName[$j] . ($i + $_row), $_cell);
+                    $j++;
+                }
+                $i++;
+            }
+        }
+
+        //文件名处理
+        if (!$fileName) {
+            $fileName = uniqid(time(), true);
+        }
+
+        $objWrite = \PHPExcel_IOFactory::createWriter($obj, 'Excel2007');
+
+        if ($isDown) {   //网页下载
+            header('pragma:public');
+            //header('Content-Type: application/vnd.ms-excel');
+            header("Content-Disposition:attachment;filename=$fileName.xlsx");
+            $objWrite->save('php://output');
+            exit;
+        }
+
+        //$_fileName = iconv("utf-8", "gb2312", $fileName);   //转码
+        $_savePath = $savePath . $fileName . '.xlsx';
+        $objWrite->save($_savePath);
+
+        return $savePath . $fileName . '.xlsx';
+        //exportExcel(array('姓名','年龄'), array(array('a',21),array('b',23)), '档案', './', true);
+    }
+
+    /**
+     * @creator Jimmy
+     * @data 2018/1/05
+     * @desc 数据导出到excel(csv文件)
+     * @param string $filename 如date("Y年m月j日").'-test.csv'
+     * @param array $tileArray 所有列名称
+     * @param array $dataArray 所有列数据
+     */
+    public static function simpleExportExcel($tileArray = [], $dataArray = [], $filename)
+    {
+        ini_set('memory_limit', '512M');
+        ini_set('max_execution_time', 0);
+        ob_end_clean();
+        ob_start();
+        header("Content-Type: text/csv");
+        header("Content-Disposition:filename=" . $filename);
+        $fp = fopen('php://output', 'w');
+        fwrite($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));//转码 防止乱码(比如微信昵称(乱七八糟的))
+        fputcsv($fp, $tileArray);
+        $index = 0;
+        foreach ($dataArray as $item) {
+            if ($index == 1000) {
+                $index = 0;
+                ob_flush();
+                flush();
+            }
+
+            $index++;
+            fputcsv($fp, $item);
+        }
+
+        ob_flush();
+        flush();
+        ob_end_clean();
+        return true;
+    }
+
 
 }

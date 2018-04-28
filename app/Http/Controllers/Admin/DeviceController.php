@@ -16,6 +16,10 @@ use App\Logics\DeviceLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Models\BiBrand;
+use App\Models\BiChannel;
+use App\Models\BiDeviceType;
+use App\Models\BiEbikeType;
+use App\Models\BiProductType;
 use App\Models\BiUser;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
@@ -239,27 +243,46 @@ class DeviceController extends BaseController
         $model = TDeviceCode::getDeviceModel();
 
         $this->listSearch($model);
-        $deviceList = $model->orderByDesc('active')->select(['qr', 'imei'])->get()->toArray();
-//        $data = [];
-//        foreach ($deviceList as $device) {
-//            //$data[] = DeviceLogic::createDevice($device->imei);
-//            $tmp = DeviceLogic::getDeviceFromCacheByUdid($device['qr']) ?: DeviceLogic::simpleCreateDevice($device['imei']);
-//            $data[] = [
-//                'udid' => $tmp->udid,
-//                'deviceTypeName' => $tmp->deviceTypeName,
-//                'channelName' => $tmp->channelName,
-//                'brandName' => $tmp->brandName,
-//                'ebikeTypeName' => $tmp->ebikeTypeName,
-//                'activeAt' => $tmp->activeAt,
-//                'deviceCycleTrans' => $tmp->deviceCycleTrans,
-//                'ebikeStatus' => $tmp->ebikeStatus,
-//                'lastContact' => $tmp->lastContact,
-//                'address' => $tmp->address,
-//                'lastGps' => $tmp->lastGps,
-//            ];
-//        }
-        Helper::simpleExportExcel('lalala.csv',[], $deviceList);
-        exit;
+        $deviceList = $model->orderByDesc('active')->select(['*'])->get()->toArray();
+
+        $deviceTypeMap = BiDeviceType::getNameMap();
+        $channelMap = BiChannel::getChannelMap();
+        $brandMap = BiBrand::getBrandMap();
+        $ebikeTypeMap = BiEbikeType::getTypeName();
+        $productTypeMap = BiProductType::getNameMap();
+        $deviceCycleMap = TDeviceCode::getCycleMap();
+
+        $data = [];
+        foreach ($deviceList as $device) {
+            //$data[] = DeviceLogic::createDevice($device->imei);
+            //$tmp = DeviceLogic::getDeviceFromCacheByUdid($device['qr']) ?: DeviceLogic::simpleCreateDevice($device['imei']);
+            $data[] = [
+                'udid' => '`' . $device['qr'],
+                'deviceTypeName' => $deviceTypeMap[$device['device_type']],
+                'channelName' => $channelMap[$device['channel_id']],
+                'brandName' => $brandMap[$device['brand_id']],
+                'ebikeTypeName' => $ebikeTypeMap[$device['ebike_type_id']],
+                'activeAt' => $device['active'] ? date('Y-m-d H:i:s', $device['active']) : '',
+                'deviceCycleTrans' => $deviceCycleMap[$device['device_cycle']],
+                'productType' => $productTypeMap[$device['model']],
+            ];
+        }
+
+        $file = '设备列表-'.date('YmdHis');
+        $path = 'export/excel/';
+
+        Helper::exportExcel([
+            '设备码',
+            '型号',
+            '渠道',
+            '品牌',
+            '车型',
+            '激活时间',
+            '设备周期',
+            '产品类型'
+        ], $data, $file , public_path($path),false);
+        $fileUrl = asset($path . $file . '.xlsx');
+        return $this->outputRedictWithoutMsg($fileUrl);
     }
 
     /**
@@ -546,7 +569,7 @@ class DeviceController extends BaseController
         if ($id && $udid = $this->getUdid($id)) {
             $where['udid'] = $udid;
             $model->where($where);
-        } elseif($id && empty($udid)) {
+        } elseif ($id && empty($udid)) {
             $model->where(['udid' => '66666666666']);//查不到哎
         }
 

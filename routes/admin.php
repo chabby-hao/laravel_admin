@@ -53,6 +53,7 @@ Route::any('/device/historyState','Admin\DeviceController@historyState');
 Route::any('/device/mileageList','Admin\DeviceController@mileageList');
 Route::any('/device/importCity','Admin\DeviceController@importCity');
 Route::any('/device/searchCity','Admin\DeviceController@searchCity');
+Route::any('/device/exportList','Admin\DeviceController@exportList');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');
