@@ -34,6 +34,7 @@
     var marker = new BMap.Marker(point);  // 创建标注
     map.addOverlay(marker);              // 将标注添加到地图中
     map.centerAndZoom(point, 15);
+    map.enableScrollWheelZoom(true);
     /*var opts = {
         width: 200,     // 信息窗口宽度
         height: 100,     // 信息窗口高度
