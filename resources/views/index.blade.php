@@ -42,8 +42,8 @@
 
     <div class="bi-history">
         <div class="bi-number">
-            <ul>
-                <li><span>1</span></li>
+            <ul id="total_count">
+                {{--<li><span>1</span></li>
                 <li><span>2</span></li>
                 <li><span>3</span></li>
                 <li><span>4</span></li>
@@ -56,7 +56,7 @@
                 <li><span>3</span></li>
                 <li><span>4</span></li>
                 <li><span>7</span></li>
-                <li><span>1</span></li>
+                <li><span>1</span></li>--}}
             </ul>
         </div>
         <label class="bi-history-text">历史访问请求量</label>
@@ -184,6 +184,23 @@
                 }
             }
         })
+
+
+        $.ajax({
+            url:'{{URL::action('Bi\StatController@requestCount')}}',
+            success:function(res){
+                if(res.code === 200){
+                    var sum = res.data.sum;
+                    var ul = $("#total_count");
+                    for(var x in sum){
+                        //<li><span>2</span></li>
+                        var li = $("<li><span>" + sum[x] + "</span></li>");
+                        ul.append(li);
+                    }
+                }
+            }
+        })
+
     })
 
 </script>
