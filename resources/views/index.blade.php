@@ -20,7 +20,7 @@
     <div class="bi-top">
         <div class="bi-nav">
             <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
-            <div class="bi-nav-a">
+            <div style="display: none" class="bi-nav-a">
                 <a href="javascript:;">关于我们</a>
                 <a href="javascript:;">技术支持</a>
                 <a href="javascript:;">成为伙伴</a>
