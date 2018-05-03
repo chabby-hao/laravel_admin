@@ -85,7 +85,7 @@
                     <button class="btn">登录</button>
                 </div>
 
-                <div class="bi-login-bottom">
+                <div class="bi-login-bottom" style="display: none;">
                     <div class="forget"><a href="javascript:;">忘记密码</a></div>
                     <div class="register-now"><a href="javascript:;">立即注册 ></a></div>
                 </div>
