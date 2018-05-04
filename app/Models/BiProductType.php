@@ -21,7 +21,7 @@ class BiProductType extends \App\Models\Base\BiProductType
         'id'
     ];
 
-
+    const PRODUCT_TYPE_UNKNOWN = 0;
     const PRODUCT_TYPE_EB001 = 1;
     const PRODUCT_TYPE_EB001B = 2;
     const PRODUCT_TYPE_EB001C = 3;

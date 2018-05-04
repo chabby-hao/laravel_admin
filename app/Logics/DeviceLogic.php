@@ -354,7 +354,7 @@ class DeviceLogic extends BaseLogic
     public static function isEb001b($udid)
     {
         $deviceType = self::getProductTypeByUdid($udid);
-        if (!in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001C, BiProductType::PRODUCT_TYPE_EB001A, BiProductType::PRODUCT_TYPE_EB001])) {
+        if (!in_array($deviceType, [BiProductType::PRODUCT_TYPE_EB001C, BiProductType::PRODUCT_TYPE_EB001A, BiProductType::PRODUCT_TYPE_EB001, BiProductType::PRODUCT_TYPE_UNKNOWN])) {
             return true;
         } else {
             return false;
@@ -399,7 +399,7 @@ class DeviceLogic extends BaseLogic
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
             $productType = BiProductType::find($deviceCode->model);
-            return $productType ? $productType->product_name : '';
+            return $productType ? $productType->product_name : BiProductType::getNameMap(BiProductType::PRODUCT_TYPE_EB001);
         });
     }
 
