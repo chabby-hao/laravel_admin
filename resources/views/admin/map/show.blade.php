@@ -173,6 +173,7 @@
             <div class="item">
                 <img src="{{asset('map/cheliang@2x.png')}}" alt="">
                 <span class="right-text">车辆</span>
+                <span class="right-text total">100000</span>
             </div>
         </li>
         <li class="chongdianpeng">
@@ -200,38 +201,6 @@
             </li>
     @endforeach
 
-    {{--<li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_STORAGE}}">
-        <span class="intro">库存</span>
-        <span class="quantity">0</span>
-    </li>
-    <li class="choose-li" name="{{\App\Models\TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE}}">
-        <span class="intro">渠道库存</span>
-        <span class="quantity">0</span>
-    </li>
-    <li class="choose-li active" name="{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}">
-        <span class="intro">骑行</span>
-        <span class="quantity">0</span>
-    </li>
-    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_PARK}}">
-        <span class="intro">停车</span>
-        <span class="quantity">0</span>
-    </li>
-    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_LESS_48}}">
-        <span class="intro">离线<48小时</span>
-        <span class="quantity">0</span>
-    </li>
-    <li class="choose-li" name="{{\App\Objects\DeviceObject::CACHE_LIST_OFFLINE_MORE_48}}">
-        <span class="intro">离线>48小时</span>
-        <span class="quantity">0</span>
-    </li>--}}
-    <!--<li class="choose-li" name="jijiangguoqi">
-            <span class="intro">即将过期</span>
-            <span class="quantity">0</span>
-        </li>
-        <li class="choose-li" name="guoqi">
-            <span class="intro">过期</span>
-            <span class="quantity">0</span>
-        </li>-->
     </ul>
 </div>
 
@@ -650,6 +619,7 @@
                 var name = $(this).attr('name')
                 $(this).find('.quantity').html(res[name]);
             });
+            $(".total").text(res['total']);
         }
     })
 

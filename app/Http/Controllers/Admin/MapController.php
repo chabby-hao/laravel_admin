@@ -103,7 +103,7 @@ class MapController extends BaseController
             DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
         ];*/
 
-        $out = [];
+        $out = ['total'=>0];
         $keyPre = $this->getCustomerKeyPre();
         $user = Auth::user();
         $typeId = $user->type_id;
@@ -112,6 +112,7 @@ class MapController extends BaseController
             $cachekey = $cacheKeyPre . $k;
             $data = Cache::store('file')->get($cachekey) ?: [];
             $out[$k] = count($data);
+            $out['total'] += $out[$k];
         }
         return $out;
     }
