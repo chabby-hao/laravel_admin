@@ -180,6 +180,7 @@
             <div class="item">
                 <img src="{{asset('map/chongdianpeng@2x.png')}}" alt="">
                 <span class="right-text">充电棚</span>
+                <span class="right-text total_chongdianpeng">3</span>
             </div>
         </li>
         <li class="wangdian">
@@ -649,6 +650,17 @@
             }
         })
     });
+
+    $.ajax({
+        type: "get",
+        dataType: 'json',
+        //async:false,
+        url: 'http://anxinchong.vipcare.com/api/map/deviceData',//数据类型为jsonp
+        jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
+        success: function (res) {
+            $(".total_chongdianpeng").text(res.length);
+        }
+    })
 
 </script>
 </body>
