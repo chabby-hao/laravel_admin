@@ -18,7 +18,6 @@ class AdminBeforeCheck
 
     //不需要验证权限的路由
     protected $noPermisVerify = [
-        'index/welcome',
         'device/searchCity',
         'brand/detail',
         'device/exportList',
@@ -58,20 +57,19 @@ class AdminBeforeCheck
                 $permisName = 'index/welcome';//默认首页
             }
 
-            /** @var BiUser $user */
-            $user = Auth::user();
-            //工厂跳转特殊
-            if($user->hasRole(FactoryLogic::$roleName)){
-                return Redirect::action('Admin\DeliveryController@factoryPanel');
-            }
-
             //无需配置权限
             if(in_array($permisName, $this->noPermisVerify)){
                 return $next($request);
             }
 
-
+            /** @var BiUser $user */
+            $user = Auth::user();
             if(!$user->can($permisName)){
+
+                //工厂跳转特殊
+                if($user->hasRole(FactoryLogic::$roleName)){
+                    return Redirect::action('Admin\DeliveryController@factoryPanel');
+                }
 
                 if($request->isXmlHttpRequest()){
                     return response(['code'=>403,'msg'=>'未经授权操作']);
