@@ -173,7 +173,7 @@
             <div class="item">
                 <img src="{{asset('map/cheliang@2x.png')}}" alt="">
                 <span class="right-text">车辆</span>
-                <span class="right-text total">100000</span>
+                <span class="right-text total"></span>
             </div>
         </li>
         <li class="chongdianpeng">
