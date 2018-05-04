@@ -269,7 +269,7 @@ class DeviceController extends BaseController
             unset($deviceList[$k]);
         }
 
-        $file = 'export-'.date('YmdHis');
+        $file = 'export-' . date('YmdHis');
         $path = 'export/excel/';
 
         Helper::exportExcel([
@@ -281,7 +281,7 @@ class DeviceController extends BaseController
             '激活时间',
             '设备周期',
             '产品类型'
-        ], $data, $file , public_path($path),false);
+        ], $data, $file, public_path($path), false);
         $fileUrl = asset($path . $file . '.xlsx');
         return $this->outputRedictWithoutMsg($fileUrl);
     }
@@ -344,10 +344,11 @@ class DeviceController extends BaseController
         $keyPre = $this->getCustomerKeyPre();
         $where = $this->getWhere();
         $cacheTime = Carbon::now()->addMinutes(15);
+        $typeId = Auth::user()->type_id;
         foreach ($map as $k => $row) {
             $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
             $sids = Cache::store('file')->get($cacheKey);
-            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $keyPre . $k, $cacheTime, function () use ($sids, $where) {
+            $count = Cache::store('file')->remember(DeviceObject::CACHE_LIST_COUNT_PRE . $keyPre . $typeId . $k, $cacheTime, function () use ($sids, $where) {
                 //$count = TDeviceCode::getDeviceModel()->whereIn('qr', $udids)->where($where)->count();
                 $count = TDeviceCode::getDeviceModel()->whereIn('sid', $sids)->where($where)->count();
                 return $count;

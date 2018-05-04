@@ -183,6 +183,11 @@ class DeviceLogic extends BaseLogic
 
     private static function getDeviceStatus(DeviceObject $deviceObj)
     {
+
+        if(!$deviceObj->getActiveAt()){
+            return '';
+        }
+
         if ($deviceObj->getisOnline()) {
             if ($deviceObj->getTurnon() === DeviceObject::SWITCH_STATUS_TURNON) {
                 $deviceStatus = '骑行';
