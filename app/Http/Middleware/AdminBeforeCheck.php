@@ -18,10 +18,12 @@ class AdminBeforeCheck
 
     //不需要验证权限的路由
     protected $noPermisVerify = [
+        'index/welcome',
         'device/searchCity',
         'brand/detail',
         'device/exportList',
         'device/map',
+        'user/resetPassword',
     ];
 
     /**

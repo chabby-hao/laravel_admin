@@ -15,17 +15,45 @@ use App\Logics\AuthLogic;
 use App\Models\BiUser;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 
 class UserController extends BaseController
 {
+
+    public function resetPassword(Request $request)
+    {
+
+        if ($request->isXmlHttpRequest()) {
+            //修改密码
+            $data = $this->checkParams(['password_old', 'password', 'password_confirm'], $request->input());
+            if ($data['password'] !== $data['password_confirm']) {
+                return $this->outPutError('两次密码输入不一致');
+            }
+            $userId = Auth::id();
+            $user = Auth::user();
+            if (!Hash::check($data['password_old'], $user->getAuthPassword())) {
+                return $this->outPutError('旧密码输入不正确');
+            }
+
+            $authLogic = new AuthLogic();
+            if ($authLogic->resetPassword($userId, $data['password'])) {
+                return $this->outputRedirectWithMsg(URL::action('Admin\IndexController@welcome'),'修改成功');
+            }
+            return $this->outPutError('修改失败，请确认旧密码输入正确');
+        }
+
+        return view('admin.user.resetpassword');
+    }
+
     public function list()
     {
 
-        $users = BiUser::join('role_user','id','=','user_id')->orderByDesc('id')->paginate();
+        $users = BiUser::join('role_user', 'id', '=', 'user_id')->orderByDesc('id')->paginate();
         $usersList = $users->items();
 
-        foreach ($usersList as $user){
+        foreach ($usersList as $user) {
 
         }
 
@@ -40,7 +68,7 @@ class UserController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $input = $this->getFilterInput($request->input());
             $authLogic = new AuthLogic();
-            if($authLogic->createUser($input)){
+            if ($authLogic->createUser($input)) {
                 return $this->outPutRedirect(URL::action('Admin\UserController@list'));
             }
             return $this->outPutError('添加失败,请确认是否有重复的账号名称');
@@ -52,21 +80,21 @@ class UserController extends BaseController
     public function edit(Request $request)
     {
         $id = $request->input('id');
-        if(!$id){
+        if (!$id) {
             return $this->outPutError();
         }
 
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $input = $this->getFilterInput($request->input(), false);
             $authLogic = new AuthLogic();
-            if($authLogic->editUser($id, $input)){
+            if ($authLogic->editUser($id, $input)) {
                 return $this->outPutRedirect(URL::action('Admin\UserController@list'));
             }
             return $this->outPutError('修改失败,请确认信息正确');
         }
 
-        return view('admin.user.edit',[
-            'user'=>BiUser::getUserWithRole($id),
+        return view('admin.user.edit', [
+            'user' => BiUser::getUserWithRole($id),
         ]);
 
     }
@@ -83,25 +111,25 @@ class UserController extends BaseController
             'role_id',
             'nickname'
         ];
-        if($needPwd){
+        if ($needPwd) {
             $arrCheck[] = 'password';
             $arrCheck[] = 'password_confirm';
         }
-        if(!$input = Helper::arrayRequiredCheck($arrCheck,$input,false,['email','brand_id','channel_id','nickname'])){
+        if (!$input = Helper::arrayRequiredCheck($arrCheck, $input, false, ['email', 'brand_id', 'channel_id', 'nickname'])) {
             return $this->outPutError('信息不完整');
         }
-        if($needPwd && ($input['password'] !== $input['password_confirm'])){
+        if ($needPwd && ($input['password'] !== $input['password_confirm'])) {
             return $this->outPutError('两次密码不一致');
         }
 
 
-        if($input['user_type'] == BiUser::USER_TYPE_ALL){
+        if ($input['user_type'] == BiUser::USER_TYPE_ALL) {
             $input['type_id'] = 0;
-        }elseif($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']){
+        } elseif ($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']) {
             $input['type_id'] = $input['channel_id'];
-        }elseif($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']){
-            $input['type_id'] =$input['brand_id'];
-        }else{
+        } elseif ($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']) {
+            $input['type_id'] = $input['brand_id'];
+        } else {
             return $this->outPutError('信息有误，请确认填写正确');
         }
         return $input;
@@ -109,7 +137,7 @@ class UserController extends BaseController
 
     public function delete(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $id = $this->getId($request);
             $user = BiUser::findOrFail($id);
             $user->delete();
@@ -127,12 +155,12 @@ class UserController extends BaseController
 
         $id = $request->input('id');
 
-        if(!$id){
+        if (!$id) {
             return $this->outPutError();
         }
         $user = BiUser::find($id);
 
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $roleId = $this->checkParams(['role_id'], $request->input())['role_id'];
             //$user->roles()->detach();
             $user->roles()->sync([$roleId]);
@@ -141,9 +169,9 @@ class UserController extends BaseController
 
         $roles = Role::all();
 
-        return view('admin.user.attach_role',[
-            'user'=>$user,
-            'roles'=>$roles,
+        return view('admin.user.attach_role', [
+            'user' => $user,
+            'roles' => $roles,
         ]);
     }
 

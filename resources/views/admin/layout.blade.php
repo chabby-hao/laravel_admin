@@ -59,8 +59,14 @@
                 {{--<li><a href="#"><i class="icon-check"></i> My Tasks</a></li>--}}
                 {{--<li class="divider"></li>--}}
                 <li>
-                    <a href="{{ \Illuminate\Support\Facades\URL::route('admin-logout')  }}"><i class="icon-key"></i>
-                        Log Out</a></li>
+                    <a href="{{ URL::action('Admin\UserController@resetPassword')  }}">
+                        <i class="icon-key"></i>Change Password</a>
+                </li>
+                <li>
+                <a href="{{ \Illuminate\Support\Facades\URL::route('admin-logout')  }}">
+                        <i class="icon-signout"></i>Log Out</a>
+                </li>
+
             </ul>
         </li>
     </ul>

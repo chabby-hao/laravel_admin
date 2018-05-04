@@ -28,6 +28,12 @@ class AuthLogic extends BaseLogic
         return $permis ? $permis->display_name : '';
     }
 
+    public function resetPassword($id, $newPwd)
+    {
+        $user = BiUser::find($id);
+        $user->password = bcrypt($newPwd);
+        return $user->save();
+    }
 
     public function createUser(array $data)
     {
