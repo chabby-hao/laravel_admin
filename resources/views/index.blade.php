@@ -106,7 +106,7 @@
 
     <div class="bi-content-top">
         <span class="bi-content-partner">合作伙伴</span>
-        <span class="bi-zixun">合作咨询：bd@vipcare.com 021-6485-8993</span>
+        <span class="bi-zixun">合作咨询：bd@vipcare.com 021-6403 0850</span>
         <div class="bi-icon"><img src="/image/biaoqian3@2x.png" alt=""></div>
     </div>
 
