@@ -297,7 +297,7 @@ class DeviceController extends BaseController
 
         $this->listSearch($model);
 
-        $devices = $model->orderByDesc('active')->paginate();
+        $devices = $model->orderByDesc('active')->paginate(100);
         $deviceList = $devices->items();
 
         $data = [];
