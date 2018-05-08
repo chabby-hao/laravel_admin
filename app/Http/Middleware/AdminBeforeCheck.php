@@ -79,7 +79,7 @@ class AdminBeforeCheck
 
             return $next($request);
         }else{
-            Session::flash('lastUrl',$request->fullUrl());
+            Session::put('lastUrl',$request->fullUrl());
             return Redirect::route('admin-login');
         }
     }
