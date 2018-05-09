@@ -60,7 +60,7 @@
                                 <tr class="gradeX">
                                     <td>{{$data->datetime}}</td>
                                     <td>{{$data->location_type}}</td>
-                                    <td>{{$data->lat}},{{$data->lng}}</td>
+                                    <td><a href="{{URL::action('Admin\DeviceController@map',['lat'=>$data->lat,'lng'=>$data->lng])}}">{{$data->lat}},{{$data->lng}}</a></td>
                                     <td><a href="{{URL::action('Admin\DeviceController@map',['lat'=>$data->lat,'lng'=>$data->lng])}}">{{$data->address}}</a></td>
                                     <td>{{$data->landmark}}</td>
                                     <td>{{$data->battery}}</td>
