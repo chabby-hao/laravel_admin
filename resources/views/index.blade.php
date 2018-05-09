@@ -99,7 +99,7 @@
 
     <div class="bi-header-icon2">
         <img src="/image/biaoqian2@2x.png" alt="">
-        <span>COPY @ HTTP://BI.VIPCARE.COM, ALL RIGHTS RESERVED. </span>
+        <span>Copyright © 2016-2018 VIPCARE. All Rights Reserved.</span>
     </div>
 </div>
 <div class="bi-content">
@@ -154,7 +154,7 @@
     </div>
 
     <div class="bi-copy">
-        京ICP备12005794号|京ICP证130311号|京公网安备11010102001221号 2011-2018 &copy; BI.VIPCARE.COM
+        沪ICP备15011485号-2   	Copyright © 2016-2018 VIPCARE. All Rights Reserved.
     </div>
 </div>
 
