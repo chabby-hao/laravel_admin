@@ -19,7 +19,9 @@ class DewinLogic extends BaseLogic
     {
 
         $url = 'http://weixin.e-dewin.com:81/api/getUdid';
-        $data = ['bianhao' => $dewinId];
+        $data = [
+            'bianhao' => $dewinId
+        ];
 
         $body = self::sendPost($url, $data);
 
@@ -38,7 +40,7 @@ class DewinLogic extends BaseLogic
             'sign' => md5($time . self::SECRET),
             'timestamp' => $time,
         );
-        $data = array_merge($data, $params);
+        $data = array_merge(['data'=>$data], $params);
         $client = new Client();
         $r = $client->post($url, [
             'json' => $data,
