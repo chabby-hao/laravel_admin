@@ -15,7 +15,7 @@
                                     <label>输入搜索：</label>
                                 </div>
                                 <div class="inline-block">
-                                    <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
+                                    <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI...">
                                     <input type="text" id="name" name="name" placeholder="设备名称">
                                 </div>
 
