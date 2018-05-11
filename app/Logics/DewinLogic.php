@@ -7,6 +7,7 @@ use App\Models\TEvMileageGp;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class DewinLogic extends BaseLogic
 {
@@ -41,6 +42,8 @@ class DewinLogic extends BaseLogic
         $r = $client->post($url, [
             'json' => $data,
         ]);
+        Log::debug("dewin post request --- :", $params);
+        Log::debug("dewin post response --- :{$r->getBody()}");
         $body = json_decode($r->getBody(), true);
         return $body;
     }
