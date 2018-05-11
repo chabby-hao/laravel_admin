@@ -43,7 +43,7 @@ class DewinLogic extends BaseLogic
         $r = $client->post($url, [
             'json' => $data,
         ]);
-        Log::debug("dewin post request --- :", ['url'=>$url,'body'=>$data]);
+        Log::debug("dewin post request $url--- :", $data);
         Log::debug("dewin post response --- :{$r->getBody()}");
         $body = json_decode($r->getBody(), true);
         return $body;
