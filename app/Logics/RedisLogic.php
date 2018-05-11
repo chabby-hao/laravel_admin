@@ -65,6 +65,39 @@ class RedisLogic extends BaseLogic
         return self::$zhangfeiData[$imei] = $data;
     }
 
+    public static function getImeiByBatteryId($batteryId)
+    {
+        self::getRedis()->select(1);
+        $imei = self::getRedis()->hGet('batteryIDToIMEI', $batteryId);
+        return $imei;
+    }
+
+    public static function getZhangfeiByBatteryId($batteryId)
+    {
+        $key = 'zhangfei_charge_batteryID:' . $batteryId;
+        self::getRedis()->select(1);
+        $data = self::getRedis()->hGetAll($key) ?: [];
+        //Log::debug("redis hgetall $key", $data);
+        /*$ret['udid'] = strval($udid);
+        $ret["timeStamp"] = intval($redisData["timeStamp"]);
+        $ret["type"] = intval($redisData["type"]);
+        $ret["batteryOnlieState"] = intval($redisData["batteryOnlieState"]);
+        $ret["lineState"] = intval($redisData["lineState"]);
+        $ret["batteryID"] = strval($redisData["batteryID"]);
+        $ret["batteryLevel"] = intval($redisData["batteryLevel"]);
+        $ret["batteryVoltage"] = intval($redisData["batteryVoltage"]);
+        $ret["coreTemperature"] = intval($redisData["coreTemperature"]);
+        $ret["batteryCycleTimes"] = intval($redisData["batteryCycleTimes"]);
+        $ret["batteryIOCurrent"] = intval($redisData["batteryIOCurrentPlus"]);
+        if(!$ret['batteryIOCurrent']){
+            $ret['batteryIOCurrent'] = intval($redisData['batteryIOCurrent']);
+        }
+        $ret["PCBTemperature"] = intval($redisData["PCBTemperature"]);
+        $ret["batteryHealthState"] = intval($redisData["batteryHealthState"]);
+        $ret["batteryIOState"] = intval($redisData["batteryIOState"]);*/
+        return $data;
+    }
+
     public static function getDevDataByUdid($udid)
     {
         $imei = DeviceLogic::getImei($udid);

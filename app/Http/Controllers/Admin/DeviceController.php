@@ -13,8 +13,10 @@ use App\Libs\Helper;
 use App\Libs\MyPage;
 use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
+use App\Logics\DewinLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
+use App\Logics\RedisLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiDeviceType;
@@ -232,6 +234,12 @@ class DeviceController extends BaseController
             return $id;
         } elseif ($udid = DeviceLogic::getUdidByImsi($id)) {
             //id=>imsi
+            return $udid;
+        } elseif ($imei = RedisLogic::getImeiByBatteryId($id)) {
+            //id=>batteryId
+            return DeviceLogic::getUdid($imei);
+        } elseif ($udid = DewinLogic::getUdidByDewinId($id)) {
+            //id=>dewinId
             return $udid;
         } else {
             return false;
