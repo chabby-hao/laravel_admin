@@ -14,6 +14,7 @@ class DewinLogic extends BaseLogic
 
     const SECRET = 'xMJxrmwhdUT3zD5f1JpTxjHE';
 
+
     public static function getUdidByDewinId($dewinId)
     {
 
@@ -42,7 +43,7 @@ class DewinLogic extends BaseLogic
         $r = $client->post($url, [
             'json' => $data,
         ]);
-        Log::debug("dewin post request --- :", $data);
+        Log::debug("dewin post request --- :", ['url'=>$url,'body'=>$data]);
         Log::debug("dewin post response --- :{$r->getBody()}");
         $body = json_decode($r->getBody(), true);
         return $body;
