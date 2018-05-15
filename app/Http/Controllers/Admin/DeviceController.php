@@ -674,6 +674,6 @@ class DeviceController extends BaseController
 
     public function map()
     {
-        RETURN view('admin.device.map');
+        return view('admin.device.map');
     }
 }
