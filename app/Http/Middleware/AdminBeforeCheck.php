@@ -79,6 +79,11 @@ class AdminBeforeCheck
 
             return $next($request);
         }else{
+
+            if($request->isXmlHttpRequest()){
+                return response(['code'=>501,'msg'=>'登录状态过期，请重新登录']);
+            }
+
             Session::put('lastUrl',$request->fullUrl());
             return Redirect::route('admin-login');
         }
