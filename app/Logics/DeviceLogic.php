@@ -788,6 +788,10 @@ class DeviceLogic extends BaseLogic
             $battery = pow((($vcur - $vunder) / ($vfull - $vunder)), 2) * 100;
 
             $battery = intval($battery);    //round($percent)
+
+            if($udid == '924507048631'){
+                var_dump($battery, $vcur, $vunder, $vfull);
+            }
         }
         return $battery;
     }
