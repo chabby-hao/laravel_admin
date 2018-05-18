@@ -756,20 +756,20 @@ class DeviceLogic extends BaseLogic
                 //直接返回电压
                 return intval($data['charger_chargerVoltage']);
             } else {
-                $vcur = static::getCurrentVoltage($imei);
+                $vcur = static::getCurrentVoltage($imei) * 10;
             }
 
             /** 剩余电量校正 **/
             $gcount = self::getBatteryCount($imei);
             $umax = !empty($data['umax']) ? $data['umax'] : 135;//单位满电电池的电压
-            $umax = max($umax, 13.5);//最大13.5V
-            $vunder = $gcount * 10.5; //欠压总电压
+            $umax = max($umax, 135);//最大13.5V
+            $vunder = $gcount * 105; //欠压总电压
 
             if (in_array($udid, ['928730994076', '929950255881', '921664606798'])) {
-                $umax = 13;
+                $umax = 130;
             }
             if (in_array($udid, ['921753803719'])) {
-                $umax = 12.86;
+                $umax = 128.6;
             }
 
             $vfull = $gcount * $umax;//满电总电压
