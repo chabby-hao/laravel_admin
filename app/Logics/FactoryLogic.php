@@ -72,6 +72,7 @@ class FactoryLogic extends BaseLogic
                 'channel_id'=>$order->channel_id,
                 'brand_id'=>$shipOrder->brand_id,
                 'ebike_type_id'=>$shipOrder->ebike_type_id,
+                'device_type'=>$order->device_type,
             ]);
 
         }
