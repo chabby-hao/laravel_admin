@@ -749,6 +749,10 @@ class DeviceLogic extends BaseLogic
 
         $battery = 0;
 
+        if($imei == '357550110486310'){
+            var_dump($data, $udid);
+        }
+
         if (array_key_exists('percent', $data)) {
 
             //糖果充电器
