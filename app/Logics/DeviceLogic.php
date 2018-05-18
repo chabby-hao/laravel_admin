@@ -778,6 +778,10 @@ class DeviceLogic extends BaseLogic
 
             $vfull = $gcount * $umax;//满电总电压
 
+            if($imei){
+                var_dump($vunder, $vcur, $vfull);
+            }
+
             //欠压
             if ($vcur <= $vunder) {
                 return 0;
