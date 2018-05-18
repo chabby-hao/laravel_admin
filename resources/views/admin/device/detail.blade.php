@@ -191,7 +191,7 @@
                                 <td><%brandName%></td>
                                 <td><%ebikeTypeName%></td>
                                 <td><%chassis%></td>
-                                <td><%batterySpecification%></td>
+                                <td><%batterySpecification%>v</td>
                             </tr>
                             </tbody>
                         </table>
