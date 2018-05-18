@@ -749,10 +749,6 @@ class DeviceLogic extends BaseLogic
 
         $battery = 0;
 
-        if($imei == '357550110486310'){
-            var_dump($data, $udid);
-        }
-
         if (array_key_exists('percent', $data)) {
 
             //糖果充电器
@@ -766,21 +762,17 @@ class DeviceLogic extends BaseLogic
             /** 剩余电量校正 **/
             $gcount = self::getBatteryCount($imei);
             $umax = !empty($data['umax']) ? $data['umax'] : 135;//单位满电电池的电压
-            $umax = max($umax, 135);//最大13.5V
-            $vunder = $gcount * 105; //欠压总电压
+            $umax = max($umax, 13.5);//最大13.5V
+            $vunder = $gcount * 10.5; //欠压总电压
 
             if (in_array($udid, ['928730994076', '929950255881', '921664606798'])) {
-                $umax = 130;
+                $umax = 13;
             }
             if (in_array($udid, ['921753803719'])) {
-                $umax = 128.6;
+                $umax = 12.86;
             }
 
             $vfull = $gcount * $umax;//满电总电压
-
-            if($imei){
-                var_dump($vunder, $vcur, $vfull);
-            }
 
             //欠压
             if ($vcur <= $vunder) {
@@ -796,10 +788,6 @@ class DeviceLogic extends BaseLogic
             $battery = pow((($vcur - $vunder) / ($vfull - $vunder)), 2) * 100;
 
             $battery = intval($battery);    //round($percent)
-
-            if($udid == '924507048631'){
-                var_dump($battery, $vcur, $vunder, $vfull);
-            }
         }
         return $battery;
     }
