@@ -161,7 +161,7 @@
                                     <%/lastLocation.lng%></td>
                                 <td><%lastLocation.address%></td>
                                 <td><%lastLocation.landmark%></td>
-                                <td><%chipPower%></td>
+                                <td><%chipPower%>%</td>
                                 <td><a class="text-success" href="<%locationUrl%>">历史定位</a></td>
                             </tr>
                             </tbody>
@@ -214,9 +214,9 @@
                                 <td><%lastContact%></td>
                                 <td><%turnonTrans%></td>
                                 <td><%isLockTrans%></td>
-                                <td><%voltage%></td>
-                                <td><%battery%></td>
-                                <td><%chipPower%></td>
+                                <td><%voltage%>v</td>
+                                <td><%battery%>%</td>
+                                <td><%chipPower%>%</td>
                                 <td><%chargeTrans%></td>
                                 <td>
                                     {{--<a class="text-success">电门日志</a>--}}
