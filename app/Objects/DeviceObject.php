@@ -10,6 +10,8 @@ class DeviceObject extends BaseObject
     const CACHE_CHANNEL_PRE ='channel:';//渠道缓存前缀
     const CACHE_BRAND_PRE = 'brand:';//品牌缓存前缀
 
+    const CACHE_DEVICE_TYPE_PRE = 'device_type:';//设备型号缓存前缀
+
     const CACHE_MAP_PRE = 'map:';//地图缓存前缀
 
     //缓存前缀

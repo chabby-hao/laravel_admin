@@ -10,6 +10,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Libs\Helper;
+use App\Logics\DeviceLogic;
+use App\Logics\DewinLogic;
+use App\Logics\RedisLogic;
 use App\Models\BiUser;
 use App\Objects\DeviceObject;
 use Carbon\Carbon;
@@ -30,6 +33,28 @@ class BaseController extends Controller
             return false;
         } else {
             return true;
+        }
+    }
+
+    protected function getUdid($id)
+    {
+        if ($udid = DeviceLogic::getUdid($id)) {
+            //id=>imei
+            return $udid;
+        } elseif ($imei = DeviceLogic::getImei($id)) {
+            //id=>udid
+            return $id;
+        } elseif ($udid = DeviceLogic::getUdidByImsi($id)) {
+            //id=>imsi
+            return $udid;
+        } elseif ($imei = RedisLogic::getImeiByBatteryId($id)) {
+            //id=>batteryId
+            return DeviceLogic::getUdid($imei);
+        } elseif ($udid = DewinLogic::getUdidByDewinId($id)) {
+            //id=>dewinId
+            return $udid;
+        } else {
+            return false;
         }
     }
 

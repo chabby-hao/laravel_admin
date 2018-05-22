@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Logics\LocationLogic;
+use App\Logics\MapLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiEbikeType;
@@ -134,7 +135,8 @@ class MapCache extends BaseCommand
                 $data = [];
                 if ($map2[$t]) {
                     foreach ($map2[$t] as $udid) {
-                        $loc = $this->getLoc($udid);
+                        $loc = MapLogic::getMapLoc($udid);
+                        DeviceLogic::clear();
                         $loc && $data[] = $loc;
                     }
                 }
@@ -146,27 +148,6 @@ class MapCache extends BaseCommand
             }
 
         }
-    }
-
-    private function getLoc($udid)
-    {
-        $gps = DeviceLogic::getLastLocationInfoByUdid($udid);
-        DeviceLogic::clear();
-        if (!$gps['time']) {
-            return [];
-        }
-        $data = [
-            'name' => $udid,
-            'value' => [
-                floatval($gps['lng']),
-                floatval($gps['lat']),
-                1,//数量
-            ],
-            'time' => date('Y-m-d H:i', $gps['time']),
-            'address' => $gps['address'] ?: '无',
-        ];
-        //echo "loc : $udid get success" . "\n";
-        return $data;
     }
 
 }
