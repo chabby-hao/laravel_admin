@@ -46,6 +46,7 @@ class MapController extends BaseController
                 if($id = $request->input('id')){
                     if($udid = $this->getUdid($id)){
                         $data = MapLogic::getMapLoc($udid);
+                        return $this->outPut(['gps' => $data]);
                     }
                 }
                 $fields = ['device_type','channel_id','brand_id'];
