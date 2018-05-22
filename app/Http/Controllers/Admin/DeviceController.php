@@ -287,11 +287,20 @@ class DeviceController extends BaseController
         $deviceList = $devices->items();
 
         $data = [];
+        $deviceTypeMap = BiDeviceType::getNameMap();
+        $brandMap = BiBrand::getBrandMap();
+        $ebikeTypeMap = BiEbikeType::getTypeName();
+        $channelMap = BiChannel::getChannelMap();
 
         /** @var TDeviceCode $device */
         foreach ($deviceList as $device) {
             //$data[] = DeviceLogic::createDevice($device->imei);
-            $data[] = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::simpleCreateDevice($device->imei);
+            $deviceObj = DeviceLogic::getDeviceFromCacheByUdid($device->qr) ?: DeviceLogic::simpleCreateDevice($device->imei);
+            $deviceObj->setDeviceTypeName($deviceTypeMap[$device->device_type]);
+            $deviceObj->setEbikeTypeName($ebikeTypeMap[$device->ebike_type_id]);
+            $deviceObj->setBrandName($brandMap[$device->brand_id]);
+            $deviceObj->setChannelName($channelMap[$device->channel_id]);
+            $data[] = $deviceObj;
         }
 
         if (!$this->isCustomer()) {

@@ -79,13 +79,13 @@ class DeviceLogic extends BaseLogic
         //$device->setProductType(static::getProductTypeByUdid($udid));
         //$device->setProductTypeName(static::getProductTypeNameByUdid($udid));
         //$device->setDeviceType(static::getDeviceTypeByUdid($udid));
-        $device->setDeviceTypeName(static::getDeviceTypeNameByUdid($udid));
+        //$device->setDeviceTypeName(static::getDeviceTypeNameByUdid($udid));
         //$device->setEbikeTypeId(static::getEbikeTypeIdByUdid($udid));
-        $device->setEbikeTypeName(static::getEbikeTypeNameByUdid($udid));
+        //$device->setEbikeTypeName(static::getEbikeTypeNameByUdid($udid));
         //$device->setBrandId(static::getBrandIdByUdid($udid));
-        $device->setBrandName(static::getBrandNameByUdid($udid));
+        //$device->setBrandName(static::getBrandNameByUdid($udid));
         //$device->setChannelId(static::getChannelIdByUdid($udid));
-        $device->setChannelName(static::getChannelNameByUdid($udid));
+        //$device->setChannelName(static::getChannelNameByUdid($udid));
         //$device->setDeliverdAt(static::getDeliverdAtByUdid($udid));
         //$device->setRegisterAt(static::getRegisterAtByUdid($udid));
         $device->setActiveAt(static::getActiveAtByUdid($udid));

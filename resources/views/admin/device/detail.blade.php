@@ -53,7 +53,7 @@
                             <thead>
                             <tr>
                                 <th>设备号</th>
-                                <th>设备型号</th>
+                                <th>车型</th>
                                 <th>IMEI</th>
                                 <th>IMSI</th>
                                 <th>固件版本</th>

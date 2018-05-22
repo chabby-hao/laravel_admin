@@ -75,7 +75,7 @@ class DeviceCache extends BaseCommand
      */
     private function cacheDeviceStatus()
     {
-        $model = TDeviceCode::getDeviceModelHasType();
+        $model = TDeviceCode::getDeviceModelHasType()->orderByDesc('sid');
 
         //使用状态
         $model->where('device_cycle', '=', TDeviceCode::DEVICE_CYCLE_INUSE);
