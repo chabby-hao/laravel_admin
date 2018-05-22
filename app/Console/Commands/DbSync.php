@@ -29,7 +29,7 @@ class DbSync extends BaseCommand
 
     public function handle()
     {
-        //$this->categoryDicNew();
+        $this->categoryDicNew();
         $this->deviceCode();
     }
 
