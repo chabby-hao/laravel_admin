@@ -45,7 +45,7 @@ class MapController extends BaseController
                 //id
                 if($id = $request->input('id')){
                     if($udid = $this->getUdid($id)){
-                        $data = MapLogic::getMapLoc($udid);
+                        $data = [MapLogic::getMapLoc($udid)];
                         return $this->outPut(['gps' => $data]);
                     }
                 }
