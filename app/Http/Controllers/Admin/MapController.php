@@ -41,6 +41,7 @@ class MapController extends BaseController
                 return $this->outPut($this->getMapCount());
             } elseif ($request->has('name')) {
                 //具体点
+                $k = $request->input('name');
 
                 //id
                 if($id = $request->input('id')){
@@ -59,11 +60,9 @@ class MapController extends BaseController
                 $searchCount = count($searchfield);
                 if($searchCount === 0){
                     //没有选择
-                    $k = $request->input('name');
                     $data = $this->getMapCacheData($k);
                 }elseif($searchCount === 1){
                     //选择一项搜索,用缓存
-                    $k = $request->input('name');
                     $data = $this->getMapCacheDataByField($searchfield[0], $k);
                 }else{
                     $where = [];
@@ -73,6 +72,9 @@ class MapController extends BaseController
                         $where[$field] = $request->input($field);
                     }
                     $model = TDeviceCode::getDeviceModel();
+                    $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
+                    $ids = Cache::store('file')->get($cacheKey) ?: [];
+                    $model->whereIn('sid', $ids);
                     $model->where($where)->limit(5000);
                     $devices = $model->get();
                     foreach ($devices as $device){
