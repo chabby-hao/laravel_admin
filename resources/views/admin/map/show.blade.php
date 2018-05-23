@@ -813,7 +813,7 @@
     function reloadMap(res){
         var newoption = deepCopy(option, {});
         console.log(newoption);
-
+        newoption.title.subtext = '当前'+res.gps.length+'辆';
         if(res.single){
             if(res.gps.length > 0){
                 newoption.bmap.zoom = 13;
