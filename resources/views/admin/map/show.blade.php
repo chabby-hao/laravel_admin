@@ -320,22 +320,22 @@
                 <div class="input-group">
                 <input name="id" type="text" style="width: 180px" class="form-control" placeholder="设备号">
                 <select name="device_type" class="selectpicker"  data-width="100px" data-size="10">
-                    <option value="1" class="myoption">Mustard</option>
-                    <option value="2" class="myoption">Ketchup</option>
-                    <option value="3" class="myoption">Relish</option>
-                    <option value="4" class="myoption">Relish</option>
+                    <option value="" class="myoption">选择型号</option>
+                    @foreach(\App\Models\BiDeviceType::getNameMap() as $id=>$name)
+                        <option value="{{$id}}" class="myoption">{{$name}}</option>
+                    @endforeach
                 </select>
                 <select name="channel_id" class="selectpicker" data-width="100px" data-size="10">
-                    <option class="myoption">Mustard</option>
-                    <option class="myoption">Ketchup</option>
-                    <option class="myoption">Relish</option>
-                    <option class="myoption">Relish</option>
+                    <<option value="" class="myoption">选择渠道</option>
+                    @foreach(\App\Models\BiChannel::getChannelMap() as $id=>$name)
+                        <option value="{{$id}}" class="myoption">{{$name}}</option>
+                    @endforeach
                 </select>
                 <select name="brand_id" class="selectpicker" data-width="100px" data-size="10">
-                    <option class="myoption">Mustard</option>
-                    <option class="myoption">Ketchup</option>
-                    <option class="myoption">Relish</option>
-                    <option class="myoption">Relish</option>
+                    <option value="" class="myoption">选择品牌</option>
+                    @foreach(\App\Models\BiBrand::getBrandMap() as $id=>$name)
+                        <option value="{{$id}}" class="myoption">{{$name}}</option>
+                    @endforeach
                 </select>
                 <span class="input-group-btn">
                     <img id="mysubmit" class="search" style="cursor:pointer;" src="{{asset('map/search.png')}}" height="34px" alt="search">
@@ -810,12 +810,22 @@
 
     var chooseName = {};
 
-    function reloadMap(res)
-    {
-        option.series[0].data = res.gps;
+    function reloadMap(res){
+        var newoption = $.extend({}, option);
+        if(res.single){
+            if(res.gps.length > 0){
+                newoption.bmap.zoom = 13;
+                newoption.bmap.center = res.gps[0].value;
+                newoption.series[0].data = res.gps;
+            }
+
+        }
+        console.log(newoption);
+
+        newoption.series[0].data = res.gps;
         //console.log(option);
         //使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        myChart.setOption(newoption);
         myChart.hideLoading();
     }
 
