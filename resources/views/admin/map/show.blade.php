@@ -325,7 +325,7 @@
                         <option value="{{$id}}" class="myoption">{{$name}}</option>
                     @endforeach
                 </select>
-                @if($isCustomer)
+                @if(!$isCustomer)
                     <select name="channel_id" class="selectpicker" data-width="100px" data-size="10">
                         <<option value="" class="myoption">选择渠道</option>
                         @foreach(\App\Models\BiChannel::getChannelMap() as $id=>$name)
