@@ -450,7 +450,7 @@
         //text: '电动车分布',
         //subtext: 'data from 安骑科技',
         //sublink: 'http://www.pm25.in',
-        left: 'center'
+        left: 'left'
     };
     var option = {
         title: title,
