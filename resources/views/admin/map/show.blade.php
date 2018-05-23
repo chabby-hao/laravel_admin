@@ -584,7 +584,7 @@
                 data: convertData,
                 symbol: 'circle',//image://./cheliang2@2x.png  pin
                 symbolSize: function () {
-                    return 9;
+                    return 5;
                 },
                 hoverAnimation: true,
                 tooltip: {},
