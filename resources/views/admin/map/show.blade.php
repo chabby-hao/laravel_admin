@@ -811,7 +811,7 @@
     var chooseName = {};
 
     function reloadMap(res){
-        var newoption = $.extend({}, option);
+        var newoption = deepCopy(option, {});
         console.log(newoption);
 
         if(res.single){
