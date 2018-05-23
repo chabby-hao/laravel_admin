@@ -812,6 +812,8 @@
 
     function reloadMap(res){
         var newoption = $.extend({}, option);
+        console.log(newoption);
+
         if(res.single){
             if(res.gps.length > 0){
                 newoption.bmap.zoom = 13;
@@ -820,7 +822,6 @@
             }
 
         }
-        console.log(newoption);
 
         newoption.series[0].data = res.gps;
         //console.log(option);
