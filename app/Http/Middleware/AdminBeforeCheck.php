@@ -62,6 +62,12 @@ class AdminBeforeCheck
                 return $next($request);
             }
 
+
+            //本地不需要验证权限
+            if(env('APP_ENV') == 'local'){
+                return $next($request);
+            }
+
             /** @var BiUser $user */
             $user = Auth::user();
             if(!$user->can($permisName)){

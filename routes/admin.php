@@ -78,5 +78,11 @@ Route::any('/map/show','Admin\MapController@show');
 Route::any('/brand/detail','Admin\BrandController@detail');
 
 
+Route::any('/tool/file','Admin\ToolController@file');
+Route::any('/tool/voiceUpdate','Admin\ToolController@voiceUpdate');
+
+
+
+
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');
