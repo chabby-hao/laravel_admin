@@ -318,7 +318,7 @@
         <div class="pull-right">
             <form id="myform" method="get">
                 <div class="input-group">
-                <input name="id" type="text" style="width: 180px" class="form-control" placeholder="设备号">
+                <input name="id" type="text" style="width: 180px" class="form-control" placeholder="设备号/IMEI/IMSI...">
                 <select name="device_type" class="selectpicker"  data-width="100px" data-size="10">
                     <option value="" class="myoption">选择型号</option>
                     @foreach(\App\Models\BiDeviceType::getNameMap() as $id=>$name)
