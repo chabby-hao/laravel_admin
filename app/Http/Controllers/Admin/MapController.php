@@ -11,7 +11,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Libs\MyPage;
 use App\Logics\DeviceLogic;
+use App\Logics\LocationLogic;
+use App\Logics\MapLogic;
 use App\Logics\OrderLogic;
+use App\Logics\RedisLogic;
 use App\Models\BiBrand;
 use App\Models\BiEbikeType;
 use App\Models\BiOrder;
@@ -23,10 +26,12 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\URL;
 
 class MapController extends BaseController
 {
+
     public function show(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
@@ -37,8 +42,48 @@ class MapController extends BaseController
             } elseif ($request->has('name')) {
                 //具体点
                 $k = $request->input('name');
-                $data = $this->getMapCacheData($k);
-                return $this->outPut(['gps' => &$data]);
+
+                //id
+                if($id = $request->input('id')){
+                    if($udid = $this->getUdid($id)){
+                        $data = [MapLogic::getMapLoc($udid)];
+                        return $this->outPut(['gps' => $data,'single'=>1]);
+                    }
+                }
+                $fields = ['device_type','channel_id','brand_id'];
+                $searchfield = [];
+                foreach ($fields as $field){
+                    if($request->input($field)){
+                        $searchfield[] = $field;
+                    }
+                }
+                $searchCount = count($searchfield);
+                if($searchCount === 0){
+                    //没有选择
+                    $data = $this->getMapCacheData($k);
+                }elseif($searchCount === 1){
+                    //选择一项搜索,用缓存
+                    $data = $this->getMapCacheDataByField($searchfield[0], $k);
+                }else{
+                    $where = [];
+                    $data = [];
+                    //选择2项以上搜索,用db
+                    foreach ($searchfield as $field){
+                        $where[$field] = $request->input($field);
+                    }
+                    $model = TDeviceCode::getDeviceModel();
+                    $cacheKey = DeviceObject::CACHE_LIST_PRE . $k;
+                    $ids = Cache::store('file')->get($cacheKey) ?: [];
+                    $model->whereIn('sid', $ids);
+                    $model->where($where)->limit(5000);
+                    $devices = $model->get();
+                    foreach ($devices as $device){
+                        $udid = $device->qr;
+                        $data[] = MapLogic::getMapLoc($udid);
+                    }
+                }
+
+                return $this->outPut(['gps' => $data]);
             }
 
         }
@@ -80,6 +125,25 @@ class MapController extends BaseController
         return $map;
     }
 
+    private function getMapCacheDataByField($field, $k)
+    {
+        if($field == 'device_type'){
+            $keyPre = DeviceObject::CACHE_DEVICE_TYPE_PRE;
+        }elseif($field == 'channel_id'){
+            $keyPre = DeviceObject::CACHE_CHANNEL_PRE;
+        }elseif($field == 'brand_id'){
+            $keyPre = DeviceObject::CACHE_BRAND_PRE;
+        }else{
+            $keyPre = '';
+        }
+
+        $typeId = Input::get($field);
+
+        $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre . $typeId;
+        $cachekey = $cacheKeyPre . $k;
+        return Cache::store('file')->get($cachekey) ?: [];
+    }
+
     private function getMapCacheData($k)
     {
         $keyPre = $this->getCustomerKeyPre();
@@ -94,14 +158,6 @@ class MapController extends BaseController
     {
         $keyMap = $this->getKeyMap();
         $caches = array_keys($keyMap);
-        /*$caches = [
-            TDeviceCode::DEVICE_CYCLE_STORAGE,//库存
-            TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE,//渠道库存
-            DeviceObject::CACHE_LIST_RIDING,
-            DeviceObject::CACHE_LIST_PARK,
-            DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
-            DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
-        ];*/
 
         $out = ['total'=>0];
         $keyPre = $this->getCustomerKeyPre();

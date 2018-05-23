@@ -224,28 +224,6 @@ class DeviceController extends BaseController
         return $tmp;
     }
 
-    private function getUdid($id)
-    {
-        if ($udid = DeviceLogic::getUdid($id)) {
-            //id=>imei
-            return $udid;
-        } elseif ($imei = DeviceLogic::getImei($id)) {
-            //id=>udid
-            return $id;
-        } elseif ($udid = DeviceLogic::getUdidByImsi($id)) {
-            //id=>imsi
-            return $udid;
-        } elseif ($imei = RedisLogic::getImeiByBatteryId($id)) {
-            //id=>batteryId
-            return DeviceLogic::getUdid($imei);
-        } elseif ($udid = DewinLogic::getUdidByDewinId($id)) {
-            //id=>dewinId
-            return $udid;
-        } else {
-            return false;
-        }
-    }
-
     public function exportList()
     {
         $model = TDeviceCode::getDeviceModel();
