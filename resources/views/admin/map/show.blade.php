@@ -581,7 +581,7 @@
                 coordinateSystem: 'bmap',
                 data: convertData,
                 symbol: 'circle',//image://./cheliang2@2x.png  pin
-                symbolSize: function (val) {
+                symbolSize: function () {
                     return 9;
                 },
                 hoverAnimation: true,
@@ -736,7 +736,7 @@
                 coordinateSystem: 'bmap',
                 data: convertData,
                 symbol: 'circle',//image://./cheliang2@2x.png  pin
-                symbolSize: function (val) {
+                symbolSize: function () {
                     return 9;
                 },
                 hoverAnimation: true,

@@ -40,4 +40,10 @@ class BiDeviceType extends \App\Models\Base\BiDeviceType
         return self::getNameMap(false);
     }
 
+    public static function getAllIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
+
 }

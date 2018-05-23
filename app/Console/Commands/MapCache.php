@@ -9,6 +9,7 @@ use App\Logics\LocationLogic;
 use App\Logics\MapLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
 use App\Models\TDevice;
@@ -37,10 +38,12 @@ class MapCache extends BaseCommand
 
         $brands = BiBrand::getAllBrandIds();
         $channels = BiChannel::getAllChannelIds();
+        $deviceTypes = BiDeviceType::getAllIds();
 
         $this->cacheData([0], null, DeviceObject::CACHE_ALL_PRE);//全部
         $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);//品牌
         $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
+        $this->cacheData($deviceTypes, 'device_type', DeviceObject::CACHE_DEVICE_TYPE_PRE);//渠道
 
         $this->chmodCache0777();
     }

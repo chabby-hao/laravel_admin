@@ -21,7 +21,7 @@ class MapLogic extends BaseLogic
             'value' => [
                 floatval($gps['lng']),
                 floatval($gps['lat']),
-                1,//数量
+                //1,//数量
             ],
             'time' => date('Y-m-d H:i', $gps['time']),
             'address' => $gps['address'] ?: '无',
