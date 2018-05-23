@@ -325,18 +325,20 @@
                         <option value="{{$id}}" class="myoption">{{$name}}</option>
                     @endforeach
                 </select>
-                <select name="channel_id" class="selectpicker" data-width="100px" data-size="10">
-                    <<option value="" class="myoption">选择渠道</option>
-                    @foreach(\App\Models\BiChannel::getChannelMap() as $id=>$name)
-                        <option value="{{$id}}" class="myoption">{{$name}}</option>
-                    @endforeach
-                </select>
-                <select name="brand_id" class="selectpicker" data-width="100px" data-size="10">
-                    <option value="" class="myoption">选择品牌</option>
-                    @foreach(\App\Models\BiBrand::getBrandMap() as $id=>$name)
-                        <option value="{{$id}}" class="myoption">{{$name}}</option>
-                    @endforeach
-                </select>
+                @if($isCustomer)
+                    <select name="channel_id" class="selectpicker" data-width="100px" data-size="10">
+                        <<option value="" class="myoption">选择渠道</option>
+                        @foreach(\App\Models\BiChannel::getChannelMap() as $id=>$name)
+                            <option value="{{$id}}" class="myoption">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select name="brand_id" class="selectpicker" data-width="100px" data-size="10">
+                        <option value="" class="myoption">选择品牌</option>
+                        @foreach(\App\Models\BiBrand::getBrandMap() as $id=>$name)
+                            <option value="{{$id}}" class="myoption">{{$name}}</option>
+                        @endforeach
+                    </select>
+                @endif
                 <span class="input-group-btn">
                     <img id="mysubmit" class="search" style="cursor:pointer;" src="{{asset('map/search.png')}}" height="34px" alt="search">
                 </span>
@@ -598,7 +600,7 @@
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(46,224,224)'
+                        color: 'rgb(127,160,255)'
                     }
                 }
             },
@@ -753,7 +755,7 @@
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(46,224,224)'
+                        color: 'rgb(127,160,255)'
                     }
                 }
             },
