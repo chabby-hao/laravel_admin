@@ -107,12 +107,15 @@ class ToolController extends BaseController
         if($request->isXmlHttpRequest()){
             $input = $this->checkParams(['cmd','mode','url'], $request->input());
 
+            $hashKey = CommandLogic::cmdToHashKey($input['cmd']);
             if($input['mode'] == 0){
                 //单个udid更新
                 $udid = $this->getUdid($request->input('id'));
                 if(!$udid){
                     return $this->outPutError('设备码有误');
                 }
+                $imei = DeviceLogic::getImei($udid);
+                CommandLogic::cmdSet($imei, $hashKey, $input['url']);
                 CommandLogic::sendCmdByUdid($udid, $input['cmd']);
             }else{
                 //批量更新,用excel
@@ -135,7 +138,7 @@ class ToolController extends BaseController
                         return $this->outPutError('imei不正确:' . $imei);
                     }
                 }
-                $hashKey = CommandLogic::cmdToHashKey($input['cmd']);
+
                 foreach ($imeis as $imei){
                     CommandLogic::cmdSet($imei, $hashKey, $input['url']);
                     CommandLogic::sendCmd($imei, $input['cmd']);
