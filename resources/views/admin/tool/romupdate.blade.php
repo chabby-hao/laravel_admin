@@ -26,10 +26,11 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>选择文件 :</label>
                                 <div class="controls">
-                                    <select name="url" class="span11">
+                                    <select name="url" class="span8">
                                         <option value="">请选择</option>
 
                                     </select>
+                                    <a href="{{URL::action('Admin\ToolController@fileAdd')}}" class="btn btn-info">添加文件</a>
                                 </div>
                             </div>
 
