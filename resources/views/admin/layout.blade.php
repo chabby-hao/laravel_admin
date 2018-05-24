@@ -158,8 +158,12 @@
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>工具</span>
             </a>
             <ul>
-                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@file')}}">文件</a></li>
-                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@romUpdate')}}">升级</a></li>
+                @if(Auth::user()->can('tool/file'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@file')}}">文件</a></li>
+                @endif
+                @if(Auth::user()->can('tool/romUpdate'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@romUpdate')}}">升级</a></li>
+                @endif
             </ul>
         </li>
 
