@@ -16,7 +16,7 @@ function ajax_check_res(data) {
         }
         if(data.msg =='success'){
             myalert('成功');
-        }else if(data.msg){
+        }else if(data.msg && typeof(data.msg) === 'string'){
             myalert(data.msg)
         }
         // if (data.msg != undefined) {
