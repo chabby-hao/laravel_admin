@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Logics\FactoryLogic;
 use App\Models\BiUser;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -76,6 +77,13 @@ class AdminBeforeCheck
                 //工厂跳转特殊
                 if($user->hasRole(FactoryLogic::$roleName)){
                     return Redirect::action('Admin\DeliveryController@factoryPanel');
+                }
+
+                $permis = Permission::get();
+                foreach ($permis as $permi){
+                    if($user->can($permi->name)){
+                        return Redirect::to('/admin/' . $permi->name);
+                    }
                 }
 
                 if($request->isXmlHttpRequest()){
