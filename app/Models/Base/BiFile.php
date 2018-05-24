@@ -10,16 +10,22 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiChannel
+ * Class BiFile
  * 
  * @property int $id
- * @property string $channel_name
- * @property string $channel_remark
+ * @property string $filename
+ * @property string $fileurl
+ * @property int $filetype
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models\Base
  */
-class BiChannel extends Eloquent
+class BiFile extends Eloquent
 {
 	protected $connection = 'bi';
-	public $timestamps = false;
+
+	protected $casts = [
+		'filetype' => 'int'
+	];
 }

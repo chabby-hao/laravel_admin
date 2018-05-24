@@ -79,7 +79,10 @@ Route::any('/brand/detail','Admin\BrandController@detail');
 
 
 Route::any('/tool/file','Admin\ToolController@file');
-Route::any('/tool/voiceUpdate','Admin\ToolController@voiceUpdate');
+Route::any('/tool/fileAdd','Admin\ToolController@fileAdd');
+Route::any('/tool/fileDelete','Admin\ToolController@fileDelete');
+Route::any('/tool/romUpdate','Admin\ToolController@romUpdate');
+Route::any('/tool/getFileUrl','Admin\ToolController@getFileUrl');
 
 
 

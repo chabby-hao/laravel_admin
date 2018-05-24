@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TVersionUpdateInfo
- * 
+ *
  * @property int $id
  * @property string $model
  * @property string $big_version
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $release_note
  * @property int $is_open_update
  * @property bool $hardware_type
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereBigVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereHardwareType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereIsOpenUpdate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereLastModifyDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereReleaseNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersionUpdateInfo whereSvnVersion($value)
+ * @mixin \Eloquent
  */
 class TVersionUpdateInfo extends Eloquent
 {

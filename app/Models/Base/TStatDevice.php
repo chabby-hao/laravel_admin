@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TStatDevice
- * 
+ *
  * @property int $date
  * @property int $products
  * @property string $model
@@ -35,8 +35,31 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $request_count_today
  * @property int $online_count_today
  * @property int $online_today_all
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereActivedDeviceToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereActivingDevice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereActivingDevice3days($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereActivingDevice7days($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereActivingNoactivedDevice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereDeliveredDeviceToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereDurationOnlineToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereIsDayStatComplete($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereOnlineCountToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereOnlineTodayAll($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereProductionDeviceToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereProducts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereRequestCountToday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereTotalActivedDevice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereTotalDeliveredDevice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereTotalProductionDevice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStatDevice whereUserLoginTodayHaveMile($value)
+ * @mixin \Eloquent
  */
 class TStatDevice extends Eloquent
 {

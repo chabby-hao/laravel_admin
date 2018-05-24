@@ -23,6 +23,7 @@ class AdminBeforeCheck
         'device/exportList',
         'device/map',
         'user/resetPassword',
+        'tool/getFileUrl',
     ];
 
     /**

@@ -57,21 +57,6 @@ class Helper
 
     }
 
-    //生成随机验证码
-    public static function rand_verify_code($num)
-    {
-
-        $count = 0;
-        $str = '';
-        while ($count < $num) {
-            $str .= rand(0, 9);
-            $count++;
-        }
-
-        return $str;
-
-    }
-
     public static function sendShortMessage($options, $appId, $to, $templateId, $msg)
     {
         $ucpaas = New Ucpass($options);

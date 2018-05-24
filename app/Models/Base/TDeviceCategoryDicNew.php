@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceCategoryDicNew
- * 
+ *
  * @property int $record_id
  * @property int $products
  * @property string $model
@@ -23,8 +23,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $name
  * @property string $remark
  * @property int $rank
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereEvModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereProducts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereRank($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereRecordId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCategoryDicNew whereType($value)
+ * @mixin \Eloquent
  */
 class TDeviceCategoryDicNew extends Eloquent
 {

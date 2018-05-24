@@ -5,7 +5,7 @@
             <div class="span6">
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
-                        <h5>编辑</h5>
+                        <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
                     </div>
                     <div class="widget-content">
                         <form id="myform" method="post" class="form-horizontal">

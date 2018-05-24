@@ -154,6 +154,16 @@
         </li>
 
 
+        {{--工具管理--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>工具</span>
+            </a>
+            <ul>
+                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@file')}}">文件</a></li>
+                <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@romUpdate')}}">升级</a></li>
+            </ul>
+        </li>
+
+
     </ul>
 </div>
 <!--sidebar-menu-->
@@ -166,12 +176,13 @@
         </div>
         @if($msg = Session::get('msg'))
             <div class="alert alert-success mymsg">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>{{$msg}}</strong>
             </div>
             <script>
                 setTimeout(function () {
                     $(".mymsg").fadeOut();
-                }, 3000)
+                }, 10000)
             </script>
         @endif
     </div>

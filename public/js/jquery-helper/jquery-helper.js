@@ -16,6 +16,8 @@ function ajax_check_res(data) {
         }
         if(data.msg =='success'){
             myalert('成功');
+        }else if(data.msg){
+            myalert(data.msg)
         }
         // if (data.msg != undefined) {
         //     myalert(data.msg);

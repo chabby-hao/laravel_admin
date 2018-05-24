@@ -2261,3 +2261,8 @@ form {
 .table th, .table td {
     text-align: center;
 }
+
+/*input 标签无margin */
+.controls input[type="radio"],.controls input[type="checkbox"] {
+    margin: 0;
+}

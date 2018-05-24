@@ -38,6 +38,10 @@ class BaseController extends Controller
 
     protected function getUdid($id)
     {
+        if(!$id){
+            return false;
+        }
+
         if ($udid = DeviceLogic::getUdid($id)) {
             //id=>imei
             return $udid;
@@ -156,6 +160,11 @@ class BaseController extends Controller
     protected function outPutSuccess()
     {
         return $this->outPut(['msg' => 'success']);
+    }
+
+    protected function outputWithMsg($msg)
+    {
+        return $this->outPut(['msg'=>$msg]);
     }
 
     protected function outPutError($msg = 'error', array $data = [], $die = true)
