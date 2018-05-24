@@ -393,28 +393,28 @@
                                 </thead>
                                 <tbody>
                                 <tr class="gradeX">
-                                    <td><%msg.safe.0%></td>
-                                    <td><%msg.inuse.0%></td>
-                                    <td><%msg.care.0%></td>
-                                    <td><%msg.fault.0%></td>
+                                    <td><%caremsg.safe.0%></td>
+                                    <td><%caremsg.inuse.0%></td>
+                                    <td><%caremsg.care.0%></td>
+                                    <td><%caremsg.fault.0%></td>
                                 </tr>
                                 <tr class="gradeX">
-                                    <td><%msg.safe.1%></td>
-                                    <td><%msg.inuse.1%></td>
-                                    <td><%msg.care.1%></td>
-                                    <td><%msg.fault.1%></td>
+                                    <td><%caremsg.safe.1%></td>
+                                    <td><%caremsg.inuse.1%></td>
+                                    <td><%caremsg.care.1%></td>
+                                    <td><%caremsg.fault.1%></td>
                                 </tr>
                                 <tr class="gradeX">
-                                    <td><%msg.safe.2%></td>
-                                    <td><%msg.inuse.2%></td>
-                                    <td><%msg.care.2%></td>
-                                    <td><%msg.fault.2%></td>
+                                    <td><%caremsg.safe.2%></td>
+                                    <td><%caremsg.inuse.2%></td>
+                                    <td><%caremsg.care.2%></td>
+                                    <td><%caremsg.fault.2%></td>
                                 </tr>
                                 <tr class="gradeX">
-                                    <td><%msg.safe.3%></td>
-                                    <td><%msg.inuse.3%></td>
-                                    <td><%msg.care.3%></td>
-                                    <td><%msg.fault.3%></td>
+                                    <td><%caremsg.safe.3%></td>
+                                    <td><%caremsg.inuse.3%></td>
+                                    <td><%caremsg.care.3%></td>
+                                    <td><%caremsg.fault.3%></td>
                                 </tr>
                                 </tbody>
                             </table>

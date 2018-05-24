@@ -143,7 +143,7 @@ class DeviceController extends BaseController
             $data['safeZoneListHas'] = $data['safeZoneList'] ? true : false;
 
             //提醒消息
-            $data['msg'] = $this->getMsgCount($udid);
+            $data['caremsg'] = $this->getMsgCount($udid);
 
 
             $lastIds = json_decode($lastIds, true);
