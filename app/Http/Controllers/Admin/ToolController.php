@@ -209,6 +209,7 @@ class ToolController extends BaseController
                     $deviceObj->lastContact,
                     $deviceObj->deliverdAt,
                 ];
+                dd($deviceObj);
             }
 
             $file = 'exportbyimsi-' . date('YmdHis');
