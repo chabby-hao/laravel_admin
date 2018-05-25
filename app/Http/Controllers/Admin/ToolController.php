@@ -36,8 +36,8 @@ class ToolController extends BaseController
         $paginates = BiFile::orderByDesc('id')->paginate();
         $data = $paginates->items();
 
-        return view('admin.tool.file',[
-            'datas'=>$data,
+        return view('admin.tool.file', [
+            'datas' => $data,
             'page_nav' => MyPage::showPageNav($paginates),
         ]);
     }
@@ -52,13 +52,13 @@ class ToolController extends BaseController
         if ($request->isXmlHttpRequest() && $request->hasFile($inputFileName)) {
             //上传文件
 
-            $data = $this->checkParams(['filetype','filename'], $request->input(), ['filename']);
+            $data = $this->checkParams(['filetype', 'filename'], $request->input(), ['filename']);
 
             $file = $request->file($inputFileName);
-            $fileName = $data['filename'] ? : $file->getClientOriginalName();
+            $fileName = $data['filename'] ?: $file->getClientOriginalName();
             $filePath = "file/$fileName";
 
-            if(!move_uploaded_file($file->getRealPath(), public_path($filePath))){
+            if (!move_uploaded_file($file->getRealPath(), public_path($filePath))) {
                 return $this->outPutError('上传失败,请确认文件格式正确');
             }
 
@@ -68,13 +68,13 @@ class ToolController extends BaseController
                 $model->filename = $fileName;
                 $model->fileurl = asset($filePath);
                 $model->save();
-            }catch (\Exception $e){
+            } catch (\Exception $e) {
                 Log::error("file upload {$e->getMessage()}");
                 return $this->outPutError('上传失败,请确认是否已经存在相同文件');
             }
 
 
-            return $this->outputRedirectWithMsg(URL::action('Admin\ToolController@file'),'上传成功');
+            return $this->outputRedirectWithMsg(URL::action('Admin\ToolController@file'), '上传成功');
 
         }
 
@@ -83,13 +83,13 @@ class ToolController extends BaseController
 
     public function fileDelete(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $id = $this->getId($request);
             $model = BiFile::find($id);
-            if($model){
+            if ($model) {
                 //删除文件
                 $path = public_path("file/" . $model->filename);
-                if(file_exists($path)){
+                if (file_exists($path)) {
                     unlink($path);
                 }
                 $model->delete();
@@ -105,23 +105,23 @@ class ToolController extends BaseController
     public function romUpdate(Request $request)
     {
 
-        if($request->isXmlHttpRequest()){
-            $input = $this->checkParams(['cmd','mode','url'], $request->input());
+        if ($request->isXmlHttpRequest()) {
+            $input = $this->checkParams(['cmd', 'mode', 'url'], $request->input());
 
             $hashKey = CommandLogic::cmdToHashKey($input['cmd']);
-            if($input['mode'] == 0){
+            if ($input['mode'] == 0) {
                 //单个udid更新
                 $udid = $this->getUdid($request->input('id'));
-                if(!$udid){
+                if (!$udid) {
                     return $this->outPutError('设备码有误');
                 }
                 $imei = DeviceLogic::getImei($udid);
                 CommandLogic::cmdSet($imei, $hashKey, $input['url']);
                 CommandLogic::sendCmdByUdid($udid, $input['cmd']);
-            }else{
+            } else {
                 //批量更新,用excel
                 $inputFilename = 'myfile';
-                if(!$request->hasFile($inputFilename)){
+                if (!$request->hasFile($inputFilename)) {
                     return $this->outPutError('请上传文件');
                 }
                 $data = Helper::readExcelFromRequest($request, $inputFilename);
@@ -134,13 +134,13 @@ class ToolController extends BaseController
                 array_shift($data);
                 $imeis = Helper::transToOneDimensionalArray($data, 0);
 
-                foreach ($imeis as $imei){
-                    if(!DeviceLogic::getUdid($imei)){
+                foreach ($imeis as $imei) {
+                    if (!DeviceLogic::getUdid($imei)) {
                         return $this->outPutError('imei不正确:' . $imei);
                     }
                 }
 
-                foreach ($imeis as $imei){
+                foreach ($imeis as $imei) {
                     CommandLogic::cmdSet($imei, $hashKey, $input['url']);
                     CommandLogic::sendCmd($imei, $input['cmd']);
                 }
@@ -150,17 +150,16 @@ class ToolController extends BaseController
         }
 
 
-
         return view('admin.tool.romupdate');
     }
 
     public function getFileUrl(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if ($request->isXmlHttpRequest()) {
             $cmd = $request->input('cmd');
             $filetype = BiFile::cmdToFileType($cmd);
             $data = BiFile::whereFiletype($filetype)->get()->toArray();
-            return $this->outPut(['list'=>$data]);
+            return $this->outPut(['list' => $data]);
         }
     }
 
@@ -171,7 +170,7 @@ class ToolController extends BaseController
             //上传文件
             $data = Helper::readExcelFromRequest($request, $inputFileName);
 
-            if(!$data){
+            if (!$data) {
                 return $this->outPutError('请确认文件格式正确');
             }
 
@@ -179,8 +178,8 @@ class ToolController extends BaseController
             array_shift($data);
 
             $imsis = Helper::transToOneDimensionalArray($data, 0);
-            foreach ($imsis as &$imsi){
-                $imsi = trim($imsi," '");
+            foreach ($imsis as &$imsi) {
+                $imsi = trim($imsi, " '");
                 $imsi = "'$imsi'";
             }
             $imsis = implode(',', $imsis);
@@ -188,24 +187,24 @@ class ToolController extends BaseController
 
             $rs = DB::connection('care')->select("select imei,qr,b.imsi as imsi from t_device_code a inner join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
 
-            if(!$rs){
+            if (!$rs) {
                 return $this->outPutError('无数据');
             }
 
             $data = [];
-            foreach ($rs as $row){
-                $imei =  "'" . $row->imei;
-                $imsi = "'" . $row->imsi;
+            foreach ($rs as $row) {
+                $imei = $row->imei;
+                $imsi = $row->imsi;
                 $deviceObj = DeviceLogic::createDevice($imei);
                 $user = DeviceLogic::getAdminInfoByUdid($deviceObj->udid);
                 $phone = $user ? $user->phone : '';
                 $data[] = [
                     "'" . $deviceObj->udid,
-                    $imsi,
+                    "'" . $imsi,
                     $deviceObj->channelName,
                     $deviceObj->brandName,
                     $deviceObj->ebikeTypeName,
-                    $phone,
+                    "'" . $phone,
                     $deviceObj->lastContact,
                     $deviceObj->deliverdAt,
                 ];
