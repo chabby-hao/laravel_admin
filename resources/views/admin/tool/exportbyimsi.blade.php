@@ -14,7 +14,7 @@
                                 <label class="control-label"><span class="text-error">*</span>文件 :</label>
                                 <div class="controls">
                                     <input type="file" name="myfile"/>
-                                    <span class="help-block">excel文件示例：<a href="{{asset('demo/imeis.xlsx')}}">点我下载</a></span>
+                                    <span class="help-block">excel文件示例：<a href="{{asset('demo/imsis.xlsx')}}">点我下载</a></span>
                                 </div>
                             </div>
 
