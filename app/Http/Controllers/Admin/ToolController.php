@@ -19,6 +19,7 @@ use App\Models\BiUser;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
@@ -161,6 +162,74 @@ class ToolController extends BaseController
             $data = BiFile::whereFiletype($filetype)->get()->toArray();
             return $this->outPut(['list'=>$data]);
         }
+    }
+
+    public function exportByImsi(Request $request)
+    {
+        $inputFileName = 'myfile';
+        if ($request->isXmlHttpRequest() && $request->hasFile($inputFileName)) {
+            //上传文件
+            $data = Helper::readExcelFromRequest($request, $inputFileName);
+
+            if(!$data){
+                return $this->outPutError('请确认文件格式正确');
+            }
+
+            //取出第一行
+            array_shift($data);
+
+            $imsis = Helper::transToOneDimensionalArray($data, 0);
+            foreach ($imsis as &$imsi){
+                $imsi = trim($imsi," '");
+                $imsi = "'$imsi'";
+            }
+            $imsis = implode(',', $imsis);
+
+
+            $rs = DB::connection('care')->select("select imei,qr,b.imsi as imsi from t_device_code a inner join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
+
+            if(!$rs){
+                return $this->outPutError('无数据');
+            }
+
+            $data = [];
+            foreach ($rs as $row){
+                $imei =  "'" . $row->imei;
+                $imsi = "'" . $row->imsi;
+                $deviceObj = DeviceLogic::createDevice($imei);
+                $user = DeviceLogic::getAdminInfoByUdid($deviceObj->udid);
+                $phone = $user ? $user->phone : '';
+                $data[] = [
+                    "'" . $deviceObj->udid,
+                    $imsi,
+                    $deviceObj->channelName,
+                    $deviceObj->brandName,
+                    $deviceObj->ebikeTypeName,
+                    $phone,
+                    $deviceObj->lastContact,
+                    $deviceObj->deliverdAt,
+                ];
+            }
+
+            $file = 'exportbyimsi-' . date('YmdHis');
+            $path = 'export/excel/';
+
+            Helper::exportExcel([
+                '设备码',
+                'IMSI',
+                '渠道',
+                '品牌',
+                '车型',
+                '设备所属账号',
+                '上次在线时间',
+                '出货时间'
+            ], $data, $file, public_path($path), false);
+            $fileUrl = asset($path . $file . '.xlsx');
+            return $this->outputRedictWithoutMsg($fileUrl);
+
+        }
+
+        return view('admin.tool.exportbyimsi');
     }
 
 }

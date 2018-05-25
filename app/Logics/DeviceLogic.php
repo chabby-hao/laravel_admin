@@ -479,8 +479,13 @@ class DeviceLogic extends BaseLogic
      */
     public static function getDeliverdAtByUdid($udid)
     {
-        return self::deviceCodeCallBack($udid, function ($deviceCode) {
-            return $deviceCode->delivered_at;
+        return self::deviceCodeCallBack($udid, function ($deviceCode) use($udid) {
+            if ($deviceCode->delivered_at) {
+                return Carbon::createFromTimestamp($deviceCode->delivered_at)->toDateTimeString();
+            } else {
+                $row = DB::connection('care_log')->selectOne("select * from t_device_category where udid='$udid'");
+                return $row ? $row->delivered_ts : '';
+            }
         });
     }
 

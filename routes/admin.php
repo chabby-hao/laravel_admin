@@ -83,6 +83,7 @@ Route::any('/tool/fileAdd','Admin\ToolController@fileAdd');
 Route::any('/tool/fileDelete','Admin\ToolController@fileDelete');
 Route::any('/tool/romUpdate','Admin\ToolController@romUpdate');
 Route::any('/tool/getFileUrl','Admin\ToolController@getFileUrl');
+Route::any('/tool/exportByImsi','Admin\ToolController@exportByImsi');
 
 
 
