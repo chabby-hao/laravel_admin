@@ -185,7 +185,7 @@ class ToolController extends BaseController
             $imsis = implode(',', $imsis);
 
 
-            $rs = DB::connection('care')->select("select imei,qr,b.imsi as imsi from t_device_code a inner join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
+            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a inner join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
 
             if (!$rs) {
                 return $this->outPutError('无数据');
@@ -195,10 +195,12 @@ class ToolController extends BaseController
             foreach ($rs as $row) {
                 $imei = $row->imei;
                 $imsi = $row->imsi;
+                $num106 = $row->num_106;
                 $deviceObj = DeviceLogic::createDevice($imei);
                 $user = DeviceLogic::getAdminInfoByUdid($deviceObj->udid);
                 $phone = $user ? $user->phone : '';
                 $data[] = [
+                    "'" . $num106,
                     "'" . $deviceObj->udid,
                     "'" . $imsi,
                     $deviceObj->channelName,
@@ -214,6 +216,7 @@ class ToolController extends BaseController
             $path = 'export/excel/';
 
             Helper::exportExcel([
+                '移动卡号',
                 '设备码',
                 'IMSI',
                 '渠道',
