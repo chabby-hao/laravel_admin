@@ -31,6 +31,7 @@ class BiProductType extends \App\Models\Base\BiProductType
     const PRODUCT_TYPE_B640 = 7;
     const PRODUCT_TYPE_EB003A = 8;
     const PRODUCT_TYPE_EB485 = 9;
+    const PRODUCT_TYPE_B669 = 10;
 
     public static function getNameMap($type = null)
     {
@@ -44,6 +45,7 @@ class BiProductType extends \App\Models\Base\BiProductType
             self::PRODUCT_TYPE_B640 => 'B640',
             self::PRODUCT_TYPE_EB003A => 'EB003A',
             self::PRODUCT_TYPE_EB485 => 'EB485',
+            self::PRODUCT_TYPE_B669 => 'B669',
         ];
         return $type === null ? $map : $map[$type];
     }
