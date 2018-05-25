@@ -164,6 +164,9 @@
                 @if(Auth::user()->can('tool/romUpdate'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@romUpdate')}}">升级</a></li>
                 @endif
+                @if(Auth::user()->can('tool/exportByImsi'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@exportByImsi')}}">Imsi导出详情</a></li>
+                @endif
             </ul>
         </li>
 
