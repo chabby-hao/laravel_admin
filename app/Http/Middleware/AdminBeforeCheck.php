@@ -25,7 +25,7 @@ class AdminBeforeCheck
         'device/map',
         'user/resetPassword',
         'tool/getFileUrl',
-        'tool/exportbyimsi'
+        'tool/exportByImsi'
     ];
 
     /**
