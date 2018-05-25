@@ -53,7 +53,6 @@ class DbSync extends BaseCommand
             BiProductType::PRODUCT_TYPE_B640 => 'B640',
             BiProductType::PRODUCT_TYPE_EB003A => 'EB003A',
             BiProductType::PRODUCT_TYPE_EB485 => 'EB485',
-            BiProductType::PRODUCT_TYPE_EB001C => 'B669',
         ];
 
         $arrFlip = array_flip($arr);
