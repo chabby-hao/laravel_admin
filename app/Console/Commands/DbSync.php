@@ -81,12 +81,22 @@ class DbSync extends BaseCommand
                 //var_dump($a);exit;
             } elseif ($row->level == 5) {
                 //品牌
-                BiBrand::firstOrCreate([
-                    'brand_name' => $name,
-                ], [
-                    'id' => $row->type,
-                    'brand_remark' => $row->remark,
-                ]);
+
+                try {
+                    BiBrand::firstOrCreate([
+                        'brand_name' => $name,
+                    ], [
+                        'id' => $row->type,
+                        'brand_remark' => $row->remark,
+                    ]);
+                }catch (\Exception $e){
+                    BiBrand::where([
+                        'id'=>$row->type,
+                    ])->update([
+                        'brand_name' => $name,
+                        'brand_remark' => $row->remark,
+                    ]);
+                }
             }
         }
 
@@ -142,9 +152,9 @@ class DbSync extends BaseCommand
                 $udid = $deviceCode->qr;
                 echo "begin processing udid: $udid" . "\n";
                 $type = $deviceCode->type;
-                if($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001){
+                if ($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001) {
                     $deviceCode->device_type = $typeMap['EB001'];
-                }elseif($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C){
+                } elseif ($deviceCode->model == BiProductType::PRODUCT_TYPE_EB001C) {
                     $deviceCode->device_type = $typeMap['EB001C'];
                 }
                 if ($row = TDeviceCategory::whereUdid($udid)->first()) {
@@ -181,7 +191,7 @@ class DbSync extends BaseCommand
                     //设备状态
                     if ($deviceCode->active > 0) {
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_INUSE;
-                    }else{
+                    } else {
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;//渠道库存
                     }
                     /*else{
