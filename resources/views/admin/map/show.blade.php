@@ -821,7 +821,7 @@
                 newoption.bmap.zoom = 13;
                 newoption.bmap.center = res.gps[0].value;
                 newoption.series[0].data = res.gps;
-                newoption.series[0].symbolSize = 9;
+                newoption.series[0].symbolSize = 11;
             }
 
         }
