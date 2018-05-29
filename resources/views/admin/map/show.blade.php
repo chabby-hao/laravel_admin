@@ -818,7 +818,7 @@
         newoption.title.text = '当前'+res.gps.length+'辆';
         if(res.single){
             if(res.gps.length > 0){
-                newoption.bmap.zoom = 13;
+                newoption.bmap.zoom = 8;
                 newoption.bmap.center = res.gps[0].value;
                 newoption.series[0].data = res.gps;
             }
