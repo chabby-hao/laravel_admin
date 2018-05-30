@@ -481,7 +481,7 @@ class DeviceLogic extends BaseLogic
     {
         return self::deviceCodeCallBack($udid, function ($deviceCode) use($udid) {
             if ($deviceCode->delivered_at) {
-                return Carbon::createFromTimestamp($deviceCode->delivered_at)->toDateTimeString();
+                return Carbon::parse($deviceCode->delivered_at)->toDateTimeString();
             } else {
                 $row = DB::connection('care_log')->selectOne("select * from t_device_category where udid='$udid'");
                 return $row ? $row->delivered_ts : '';
