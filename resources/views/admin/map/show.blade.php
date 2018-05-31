@@ -731,7 +731,7 @@
         },
         series: [
             {
-                name: 'udid',
+                name: 'chongdianpeng',
                 type: 'scatter',
                 /*large: true,
                  largeThreshold:30000,*/
@@ -912,6 +912,21 @@
             }
         })
     });
+
+    //点击事件绑定
+    myChart.on('click', function (params) {
+        console.log(params);
+        if (params.componentType === 'series') {
+            if (params.seriesIndex === 0) {
+                if(params.seriesName === 'udid' && params.data.udid){
+                    window.open('{{URL::action('Admin\DeviceController@detail')}}?id=' + encodeURIComponent(params.data.udid));
+                }
+                // 点击到了 index 为 5 的 series 的 markPoint 上。
+            }
+        }
+        //window.open('https://www.baidu.com/s?wd=' + encodeURIComponent(params.name));
+    });
+
 
     $.ajax({
         type: "get",
