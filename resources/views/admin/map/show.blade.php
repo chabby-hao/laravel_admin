@@ -841,7 +841,7 @@
         that.addClass('active');
         var name = that.attr('name');
 
-        //var formdata = $("#myform").serialize();
+        var formdata = $("#myform").serialize();
         //console.log(formdata);
 
         chooseName = {name:name};
@@ -852,8 +852,8 @@
             dataType: 'json',
             //async:false,
             url: url,//数据类型为jsonp
-            //data: formdata + '&name='+name,
-            data:chooseName,
+            data: formdata + '&name='+name,
+            //data:chooseName,
             //jsonp: "jsonpCallback",//服务端用于接收callback调用的function名的参数
             success: function (res) {
                 reloadMap(res);
