@@ -34,4 +34,11 @@ class BiEbikeType extends \App\Models\Base\BiEbikeType
         $rs = self::orderByDesc('id')->get()->toArray();
         return Helper::transToKeyValueArray($rs, 'id', 'ebike_name');
     }
+
+    public static function getAllIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
+
 }

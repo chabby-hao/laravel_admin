@@ -289,7 +289,7 @@
             background-color: #7fa0ff !important;
             border-color: #7fa0ff !important;
             text-align: center !important;
-            width: 140px !important;
+            width: auto !important;
         }
 
         .open .dropdown-toggle {
@@ -335,6 +335,12 @@
                     <select name="brand_id" class="selectpicker" data-width="100px" data-size="10">
                         <option value="" class="myoption">选择品牌</option>
                         @foreach(\App\Models\BiBrand::getBrandMap() as $id=>$name)
+                            <option value="{{$id}}" class="myoption">{{$name}}</option>
+                        @endforeach
+                    </select>
+                    <select name="ebike_type_id" class="selectpicker" data-width="200px" data-size="10">
+                        <option value="" class="myoption">选择车型</option>
+                        @foreach(\App\Models\BiEbikeType::getTypeName() as $id=>$name)
                             <option value="{{$id}}" class="myoption">{{$name}}</option>
                         @endforeach
                     </select>

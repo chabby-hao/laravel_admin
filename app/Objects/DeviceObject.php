@@ -9,6 +9,7 @@ class DeviceObject extends BaseObject
     const CACHE_ALL_PRE = 'all:';//全部缓存
     const CACHE_CHANNEL_PRE ='channel:';//渠道缓存前缀
     const CACHE_BRAND_PRE = 'brand:';//品牌缓存前缀
+    const CACHE_EBIKE_TYPE_PRE = 'ebike_type:';//车型缓存前缀
 
     const CACHE_DEVICE_TYPE_PRE = 'device_type:';//设备型号缓存前缀
 

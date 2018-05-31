@@ -38,12 +38,14 @@ class MapCache extends BaseCommand
 
         $brands = BiBrand::getAllBrandIds();
         $channels = BiChannel::getAllChannelIds();
+        $ebikeTypes = BiEbikeType::getAllIds();
         $deviceTypes = BiDeviceType::getAllIds();
 
         $this->cacheData([0], null, DeviceObject::CACHE_ALL_PRE);//全部
         $this->cacheData($brands, 'brand_id', DeviceObject::CACHE_BRAND_PRE);//品牌
         $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
-        $this->cacheData($deviceTypes, 'device_type', DeviceObject::CACHE_DEVICE_TYPE_PRE);//渠道
+        $this->cacheData($ebikeTypes, 'ebike_type_id', DeviceObject::CACHE_EBIKE_TYPE_PRE);//车型
+        $this->cacheData($deviceTypes, 'device_type', DeviceObject::CACHE_DEVICE_TYPE_PRE);//设备型号
 
         $this->chmodCache0777();
     }

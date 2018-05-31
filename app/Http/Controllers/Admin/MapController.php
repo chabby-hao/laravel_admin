@@ -50,7 +50,7 @@ class MapController extends BaseController
                         return $this->outPut(['gps' => $data,'single'=>1]);
                     }
                 }
-                $fields = ['device_type','channel_id','brand_id'];
+                $fields = ['device_type','channel_id','brand_id','ebike_type_id'];
                 $searchfield = [];
                 foreach ($fields as $field){
                     if($request->input($field)){
@@ -133,6 +133,8 @@ class MapController extends BaseController
             $keyPre = DeviceObject::CACHE_CHANNEL_PRE;
         }elseif($field == 'brand_id'){
             $keyPre = DeviceObject::CACHE_BRAND_PRE;
+        }elseif($field == 'ebike_type_id'){
+            $keyPre = DeviceObject::CACHE_EBIKE_TYPE_PRE;
         }else{
             $keyPre = '';
         }
