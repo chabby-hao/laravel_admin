@@ -918,8 +918,8 @@
         console.log(params);
         if (params.componentType === 'series') {
             if (params.seriesIndex === 0) {
-                if(params.seriesName === 'udid' && params.data.udid){
-                    window.open('{{URL::action('Admin\DeviceController@detail')}}?id=' + encodeURIComponent(params.data.udid));
+                if(params.seriesName === 'udid' && params.data.name){
+                    window.open('{{URL::action('Admin\DeviceController@detail')}}?id=' + encodeURIComponent(params.data.name));
                 }
                 // 点击到了 index 为 5 的 series 的 markPoint 上。
             }
