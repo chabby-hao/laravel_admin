@@ -45,6 +45,8 @@ class DeviceObject extends BaseObject
     const UNLOCK_TYPE_SHANQI = 'sq_unlock';//闪骑解锁
     const LOCK_TYPE_XIYOU = 'xy_lock';//西游锁车
     const UNLOCK_TYPE_XIYOU = 'xy_unlock';//西游解锁
+    const LOCK_TYPE_485 = '485_lock';//485锁
+    const UNLOCK_TYPE_485 = '485_unlock';//485解锁
 
     public static function getLockTypeMap($type = null)
     {
