@@ -61,6 +61,8 @@ class DeviceObject extends BaseObject
             self::UNLOCK_TYPE_SHANQI => '闪骑解锁',
             self::LOCK_TYPE_XIYOU => '西游锁车',
             self::UNLOCK_TYPE_XIYOU => '西游解锁',
+            self::LOCK_TYPE_485 => '485锁车',
+            self::UNLOCK_TYPE_485 => '485解锁',
         ];
         return $type === null ? $map : $map[$type];
     }
