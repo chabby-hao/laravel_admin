@@ -1,7 +1,15 @@
 @extends('admin.layout')
 @section('content')
 
-    <div class="container-fluid">
+    <!-- 引入 echarts.js -->
+    <!--引入百度地图的jssdk，这里需要使用你在百度地图开发者平台申请的 ak-->
+    <script src="https://api.map.baidu.com/api?v=4.0&ak=QhhNgV6Mb4rVFtGQKhiPoETzf1VpK1vM"></script>
+    <!-- 引入 ECharts -->
+    <script src="{{asset('map/echarts.min.js')}}"></script>
+    <!-- 引入百度地图扩展 -->
+    <script src="{{asset('map/bmap.min.js')}}"></script>
+
+    <div class="container-fluid" style="min-height: 800px">
         <hr>
         {{--设备状态tab--}}
 
@@ -41,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="widget-box">
+                <div id="mytable" class="hide widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>列表</h5>
                     </div>
@@ -75,6 +83,9 @@
                         <?php echo $page_nav ?>
                     </div>
                 </div>
+
+                <div id="mymap" style="width: 100%;height: 570px"></div>
+
             </div>
         </div>
     </div>
@@ -84,5 +95,66 @@
     </script>
 
     {{--        @include('admin.common_submitjs')--}}
+
+    <script>
+
+        var myChart = echarts.init(document.getElementById('mymap'));
+
+        var option = {
+            bmap: {
+                center: [116.282019, 38.587249],
+                roam: true,
+                zoom: 5
+            },
+            visualMap: {
+                type: "piecewise",
+                left: 'right',
+                min: 0,
+                max: 15,
+                splitNumber: 5,
+                maxOpen: true,
+                color: ['red', 'yellow', 'green']
+            },
+            tooltip: {
+                formatter: function(params, ticket, callback) {
+                    return "拥堵指数:" + params.value;
+                },
+                trigger: 'item'
+            },
+            series: [{
+                type: 'lines',
+                coordinateSystem: 'bmap',
+                polyline: true,
+                lineStyle: {
+                    normal: {
+                        opacity: 1,
+                        width: 4
+                    },
+                    emphasis: {
+                        width: 6
+                    }
+                },
+                effect: {
+                    show: true,
+                    symbolSize: 2,
+                    color: "white"
+                }
+            }]
+        };
+
+        var data = [
+            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
+            {value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
+        ]
+        option.series[0].data = data;
+        console.log(option.series[0].data);
+        myChart.setOption(option);
+        // console.log(option);
+        //获取echart中使用的bmap实例
+        //var map = myChart.getModel().getComponent('bmap').getBMap();
+        //map.centerAndZoom([1,2], 9);
+
+    </script>
+
 
 @endsection
