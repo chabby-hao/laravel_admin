@@ -15,6 +15,8 @@ class CommandLogic extends BaseLogic
     const CMD_VOICE_UPDATE_UNLOCK = 23011;//锁车声音文件更新
     const CMD_VOICE_UPDATE_WARNING = 23012;//锁车声音文件更新
 
+    const CMD_KICK_DEVICE_OFFLINE = 28888;//设备踢下线
+
     public static function sendCmd($imei, int $cmd)
     {
         return RedisLogic::sendCmd($imei, $cmd);

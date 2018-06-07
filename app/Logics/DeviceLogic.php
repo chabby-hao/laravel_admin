@@ -8,24 +8,40 @@ use App\Models\BiChannel;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
+use App\Models\TChipMileage;
 use App\Models\TDevice;
+use App\Models\TDeviceCategory;
+use App\Models\TDeviceCategoryDicNew;
 use App\Models\TDeviceCode;
+use App\Models\TDeviceFootmark;
+use App\Models\TDeviceSetLog;
 use App\Models\TEvCharge;
+use App\Models\TEvDay;
+use App\Models\TEvMileage;
 use App\Models\TEvMileageGp;
+use App\Models\TEvSituation;
+use App\Models\TEvVoltage;
 use App\Models\TInsureOrder;
 use App\Models\TInsureType;
+use App\Models\TLockLog;
 use App\Models\TPayment;
 use App\Models\TPaymentOrder;
+use App\Models\TStepCounter;
+use App\Models\TStepHour;
+use App\Models\TStepProperty;
 use App\Models\TUser;
 use App\Models\TUserDevice;
+use App\Models\TUserMsg;
 use App\Models\TVersionUpdateInfo;
 use App\Models\TZoneMsg;
 use App\Objects\DeviceObject;
 use App\Objects\FaultObject;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class DeviceLogic extends BaseLogic
 {
@@ -594,11 +610,12 @@ class DeviceLogic extends BaseLogic
 
     public static function getGsm($imei)
     {
-        $devData = RedisLogic::getDevDataByImei($imei);
         $gsm = 0;
+        $devData = RedisLogic::getDevDataByImei($imei);
+        $locData = RedisLogic::getLocationByImei($imei);
         if (isset($devData['GSMsignal']) && $devData['GSMsignal']) {
             $gsm = $devData['GSMsignal'];
-        } elseif ($locData = RedisLogic::getLocationByImei($imei) && isset($locData['gsmStrength'])) {
+        } elseif ($locData && isset($locData['gsmStrength'])) {
             $gsm = $locData['gsmStrength'];
         }
         return $gsm;
@@ -1193,6 +1210,122 @@ class DeviceLogic extends BaseLogic
             ->select($column)->distinct()
             ->get()->toArray();
         return Helper::transToOneDimensionalArray($rs, $column);
+    }
+
+    /**
+     * 设备加入渠道
+     */
+    public static function deviceToChannel($imei, $type)
+    {
+        $udid = self::getUdid($imei);
+        # 设置已绑定设备类型数据
+        TDevice::whereImei($imei)->update(['type'=>$type]);
+
+//        # 设置原始库设备类型数据
+        TDeviceCode::whereImei($imei)->update(['type'=>$type]);
+
+//        # 设置用户库设备类型数据
+        DB::connection('care_user')->update("update t_device set ptype=$type where udid='$udid'");
+
+//        # 判断设备是否已归类
+        $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
+        $deviceCode = TDeviceCode::whereImei($imei)->first();
+
+        if(!$deviceCode){
+            return false;
+        }
+
+        $ebikeType = BiEbikeType::find($deviceCode->ebike_type_id);
+        if(!$ebikeType){
+            return false;
+        }
+
+
+        TDeviceCategory::updateOrCreate([
+            'udid'=>$udid,
+        ],[
+            'category'=>$type,
+            'channel'=>$model->channel,
+            'brand'=>$model->brand,
+            'model'=>$model->brand . $ebikeType->ev_model,
+        ]);
+
+        //将设备踢下线
+        $cmd = CommandLogic::CMD_KICK_DEVICE_OFFLINE;
+        CommandLogic::sendCmd($imei, $cmd);
+    }
+
+    /**
+     * 重置设备
+     * @param $imei
+     */
+    public static function resetDevice($imei)
+    {
+
+        $udid = self::getUdid($imei);
+
+        //1、解绑用户
+        $client = new Client();
+        $url = "http://user.qqfind.me:8080/care.api/user/device/unbindingAll.json?udid=$udid&type=0";
+        $client->get($url);
+
+        //2、删除redis中的相关数据
+        RedisLogic::getRedis()->select(1);
+
+        $locs = RedisLogic::zRangeByScore('dev_imei:'.$imei,0,time()+3600);
+        foreach ($locs as $key=>$loc){
+            RedisLogic::del("loc:".$loc);
+        }
+        RedisLogic::del('dev:'.$imei);//删除设备当前的实时数据
+        RedisLogic::del('dev_loc:'.$imei);//删除设备的定位点索引
+        RedisLogic::del('dev_zone:'.$imei);//删除设备的安全区域设置数据
+
+        //3、操作数据库
+        //记录设备重置的日志
+
+        //重置Mysql数据库激活时间数据
+        TDeviceCode::whereImei($imei)->update(['active'=>0]);
+
+        //删除Mysql数据库设备过期时间数据(未激活)
+        TPayment::whereUdid($udid)->delete();
+
+        //删除设备足迹索引数据
+        TDeviceFootmark::whereUdid($udid)->delete();
+
+        //删除设备计步总数
+        TStepCounter::whereUdid($udid)->delete();
+
+        //删除运动足迹日统计数据
+        TStepHour::whereUdid($udid)->delete();
+
+        //删除设备佩戴者属性设置数据
+        TStepProperty::whereUdid($udid)->delete();
+
+        //删除相关消息
+        TUserMsg::whereSource($udid)->delete();
+        //电动车相关数据清理
+        TEvDay::whereUdid($udid)->delete();
+        TEvSituation::whereUdid($udid)->delete();
+
+        //电动车统计数据清理
+        TEvMileageGp::whereUdid($udid)->delete();
+        TEvMileage::whereUdid($udid)->delete();
+        TEvVoltage::whereUdid($udid)->delete();
+        TEvCharge::whereUdid($udid)->delete();
+
+        //设备日志数据清理
+        //用户设置日志
+        TDeviceSetLog::whereUdid($udid)->delete();
+
+        //充电日志
+        TEvCharge::whereUdid($udid)->delete();
+
+        //锁车日志
+        TLockLog::whereUdid($udid)->delete();
+        TChipMileage::whereUdid($udid)->delete();
+
+        //将设备踢下线
+        CommandLogic::sendCmd($imei, CommandLogic::CMD_KICK_DEVICE_OFFLINE);
     }
 
 }

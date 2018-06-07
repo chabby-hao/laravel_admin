@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 23 Apr 2018 16:16:54 +0800.
+ * Date: Wed, 06 Jun 2018 17:54:24 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,15 +11,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TPayment
- *
+ * 
  * @property string $udid
  * @property int $expire
  * @property int $status
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereExpire($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereUdid($value)
- * @mixin \Eloquent
  */
 class TPayment extends Eloquent
 {

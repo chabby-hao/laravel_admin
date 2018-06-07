@@ -59,6 +59,12 @@ class FactoryLogic extends BaseLogic
             }
         }
 
+        foreach ($insert as $row){
+            $imei = $row['imei'];
+            DeviceLogic::deviceToChannel($imei, $shipOrder->brand_id);
+            DeviceLogic::resetDevice($imei);
+        }
+
 
         $res = BiDeliveryDevice::insert($insert);
 

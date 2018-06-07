@@ -6,6 +6,7 @@ namespace App\Logics;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
+use Predis\Client;
 
 class RedisLogic extends BaseLogic
 {
@@ -29,7 +30,7 @@ class RedisLogic extends BaseLogic
 
     /**
      * 获取redis示例
-     * @return \Redis
+     * @return Client
      */
     public static function getRedis()
     {
@@ -183,6 +184,16 @@ class RedisLogic extends BaseLogic
         } else {
             return false;
         }
+    }
+
+    public static function del($key)
+    {
+        return self::getRedis()->del($key);
+    }
+
+    public static function delete($key)
+    {
+        return self::del($key);
     }
 
     public static function sMembers($key)

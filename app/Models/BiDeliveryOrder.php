@@ -35,6 +35,7 @@ namespace App\Models;
  * @mixin \Eloquent
  * @property string|null $actuall_date 实际出货日期
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereActuallDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereBatteryType($value)
  */
 class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 {

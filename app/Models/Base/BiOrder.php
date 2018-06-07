@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiOrder
- * 
+ *
  * @property int $id
  * @property int $user_id
  * @property string $order_no
@@ -26,8 +26,22 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $remark
  * @property int $ship_quantity
  * @property int $actuall_quantity
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereActuallQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereAfterSale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereChannelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereDeviceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereExpectDelivery($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereOrderNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereOrderQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereRemark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereShipQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiOrder whereUserId($value)
+ * @mixin \Eloquent
  */
 class BiOrder extends Eloquent
 {
