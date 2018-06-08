@@ -7,10 +7,15 @@ namespace App\Logics;
 class CommandLogic extends BaseLogic
 {
 
-    const CMD_REFRESH_GSM = 22007;//获取即时GSM,GPS信号强度信息
+    const CMD_REFRESH_GPS = 22003;//刷新GPS
+    const CMD_REFRESH_GSM = 22004;//刷新GSM
+
+    const CMD_REFRESH_GSM_GPS = 22007;//获取即时GSM,GPS信号强度信息
     const CMD_VOICE_UPDATE_LOCK = 23010;//锁车声音文件更新
     const CMD_VOICE_UPDATE_UNLOCK = 23011;//锁车声音文件更新
     const CMD_VOICE_UPDATE_WARNING = 23012;//锁车声音文件更新
+
+    const CMD_KICK_DEVICE_OFFLINE = 28888;//设备踢下线
 
     public static function sendCmd($imei, int $cmd)
     {

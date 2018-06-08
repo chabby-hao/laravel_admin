@@ -262,6 +262,9 @@ return [
         */
 
         'except' => [
+            '*20*',
+            '*bak*',
+            '*leke*',
             'migrations',
         ],
     ],

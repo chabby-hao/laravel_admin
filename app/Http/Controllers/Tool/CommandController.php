@@ -16,10 +16,13 @@ class CommandController extends Controller
     public function refreshGsm(Request $request)
     {
         $imei = $request->input('imei');
-        list(,$imei) = DeviceLogic::getUdidImei($imei);
-        if(CommandLogic::sendCmd($imei, CommandLogic::CMD_REFRESH_GSM)){
-            return Helper::response(['time'=>time()]);
-        }else{
+        list(, $imei) = DeviceLogic::getUdidImei($imei);
+        if (CommandLogic::sendCmd($imei, CommandLogic::CMD_REFRESH_GSM_GPS) &&
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_REFRESH_GSM) &&
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_REFRESH_GPS)
+        ) {
+            return Helper::response(['time' => time()]);
+        } else {
             return Helper::responeseError();
         }
     }
@@ -30,11 +33,11 @@ class CommandController extends Controller
         $imei = $request->input('imei');
         $mac = $request->input('mac');
         $res = false;
-        if($imei && $mac){
+        if ($imei && $mac) {
             RedisLogic::getRedis()->select(6);
-            $res = RedisLogic::hSet('pairbt',$mac, $imei);
+            $res = RedisLogic::hSet('pairbt', $mac, $imei);
         }
-        if($res){
+        if ($res) {
             return Helper::response();
         }
         return Helper::responeseError();

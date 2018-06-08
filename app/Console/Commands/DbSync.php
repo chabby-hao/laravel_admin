@@ -110,13 +110,23 @@ class DbSync extends BaseCommand
                     $brandName = $val->name;
                     $brandModel = BiBrand::whereBrandName($brandName)->first();
                     $brandId = $brandModel->id;
-                    BiEbikeType::firstOrCreate([
-                        'ebike_name' => $name,
-                        //'ev_model'=>$row->ev_model,
-                    ], [
-                        'ebike_remark' => $row->remark,
-                        'brand_id' => $brandId,
-                    ]);
+                    try{
+                        BiEbikeType::firstOrCreate([
+                            'ebike_name' => $name,
+                            'ev_model'=>$row->ev_model,
+                        ], [
+                            'ebike_remark' => $row->remark,
+                            'brand_id' => $brandId,
+                        ]);
+                    }catch (\Exception $e){
+                        BiEbikeType::where([
+                            'ebike_name' => $name,
+                        ])->update([
+                            'ev_model'=>$row->ev_model,
+                            'ebike_remark' => $row->remark,
+                            'brand_id' => $brandId,
+                        ]);
+                    }
                 }
             }
         }

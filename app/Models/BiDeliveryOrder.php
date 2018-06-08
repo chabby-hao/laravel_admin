@@ -16,6 +16,7 @@ namespace App\Models;
  * @property int $delivery_quantity 出货数量
  * @property int $brand_id 品牌id
  * @property int $ebike_type_id 车型id
+ * @property int $battery_type 电池型号
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereBrandId($value)
@@ -34,6 +35,7 @@ namespace App\Models;
  * @mixin \Eloquent
  * @property string|null $actuall_date 实际出货日期
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereActuallDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeliveryOrder whereBatteryType($value)
  */
 class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 {
@@ -47,7 +49,8 @@ class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
 		'delivery_date',
 		'delivery_quantity',
 		'brand_id',
-		'ebike_type_id'
+		'ebike_type_id',
+        'battery_type',
 	];
 
 	protected $dates = [];
@@ -55,6 +58,23 @@ class BiDeliveryOrder extends \App\Models\Base\BiDeliveryOrder
     const DELIVERY_ORDER_STATE_INIT = 0;//待工厂处理
     const DELIVERY_ORDER_STATE_FINISH = 1;//已完成
     const DELIVERY_ORDER_STATE_CANCEL = 2;//已作废
+
+    const BATTERY_TYPE_XINPU = 1;//新普
+    const BATTERY_TYPE_AIBIKE = 2;//艾比克
+    const BATTERY_TYPE_ZHONGLI = 3;//中锂
+    const BATTERY_TYPE_HUIKANG = 4;//惠康锂电
+
+    public static function getBatteryTypeMap()
+    {
+        $map = [
+            self::BATTERY_TYPE_XINPU => '新普',
+            self::BATTERY_TYPE_AIBIKE => '艾比克',
+            self::BATTERY_TYPE_ZHONGLI => '中锂',
+            self::BATTERY_TYPE_HUIKANG => '惠康',
+        ];
+        return $map;
+    }
+
 
     public static function getStateTypeName($type = null)
     {

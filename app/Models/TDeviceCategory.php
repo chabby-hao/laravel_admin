@@ -33,6 +33,7 @@ class TDeviceCategory extends \App\Models\Base\TDeviceCategory
 		'channel',
 		'brand',
 		'category',
-		'model'
+		'model',
+        'udid',
 	];
 }

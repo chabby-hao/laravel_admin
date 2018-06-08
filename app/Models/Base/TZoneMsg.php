@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 23 Apr 2018 16:16:54 +0800.
+ * Date: Wed, 06 Jun 2018 17:54:24 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,19 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TZoneMsg
- *
+ * 
  * @property int $mid
  * @property string $udid
  * @property int $zid
  * @property int $state
  * @property int $time
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneMsg whereMid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneMsg whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneMsg whereTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneMsg whereUdid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneMsg whereZid($value)
- * @mixin \Eloquent
  */
 class TZoneMsg extends Eloquent
 {

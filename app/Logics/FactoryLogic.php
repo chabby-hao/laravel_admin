@@ -51,6 +51,21 @@ class FactoryLogic extends BaseLogic
             ];
         }
 
+        if($shipOrder->battery_type){
+            foreach ($insert as $row){
+                $imei = $row['imei'];
+                RedisLogic::getRedis()->select(1);
+                RedisLogic::hSet('battery_type', $imei, $shipOrder->battery_type);
+            }
+        }
+
+        foreach ($insert as $row){
+            $imei = $row['imei'];
+            DeviceLogic::deviceToChannel($imei, $shipOrder->brand_id);
+            DeviceLogic::resetDevice($imei);
+        }
+
+
         $res = BiDeliveryDevice::insert($insert);
 
         if($res){

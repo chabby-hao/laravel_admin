@@ -106,6 +106,19 @@
                                 </div>
                             </div>
 
+
+                            <div class="control-group">
+                                <label class="control-label">电池型号:</label>
+                                <div class="controls">
+                                    <select name="battery_type" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\BiDeliveryOrder::getBatteryTypeMap() as $id=>$name)
+                                            <option value="{{$id}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>
@@ -145,7 +158,7 @@
 
 
     </script>
-    @include('admin.common_brand_ebikejs');
+    @include('admin.common_brand_ebikejs')
     @include('admin.common_submitjs')
 @endsection
 

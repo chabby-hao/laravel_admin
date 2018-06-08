@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 23 Apr 2018 16:16:54 +0800.
+ * Date: Wed, 06 Jun 2018 17:54:24 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TLockLog
- *
+ * 
  * @property int $id
  * @property string $udid
  * @property string $act
@@ -21,17 +21,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $phone
  * @property int $login_log_id
  * @property int $type
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereAct($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereAddTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereLoginLogId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereUdid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereUid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLockLog whereUsername($value)
- * @mixin \Eloquent
  */
 class TLockLog extends Eloquent
 {

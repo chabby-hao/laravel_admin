@@ -214,7 +214,8 @@ class DeliveryController extends BaseController
                 'delivery_quantity',
                 'brand_id',
                 'ebike_type_id',
-            ], $request->input(), ['brand_id', 'ebike_type_id']);
+                'battery_type'
+            ], $request->input(), ['brand_id', 'ebike_type_id','battery_type']);
 
             $input['user_id'] = Auth::id();
 
