@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Schema;
 class LocationLogic extends BaseLogic
 {
 
-    private function getLocationsNewFromDb($udid, $begin, $end)
+    private static function getLocationsNewFromDb($udid, $begin, $end)
     {
         $ret = [];
         $imei = DeviceLogic::getImei($udid);
