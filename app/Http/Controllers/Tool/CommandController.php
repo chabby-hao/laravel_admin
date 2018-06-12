@@ -101,4 +101,17 @@ class CommandController extends Controller
         return Helper::response();
     }
 
+    //for debug 发命令
+    public function command(Request $request)
+    {
+        $cmd = $request->input('cmd');
+        $imei = $request->input('imei');
+        if ($imei && $cmd) {
+            CommandLogic::sendCmd($imei, $cmd);
+        }else{
+            return Helper::responeseError();
+        }
+        return Helper::response();
+    }
+
 }
