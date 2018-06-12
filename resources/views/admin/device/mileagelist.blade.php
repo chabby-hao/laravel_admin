@@ -42,6 +42,7 @@
                                     <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
                                     <input name="daterange" value="" class="w6 date" type="text">
                                     <input class="btn btn-info" type="submit" value="查询">
+                                    <input class="btn btn-success" type="submit" value="地图">
                                 </div>
 
                             </div>
@@ -84,7 +85,7 @@
                     </div>
                 </div>
 
-                <div id="mymap" style="width: 100%;height: 570px"></div>
+                <div id="mymap" style="width: 100%;height: 570px;float:left"></div>
 
             </div>
         </div>
