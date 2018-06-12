@@ -17,6 +17,10 @@ class CommandLogic extends BaseLogic
 
     const CMD_KICK_DEVICE_OFFLINE = 28888;//设备踢下线
 
+    const CMD_AUTO_SET_ZDSF = 24030;//关电门后自动设防配置
+    const CMD_AUTO_SET_ZDFJ = 24031;//下发震动信号分级配置
+    const CMD_ACTIVE_CONFIG = 24033;//激活配置
+
     public static function sendCmd($imei, int $cmd)
     {
         return RedisLogic::sendCmd($imei, $cmd);
