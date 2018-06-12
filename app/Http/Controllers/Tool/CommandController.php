@@ -43,5 +43,47 @@ class CommandController extends Controller
         return Helper::responeseError();
     }
 
+    //for debug   关电门后自动设防配置
+    public function tongbushefang(Request $request)
+    {
+        $enable = $request->input('enable');
+        $time = $request->input('time');
+        $imei = $request->input('imei');
+        if ($imei && $enable && $time) {
+            CommandLogic::cmdSet($imei, 'AutoFortifyEnable', $enable);
+            CommandLogic::cmdSet($imei, 'AutoFortifyTime', $time);
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_AUTO_SET_ZDSF);
+        }else{
+            return Helper::responeseError();
+        }
+        return Helper::response();
+    }
+
+    public function zhendongfenji(Request $request)
+    {
+        $value = $request->input('value');
+        $imei = $request->input('imei');
+        if ($imei && $value) {
+            CommandLogic::cmdSet($imei, 'ShakeSignalValue', $value);
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_AUTO_SET_ZDFJ);
+        }else{
+            return Helper::responeseError();
+        }
+        return Helper::response();
+    }
+
+    //for debug 激活配置
+    public function activeConfig(Request $request)
+    {
+        $value = $request->input('value');
+        $imei = $request->input('imei');
+        if ($imei && $value) {
+            CommandLogic::cmdSet($imei, 'ActivatedState', $value);
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_ACTIVE_CONFIG);
+        }else{
+            return Helper::responeseError();
+        }
+        return Helper::response();
+    }
 
 }
