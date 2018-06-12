@@ -25,6 +25,7 @@ class AdminBeforeCheck
         'device/map',
         'user/resetPassword',
         'tool/getFileUrl',
+        'device/tripTrails'
     ];
 
     /**
