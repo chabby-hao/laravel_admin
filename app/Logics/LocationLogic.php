@@ -29,6 +29,7 @@ class LocationLogic extends BaseLogic
 
             $rs = DB::connection('location')->select("select * from $table where udid='$imei' and `create_time` BETWEEN $begin and $end and type='GPS'");
             foreach ($rs as $row) {
+                $row = (array)$row;
 
                 $row['id'] = intval($row['location_id']);
                 $row['time'] = intval($row['create_time']);
