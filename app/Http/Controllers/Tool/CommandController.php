@@ -49,7 +49,7 @@ class CommandController extends Controller
         $enable = $request->input('enable');
         $time = $request->input('time');
         $imei = $request->input('imei');
-        if ($imei && $enable && $time) {
+        if ($imei && is_numeric($enable) && $time) {
             CommandLogic::cmdSet($imei, 'AutoFortifyEnable', $enable);
             CommandLogic::cmdSet($imei, 'AutoFortifyTime', $time);
             CommandLogic::sendCmd($imei, CommandLogic::CMD_AUTO_SET_ZDSF);
@@ -64,7 +64,7 @@ class CommandController extends Controller
     {
         $value = $request->input('value');
         $imei = $request->input('imei');
-        if ($imei && $value) {
+        if ($imei && is_numeric($value)) {
             CommandLogic::cmdSet($imei, 'ShakeSignalValue', $value);
             CommandLogic::sendCmd($imei, CommandLogic::CMD_AUTO_SET_ZDFJ);
         }else{
@@ -78,7 +78,7 @@ class CommandController extends Controller
     {
         $value = $request->input('value');
         $imei = $request->input('imei');
-        if ($imei && $value) {
+        if ($imei && is_numeric($value)) {
             CommandLogic::cmdSet($imei, 'ActivatedState', $value);
             CommandLogic::sendCmd($imei, CommandLogic::CMD_ACTIVE_CONFIG);
         }else{
@@ -92,7 +92,7 @@ class CommandController extends Controller
     {
         $value = $request->input('value');
         $imei = $request->input('imei');
-        if ($imei && $value) {
+        if ($imei && is_numeric($value)) {
             CommandLogic::cmdSet($imei, 'szfj_gear', $value);
             CommandLogic::sendCmd($imei, CommandLogic::CMD_ACTIVE_CONFIG);
         }else{
