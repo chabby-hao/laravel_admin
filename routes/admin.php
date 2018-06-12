@@ -56,6 +56,7 @@ Route::any('/device/importCity','Admin\DeviceController@importCity');
 Route::any('/device/searchCity','Admin\DeviceController@searchCity');
 Route::any('/device/exportList','Admin\DeviceController@exportList');
 Route::any('/device/map','Admin\DeviceController@map');
+Route::any('/device/tripTrails','Admin\DeviceController@tripTrails');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');

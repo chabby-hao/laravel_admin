@@ -42,7 +42,7 @@
                                     <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
                                     <input name="daterange" value="" class="w6 date" type="text">
                                     <input class="btn btn-info" type="submit" value="查询">
-                                    <input class="btn btn-success" type="submit" value="地图">
+                                    <input class="btn btn-success btn_map" type="button" value="地图">
                                 </div>
 
                             </div>
@@ -85,7 +85,10 @@
                     </div>
                 </div>
 
-                <div id="mymap" style="width: 100%;height: 570px;float:left"></div>
+                <div style="width: 100%;height: 570px;float:left">
+                    <div id="mymap" style="width:100%; height: 570px"></div>
+                </div>
+
 
             </div>
         </div>
@@ -150,10 +153,22 @@
         option.series[0].data = data;
         console.log(option.series[0].data);
         myChart.setOption(option);
-        // console.log(option);
-        //获取echart中使用的bmap实例
-        //var map = myChart.getModel().getComponent('bmap').getBMap();
-        //map.centerAndZoom([1,2], 9);
+
+        $(".btn_map").click(function(){
+            var id = $("#id").val();
+            var daterange = $("input[name='daterange']").val();
+            if(id && daterange){
+                var str = $("#myform").serialize();
+                $.ajax({
+                    url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
+                    data:str,
+                    success:function(res){
+                        console.log(res);
+                    }
+                })
+            }
+        });
+
 
     </script>
 

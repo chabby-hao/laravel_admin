@@ -14,6 +14,7 @@ use App\Libs\MyPage;
 use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
 use App\Logics\DewinLogic;
+use App\Logics\LocationLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Logics\RedisLogic;
@@ -551,30 +552,7 @@ class DeviceController extends BaseController
     public function mileageList()
     {
 
-        $type = Input::get('type');
-        $id = Input::get('id');
-
-        $model = TEvMileageGp::join('t_device_code', 'udid', '=', 'qr')->where($this->getWhere());
-
-
-        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->startOfDay()->subDays(1)->toDateTimeString());
-
-        $whereBetween = ['begin', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
-        $model->whereBetween($whereBetween[0], $whereBetween[1]);
-
-        $where = [];
-        if ($id && $udid = $this->getUdid($id)) {
-            $where['udid'] = $udid;
-            $model->where($where);
-        } elseif ($id && empty($udid)) {
-            $model->where(['udid' => '66666666666']);//查不到哎
-        }
-
-        if ($type == MileageLogic::MILE_TYPE_NORMAL) {
-            $model->where('mile', '<', MileageLogic::MAX_MILE);
-        } elseif ($type == MileageLogic::MILE_TYPE_ABNORMAL) {
-            $model->where('mile', '>=', MileageLogic::MAX_MILE);
-        }
+        list($model, $startDatetime, $endDatetime) = $this->getTripModel();
 
         $paginate = $model->orderByDesc('begin')->select('t_ev_mileage_gps.*')->paginate();
 
@@ -596,6 +574,72 @@ class DeviceController extends BaseController
             'end' => $endDatetime,
         ]);
 
+    }
+
+    public function tripTrails(Request $request)
+    {
+        $id = $this->getId($request);
+        $udid = $this->getUdid($id);
+        if(!$udid){
+            return $this->outPutError('查询不到数据');
+        }
+        list($model, ,) = $this->getTripModel();
+
+        $data = $model->orderByDesc('end')->select('t_ev_mileage_gps.*')->get();
+
+        $rs = [];
+        foreach ($data as $row) {
+            $rs[] = $this->getMileTripsInfo($row);
+        }
+        return $this->outPut($rs);
+
+    }
+
+    public function getMileTripsInfo($mileRow)
+    {
+        $tmp = [];
+        $tmp['udid'] = $mileRow->udid;
+        $tmp['dateTime'] = Carbon::createFromTimestamp($mileRow->begin)->toDateTimeString();
+
+        $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
+        $tmp['locs'] = $locs;
+        $tmp['addressBegin'] = array_shift($locs)['address'];
+        $tmp['addressEnd'] = array_pop($locs)['address'];
+
+        $tmp['mile'] = $mileRow->mile;
+        $tmp['duration'] = number_format($mileRow->duration / 60, 1);
+        $tmp['speed'] = number_format($tmp['mile'] / ($mileRow->duration / 60 / 60), 1);
+        $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
+        return $tmp;
+    }
+
+    private function getTripModel()
+    {
+        $type = Input::get('type');
+        $id = Input::get('id');
+
+        $model = TEvMileageGp::join('t_device_code', 'udid', '=', 'qr')->where($this->getWhere());
+
+
+        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::now()->startOfDay()->subDays(1)->toDateTimeString());
+
+        $whereBetween = ['begin', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $model->whereBetween($whereBetween[0], $whereBetween[1]);
+
+        $where = [];
+        if ($id && $udid = $this->getUdid($id)) {
+            $where['udid'] = $udid;
+            $model->where($where);
+        } elseif ($id && empty($udid)) {
+            return $this->outPutError('设备码有误');
+        }
+
+        if ($type == MileageLogic::MILE_TYPE_NORMAL) {
+            $model->where('mile', '<', MileageLogic::MAX_MILE);
+        } elseif ($type == MileageLogic::MILE_TYPE_ABNORMAL) {
+            $model->where('mile', '>=', MileageLogic::MAX_MILE);
+        }
+        return [$model, $startDatetime, $endDatetime];
     }
 
     /**
@@ -663,4 +707,6 @@ class DeviceController extends BaseController
     {
         return view('admin.device.map');
     }
+
+
 }
