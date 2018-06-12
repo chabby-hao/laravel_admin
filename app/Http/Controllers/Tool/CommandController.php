@@ -59,6 +59,7 @@ class CommandController extends Controller
         return Helper::response();
     }
 
+    //for debug 震动分级
     public function zhendongfenji(Request $request)
     {
         $value = $request->input('value');
@@ -79,6 +80,20 @@ class CommandController extends Controller
         $imei = $request->input('imei');
         if ($imei && $value) {
             CommandLogic::cmdSet($imei, 'ActivatedState', $value);
+            CommandLogic::sendCmd($imei, CommandLogic::CMD_ACTIVE_CONFIG);
+        }else{
+            return Helper::responeseError();
+        }
+        return Helper::response();
+    }
+
+    //for debug   神舟飞箭设置档位
+    public function szfjGear(Request $request)
+    {
+        $value = $request->input('value');
+        $imei = $request->input('imei');
+        if ($imei && $value) {
+            CommandLogic::cmdSet($imei, 'szfj_gear', $value);
             CommandLogic::sendCmd($imei, CommandLogic::CMD_ACTIVE_CONFIG);
         }else{
             return Helper::responeseError();
