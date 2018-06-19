@@ -166,7 +166,7 @@
                     data:str,
                     success:function(res){
                         console.log(res);
-                        option.series[0].data = res.trip[0].locs;
+                        option.series[0].data.coords = res.trip[0].locs;
                         console.log(option);
                         myChart.setOption(option);
                         myChart.hideLoading();

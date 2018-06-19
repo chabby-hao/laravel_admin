@@ -597,7 +597,7 @@ class DeviceController extends BaseController
 
     }
 
-    public function getMileTripsInfo($mileRow)
+    private function getMileTripsInfo($mileRow)
     {
         $tmp = [];
         $tmp['udid'] = $mileRow->udid;
