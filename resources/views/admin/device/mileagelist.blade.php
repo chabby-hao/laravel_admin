@@ -160,19 +160,16 @@
             var id = $("#id").val();
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
-                myChart.showLoading();
+                //myChart.showLoading();
                 var str = $("#myform").serialize();
                 $.ajax({
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        console.log(res);
                         var data = [{value: 23, coords:res.trip[0].locs}];
-                        console.log(data);
                         option.series[0].data = data;
-                        console.log(option);
                         myChart.setOption(option);
-                        myChart.hideLoading();
+                        //myChart.hideLoading();
                     }
                 })
             }
