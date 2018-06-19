@@ -149,7 +149,7 @@
 
         var data = [
             {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-            {value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
+            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
         ]
         console.log(data);
         //option.series[0].data = data;
@@ -166,7 +166,7 @@
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        var data = [{value: 23, coords:res.trip[0].locs}];
+                        var data = [{value: 23, 'coords':res.trip[0].locs}];
                         option.series[0].data = data;
                         myChart.setOption(option);
                         //myChart.hideLoading();
