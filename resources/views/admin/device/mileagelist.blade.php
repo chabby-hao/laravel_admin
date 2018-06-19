@@ -167,7 +167,8 @@
                     success:function(res){
                         console.log(res);
                         console.log(res.trip[0]);
-                        option.series[0].data.coords = res.trip[0].locs;
+                        var trip = res.trip[0];
+                        option.series[0].data.coords = trip.locs;
                         console.log(option);
                         myChart.setOption(option);
                         myChart.hideLoading();
