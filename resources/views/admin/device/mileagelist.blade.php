@@ -177,6 +177,7 @@
                     success:function(res){
                         var data = res.trip[0].locs;
                         option.series[0].data = data;
+                        console.log(option);
                         option.bmap.center = data[0].coords;
                         myChart.setOption(option);
                         //myChart.hideLoading();
