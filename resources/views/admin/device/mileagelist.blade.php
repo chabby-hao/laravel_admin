@@ -178,7 +178,7 @@
                         var data = res.trip[0].locs;
                         option.series[0].data = data;
                         console.log(option);
-                        option.bmap.center = data[0].coords;
+                        option.bmap.center = data[0].coord;
                         myChart.setOption(option);
                         //myChart.hideLoading();
                     }
