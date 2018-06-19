@@ -592,7 +592,7 @@ class DeviceController extends BaseController
             $rs[] = $this->getMileTripsInfo($row);
         }
         return $this->outPut([
-            'gps'=>$rs,
+            'trip'=>$rs,
         ]);
 
     }
