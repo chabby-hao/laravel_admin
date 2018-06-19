@@ -607,7 +607,7 @@ class DeviceController extends BaseController
         //$tmp['locs'] = $locs;
         $t = [];
         foreach ($locs as $loc){
-            $t[] = [$loc['lng'], $loc['lat']];
+            $t[] = [floatval($loc['lng']), floatval($loc['lat'])];
         }
         $tmp['locs'] = $t;
         $tmp['addressBegin'] = array_shift($locs)['address'];
