@@ -110,15 +110,15 @@
                 roam: true,
                 zoom: 15
             },
-            visualMap: {
-                type: "piecewise",
-                left: 'right',
-                min: 0,
-                max: 15,
-                splitNumber: 5,
-                maxOpen: true,
-                color: ['red', 'yellow', 'green']
-            },
+//            visualMap: {
+//                type: "piecewise",
+//                left: 'right',
+//                min: 0,
+//                max: 15,
+//                splitNumber: 5,
+//                maxOpen: true,
+//                color: ['red', 'yellow', 'green']
+//            },
             tooltip: {
                 formatter: function(params, ticket, callback) {
 
