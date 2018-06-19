@@ -122,6 +122,8 @@
             tooltip: {
                 formatter: function(params, ticket, callback) {
 
+                    console.log(params);
+                    console.log(ticket);
                     return "aaa:";
                 },
                 trigger: 'item'
