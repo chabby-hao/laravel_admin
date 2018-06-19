@@ -168,6 +168,7 @@
                         console.log(res);
                         console.log(res.trip[0]);
                         var trip = res.trip[0];
+                        console.log(trip.locs);
                         option.series[0].data.coords = trip.locs;
                         console.log(option);
                         myChart.setOption(option);
