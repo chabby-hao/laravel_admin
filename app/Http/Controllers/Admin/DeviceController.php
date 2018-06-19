@@ -606,8 +606,11 @@ class DeviceController extends BaseController
         $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
         //$tmp['locs'] = $locs;
         $t = [];
-        foreach ($locs as $loc){
-            $t[] = [floatval($loc['lng']), floatval($loc['lat']), $loc['address']];
+        foreach ($locs as $loc) {
+            $t[] = [
+                'coord' => [floatval($loc['lng']), floatval($loc['lat'])],
+                'address' => $loc['address'],
+            ];
         }
         $tmp['locs'] = $t;
         $tmp['addressBegin'] = array_shift($locs)['address'];

@@ -175,24 +175,9 @@
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        var data = [
-                            {
-                                value: 23,
-                                coords:res.trip[0].locs,
-                                tooltip: {
-                                    formatter: function(params, ticket, callback) {
-
-                                        console.log(params);
-                                        console.log(ticket);
-                                        console.log(callback);
-                                        return "ccc:";
-                                    },
-                                    trigger: 'item'
-                                },
-                            }
-                        ];
+                        var data = res.trip[0].locs;
                         option.series[0].data = data;
-                        option.bmap.center = data[0].coords[0];
+                        option.bmap.center = data[0].coords;
                         myChart.setOption(option);
                         //myChart.hideLoading();
                     }
