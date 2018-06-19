@@ -140,7 +140,7 @@
                     },
                     trigger: 'item'
                 },
-                type: 'lines',
+                type: 'line',
                 coordinateSystem: 'bmap',
                 polyline: true,
                 lineStyle: {
