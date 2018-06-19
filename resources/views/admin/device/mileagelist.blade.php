@@ -130,6 +130,16 @@
                 trigger: 'item'
             },
             series: [{
+                tooltip: {
+                    formatter: function(params, ticket, callback) {
+
+                        console.log(params);
+                        console.log(ticket);
+                        console.log(callback);
+                        return "bbb:";
+                    },
+                    trigger: 'item'
+                },
                 type: 'lines',
                 coordinateSystem: 'bmap',
                 polyline: true,
