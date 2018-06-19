@@ -121,6 +121,7 @@
 //            },
             tooltip: {
                 formatter: function(params, ticket, callback) {
+                    console.log(params);
                     return "行程时间由: " + params.begin + ' 至 ' + params.end;
                 },
                 trigger: 'item'
