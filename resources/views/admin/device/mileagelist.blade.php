@@ -148,9 +148,7 @@
         };
 
         var data = [
-            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-            {value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-        ]
+        ];
         option.series[0].data = data;
         console.log(option.series[0].data);
         myChart.setOption(option);
@@ -167,6 +165,7 @@
                     success:function(res){
                         console.log(res);
                         data = res.gps;
+                        console.log(option);
                         myChart.setOption(option);
                         myChart.hideLoading();
                     }
