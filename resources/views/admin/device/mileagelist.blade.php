@@ -121,7 +121,8 @@
             },
             tooltip: {
                 formatter: function(params, ticket, callback) {
-                    return "拥堵指数:" + params.value;
+
+                    return "aaa:";
                 },
                 trigger: 'item'
             },
@@ -158,12 +159,16 @@
             var id = $("#id").val();
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
+                myChart.showLoading();
                 var str = $("#myform").serialize();
                 $.ajax({
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
                         console.log(res);
+                        data = res.gps;
+                        myChart.setOption(option);
+                        myChart.hideLoading();
                     }
                 })
             }

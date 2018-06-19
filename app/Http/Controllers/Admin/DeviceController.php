@@ -591,7 +591,9 @@ class DeviceController extends BaseController
         foreach ($data as $row) {
             $rs[] = $this->getMileTripsInfo($row);
         }
-        return $this->outPut($rs);
+        return $this->outPut([
+            'gps'=>$rs,
+        ]);
 
     }
 
