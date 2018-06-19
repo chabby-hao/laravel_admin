@@ -147,10 +147,11 @@
             }]
         };
 
-//        var data = [
-//            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-//            {value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-//        ]
+        var data = [
+            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
+            {value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
+        ]
+        console.log(data);
         //option.series[0].data = data;
         //console.log(option.series[0].data);
         //myChart.setOption(option);
@@ -167,6 +168,7 @@
                     success:function(res){
                         console.log(res);
                         var data = [{value: 23, coords:res.trip[0].locs}];
+                        console.log(data);
                         option.series[0].data = data;
                         console.log(option);
                         myChart.setOption(option);
