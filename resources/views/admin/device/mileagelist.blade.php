@@ -121,26 +121,12 @@
 //            },
             tooltip: {
                 formatter: function(params, ticket, callback) {
-
-                    console.log(params);
-                    console.log(ticket);
-                    console.log(callback);
-                    return "aaa:";
+                    return "行程时间由: " + params.begin + ' 至 ' + params.end;
                 },
                 trigger: 'item'
             },
             series: [{
-                tooltip: {
-                    formatter: function(params, ticket, callback) {
-
-                        console.log(params);
-                        console.log(ticket);
-                        console.log(callback);
-                        return "bbb:";
-                    },
-                    trigger: 'item'
-                },
-                type: 'line',
+                type: 'lines',
                 coordinateSystem: 'bmap',
                 polyline: true,
                 lineStyle: {
@@ -175,10 +161,10 @@
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        var data = res.trip[0].locs;
+                        var trip = res.trip[0];
+                        var data = [{begin: trip.begin,end:trip.end, coords:trip.locs}];
                         option.series[0].data = data;
-                        console.log(option);
-                        option.bmap.center = data[0].coord;
+                        option.bmap.center = data[0].coords[0];
                         myChart.setOption(option);
                         //myChart.hideLoading();
                     }
