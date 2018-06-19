@@ -108,7 +108,7 @@
             bmap: {
                 center: [116.282019, 38.587249],
                 roam: true,
-                zoom: 5
+                zoom: 13
             },
             visualMap: {
                 type: "piecewise",
@@ -147,14 +147,10 @@
             }]
         };
 
-        var data = [
-            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-        ]
-        console.log(data);
-        //option.series[0].data = data;
-        //console.log(option.series[0].data);
-        //myChart.setOption(option);
+//        var data = [
+//            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
+//            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
+//        ]
 
         $(".btn_map").click(function(){
             var id = $("#id").val();
@@ -166,12 +162,9 @@
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        var data = [{value: 23, 'coords':res.trip[0].locs}];
-//                        var data = [
-//                            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-//                            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-//                        ]
+                        var data = [{value: 23, coords:res.trip[0].locs}];
                         option.series[0].data = data;
+                        option.bmap.center = data.coords[0];
                         myChart.setOption(option);
                         //myChart.hideLoading();
                     }
