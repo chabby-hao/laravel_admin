@@ -166,10 +166,8 @@
                     data:str,
                     success:function(res){
                         console.log(res);
-                        console.log(res.trip[0]);
-                        var trip = res.trip[0];
-                        console.log(trip.locs);
-                        option.series[0].data.coords = trip.locs;
+                        var data = [{coords:res.trip[0].locs}];
+                        option.series[0].data = data;
                         console.log(option);
                         myChart.setOption(option);
                         myChart.hideLoading();
