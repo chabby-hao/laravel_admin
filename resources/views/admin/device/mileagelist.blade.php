@@ -124,6 +124,7 @@
 
                     console.log(params);
                     console.log(ticket);
+                    console.log(callback);
                     return "aaa:";
                 },
                 trigger: 'item'
