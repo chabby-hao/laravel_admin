@@ -604,7 +604,12 @@ class DeviceController extends BaseController
         $tmp['dateTime'] = Carbon::createFromTimestamp($mileRow->begin)->toDateTimeString();
 
         $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
-        $tmp['locs'] = $locs;
+        //$tmp['locs'] = $locs;
+        $t = [];
+        foreach ($locs as $loc){
+            $t[] = [$loc['lng'], $loc['lat']];
+        }
+        $tmp['locs'] = $t;
         $tmp['addressBegin'] = array_shift($locs)['address'];
         $tmp['addressEnd'] = array_pop($locs)['address'];
 
