@@ -108,7 +108,7 @@
             bmap: {
                 center: [116.282019, 38.587249],
                 roam: true,
-                zoom: 16
+                zoom: 15
             },
             visualMap: {
                 type: "piecewise",
