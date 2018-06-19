@@ -166,7 +166,7 @@
                     data:str,
                     success:function(res){
                         console.log(res);
-                        var data = [{coords:res.trip[0].locs}];
+                        var data = [{value: 23, coords:res.trip[0].locs}];
                         option.series[0].data = data;
                         console.log(option);
                         myChart.setOption(option);
