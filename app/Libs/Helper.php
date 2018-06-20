@@ -328,17 +328,18 @@ class Helper
     }
 
     /**
-     *      把秒数转换为时分秒的格式
-     *      @param Int $times 时间，单位 秒
-     *      @return String
+     * 把秒数转换为时分秒的格式
+     * @param Int $times 时间，单位 秒
+     * @return String
      */
-    public static function secToTime($times){
+    public static function secToTime($times)
+    {
         $result = '00:00:00';
-        if ($times>0) {
-            $hour = floor($times/3600);
-            $minute = floor(($times-3600 * $hour)/60);
-            $second = floor((($times-3600 * $hour) - 60 * $minute) % 60);
-            $result = $hour.':'.$minute.':'.$second;
+        if ($times > 0) {
+            $hour = number_format(floor($times / 3600), 2);
+            $minute = number_format(floor(($times - 3600 * $hour) / 60), 2);
+            $second = number_format(floor((($times - 3600 * $hour) - 60 * $minute) % 60), 2);
+            $result = $hour . ':' . $minute . ':' . $second;
         }
         return $result;
     }
