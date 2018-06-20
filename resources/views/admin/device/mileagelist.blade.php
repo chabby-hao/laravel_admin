@@ -43,7 +43,7 @@
                                     <input name="daterange" value="" class="w6 date" type="text">
                                     <input class="btn btn-info" type="submit" value="查询">
                                     @if(Auth::user()->can('device/tripTrails'))
-                                        <input class="btn btn-success btn_map" type="button" value="地图">
+                                        <input class="btn btn-success btn_map hide" type="button" value="地图">
                                     @endif
                                 </div>
 
