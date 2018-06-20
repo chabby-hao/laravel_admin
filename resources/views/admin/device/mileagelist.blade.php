@@ -227,8 +227,9 @@
                 polyline: true,
                 lineStyle: {
                     normal: {
+                        color: 'blue',
                         opacity: 1,
-                        width: 4
+                        width: 2
                     },
                     emphasis: {
                         width: 6
@@ -297,24 +298,25 @@
         }
 
         $(".left").click(function(){
-            myChart.showLoading();
+
             if(index+1 === len){
                 return;
             }else if(index+2 === len){
                 $(this).addClass('nomore');
             }
+            myChart.showLoading();
             index++;
             setTrip(all[index]);
             $(".right").removeClass('nomore');
         });
 
         $(".right").click(function(){
-            myChart.showLoading();
             if(index === 0){
                 return;
             }else if(index === 1){
                 $(this).addClass('nomore');
             }
+            myChart.showLoading();
             index--;
             setTrip(all[index]);
             $(".left").removeClass('nomore');
