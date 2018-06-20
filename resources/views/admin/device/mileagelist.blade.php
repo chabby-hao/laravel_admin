@@ -136,6 +136,7 @@
                         .address_begin,.address_end{
                             display: inline-block;
                             width:46%;
+                            vertical-align: top;
                         }
 
                         .detail{
