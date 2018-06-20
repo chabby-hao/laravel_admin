@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <div id="map" style="width: 100%;height: 570px;float:left">
+                <div id="map" style="width: 100%;height: 570px;float:left;display: none">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
                         .left,.center,.right{
