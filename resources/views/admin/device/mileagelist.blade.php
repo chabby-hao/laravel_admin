@@ -227,9 +227,9 @@
                 polyline: true,
                 lineStyle: {
                     normal: {
-                        color: '#09F7F7',
+                        color: '#44BB8C',
                         opacity: 1,
-                        width: 3
+                        width: 4
                     },
                     emphasis: {
                         width: 6
@@ -240,8 +240,8 @@
                     period: 6,
                     trailLength: 0,
                     symbol: 'arrow',
-                    symbolSize: 8,
-                    color: '#BDE61A'
+                    symbolSize: [5,15],
+                    color: '#ffffff'
                 },
             }]
         };
