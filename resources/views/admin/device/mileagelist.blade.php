@@ -165,11 +165,11 @@
                             <span class="address">
                                 <span class="address_begin">
                                     <img src="{{asset('image/start.png')}}" alt="">
-                                    阿拉啦啦啦啦
+                                    <span class="text_begin"></span>
                                 </span>
                                 <span class="address_end">
                                     <img src="{{asset('image/end.png')}}" alt="">
-                                    我喜欢二哈哈哈
+                                    <span class="text_end"></span>
                                 </span>
                             </span>
                             <span class="detail">
@@ -247,8 +247,8 @@
         var len = 0;
         var mydate = $(".mydate");
         var time = $(".time");
-        var address_begin = $(".address_begin");
-        var address_end = $(".address_end");
+        var text_begin = $(".text_begin");
+        var text_end = $(".text_end");
         var use_time = $(".use_time");
         var mile = $(".mile");
         var speed = $(".speed");
@@ -287,8 +287,8 @@
             myChart.setOption(option);
             mydate.html(trip.date);
             time.html(trip.time);
-            address_begin.text(trip.addressBegin);
-            address_end.text(trip.addressEnd);
+            text_begin.text(trip.addressBegin);
+            text_end.text(trip.addressEnd);
             use_time.html(trip.use_time);
             mile.html(trip.mile + 'km');
             speed.html(trip.speed + 'km/h');
