@@ -267,8 +267,8 @@
             var id = $("#id").val();
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
-                //$('#map').show();
-                //$("#mytable").hide();
+                $('#map').show();
+                $("#mytable").hide();
                 //myChart.showLoading();
                 var str = $("#myform").serialize();
                 $.ajax({
