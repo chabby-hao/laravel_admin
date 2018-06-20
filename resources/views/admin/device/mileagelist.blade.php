@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <div id="map" style="width: 100%;height: 570px;float:left;">
+                <div id="map" class="hide" style="width: 100%;height: 570px;float:left;">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
                         .left,.center,.right{
@@ -201,8 +201,6 @@
 
     <script>
 
-        $("#map").hide();
-
         var myChart = echarts.init(document.getElementById('mymap'));
 
         var option = {
@@ -270,6 +268,7 @@
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
                 $('#map').show();
+                myChart.resize();
                 $("#mytable").hide();
                 //myChart.showLoading();
                 var str = $("#myform").serialize();
