@@ -42,7 +42,9 @@
                                     <input class="w2" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI">
                                     <input name="daterange" value="" class="w6 date" type="text">
                                     <input class="btn btn-info" type="submit" value="查询">
-                                    <input class="btn btn-success btn_map" type="button" value="地图">
+                                    @if(Auth::user()->can('device/tripTrails'))
+                                        <input class="btn btn-success btn_map" type="button" value="地图">
+                                    @endif
                                 </div>
 
                             </div>
@@ -50,7 +52,7 @@
                     </div>
                 </div>
 
-                <div id="mytable" class="hide widget-box">
+                <div id="mytable" class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>列表</h5>
                     </div>
@@ -85,7 +87,7 @@
                     </div>
                 </div>
 
-                <div style="width: 100%;height: 570px;float:left">
+                <div id="map" class="hide" style="width: 100%;height: 570px;float:left">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
                         .left,.center,.right{
@@ -159,8 +161,8 @@
                             <span><</span>
                         </div>{{--
                         --}}<div class="center" style="display:inline-block;width: 78%;">
-                            <span class="mydate" style="position: absolute;top:5px;left:5px">2018-06-03</span>
-                            <span class="time">10:18-10:26</span>
+                            <span class="mydate" style="position: absolute;top:5px;left:5px">0000-00-00</span>
+                            <span class="time">00:00-00:00</span>
                             <div class="line-css"></div>
                             <span class="address">
                                 <span class="address_begin">
@@ -173,10 +175,10 @@
                                 </span>
                             </span>
                             <span class="detail">
-                                <span class="use_time">00:14:03</span>
-                                <span class="mile">4.5km</span>
-                                <span class="speed">19.2km/h</span>
-                                <span class="energy">0.1kw.h</span>
+                                <span class="use_time">00:00:00</span>
+                                <span class="mile">0.0km</span>
+                                <span class="speed">0.0km/h</span>
+                                <span class="energy">0.0kw.h</span>
                             </span>
                         </div>{{--
                         --}}<div class="right nomore" style="display:inline-block;width:10%;height: 100%">
@@ -225,6 +227,7 @@
                 type: 'lines',
                 coordinateSystem: 'bmap',
                 polyline: true,
+                data:[],
                 lineStyle: {
                     normal: {
                         color: '#44BB8C',
@@ -258,23 +261,28 @@
         var speed = $(".speed");
         var energy = $(".energy");
 
-        $(".btn_map").click(function(){
+        var btn_map = $(".btn_map");
+        btn_map.click(function(){
             var id = $("#id").val();
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
+                $('#map').show();
+                $("#mytable").hide();
                 //myChart.showLoading();
                 var str = $("#myform").serialize();
                 $.ajax({
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        if(res.trip){
+                        if(res.trip && res.trip.length > 0){
                             all = res.trip;
                             len = all.length;
                             if(len === 1){
                                 $(".left").addClass('nomore');
                             }
                             setTrip(all[index]);
+                        }else{
+                            myalert('未查询到行程记录');
                         }
 
                         //myChart.hideLoading();
@@ -323,7 +331,16 @@
             index--;
             setTrip(all[index]);
             $(".left").removeClass('nomore');
-        })
+        });
+
+        $("#id").on('blur keyup',function(){
+            if($(this).val()){
+                btn_map.show();
+            }else{
+                btn_map.hide();
+            }
+        });
+
 
 
     </script>
