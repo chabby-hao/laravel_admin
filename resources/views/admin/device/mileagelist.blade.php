@@ -159,7 +159,7 @@
                             <span><</span>
                         </div>{{--
                         --}}<div class="center" style="display:inline-block;width: 78%;">
-                            <span class="date" style="position: absolute;top:5px;left:5px">2018-06-03</span>
+                            <span class="mydate" style="position: absolute;top:5px;left:5px">2018-06-03</span>
                             <span class="time">10:18-10:26</span>
                             <div class="line-css"></div>
                             <span class="address">
@@ -204,7 +204,7 @@
             bmap: {
                 center: [116.282019, 38.587249],
                 roam: true,
-                zoom: 15
+                zoom: 16
             },
 //            visualMap: {
 //                type: "piecewise",
@@ -242,16 +242,17 @@
             }]
         };
 
-        var data = [
-            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-        ]
-        option.series[0].data = data;
-        myChart.setOption(option);
-
         var all = null;
         var index = 0;
         var len = 0;
+        var mydate = $(".mydate");
+        var time = $(".time");
+        var address_begin = $(".address_begin");
+        var address_end = $(".address_end");
+        var use_time = $(".use_time");
+        var mile = $(".mile");
+        var speed = $(".speed");
+        var energy = $(".energy");
 
         $(".btn_map").click(function(){
             var id = $("#id").val();
@@ -284,6 +285,14 @@
             option.series[0].data = data;
             option.bmap.center = data[0].coords[0];
             myChart.setOption(option);
+            mydate.html(trip.date);
+            time.html(trip.time);
+            address_begin.html(trip.addressBegin);
+            address_end.html(trip.addresseEnd);
+            use_time.html(trip.use_time);
+            mile.html(trip.mile + 'km');
+            speed.html(trip.speed + 'km/h');
+            energy.html(trip.energy + 'kw.h');
             myChart.hideLoading();
         }
 

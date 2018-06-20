@@ -603,19 +603,24 @@ class DeviceController extends BaseController
         $tmp['udid'] = $mileRow->udid;
         $tmp['begin'] = Carbon::createFromTimestamp($mileRow->begin)->toDateTimeString();
         $tmp['end'] = Carbon::createFromTimestamp($mileRow->end)->toDateTimeString();
+        $tmp['time'] = Carbon::createFromTimestamp($mileRow->begin)->format('H:i') . '-' . Carbon::createFromTimestamp($mileRow->end)->format('H:i');
+        $tmp['date'] = Carbon::createFromTimestamp($mileRow->begin)->toDateString();
 
         $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
         //$tmp['locs'] = $locs;
         $t = [];
+        $loc = [];
         foreach ($locs as $loc){
             $t[] = [floatval($loc['lng']), floatval($loc['lat'])];
         }
         $tmp['locs'] = $t;
-        $tmp['addressBegin'] = array_shift($locs)['address'];
-        $tmp['addressEnd'] = array_pop($locs)['address'];
+        $first = $locs[0];
+        $tmp['addressBegin'] = $first['address'] ?: $first['lng'] . ',' . $first['lat'];
+        $tmp['addressEnd'] = array_pop($locs)['address'] ?: $loc['lng'] . ',' . $loc['lat'];
 
         $tmp['mile'] = $mileRow->mile;
         $tmp['duration'] = number_format($mileRow->duration / 60, 1);
+        $tmp['use_time'] = Helper::secToTime($mileRow->duration);
         $tmp['speed'] = number_format($tmp['mile'] / ($mileRow->duration / 60 / 60), 1);
         $tmp['energy'] = DeviceLogic::getEnergyByMileage($tmp['mile']);
         return $tmp;
