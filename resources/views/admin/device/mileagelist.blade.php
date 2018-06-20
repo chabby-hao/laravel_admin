@@ -237,11 +237,11 @@
                 },
                 effect: {
                     show: true,
-                    period: 6,
+                    period: 10,
                     trailLength: 0,
                     symbol: 'arrow',
-                    symbolSize: [5,15],
-                    color: '#ffffff'
+                    symbolSize: [15,10],
+                    color: '#cc0066'
                 },
             }]
         };
