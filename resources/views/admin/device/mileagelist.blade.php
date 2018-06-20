@@ -287,8 +287,8 @@
             myChart.setOption(option);
             mydate.html(trip.date);
             time.html(trip.time);
-            address_begin.html(trip.addressBegin);
-            address_end.html(trip.addresseEnd);
+            address_begin.text(trip.addressBegin);
+            address_end.text(trip.addressEnd);
             use_time.html(trip.use_time);
             mile.html(trip.mile + 'km');
             speed.html(trip.speed + 'km/h');
