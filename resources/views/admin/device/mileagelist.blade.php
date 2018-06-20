@@ -201,6 +201,8 @@
 
     <script>
 
+        $("#map").hide();
+
         var myChart = echarts.init(document.getElementById('mymap'));
 
         var option = {
