@@ -87,6 +87,102 @@
 
                 <div style="width: 100%;height: 570px;float:left">
                     <div id="mymap" style="width:100%; height: 570px"></div>
+                    <style>
+                        .left,.center,.right{
+                            text-align:center;
+                        }
+                        .left,.right{
+                            font-size: 48px;
+                            cursor: pointer;
+                            font-weight:100;
+                            vertical-align: top;
+                            color:#fff;
+                            background-color: #7fa0ff;
+                        }
+
+                        .left span,.right span{
+                            display: inline-block;
+                            height: 100%;
+                            line-height: 220%;
+                        }
+
+                        .center{
+                            padding:1%;
+                            padding-top:17px;
+                            position: relative;
+                            background-color: #ffffff;
+                        }
+                        .line-css{
+                            height:1px;
+                            width:100%;
+                            background-color: #7fa0ff;
+                            margin:0 auto;
+                            opacity: 0.5;
+                        }
+                        .time{
+                            font-size:24px;
+                            color: #7fa0ff;
+                            margin-bottom: 5px;
+                            display: inline-block;
+                        }
+                        .address{
+                            margin-top:10px;
+                            display: inline-block;
+                            width:100%;
+                            text-align: left;
+                        }
+                        .address_begin,.address_end{
+                            display: inline-block;
+                            width:46%;
+                        }
+
+                        .detail{
+                            display: inline-block;
+                            width: 100%;
+                            margin-top: 10px;
+                        }
+
+                        .detail span{
+                            width:23%;
+                            display: inline-block;
+                            text-align: center;
+                        }
+
+                        .nomore{
+                            background-color: #bbbbbb;
+                        }
+
+
+                    </style>
+                    <div class="mybottom" style="position: absolute;width: 600px;height:120px;background-color:#ffffff;margin: 0 auto;bottom: 30px;left:0;right:0">
+                        <div class="left" style="display:inline-block;width: 10%;height: 100%">
+                            <span><</span>
+                        </div>{{--
+                        --}}<div class="center" style="display:inline-block;width: 78%;">
+                            <span class="date" style="position: absolute;top:5px;left:5px">2018-06-03</span>
+                            <span class="time">10:18-10:26</span>
+                            <div class="line-css"></div>
+                            <span class="address">
+                                <span class="address_begin">
+                                    <img src="{{asset('image/start.png')}}" alt="">
+                                    阿拉啦啦啦啦
+                                </span>
+                                <span class="address_end">
+                                    <img src="{{asset('image/end.png')}}" alt="">
+                                    我喜欢二哈哈哈
+                                </span>
+                            </span>
+                            <span class="detail">
+                                <span class="use_time">00:14:03</span>
+                                <span class="mile">4.5km</span>
+                                <span class="speed">19.2km/h</span>
+                                <span class="energy">0.1kw.h</span>
+                            </span>
+                        </div>{{--
+                        --}}<div class="right nomore" style="display:inline-block;width:10%;height: 100%">
+                            <span>></span>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -146,10 +242,16 @@
             }]
         };
 
-//        var data = [
-//            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
-//            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
-//        ]
+        var data = [
+            {value:23,'coords':[[120.77242, 30.77701],[120.77237, 30.77694],[120.77232, 34.7769]]},
+            //{value:3,'coords':[[124.74735, 36.74056],[120.7473, 30.7406],[120.74599, 30.74134]]},
+        ]
+        option.series[0].data = data;
+        myChart.setOption(option);
+
+        var all = null;
+        var index = 0;
+        var len = 0;
 
         $(".btn_map").click(function(){
             var id = $("#id").val();
@@ -161,16 +263,53 @@
                     url:'{{URL::action('Admin\DeviceController@tripTrails')}}',
                     data:str,
                     success:function(res){
-                        var trip = res.trip[0];
-                        var data = [{begin: trip.begin,end:trip.end, coords:trip.locs}];
-                        option.series[0].data = data;
-                        option.bmap.center = data[0].coords[0];
-                        myChart.setOption(option);
+                        if(res.trip){
+                            all = res.trip;
+                            len = all.length;
+                            if(len === 1){
+                                $(".left").addClass('nomore');
+                            }
+                            setTrip(all[index]);
+                        }
+
                         //myChart.hideLoading();
                     }
                 })
             }
         });
+
+        function setTrip(trip)
+        {
+            var data = [{begin: trip.begin,end:trip.end, coords:trip.locs}];
+            option.series[0].data = data;
+            option.bmap.center = data[0].coords[0];
+            myChart.setOption(option);
+            myChart.hideLoading();
+        }
+
+        $(".left").click(function(){
+            myChart.showLoading();
+            if(index+1 === len){
+                return;
+            }else if(index+2 === len){
+                $(this).addClass('nomore');
+            }
+            index++;
+            setTrip(all[index]);
+            $(".right").removeClass('nomore');
+        });
+
+        $(".right").click(function(){
+            myChart.showLoading();
+            if(index === 0){
+                return;
+            }else if(index === 1){
+                $(this).addClass('nomore');
+            }
+            index--;
+            setTrip(all[index]);
+            $(".left").removeClass('nomore');
+        })
 
 
     </script>
