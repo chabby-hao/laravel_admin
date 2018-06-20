@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <div id="map" class="hide" style="width: 100%;height: 570px;float:left">
+                <div id="map" style="width: 100%;height: 570px;float:left">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
                         .left,.center,.right{
@@ -267,8 +267,8 @@
             var id = $("#id").val();
             var daterange = $("input[name='daterange']").val();
             if(id && daterange){
-                $('#map').show();
-                $("#mytable").hide();
+                //$('#map').show();
+                //$("#mytable").hide();
                 //myChart.showLoading();
                 var str = $("#myform").serialize();
                 $.ajax({
