@@ -336,9 +336,9 @@ class Helper
     {
         $result = '00:00:00';
         if ($times > 0) {
-            $hour = number_format(floor($times / 3600), 2);
-            $minute = number_format(floor(($times - 3600 * $hour) / 60), 2);
-            $second = number_format(floor((($times - 3600 * $hour) - 60 * $minute) % 60), 2);
+            $hour = sprintf('%02d', floor($times / 3600));
+            $minute = sprintf('%02d', floor(($times - 3600 * $hour) / 60));
+            $second = sprintf('%02d', floor((($times - 3600 * $hour) - 60 * $minute) % 60));
             $result = $hour . ':' . $minute . ':' . $second;
         }
         return $result;
