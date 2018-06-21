@@ -345,7 +345,7 @@
         });
 
         $(function(){
-            if(("#id").val()){
+            if($("#id").val()){
                 btn_map.show();
             }
         })
