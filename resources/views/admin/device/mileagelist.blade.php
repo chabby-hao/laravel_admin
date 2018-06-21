@@ -90,10 +90,10 @@
                 <div id="map" class="hide" style="width: 100%;height: 570px;float:left;">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
-                        .myleft,.center,.right{
+                        .myleft,.center,.myright{
                             text-align:center;
                         }
-                        .myleft,.right{
+                        .myleft,.myright{
                             font-size: 48px;
                             cursor: pointer;
                             font-weight:100;
@@ -102,7 +102,7 @@
                             background-color: #7fa0ff;
                         }
 
-                        .myleft span,.right span{
+                        .myleft span,.myright span{
                             display: inline-block;
                             height: 100%;
                             line-height: 220%;
@@ -320,10 +320,10 @@
             myChart.showLoading();
             index++;
             setTrip(all[index]);
-            $(".right").removeClass('nomore');
+            $(".myright").removeClass('nomore');
         });
 
-        $(".right").click(function(){
+        $(".myright").click(function(){
             if(index === 0){
                 return;
             }else if(index === 1){
