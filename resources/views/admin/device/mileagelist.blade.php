@@ -90,10 +90,10 @@
                 <div id="map" class="hide" style="width: 100%;height: 570px;float:left;">
                     <div id="mymap" style="width:100%; height: 570px"></div>
                     <style>
-                        .left,.center,.right{
+                        .myleft,.center,.right{
                             text-align:center;
                         }
-                        .left,.right{
+                        .myleft,.right{
                             font-size: 48px;
                             cursor: pointer;
                             font-weight:100;
@@ -102,7 +102,7 @@
                             background-color: #7fa0ff;
                         }
 
-                        .left span,.right span{
+                        .myleft span,.right span{
                             display: inline-block;
                             height: 100%;
                             line-height: 220%;
@@ -158,7 +158,7 @@
 
                     </style>
                     <div class="mybottom" style="position: absolute;width: 600px;height:120px;background-color:#ffffff;margin: 0 auto;bottom: 30px;left:0;right:0">
-                        <div class="left" style="display:inline-block;width: 10%;height: 100%">
+                        <div class="myleft" style="display:inline-block;width: 10%;height: 100%">
                             <span><</span>
                         </div>{{--
                         --}}<div class="center" style="display:inline-block;width: 78%;">
@@ -182,7 +182,7 @@
                                 <span class="energy">0.0kw.h</span>
                             </span>
                         </div>{{--
-                        --}}<div class="right nomore" style="display:inline-block;width:10%;height: 100%">
+                        --}}<div class="myleft nomore" style="display:inline-block;width:10%;height: 100%">
                             <span>></span>
                         </div>
                     </div>
@@ -280,7 +280,7 @@
                             all = res.trip;
                             len = all.length;
                             if(len === 1){
-                                $(".left").addClass('nomore');
+                                $(".myleft").addClass('nomore');
                             }
                             setTrip(all[index]);
                         }else{
@@ -310,7 +310,7 @@
             myChart.hideLoading();
         }
 
-        $(".left").click(function(){
+        $(".myleft").click(function(){
 
             if(index+1 === len){
                 return;
@@ -332,8 +332,9 @@
             myChart.showLoading();
             index--;
             setTrip(all[index]);
-            $(".left").removeClass('nomore');
+            $(".myleft").removeClass('nomore');
         });
+
 
         $("#id").on('blur keyup',function(){
             if($(this).val()){
@@ -342,6 +343,13 @@
                 btn_map.hide();
             }
         });
+
+        $(function(){
+            if(("#id").val()){
+                btn_map.show();
+            }
+        })
+
 
 
 
