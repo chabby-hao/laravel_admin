@@ -182,7 +182,7 @@
                                 <span class="energy">0.0kw.h</span>
                             </span>
                         </div>{{--
-                        --}}<div class="myleft nomore" style="display:inline-block;width:10%;height: 100%">
+                        --}}<div class="myright nomore" style="display:inline-block;width:10%;height: 100%">
                             <span>></span>
                         </div>
                     </div>
