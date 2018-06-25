@@ -55,11 +55,27 @@ function myalert(msg) {
 
 //ajax加载动画
 function ajax_loading() {
-    var obj_loading = $('<div class="mask"></div><div class="spinner"></div>');
+    //var obj_loading = $('<div class="mask"></div><div class="spinner"></div>');
+    var obj_loading = $('<div class="mask"></div>' +
+        '<div class="sk-fading-circle">' +
+        '<div class="sk-circle1 sk-circle"></div>' +
+        '<div class="sk-circle2 sk-circle"></div>' +
+        '<div class="sk-circle3 sk-circle"></div>' +
+        '<div class="sk-circle4 sk-circle"></div>' +
+        '<div class="sk-circle5 sk-circle"></div>' +
+        '<div class="sk-circle6 sk-circle"></div>' +
+        '<div class="sk-circle7 sk-circle"></div>' +
+        '<div class="sk-circle8 sk-circle"></div>' +
+        '<div class="sk-circle9 sk-circle"></div>' +
+        '<div class="sk-circle10 sk-circle"></div>' +
+        '<div class="sk-circle11 sk-circle"></div>' +
+        '<div class="sk-circle12 sk-circle"></div>' +
+        '</div>');
     $("body").append(obj_loading);
     $('.mask').css({'display': 'block'});
-    center($('.spinner'));
-    $('.spinner').css({'display': 'block'});
+    //center($('.spinner'));
+    center($('.sk-fading-circle'));
+    //$('.spinner').css({'display': 'block'});
     // 居中
     function leftTop(obj) {
         var screenWidth = $(window).width();
@@ -67,7 +83,7 @@ function ajax_loading() {
         var scrolltop = $(document).scrollTop();
         var scrollleft = $(document).scrollLeft();
         var objLeft = (screenWidth - obj.width()) / 2 + scrollleft;
-        var objTop = (screenHeight - obj.height()) / 2 + scrolltop - 160;
+        var objTop = (screenHeight - obj.height()) / 2 + scrolltop - 120;
         obj.css({left: objLeft + 'px', top: objTop + 'px'});
     }
 
@@ -89,7 +105,7 @@ function ajax_complete() {
     $('.mask').fadeOut("slow", function () {
         $(this).remove();
     });
-    $('.spinner').fadeOut("slow", function () {
+    $('.spinner,.sk-fading-circle').fadeOut("slow", function () {
         $(this).remove();
     });
 }
