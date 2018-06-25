@@ -102,10 +102,10 @@ function ajax_loading() {
 }
 
 function ajax_complete() {
-    $('.mask').fadeOut("slow", function () {
+    $('.mask').fadeOut("fast", function () {
         $(this).remove();
     });
-    $('.spinner,.sk-fading-circle').fadeOut("slow", function () {
+    $('.spinner,.sk-fading-circle').fadeOut("fast", function () {
         $(this).remove();
     });
 }
