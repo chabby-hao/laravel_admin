@@ -2237,8 +2237,8 @@ form {
 /*loading圈，新动画*/
 .sk-fading-circle {
     margin: 100px auto;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     position: absolute;
     z-index: 999999999999999999999;
 }
