@@ -86,22 +86,26 @@ class LocationLogic extends BaseLogic
 
     public static function getLocationHistoryFromDb($udid, $date)
     {
-        if (DeviceLogic::isEb001b($udid) || $date > '20170927') {
+        $begin = strtotime($date . ' 00:00:00');
+        $end = strtotime($date . ' 23:59:59');
+        return self::getLocationsNewFromDb($udid, $begin, $end);
+        /*if (DeviceLogic::isEb001b($udid) || $date > '20170927') {
             $begin = strtotime($date . ' 00:00:00');
             $end = strtotime($date . ' 23:59:59');
             return self::getLocationsNewFromDb($udid, $begin, $end);
         } else {
             return self::getLocationsOldFromDb($udid, $date);
-        }
+        }*/
     }
 
     public static function getLocationListFromDb($udid, $beginTime, $endTime)
     {
-        if(DeviceLogic::isEb001b($udid)){
+        return self::getLocationsNewFromDb($udid, $beginTime, $endTime);
+        /*if(DeviceLogic::isEb001b($udid)){
             return self::getLocationsNewFromDb($udid, $beginTime, $endTime);
         }else{
             return self::getLocationOldListFromDb($udid, $beginTime, $endTime);
-        }
+        }*/
     }
 
     public static function getLocationListByDate($udid, $date)
