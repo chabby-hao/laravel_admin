@@ -565,7 +565,7 @@ class DeviceController extends BaseController
                 $row->user = $user;
                 $row->from = $from;
             } else {
-                $row->from = $row->username;
+                $row->from = $row->username ? : '超牛管家';
                 $row->user = $row->phone;
             }
             $row->lock_type_trans = TLockLog::getLockTypeMap($row->type);
