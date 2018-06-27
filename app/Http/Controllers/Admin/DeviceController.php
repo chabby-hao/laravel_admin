@@ -18,6 +18,7 @@ use App\Logics\LocationLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Logics\RedisLogic;
+use App\Logics\UserLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiDeviceType;
@@ -49,6 +50,25 @@ class DeviceController extends BaseController
 {
 
 
+    private function getSingleUdid($id)
+    {
+        $udid = $this->getUdid($id);
+        if(!$udid){
+            $udids = UserLogic::getUdidListByAdminPhone($id);
+            if($udids && count($udids) === 1){
+                return $udids[0];
+            }elseif($udids && count($udids) > 1){
+                $str = '';
+                foreach ($udids as $udid){
+                    $str .= '<br/>' . '<a href="' . URL::action('Admin\DeviceController@detail',['id'=>$udid]) . '">' . $udid . ' </a>';
+                }
+                $this->outputErrorWithDie('该手机号绑定了多个设备，请点击下列设备码进行查询:' . $str);
+            }
+        }else{
+            return $udid;
+        }
+    }
+
     public function detail(Request $request)
     {
 
@@ -60,7 +80,7 @@ class DeviceController extends BaseController
             $id = $request->input('id');
             $name = $request->input('name');
             if ($id) {
-                $udid = $this->getUdid($id);
+                $udid = $this->getSingleUdid($id);
             } elseif ($name) {
                 $udid = DeviceLogic::getUdidByName($name);
             } else {
@@ -384,8 +404,20 @@ class DeviceController extends BaseController
 
         if ($id = \Request::input('id')) {
             $udid = $this->getUdid($id);
-            $model->whereQr($udid);
+            if(!$udid){
+                //管理员手机号查询
+                $udids = UserLogic::getUdidListByAdminPhone($id);
+                if($udids){
+                    $model->whereIn('qr', $udids);
+                }else{
+                    $model->whereIn('qr',['']);
+                }
+            }else{
+                $model->whereQr($udid);
+            }
         }
+
+
 
         if ($deviceType = \Request::input('device_type')) {
             $model->whereDeviceType($deviceType);
@@ -533,7 +565,7 @@ class DeviceController extends BaseController
                 $row->user = $user;
                 $row->from = $from;
             } else {
-                $row->from = '超牛管家';
+                $row->from = $row->username;
                 $row->user = $row->phone;
             }
             $row->lock_type_trans = TLockLog::getLockTypeMap($row->type);
