@@ -591,7 +591,8 @@ class DeviceController extends BaseController
 
         $rs = [];
         foreach ($data as $row) {
-            $rs[] = $this->getMileTripsInfo($row);
+            $info = $this->getMileTripsInfo($row);
+            $info && $rs[] = $info;
         }
         return $this->outPut([
             'trip'=>$rs,
@@ -609,6 +610,9 @@ class DeviceController extends BaseController
         $tmp['date'] = Carbon::createFromTimestamp($mileRow->begin)->toDateString();
 
         $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
+        if(!$locs){
+            return false;
+        }
         //$tmp['locs'] = $locs;
         $t = [];
         $loc = [];
