@@ -284,7 +284,7 @@
                             }
                             setTrip(all[index]);
                         }else{
-                            myalert('未查询到行程记录');
+                            myalert('未查询到行程轨迹记录');
                         }
 
                         //myChart.hideLoading();
