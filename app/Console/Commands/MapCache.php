@@ -78,7 +78,7 @@ class MapCache extends BaseCommand
 
                 echo "processing imei:$imei,udid:$udid...\n";
                 echo ++$t . ".......\n";
-                echo memory_get_usage() . "---------------\n";
+                echo memory_get_usage()/1024/1024 . "MB---------------\n";
 
                 //过滤没有定位的
                 if (!DeviceLogic::getLastLocationInfo($imei)) {
