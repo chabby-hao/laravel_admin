@@ -135,6 +135,8 @@ class MapCache extends BaseCommand
                 $offlineMore48,
             ];
 
+            unset($storage, $channelStorage, $riding,$park,$offlineMore48,$offlineLess48);
+
 
             foreach ($map as $t => $k) {
                 $data = [];
