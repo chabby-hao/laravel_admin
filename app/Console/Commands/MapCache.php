@@ -66,8 +66,9 @@ class MapCache extends BaseCommand
             }
             $model->where($where);
             //$all = [];
-            $this->batchSearch($model, function ($deviceCode) use ($nowtime) {
-                static $t = 0;
+            $t = 0;
+            $this->batchSearch($model, function ($deviceCode) use ($nowtime, $t) {
+
                 /** @var TDeviceCode $deviceCode */
                 $imei = $deviceCode->imei;
                 $udid = $deviceCode->qr;
