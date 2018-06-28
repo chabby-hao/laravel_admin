@@ -117,6 +117,7 @@ class MapCache extends BaseCommand
                     RedisLogic::lPush(TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE . $nowtime, $udid);
                     //$channelStorage[] = $udid;
                 }
+                return [];
 
             });
 
