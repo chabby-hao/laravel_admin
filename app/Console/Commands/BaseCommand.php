@@ -10,6 +10,8 @@ use Illuminate\Console\Command;
 abstract class BaseCommand extends Command
 {
 
+    protected $maxCache = 0;//MB
+
     public function __construct()
     {
         parent::__construct();
@@ -42,6 +44,15 @@ abstract class BaseCommand extends Command
         exec("chmod -R 0777 $cachePath", $out);
         echo "\n";
         echo 'exec chmod msg :' . json_encode($out) . "\n";
+    }
+
+    protected function getMaxCache($echo = true)
+    {
+        $this->maxCache = max(memory_get_usage()/1024/1024, $this->maxCache);
+        if($echo){
+            echo  'maxCache :' . $this->maxCache . "------MB-----------\n";
+        }
+        return $this->maxCache;
     }
 
 }

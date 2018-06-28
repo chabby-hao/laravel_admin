@@ -78,7 +78,7 @@ class MapCache extends BaseCommand
 
                 echo "processing imei:$imei,udid:$udid...\n";
                 echo ++$t . ".......\n";
-                echo memory_get_usage()/1024/1024 . "MB---------------\n";
+                $this->getMaxCache();
 
                 //过滤没有定位的
                 if (!DeviceLogic::getLastLocationInfo($imei)) {
@@ -140,6 +140,7 @@ class MapCache extends BaseCommand
                 $data = [];
                 if ($map2[$t]) {
                     foreach ($map2[$t] as $udid) {
+                        $this->getMaxCache();
                         $loc = MapLogic::getMapLoc($udid);
                         DeviceLogic::clear();
                         $loc && $data[] = $loc;
