@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TPayment
- * 
+ *
  * @property string $udid
  * @property int $expire
  * @property int $status
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPayment whereUdid($value)
+ * @mixin \Eloquent
  */
 class TPayment extends Eloquent
 {

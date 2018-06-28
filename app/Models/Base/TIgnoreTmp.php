@@ -11,10 +11,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TIgnoreTmp
- * 
- * @property string $imei
  *
+ * @property string $imei
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TIgnoreTmp whereImei($value)
+ * @mixin \Eloquent
  */
 class TIgnoreTmp extends Eloquent
 {

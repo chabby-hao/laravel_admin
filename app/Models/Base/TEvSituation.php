@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvSituation
- * 
+ *
  * @property string $udid
  * @property int $code
  * @property int $check_time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvSituation whereCheckTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvSituation whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvSituation whereUdid($value)
+ * @mixin \Eloquent
  */
 class TEvSituation extends Eloquent
 {

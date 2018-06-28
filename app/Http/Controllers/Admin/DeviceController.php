@@ -108,6 +108,9 @@ class DeviceController extends BaseController
             $data['shipOrder'] = $shipOrder;
             $data['name'] = DeviceLogic::getNameByUdid($udid);
             $data['master'] = DeviceLogic::getAdminInfoByUdid($udid);
+            if($data['master'] && $data['master']['phone']){
+                $data['userConfig'] = UserLogic::getUserConfigByPhone($data['master']['phone']);
+            }
             $data['followers'] = DeviceLogic::getFollowersByUdid($udid);
             $data['gpsSatCount'] = DeviceLogic::getGpsSatCount($data['imei']);
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);

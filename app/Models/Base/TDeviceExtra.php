@@ -11,11 +11,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceExtra
- * 
+ *
  * @property string $manufacturer
  * @property string $model
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceExtra whereManufacturer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceExtra whereModel($value)
+ * @mixin \Eloquent
  */
 class TDeviceExtra extends Eloquent
 {

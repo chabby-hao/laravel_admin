@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TZoneInterface
- * 
+ *
  * @property int $zid
  * @property float $lat
  * @property float $lng
@@ -20,8 +20,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $begin
  * @property int $end
  * @property int $type
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereAddTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereBegin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereRadius($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneInterface whereZid($value)
+ * @mixin \Eloquent
  */
 class TZoneInterface extends Eloquent
 {

@@ -11,10 +11,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceCmcc
- * 
- * @property string $imsi
  *
+ * @property string $imsi
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceCmcc whereImsi($value)
+ * @mixin \Eloquent
  */
 class TDeviceCmcc extends Eloquent
 {

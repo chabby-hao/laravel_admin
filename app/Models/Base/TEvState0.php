@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvState0
- * 
+ *
  * @property string $udid
  * @property int $create_time
  * @property int $ev_key
@@ -27,8 +27,23 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $instrument_status_code
  * @property int $eBrake
  * @property int $limit_speed
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereBattery($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereEBrake($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereEvKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereEvLock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereGear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereInstrumentStatusCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereLimitSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereLocalVoltage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereMileage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 wherePercent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereUsb($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvState0 whereVoltage($value)
+ * @mixin \Eloquent
  */
 class TEvState0 extends Eloquent
 {

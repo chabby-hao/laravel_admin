@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TSalesDevice
- * 
+ *
  * @property string $imei
  * @property string $udid
  * @property \Carbon\Carbon $active
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TSalesDevice whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TSalesDevice whereImei($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TSalesDevice whereUdid($value)
+ * @mixin \Eloquent
  */
 class TSalesDevice extends Eloquent
 {

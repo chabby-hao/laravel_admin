@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureOrder
- * 
+ *
  * @property string $order_id
  * @property \Carbon\Carbon $create_time
  * @property string $insure_id
@@ -38,8 +38,34 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property array $messages_json
  * @property int $mode
  * @property int $is_del
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereActiveCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereChassisId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereEbikeBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereEbikeModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereElectromotorNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereIdcard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureTimeLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereInsureType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereIsDel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereMessagesJson($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder wherePaymentLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder wherePlateNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrder whereUid($value)
+ * @mixin \Eloquent
  */
 class TInsureOrder extends Eloquent
 {

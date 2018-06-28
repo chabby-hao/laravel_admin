@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureGood
- * 
+ *
  * @property int $goods_id
  * @property string $goods_title
  * @property string $goods_desc
  * @property float $goods_price
  * @property int $sort
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureGood whereGoodsDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureGood whereGoodsId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureGood whereGoodsPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureGood whereGoodsTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureGood whereSort($value)
+ * @mixin \Eloquent
  */
 class TInsureGood extends Eloquent
 {

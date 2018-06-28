@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class DtsIncrementTrx
- * 
+ *
  * @property string $job_id
  * @property int $partition
  * @property string $checkpoint
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\DtsIncrementTrx whereCheckpoint($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\DtsIncrementTrx whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\DtsIncrementTrx wherePartition($value)
+ * @mixin \Eloquent
  */
 class DtsIncrementTrx extends Eloquent
 {

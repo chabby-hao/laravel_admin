@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureIssue
- * 
+ *
  * @property string $order_id
  * @property string $policy_id
  * @property \Carbon\Carbon $policy_start
@@ -20,8 +20,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $contract_url
  * @property float $premium
  * @property float $suminsured
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue whereContractUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue whereFeeDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue wherePolicyEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue wherePolicyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue wherePolicyStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue wherePremium($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureIssue whereSuminsured($value)
+ * @mixin \Eloquent
  */
 class TInsureIssue extends Eloquent
 {

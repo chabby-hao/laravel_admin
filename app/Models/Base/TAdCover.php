@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TAdCover
- * 
+ *
  * @property int $sid
  * @property string $link
  * @property int $duration
@@ -23,8 +23,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $image_l
  * @property string $image_t
  * @property int $type
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereImageL($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereImageM($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereImageS($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereImageT($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereShow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereSid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TAdCover whereUpdateTm($value)
+ * @mixin \Eloquent
  */
 class TAdCover extends Eloquent
 {

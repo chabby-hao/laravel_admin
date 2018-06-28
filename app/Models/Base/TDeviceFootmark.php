@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceFootmark
- * 
+ *
  * @property string $udid
  * @property int $year
  * @property int $month
  * @property int $days
  * @property int $gps
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFootmark whereDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFootmark whereGps($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFootmark whereMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFootmark whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFootmark whereYear($value)
+ * @mixin \Eloquent
  */
 class TDeviceFootmark extends Eloquent
 {

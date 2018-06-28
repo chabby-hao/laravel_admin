@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TPaymentOrder
- * 
+ *
  * @property string $order_id
  * @property int $order_type
  * @property float $order_money
@@ -22,8 +22,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $status
  * @property int $mode
  * @property string $trade_no
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereMode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereOrderMoney($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereOrderType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder wherePayTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereTradeNo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPaymentOrder whereUid($value)
+ * @mixin \Eloquent
  */
 class TPaymentOrder extends Eloquent
 {

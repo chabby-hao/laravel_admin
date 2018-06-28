@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TFeedback
- * 
+ *
  * @property int $sid
  * @property int $uid
  * @property \Carbon\Carbon $time
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $content
  * @property string $phone
  * @property string $name
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereSid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFeedback whereUid($value)
+ * @mixin \Eloquent
  */
 class TFeedback extends Eloquent
 {

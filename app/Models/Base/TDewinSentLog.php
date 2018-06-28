@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDewinSentLog
- * 
+ *
  * @property int $id
  * @property string $post_data
  * @property \Carbon\Carbon $sent_time
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $total_mileage
  * @property int $gps_mileage
  * @property int $charge_number
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereChargeNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereGpsMileage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog wherePostData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereSentTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereTotalMileage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinSentLog whereUdid($value)
+ * @mixin \Eloquent
  */
 class TDewinSentLog extends Eloquent
 {

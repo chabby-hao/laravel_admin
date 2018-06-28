@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvChargeLog
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property string $imei
@@ -22,8 +22,18 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $create_time
  * @property int $charge_time
  * @property int $pre_time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereChargeTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereImei($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereNextV($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog wherePreTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog wherePreV($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereUmax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvChargeLog whereVmax($value)
+ * @mixin \Eloquent
  */
 class TEvChargeLog extends Eloquent
 {

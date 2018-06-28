@@ -11,13 +11,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TShouquLog
- * 
+ *
  * @property int $id
  * @property int $last_time
  * @property string $post_data
  * @property string $udid
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TShouquLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TShouquLog whereLastTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TShouquLog wherePostData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TShouquLog whereUdid($value)
+ * @mixin \Eloquent
  */
 class TShouquLog extends Eloquent
 {

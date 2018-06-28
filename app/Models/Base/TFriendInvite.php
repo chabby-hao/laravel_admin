@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TFriendInvite
- * 
+ *
  * @property int $sid
  * @property int $inviter
  * @property string $phone
@@ -20,8 +20,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $finish_tm
  * @property string $name
  * @property string $mobile
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereCreateTm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereFinishTm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereInviter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereSid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TFriendInvite whereStatus($value)
+ * @mixin \Eloquent
  */
 class TFriendInvite extends Eloquent
 {

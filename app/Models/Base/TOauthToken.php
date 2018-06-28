@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TOauthToken
- * 
+ *
  * @property int $platform
  * @property string $token
  * @property int $expire
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TOauthToken whereExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TOauthToken wherePlatform($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TOauthToken whereToken($value)
+ * @mixin \Eloquent
  */
 class TOauthToken extends Eloquent
 {

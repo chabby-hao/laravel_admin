@@ -11,13 +11,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureOrderGood
- * 
+ *
  * @property int $id
  * @property int $pay_order_id
  * @property int $insure_goods_id
  * @property int $insure_order_id
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderGood whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderGood whereInsureGoodsId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderGood whereInsureOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderGood wherePayOrderId($value)
+ * @mixin \Eloquent
  */
 class TInsureOrderGood extends Eloquent
 {

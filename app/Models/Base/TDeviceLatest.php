@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceLatest
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property int $stime
@@ -24,8 +24,20 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $gsm_signal
  * @property int $gps_signal
  * @property bool $online
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereCourse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereGpsSignal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereGsmLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereGsmLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereGsmSignal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereLat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereLng($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereOnline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereSpeed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereStime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceLatest whereUdid($value)
+ * @mixin \Eloquent
  */
 class TDeviceLatest extends Eloquent
 {

@@ -11,13 +11,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TWarningLog
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property string $warning_info
  * @property int $add_time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TWarningLog whereAddTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TWarningLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TWarningLog whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TWarningLog whereWarningInfo($value)
+ * @mixin \Eloquent
  */
 class TWarningLog extends Eloquent
 {

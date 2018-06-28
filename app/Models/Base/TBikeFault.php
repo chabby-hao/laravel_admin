@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TBikeFault
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property int $stime
@@ -34,8 +34,30 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $hallC_off
  * @property int $hallC_short
  * @property int $hall_value_fail
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereBatteryLow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereBlock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereBrakeBack($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereDownBridge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallAOff($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallAShort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallBOff($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallBShort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallCOff($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallCShort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHallValueFail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHandBack($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHandEarth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHandNopower($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHigh($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereHot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereLow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereOcp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereStime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBikeFault whereUpBridge($value)
+ * @mixin \Eloquent
  */
 class TBikeFault extends Eloquent
 {

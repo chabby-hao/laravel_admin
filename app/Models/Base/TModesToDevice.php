@@ -11,11 +11,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TModesToDevice
- * 
+ *
  * @property int $device_type
  * @property int $mode_id
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TModesToDevice whereDeviceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TModesToDevice whereModeId($value)
+ * @mixin \Eloquent
  */
 class TModesToDevice extends Eloquent
 {

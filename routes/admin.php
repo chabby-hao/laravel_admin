@@ -87,6 +87,9 @@ Route::any('/tool/getFileUrl','Admin\ToolController@getFileUrl');
 Route::any('/tool/exportByImsi','Admin\ToolController@exportByImsi');
 
 
+Route::get('/breakRule/list','Admin\BreakRuleController@list');
+
+
 
 
 //放在最后

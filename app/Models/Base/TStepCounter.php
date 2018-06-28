@@ -11,13 +11,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TStepCounter
- * 
+ *
  * @property string $udid
  * @property int $time
  * @property int $counter
  * @property int $total
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepCounter whereCounter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepCounter whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepCounter whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepCounter whereUdid($value)
+ * @mixin \Eloquent
  */
 class TStepCounter extends Eloquent
 {
