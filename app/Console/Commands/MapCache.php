@@ -7,6 +7,7 @@ use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Logics\LocationLogic;
 use App\Logics\MapLogic;
+use App\Logics\RedisLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiDeviceType;
@@ -52,6 +53,7 @@ class MapCache extends BaseCommand
 
     private function cacheData($ids, $whereName = null, $keyPre)
     {
+        $nowtime = time();
         $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
 
@@ -64,13 +66,7 @@ class MapCache extends BaseCommand
             }
             $model->where($where);
             //$all = [];
-            $riding = [];
-            $park = [];
-            $offlineLess48 = [];
-            $offlineMore48 = [];
-            $storage = [];
-            $channelStorage = [];
-            $this->batchSearch($model, function ($deviceCode) use (&$channelStorage, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
+            $this->batchSearch($model, function ($deviceCode) use ($nowtime) {
                 static $t = 0;
                 /** @var TDeviceCode $deviceCode */
                 $imei = $deviceCode->imei;
@@ -91,18 +87,22 @@ class MapCache extends BaseCommand
                     if (DeviceLogic::isOnline($imei)) {
                         if (DeviceLogic::isTurnOn($imei)) {
                             //骑行
-                            $riding[] = $udid;
+                            RedisLogic::lPush(DeviceObject::CACHE_LIST_RIDING . $nowtime, $udid);
+                            //$riding[] = $udid;
                         } else {
                             //停车
-                            $park[] = $udid;
+                            RedisLogic::lPush(DeviceObject::CACHE_LIST_PARK . $nowtime, $udid);
+                            //$park[] = $udid;
                         }
                     } else {
                         if (DeviceLogic::isContanct($imei, 48 * 3600)) {
                             //离线小于48小时
-                            $offlineLess48[] = $udid;
+                            RedisLogic::lPush(DeviceObject::CACHE_LIST_OFFLINE_LESS_48 . $nowtime, $udid);
+                            //$offlineLess48[] = $udid;
                         } else {
                             //离线大于48小时
-                            $offlineMore48[] = $udid;
+                            RedisLogic::lPush(DeviceObject::CACHE_LIST_OFFLINE_MORE_48 . $nowtime, $udid);
+                            //$offlineMore48[] = $udid;
                         }
                     }
                 }
@@ -110,9 +110,11 @@ class MapCache extends BaseCommand
 
                 //库存
                 if ($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_STORAGE) {
-                    $storage[] = $udid;
+                    RedisLogic::lPush(TDeviceCode::DEVICE_CYCLE_STORAGE . $nowtime, $udid);
+                    //$storage[] = $udid;
                 }elseif($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE){
-                    $channelStorage[] = $udid;
+                    RedisLogic::lPush(TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE . $nowtime, $udid);
+                    //$channelStorage[] = $udid;
                 }
 
             });
@@ -126,28 +128,17 @@ class MapCache extends BaseCommand
                 DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
             ];
-            $map2 = [
-                $storage,
-                $channelStorage,
-                $riding,
-                $park,
-                $offlineLess48,
-                $offlineMore48,
-            ];
-
-            unset($storage, $channelStorage, $riding,$park,$offlineMore48,$offlineLess48);
-
 
             foreach ($map as $t => $k) {
+
                 $data = [];
-                if ($map2[$t]) {
-                    foreach ($map2[$t] as $udid) {
-                        $this->getMaxCache();
-                        $loc = MapLogic::getMapLoc($udid);
-                        DeviceLogic::clear();
-                        $loc && $data[] = $loc;
-                    }
+                while($udid = RedisLogic::rPop($k . $nowtime)){
+                    $this->getMaxCache();
+                    $loc = MapLogic::getMapLoc($udid);
+                    DeviceLogic::clear();
+                    $loc && $data[] = $loc;
                 }
+
                 $count = count($data);
                 Log::debug("file put $cacheKeyPre-$id-$k , count:$count success");
                 echo "file put $cacheKeyPre-$id-$k ,  count:$count  success" . "\n";

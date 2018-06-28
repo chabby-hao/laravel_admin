@@ -145,6 +145,11 @@ class RedisLogic extends BaseLogic
         return self::getRedis()->lPush($key, $val);
     }
 
+    public static function rPop($key)
+    {
+        return self::getRedis()->rpop($key);
+    }
+
     public static function hGet($key, $hashKey)
     {
         return self::getRedis()->hGet($key, $hashKey);
