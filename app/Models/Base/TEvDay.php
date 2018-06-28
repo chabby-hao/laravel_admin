@@ -11,15 +11,21 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvDay
- * 
+ *
  * @property string $udid
  * @property int $day
  * @property float $mile
  * @property int $minutes
  * @property float $energy
  * @property int $seconds
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereEnergy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereMile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereMinutes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereSeconds($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvDay whereUdid($value)
+ * @mixin \Eloquent
  */
 class TEvDay extends Eloquent
 {

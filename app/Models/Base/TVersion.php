@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TVersion
- * 
+ *
  * @property int $ver
  * @property \Carbon\Carbon $update_tm
  * @property string $url
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $sys
  * @property int $force
  * @property int $channel
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereForce($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereSys($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereUpdateTm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TVersion whereVer($value)
+ * @mixin \Eloquent
  */
 class TVersion extends Eloquent
 {

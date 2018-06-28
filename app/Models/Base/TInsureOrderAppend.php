@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureOrderAppend
- * 
+ *
  * @property string $atcode
  * @property int $uid
  * @property string $udid
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $expire_time
  * @property int $insure_time
  * @property int $status
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereAtcode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereExpireTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereInsureTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureOrderAppend whereUid($value)
+ * @mixin \Eloquent
  */
 class TInsureOrderAppend extends Eloquent
 {

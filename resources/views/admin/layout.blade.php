@@ -153,6 +153,12 @@
             </ul>
         </li>
 
+        {{--违章管理--}}
+        @if(Auth::user()->can('breakRule/list'))
+            <li class=""><a href="{{URL::action('Admin\BreakRuleController@list')}}"><i class="icon icon-home"></i>
+                    <span>违章管理</span></a></li>
+        @endif
+
 
         {{--工具管理--}}
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>工具</span>

@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDewinBasicLog
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property int $status
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $charge_number
  * @property \Carbon\Carbon $create_time
  * @property string $json_post
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereCTotalMileage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereChargeNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereIsOnline($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereJsonPost($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereTotalMileage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinBasicLog whereUdid($value)
+ * @mixin \Eloquent
  */
 class TDewinBasicLog extends Eloquent
 {

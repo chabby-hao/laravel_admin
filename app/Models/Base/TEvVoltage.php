@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvVoltage
- * 
+ *
  * @property string $udid
  * @property int $mid
  * @property int $mid_time
  * @property \Carbon\Carbon $refresh_time
  * @property int $vol
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvVoltage whereMid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvVoltage whereMidTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvVoltage whereRefreshTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvVoltage whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvVoltage whereVol($value)
+ * @mixin \Eloquent
  */
 class TEvVoltage extends Eloquent
 {

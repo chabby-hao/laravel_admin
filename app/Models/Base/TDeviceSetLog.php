@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceSetLog
- * 
+ *
  * @property int $id
  * @property string $udid
  * @property int $uid
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $act
  * @property int $login_log_id
  * @property string $type
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereAct($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereAddtime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereLoginLogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceSetLog whereUid($value)
+ * @mixin \Eloquent
  */
 class TDeviceSetLog extends Eloquent
 {

@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TTmpDischarge
- * 
+ *
  * @property int $id
  * @property string $BMSID
  * @property string $IMEID
@@ -26,8 +26,22 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $method
  * @property \Carbon\Carbon $add_time
  * @property string $time_segment
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereAddTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereBMSID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereDirect($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereEndVoltage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereIMEID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereIMSID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereIndex($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereMethod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereSign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereStartVoltage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereTimeSegment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTmpDischarge whereVolume($value)
+ * @mixin \Eloquent
  */
 class TTmpDischarge extends Eloquent
 {

@@ -11,11 +11,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TApnsFeedback
- * 
+ *
  * @property string $token
  * @property \Carbon\Carbon $time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TApnsFeedback whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TApnsFeedback whereToken($value)
+ * @mixin \Eloquent
  */
 class TApnsFeedback extends Eloquent
 {

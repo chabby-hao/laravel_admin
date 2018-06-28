@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TPhoneInvite
- * 
+ *
  * @property string $code
  * @property string $mobile
  * @property string $udid
  * @property int $state
  * @property \Carbon\Carbon $create_tm
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPhoneInvite whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPhoneInvite whereCreateTm($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPhoneInvite whereMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPhoneInvite whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPhoneInvite whereUdid($value)
+ * @mixin \Eloquent
  */
 class TPhoneInvite extends Eloquent
 {

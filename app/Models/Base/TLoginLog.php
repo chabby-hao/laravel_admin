@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TLoginLog
- * 
+ *
  * @property int $id
  * @property int $uid
  * @property int $login_time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLoginLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLoginLog whereLoginTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLoginLog whereUid($value)
+ * @mixin \Eloquent
  */
 class TLoginLog extends Eloquent
 {

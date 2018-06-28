@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TStepHour
- * 
+ *
  * @property string $udid
  * @property int $ymd
  * @property int $total
@@ -39,8 +39,35 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $hour_22
  * @property int $hour_23
  * @property int $hour_24
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour10($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour11($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour12($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour13($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour14($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour15($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour16($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour17($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour18($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour19($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour20($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour21($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour22($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour23($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour24($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour3($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour4($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour5($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour6($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour7($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour8($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereHour9($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepHour whereYmd($value)
+ * @mixin \Eloquent
  */
 class TStepHour extends Eloquent
 {

@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TZoneDeviceInterface
- * 
+ *
  * @property int $id
  * @property int $type
  * @property string $udid
  * @property int $add_time
  * @property int $zid
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneDeviceInterface whereAddTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneDeviceInterface whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneDeviceInterface whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneDeviceInterface whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TZoneDeviceInterface whereZid($value)
+ * @mixin \Eloquent
  */
 class TZoneDeviceInterface extends Eloquent
 {

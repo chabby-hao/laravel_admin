@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TPromoteMsg
- * 
+ *
  * @property int $id
  * @property string $title
  * @property string $desc
  * @property string $link
  * @property int $time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPromoteMsg whereDesc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPromoteMsg whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPromoteMsg whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPromoteMsg whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TPromoteMsg whereTitle($value)
+ * @mixin \Eloquent
  */
 class TPromoteMsg extends Eloquent
 {

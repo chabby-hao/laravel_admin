@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TLanguageContent
- * 
+ *
  * @property string $lang_tag
  * @property string $content_key
  * @property string $content
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLanguageContent whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLanguageContent whereContentKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TLanguageContent whereLangTag($value)
+ * @mixin \Eloquent
  */
 class TLanguageContent extends Eloquent
 {

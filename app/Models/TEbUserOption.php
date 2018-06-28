@@ -20,15 +20,34 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TEbUserOption whereSafezone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TEbUserOption whereUid($value)
  * @mixin \Eloquent
+ * @property string|null $idcard 身份证号
+ * @property bool|null $sex 性别，1=男，2=女
+ * @property string|null $lpn 车牌号
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TEbUserOption whereIdcard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TEbUserOption whereLpn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TEbUserOption whereSex($value)
  */
 class TEbUserOption extends \App\Models\Base\TEbUserOption
 {
-	protected $fillable = [
-		'realname',
-		'remind',
-		'notice',
-		'abmove',
-		'guard',
-		'safezone'
-	];
+
+    const SEX_MAN = 1;
+    const SEX_WOMAN = 2;
+
+    public static function getSexNameMap($type)
+    {
+        $map = [
+            self::SEX_MAN => '男',
+            self::SEX_WOMAN => '女',
+        ];
+        return $map[$type];
+    }
+
+    protected $fillable = [
+        'realname',
+        'remind',
+        'notice',
+        'abmove',
+        'guard',
+        'safezone'
+    ];
 }

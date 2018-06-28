@@ -11,11 +11,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class MysqlTest
- * 
+ *
  * @property int $id
  * @property string $udid
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\MysqlTest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\MysqlTest whereUdid($value)
+ * @mixin \Eloquent
  */
 class MysqlTest extends Eloquent
 {

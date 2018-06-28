@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceTmp
- * 
+ *
  * @property string $udid
  * @property int $type
  * @property int $ptype
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $imei
  * @property string $imsi
  * @property int $device_type
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereDeviceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereExpire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereImei($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereImsi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp wherePay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp wherePtype($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceTmp whereUdid($value)
+ * @mixin \Eloquent
  */
 class TDeviceTmp extends Eloquent
 {

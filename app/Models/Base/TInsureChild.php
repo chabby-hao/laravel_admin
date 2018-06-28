@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureChild
- * 
+ *
  * @property string $order_id
  * @property int $order_type
  * @property float $order_money
@@ -29,8 +29,25 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $idinsured
  * @property string $insured_contact
  * @property int $gender
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereCheckTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereIdcard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereIdinsured($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereInsured($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereInsuredContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereIssueTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereOrderMoney($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereOrderType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild wherePayTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureChild whereUid($value)
+ * @mixin \Eloquent
  */
 class TInsureChild extends Eloquent
 {

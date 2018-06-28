@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TInsureEv
- * 
+ *
  * @property string $order_id
  * @property int $order_type
  * @property float $order_money
@@ -29,8 +29,25 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $brand
  * @property string $model
  * @property string $price
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereBrand($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereCheckTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereIdcard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereIdchassis($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereIssueTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereOrderMoney($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereOrderType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv wherePayTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TInsureEv whereUid($value)
+ * @mixin \Eloquent
  */
 class TInsureEv extends Eloquent
 {

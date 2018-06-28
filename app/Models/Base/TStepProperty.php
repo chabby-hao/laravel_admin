@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TStepProperty
- * 
+ *
  * @property string $udid
  * @property int $birthday
  * @property int $height
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $gender
  * @property int $register
  * @property int $target
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereBirthday($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereRegister($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereTarget($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TStepProperty whereWeight($value)
+ * @mixin \Eloquent
  */
 class TStepProperty extends Eloquent
 {

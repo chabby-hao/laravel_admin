@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvMileage
- * 
+ *
  * @property string $udid
  * @property int $begin
  * @property int $end
@@ -20,8 +20,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $power
  * @property string $points
  * @property int $mid
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereBegin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereDuration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereMid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereMile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage wherePoints($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage wherePower($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvMileage whereUdid($value)
+ * @mixin \Eloquent
  */
 class TEvMileage extends Eloquent
 {

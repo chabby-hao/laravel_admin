@@ -11,10 +11,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TBtImei
- * 
- * @property string $bt_mac
  *
+ * @property string $bt_mac
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TBtImei whereBtMac($value)
+ * @mixin \Eloquent
  */
 class TBtImei extends Eloquent
 {

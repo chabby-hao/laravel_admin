@@ -11,14 +11,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TErrorLog
- * 
+ *
  * @property int $id
  * @property string $d_code
  * @property string $msg
  * @property int $log_time
  * @property int $add_time
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TErrorLog whereAddTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TErrorLog whereDCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TErrorLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TErrorLog whereLogTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TErrorLog whereMsg($value)
+ * @mixin \Eloquent
  */
 class TErrorLog extends Eloquent
 {

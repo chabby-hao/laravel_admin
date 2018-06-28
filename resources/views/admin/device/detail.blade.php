@@ -15,7 +15,7 @@
                                     <label>输入搜索：</label>
                                 </div>
                                 <div class="inline-block">
-                                    <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI...">
+                                    <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
                                     <input type="text" id="name" name="name" placeholder="设备名称">
                                 </div>
 
@@ -99,6 +99,9 @@
                                 <th>激活日期</th>
                                 <th>设备名称</th>
                                 <th>管理员</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>身份证号</th>
                                 <th>关注者</th>
                             </tr>
                             </thead>
@@ -107,6 +110,9 @@
                                 <td><%activeAt%></td>
                                 <td><%name%></td>
                                 <td><%master.phone%></td>
+                                <td><%userConfig.realname%></td>
+                                <td><%userConfig.sexTrans%></td>
+                                <td><%userConfig.idcard%></td>
                                 <td>
                                     <%#followers%>
                                         <%phone%>
@@ -182,6 +188,7 @@
                                 <th>品牌</th>
                                 <th>车型</th>
                                 <th>车架号</th>
+                                <th>车辆牌照</th>
                                 <th>电池规格</th>
                             </tr>
                             </thead>
@@ -191,6 +198,7 @@
                                 <td><%brandName%></td>
                                 <td><%ebikeTypeName%></td>
                                 <td><%chassis%></td>
+                                <td><%userConfig.lpn%></td>
                                 <td><%batterySpecification%>v</td>
                             </tr>
                             </tbody>

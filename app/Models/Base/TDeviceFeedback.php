@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDeviceFeedback
- * 
+ *
  * @property int $sid
  * @property int $uid
  * @property string $udid
@@ -21,8 +21,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $phone
  * @property string $name
  * @property string $contact
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereContent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereSid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereUdid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDeviceFeedback whereUid($value)
+ * @mixin \Eloquent
  */
 class TDeviceFeedback extends Eloquent
 {

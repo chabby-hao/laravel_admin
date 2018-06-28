@@ -18,6 +18,7 @@ use App\Logics\LocationLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Logics\RedisLogic;
+use App\Logics\UserLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiDeviceType;
@@ -88,6 +89,9 @@ class DeviceController extends BaseController
             $data['shipOrder'] = $shipOrder;
             $data['name'] = DeviceLogic::getNameByUdid($udid);
             $data['master'] = DeviceLogic::getAdminInfoByUdid($udid);
+            if($data['master'] && $data['master']['phone']){
+                $data['userConfig'] = UserLogic::getUserConfigByPhone($data['master']['phone']);
+            }
             $data['followers'] = DeviceLogic::getFollowersByUdid($udid);
             $data['gpsSatCount'] = DeviceLogic::getGpsSatCount($data['imei']);
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);

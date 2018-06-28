@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TEvFault
- * 
+ *
  * @property string $udid
  * @property string $create_time
  * @property int $power
@@ -23,8 +23,19 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $switch
  * @property int $phase
  * @property int $ocp
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereBlock($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereControl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereCreateTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereCruise($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereHall($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereLow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereOcp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault wherePhase($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault wherePower($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereSwitch($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TEvFault whereUdid($value)
+ * @mixin \Eloquent
  */
 class TEvFault extends Eloquent
 {

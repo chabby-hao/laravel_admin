@@ -11,13 +11,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TDewinLog
- * 
+ *
  * @property int $id
  * @property string $post_data
  * @property \Carbon\Carbon $last_time
  * @property string $udid
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinLog whereLastTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinLog wherePostData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TDewinLog whereUdid($value)
+ * @mixin \Eloquent
  */
 class TDewinLog extends Eloquent
 {
