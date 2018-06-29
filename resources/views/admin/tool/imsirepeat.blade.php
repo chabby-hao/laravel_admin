@@ -9,7 +9,7 @@
                         <h5>筛选查询</h5>
                     </div>
                     <div class="widget-content">
-                        <form action="{{URL::action('Admin\BreakRuleController@list')}}" method="get" class="form-search">
+                        <form  method="get" class="form-search">
                             <div class="control-group">
                                 <div class="inline-block w10">
                                     <div class="inline-block">
