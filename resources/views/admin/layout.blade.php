@@ -173,6 +173,9 @@
                 @if(Auth::user()->can('tool/exportByImsi'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@exportByImsi')}}">Imsi导出详情</a></li>
                 @endif
+                @if(Auth::user()->can('tool/imsiRepeat'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@imsiRepeat')}}">Imsi重号查询</a></li>
+                @endif
             </ul>
         </li>
 
