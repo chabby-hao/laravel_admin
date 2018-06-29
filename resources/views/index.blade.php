@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="bi-header">
-    <video class="bi-video" src="/video/dabj.mp4" muted autoplay loop></video>
+    <video class="bi-video" src="/video/dabj.mp4" poster="/image/dabj_poster.png" muted autoplay loop></video>
     <div class="bi-top">
         <div class="bi-nav">
             <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
