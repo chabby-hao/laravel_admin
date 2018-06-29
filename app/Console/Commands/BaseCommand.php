@@ -20,20 +20,20 @@ abstract class BaseCommand extends Command
     /**
      * @param \Eloquent $model
      */
-    protected function batchSearch($model)
+    protected function batchSearch($model, callable $func)
     {
         $page = 1;
-        $perPage = 100;
+        $perPage = 500;
         $rtn = [];
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
             foreach ($pagination->items() as $row) {
-//                $tmp = $func($row);
-//                if($tmp){
-//                    $rtn[] = $tmp;
-//                }
+                $tmp = $func($row);
+                if($tmp){
+                    $rtn[] = $tmp;
+                }
+                $this->getMaxCache();
             }
-            echo memory_get_usage() / 1024 /1024 . 'mb------------' . "\n";
 
         } while ($pagination->hasMorePages());
         return $rtn;
