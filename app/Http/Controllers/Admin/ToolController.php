@@ -17,6 +17,7 @@ use App\Logics\DeviceLogic;
 use App\Models\BiFile;
 use App\Models\BiUser;
 use App\Models\Role;
+use App\Models\TDeviceCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -185,7 +186,7 @@ class ToolController extends BaseController
             $imsis = implode(',', $imsis);
 
 
-            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a inner join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
+            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a left join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
 
             if (!$rs) {
                 return $this->outPutError('无数据');
@@ -235,6 +236,28 @@ class ToolController extends BaseController
         }
 
         return view('admin.tool.exportbyimsi');
+    }
+
+    public function imsiRepeat(Request $request)
+    {
+        $id = $request->input('id');
+
+        if($id){
+            $model = TDeviceCode::orWhere([
+                'imei'=>$id,
+            ])->where([
+                'imsi'=>$id,
+            ]);
+        }else{
+            $model = TDeviceCode::where([]);
+        }
+
+        $paginate = $model->paginate();
+
+        return view('admin.breakrule.breakrule', [
+            'datas' => $paginate->items(),
+            'page_nav' => MyPage::showPageNav($paginate),
+        ]);
     }
 
 }

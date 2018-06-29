@@ -161,7 +161,7 @@
 
 
         {{--工具管理--}}
-        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>工具</span>
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>客服工具</span>
             </a>
             <ul>
                 @if(Auth::user()->can('tool/file'))

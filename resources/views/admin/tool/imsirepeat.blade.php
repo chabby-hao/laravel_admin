@@ -13,8 +13,8 @@
                             <div class="control-group">
                                 <div class="inline-block w10">
                                     <div class="inline-block">
-                                        <label>车辆牌照:</label>
-                                        <input class="w6" type="text" id="lpn" name="lpn" value="{{Request::input('lpn')}}" >
+                                        <label>请输入:</label>
+                                        <input class="w6" placeholder="IMEI/IMSI" type="text" id="id" name="id" value="{{Request::input('id')}}" >
                                     </div>
 
 
@@ -43,8 +43,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <?php /** @var \App\Models\BiFile $data */ ?>
-
+                            <?php /** @var \App\Models\TDeviceCode $data */ ?>
+                            @foreach($datas as $data)
+                                <tr>
+                                    <td>{{$data->imei}}</td>
+                                    <td>{{$data->imsi}}</td>
+                                    <td>{{$data->register->toDateTimeString()}}</td>
+                                    <td>{{\Illuminate\Support\Carbon::parse($data->first)->toDateTimeString()}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -56,8 +63,6 @@
         </div>
     </div>
     <script>
-
-        $(":file").filestyle();
 
     </script>
     @include('admin.common_submitjs')
