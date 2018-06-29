@@ -33,6 +33,7 @@ abstract class BaseCommand extends Command
 //                    $rtn[] = $tmp;
 //                }
             }
+            echo memory_get_usage() / 1024 /1024 . 'mb------------' . "\n";
 
         } while ($pagination->hasMorePages());
         return $rtn;
