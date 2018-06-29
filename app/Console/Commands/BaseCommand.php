@@ -32,7 +32,6 @@ abstract class BaseCommand extends Command
                 if($tmp){
                     $rtn[] = $tmp;
                 }
-                $this->getMaxCache();
             }
 
         } while ($pagination->hasMorePages());
