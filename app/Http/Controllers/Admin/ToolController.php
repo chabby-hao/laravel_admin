@@ -179,14 +179,17 @@ class ToolController extends BaseController
             array_shift($data);
 
             $imsis = Helper::transToOneDimensionalArray($data, 0);
-            foreach ($imsis as &$imsi) {
+            foreach ($imsis as $k => &$imsi) {
                 $imsi = trim($imsi, " '");
+                if(!$imsi){
+                    unset($imsis[$k]);
+                }
                 $imsi = "'$imsi'";
             }
             $imsis = implode(',', $imsis);
 
 
-            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a left join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where b.imsi in ($imsis);");
+            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a left join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where substr(a.imsi,2) in ($imsis);");
 
             if (!$rs) {
                 return $this->outPutError('无数据');
