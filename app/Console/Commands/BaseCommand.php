@@ -20,7 +20,7 @@ abstract class BaseCommand extends Command
     /**
      * @param \Eloquent $model
      */
-    protected function batchSearch($model, callable $func)
+    protected function batchSearch($model)
     {
         $page = 1;
         $perPage = 100;

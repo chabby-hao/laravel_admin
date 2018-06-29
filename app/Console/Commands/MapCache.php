@@ -70,9 +70,7 @@ class MapCache extends BaseCommand
             $offlineMore48 = [];
             $storage = [];
             $channelStorage = [];
-            $this->batchSearch($model, function ($deviceCode)  {
-
-            });
+            $this->batchSearch($model );
 
             $cacheKeyPre = DeviceObject::CACHE_MAP_PRE . $keyPre;
             $map = [
