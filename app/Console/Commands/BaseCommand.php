@@ -28,10 +28,10 @@ abstract class BaseCommand extends Command
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
             foreach ($pagination->items() as $row) {
-                $tmp = $func($row);
-                if($tmp){
-                    $rtn[] = $tmp;
-                }
+//                $tmp = $func($row);
+//                if($tmp){
+//                    $rtn[] = $tmp;
+//                }
             }
 
         } while ($pagination->hasMorePages());
