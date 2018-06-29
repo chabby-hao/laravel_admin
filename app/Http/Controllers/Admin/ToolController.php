@@ -248,18 +248,14 @@ class ToolController extends BaseController
         if($id){
             $model = TDeviceCode::orWhere([
                 'imei'=>$id,
-            ])->where([
+            ])->orWhere([
                 'imsi'=>$id,
             ]);
-        }else{
-            $model = TDeviceCode::where([]);
+            $items = $model->get();
         }
 
-        $paginate = $model->paginate();
-
-        return view('admin.breakrule.breakrule', [
-            'datas' => $paginate->items(),
-            'page_nav' => MyPage::showPageNav($paginate),
+        return view('admin.tool.imsirepeat', [
+            'datas' => isset($items) ? $items : [],
         ]);
     }
 
