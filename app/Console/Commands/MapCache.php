@@ -70,7 +70,7 @@ class MapCache extends BaseCommand
             $offlineMore48 = [];
             $storage = [];
             $channelStorage = [];
-            $this->batchSearch($model, function ($deviceCode) use (&$channelStorage, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
+            $this->batchSearch($model, function ($deviceCode)  {
 
             });
 

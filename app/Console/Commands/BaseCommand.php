@@ -23,7 +23,7 @@ abstract class BaseCommand extends Command
     protected function batchSearch($model, callable $func)
     {
         $page = 1;
-        $perPage = 500;
+        $perPage = 100;
         $rtn = [];
         do {
             $pagination = $model->simplePaginate($perPage, ['*'], 'page', $page++);
