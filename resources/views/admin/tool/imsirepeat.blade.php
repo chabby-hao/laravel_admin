@@ -40,6 +40,7 @@
                                 <th>IMSI</th>
                                 <th>入库时间</th>
                                 <th>第一次通讯时间</th>
+                                <th>最后一次通讯时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,6 +51,7 @@
                                     <td>{{$data->imsi}}</td>
                                     <td>{{$data->register->toDateTimeString()}}</td>
                                     <td>{{\Illuminate\Support\Carbon::createFromTimestamp($data->first)->toDateTimeString()}}</td>
+                                    <td>{{max(\App\Logics\DeviceLogic::getLastLocationInfo($data->imei), \App\Logics\DeviceLogic::getLastContact($data->imei))}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
