@@ -31,11 +31,15 @@ class BiBreakRule extends \App\Models\Base\BiBreakRule
 {
 
     const VIOLATION_TYPE_OVERSPEED = 1;//超速
+    const VIOLATION_TYPE_NIXING = 2;//逆行
+    const VIOLATION_TYPE_JXQY = 3;//禁行区域
 
     public static function getViolationTypeMap($type = null)
     {
         $map = [
             self::VIOLATION_TYPE_OVERSPEED => '超速',
+            self::VIOLATION_TYPE_NIXING => '逆行',
+            self::VIOLATION_TYPE_JXQY => '禁行区域',
         ];
         return $type === null ? $map : $map[$type];
     }
