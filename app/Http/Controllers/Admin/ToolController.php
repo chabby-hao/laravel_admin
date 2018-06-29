@@ -189,7 +189,7 @@ class ToolController extends BaseController
             $imsis = implode(',', $imsis);
 
 
-            $rs = DB::connection('care')->select("select num_106,imei,qr,b.imsi as imsi from t_device_code a left join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where substr(a.imsi,2) in ($imsis);");
+            $rs = DB::connection('care')->select("select num_106,imei,qr,substr(a.imsi,2) as imsi from t_device_code a left join `care_operate`.t_imsi_num b on a.imsi=concat('9', b.imsi) where substr(a.imsi,2) in ($imsis);");
 
             if (!$rs) {
                 return $this->outPutError('无数据');
