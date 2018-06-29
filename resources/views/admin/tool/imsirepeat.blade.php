@@ -49,7 +49,7 @@
                                     <td>{{$data->imei}}</td>
                                     <td>{{$data->imsi}}</td>
                                     <td>{{$data->register->toDateTimeString()}}</td>
-                                    <td>{{\Illuminate\Support\Carbon::parse($data->first)->toDateTimeString()}}</td>
+                                    <td>{{\Illuminate\Support\Carbon::createFromTimestamp($data->first)->toDateTimeString()}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
