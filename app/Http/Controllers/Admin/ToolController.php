@@ -199,6 +199,7 @@ class ToolController extends BaseController
                 $deviceObj = DeviceLogic::createDevice($imei);
                 $user = DeviceLogic::getAdminInfoByUdid($deviceObj->udid);
                 $phone = $user ? $user->phone : '';
+                $rom = DeviceLogic::getRomVersionByUdid($deviceObj->udid);
                 $data[] = [
                     "'" . $num106,
                     "'" . $deviceObj->udid,
@@ -209,6 +210,7 @@ class ToolController extends BaseController
                     "'" . $phone,
                     $deviceObj->lastContact,
                     $deviceObj->deliverdAt,
+                    $rom,
                 ];
             }
 
@@ -224,7 +226,8 @@ class ToolController extends BaseController
                 '车型',
                 '设备所属账号',
                 '上次在线时间',
-                '出货时间'
+                '出货时间',
+                '固件版本',
             ], $data, $file, public_path($path), false);
             $fileUrl = asset($path . $file . '.xlsx');
             return $this->outputRedictWithoutMsg($fileUrl);
