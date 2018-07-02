@@ -59,7 +59,7 @@
                 <li><span>1</span></li>--}}
             </ul>
         </div>
-        <label class="bi-history-text">历史访问请求量</label>
+        <label class="bi-history-text">设备请求总量</label>
     </div>
 
     <form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
