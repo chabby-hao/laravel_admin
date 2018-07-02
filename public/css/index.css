@@ -199,7 +199,8 @@ a:hover {
     pointer-events:none;
     position: absolute;
     bottom: 20%;
-    width: 960px;
+    /*width: 960px;*/
+    width: 60%;
     height: 200px;
     background: url("/image/yindaoliebiao.png") center no-repeat;
     background-size: 100%;
