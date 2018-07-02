@@ -173,6 +173,7 @@ a:hover {
 }
 
 .bi-number ul li {
+    margin: 0 5px;
     display: inline-block;
     width: 30px;
     height: 52px;
