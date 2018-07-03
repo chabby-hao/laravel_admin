@@ -120,7 +120,7 @@ class DeviceController extends BaseController
                 foreach ($snr['arr'] as $arr){
                     $snrStr .= 'id=' . $arr['id'] . ',signal=' . $arr['snr'] . " | ";
                 }
-                $data['snr'] = $snrStr;
+                $data['snr'] = rtrim($snrStr,' |');
                 $data['snrTime'] = Carbon::createFromTimestamp($snr['time'])->toDateTimeString();
             }
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);
