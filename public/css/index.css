@@ -209,6 +209,11 @@ a:hover {
 .bi-number .delimiter span {
     position: absolute;
     left: -6px;
+    transform: scale(1.5, 1);
+    -ms-transform: scale(1.5, 1);
+    -webkit-transform: scale(1.5, 1);
+    -moz-transform: scale(1.5, 1);
+    -o-transform: scale(1.5, 1);
 }
 
 .bi-point {
