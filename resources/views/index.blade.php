@@ -208,9 +208,9 @@
             })
         }
 
+        refreshTotal();
+
         setInterval(refreshTotal, 1000);
-
-
 
 
     })
