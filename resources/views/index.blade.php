@@ -185,7 +185,7 @@
             }
         })
 
-        setInterval(function(){
+        var refreshTotal = function(){
             $.ajax({
                 url:'{{URL::action('Bi\StatController@requestCount')}}',
                 success:function(res){
@@ -206,7 +206,10 @@
                     }
                 }
             })
-        }, 1000);
+        }
+
+        setInterval(refreshTotal, 1000);
+
 
 
 
