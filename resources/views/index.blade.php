@@ -195,7 +195,11 @@
                     var ul = $("#total_count");
                     for(var x in sum){
                         //<li><span>2</span></li>
-                        var li = $("<li><span>" + sum[x] + "</span></li>");
+                        if(parseInt(sum[x])){
+                            var li = $("<li><span>" + sum[x] + "</span></li>");
+                        }else{
+                            var li = $('<li class="delimiter"><span>′</span></li>');
+                        }
                         ul.append(li);
                     }
                 }
