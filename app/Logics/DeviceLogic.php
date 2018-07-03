@@ -953,7 +953,7 @@ class DeviceLogic extends BaseLogic
     {
         $snrJson = RedisLogic::getDevDataByImei($imei)['SnrJson'];
         if($snrJson){
-            return json_decode($snrJson);
+            return json_decode($snrJson, true);
         }
         return [];
     }
