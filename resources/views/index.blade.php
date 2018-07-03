@@ -196,7 +196,7 @@
                         var str = '';
                         for(var x in sum){
                             if(!isNaN(sum[x])){
-                                var li = "<li><span>" + sum[x] + "</span></li>;
+                                var li = "<li><span>" + sum[x] + "</span></li>";
                             }else{
                                 var li = '<li class="delimiter"><span>′</span></li>';
                             }
