@@ -194,7 +194,7 @@
                     var ul = $("#total_count");
                     for(var x in sum){
                         //<li><span>2</span></li>
-                        if(parseInt(sum[x])){
+                        if(isNumeric(sum[x])){
                             var li = $("<li><span>" + sum[x] + "</span></li>");
                         }else{
                             var li = $('<li class="delimiter"><span>′</span></li>');
