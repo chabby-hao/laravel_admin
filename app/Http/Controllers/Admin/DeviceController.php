@@ -118,9 +118,9 @@ class DeviceController extends BaseController
             if($snr && $snr['arr']){
                 $snrStr = '';
                 foreach ($snr['arr'] as $arr){
-                    $snrStr .= 'id=' . $arr['id'] . ',signal=' . $arr['snr'] . " | ";
+                    $snrStr .= 'id=' . $arr['id'] . ',signal=' . $arr['snr'] . '<br>';
                 }
-                $data['snr'] = rtrim($snrStr,' |');
+                $data['snr'] = rtrim($snrStr,' ');
                 $data['snrTime'] = Carbon::createFromTimestamp($snr['time'])->toDateTimeString();
             }
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);
