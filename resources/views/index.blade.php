@@ -43,7 +43,7 @@
     <div class="bi-history">
         <div class="bi-number">
             <ul id="total_count">
-                {{--<li><span>1</span></li>
+                <li><span>1</span></li>
                 <li><span>2</span></li>
                 <li><span>3</span></li>
                 <li><span>4</span></li>
@@ -56,7 +56,7 @@
                 <li><span>3</span></li>
                 <li><span>4</span></li>
                 <li><span>7</span></li>
-                <li><span>1</span></li>--}}
+                <li><span>1</span></li>
             </ul>
         </div>
         <label class="bi-history-text">设备请求总量</label>
@@ -189,6 +189,7 @@
         $.ajax({
             url:'{{URL::action('Bi\StatController@requestCount')}}',
             success:function(res){
+                return;
                 if(res.code === 200){
                     var sum = res.data.sum;
                     var ul = $("#total_count");
