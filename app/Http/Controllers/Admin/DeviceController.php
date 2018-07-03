@@ -118,7 +118,7 @@ class DeviceController extends BaseController
             if($snr && $snr['arr']){
                 $snrStr = '';
                 foreach ($snr['arr'] as $arr){
-                    $snrStr .= 'id:' . $arr['id'] . ',强度' . $arr['snr'] . "\r\n";
+                    $snrStr .= 'id=' . $arr['id'] . ',signal=' . $arr['snr'] . "|";
                 }
                 $data['snr'] = $snrStr;
                 $data['snrTime'] = Carbon::createFromTimestamp($data['time'])->toDateTimeString();
