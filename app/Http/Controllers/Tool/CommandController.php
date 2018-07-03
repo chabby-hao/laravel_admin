@@ -114,4 +114,17 @@ class CommandController extends Controller
         return Helper::response();
     }
 
+    public function cmdSet(Request $request)
+    {
+
+        if(env('APP_ENV') !== 'test'){
+            die('非法操作');
+        }
+
+        if($data = Helper::arrayRequiredCheck(['imei','field','value'], $request->input())){
+            CommandLogic::cmdSet($data['imei'], $data['field'], $data['value']);
+            return Helper::response();
+        }
+    }
+
 }

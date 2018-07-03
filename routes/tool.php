@@ -27,6 +27,7 @@ Route::any('command/zhendongfenji','Tool\CommandController@zhendongfenji');
 Route::any('command/activeConfig','Tool\CommandController@activeConfig');
 Route::any('command/szfjGear','Tool\CommandController@szfjGear');
 Route::any('command/command','Tool\CommandController@command');
+Route::any('command/cmdSet','Tool\CommandController@cmdSet');
 
 
 Route::get('/phpinfo',function(){
