@@ -196,17 +196,19 @@ a:hover {
 }
 
 .bi-number ul .delimiter {
+    position: absolute;
     margin: 0;
     width: 0;
     height: 52px;
     border: none;
     background: transparent;
     margin-bottom: 22px;
-    line-height: 48px;
+    line-height: 107px;
 }
 
 .bi-number .delimiter span {
-    line-height: 2px;
+    position: absolute;
+    left: -6px;
 }
 
 .bi-point {
