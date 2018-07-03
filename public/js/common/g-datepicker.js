@@ -100,7 +100,7 @@ window.gDatepicker = (function () {
                 "startDate": startDate,
                 "endDate": endDate,
                 //"maxDate": "12/07/2016"
-                "maxDate": nowDate + ' 23:59:56',
+                "maxDate": nowDate + ' 23:59:59',
             }, function (start, end, label) {
                 console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
             });
