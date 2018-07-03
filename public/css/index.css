@@ -243,7 +243,8 @@ a:hover {
     text-align: right;
     overflow: hidden;
     display: block;
-    margin-left: 30px;
+    right: 0px;
+    position: absolute;
 }
 
 .bi-logo {
