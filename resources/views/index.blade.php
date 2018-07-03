@@ -185,25 +185,30 @@
             }
         })
 
-
-        $.ajax({
-            url:'{{URL::action('Bi\StatController@requestCount')}}',
-            success:function(res){
-                if(res.code === 200){
-                    var sum = res.data.sum;
-                    var ul = $("#total_count");
-                    for(var x in sum){
+        setInterval(function(){
+            $.ajax({
+                url:'{{URL::action('Bi\StatController@requestCount')}}',
+                success:function(res){
+                    if(res.code === 200){
+                        var sum = res.data.sum;
+                        var ul = $("#total_count");
                         //<li><span>2</span></li>
-                        if(!isNaN(sum[x])){
-                            var li = $("<li><span>" + sum[x] + "</span></li>");
-                        }else{
-                            var li = $('<li class="delimiter"><span>′</span></li>');
+                        var str = '';
+                        for(var x in sum){
+                            if(!isNaN(sum[x])){
+                                var li = "<li><span>" + sum[x] + "</span></li>;
+                            }else{
+                                var li = '<li class="delimiter"><span>′</span></li>';
+                            }
+                            str += li;
                         }
-                        ul.append(li);
+                        ul.html(str);
                     }
                 }
-            }
-        })
+            })
+        }, 1000);
+
+
 
     })
 
