@@ -167,7 +167,7 @@
                                 <td><%lastLocation.dateTime%></td>
                                 <td><%lastLocation.type%></td>
                                 <td><%#lastLocation.lng%>
-                                    <%lastLocation.lng%>,<%lastLocation.lat%>
+                                    <a href="{{URL::action('Admin\DeviceController@map')}}?lat=<%lastLocation.lng%>&lat=<%lastLocation.lat%>"><%lastLocation.lng%>,<%lastLocation.lat%></a>
                                     <%/lastLocation.lng%></td>
                                 <td><%lastLocation.address%></td>
                                 <td><%lastLocation.landmark%></td>
