@@ -136,6 +136,7 @@
                                 <th>GSM信号</th>
                                 <th>卫星数量</th>
                                 <th>卫星强度</th>
+                                <th>卫星强度刷新时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -143,7 +144,8 @@
                                 <td><%isOnlineTrans%></td>
                                 <td>-<%gsm%>db</td>
                                 <td><%gpsSatCount%></td>
-                                <td><%snr%>></td>
+                                <td><%snr%></td>
+                                <td><%snrTime%></td>
                             </tr>
                             </tbody>
                         </table>

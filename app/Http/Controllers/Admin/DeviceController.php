@@ -113,6 +113,16 @@ class DeviceController extends BaseController
             }
             $data['followers'] = DeviceLogic::getFollowersByUdid($udid);
             $data['gpsSatCount'] = DeviceLogic::getGpsSatCount($data['imei']);
+            //GPS信号强度
+            $snr = DeviceLogic::getGpsSnr($data['imei']);
+            if($snr && $snr['arr']){
+                $snrStr = '';
+                foreach ($snr['arr'] as $arr){
+                    $snrStr .= 'id:' . $arr['id'] . ',强度' . $arr['snr'] . "<br/>";
+                }
+                $data['snr'] = $snrStr;
+                $data['snrTime'] = Carbon::createFromTimestamp($data['time'])->toDateTimeString();
+            }
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);
 
             $data['chassis'] = DeviceLogic::getChassisByUdid($udid);

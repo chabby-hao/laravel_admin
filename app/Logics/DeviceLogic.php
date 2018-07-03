@@ -949,6 +949,15 @@ class DeviceLogic extends BaseLogic
         return max($gps['satCount'], $gsm['satCount']) ?: 0;
     }
 
+    public static function getGpsSnr($imei)
+    {
+        $snrJson = RedisLogic::getDevDataByImei($imei)['SnrJson'];
+        if($snrJson){
+            return json_decode($snrJson);
+        }
+        return [];
+    }
+
     public static function isLock($imei)
     {
         $devData = RedisLogic::getDevDataByImei($imei);
