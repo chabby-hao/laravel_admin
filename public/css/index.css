@@ -197,15 +197,16 @@ a:hover {
 
 .bi-number ul .delimiter {
     margin: 0;
-    display: inline-block;
-    width: 10px;
+    width: 0;
     height: 52px;
-    border: 1px solid #7ea0ff;
-    background-color: rgba(8,22,49,0.9);
-    /*background: rgba('');*/
-    border-radius: 4px;
+    border: none;
+    background: transparent;
     margin-bottom: 22px;
     line-height: 48px;
+}
+
+.bi-number .delimiter span {
+    line-height: 2px;
 }
 
 .bi-point {
