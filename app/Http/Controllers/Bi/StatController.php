@@ -14,6 +14,7 @@ class StatController extends BaseController
     public function requestCount()
     {
         $sum = TStatDevice::sum('request_count_today');
+        $sum = number_format($sum);
         $sum = '0' . $sum;
         $sum = str_split($sum);
         return Helper::response(['sum'=>$sum]);
