@@ -144,7 +144,7 @@
                                 <td><%isOnlineTrans%></td>
                                 <td>-<%gsm%>db</td>
                                 <td><%gpsSatCount%></td>
-                                <td><a onclick='myalert("<%snr%>")'>点击查看</a></td>
+                                <td><a href='javascript:;' onclick='myalert("<%snr%>")'>点击查看</a></td>
                                 <td><%snrTime%></td>
                             </tr>
                             </tbody>
