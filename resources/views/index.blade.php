@@ -200,6 +200,7 @@
                         }else{
                             var li = $('<li class="delimiter"><span>′</span></li>');
                         }
+                        console.log(li);
                         ul.append(li);
                     }
                 }
