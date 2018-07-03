@@ -190,7 +190,6 @@
             url:'{{URL::action('Bi\StatController@requestCount')}}',
             success:function(res){
                 if(res.code === 200){
-                    return;
                     var sum = res.data.sum;
                     var ul = $("#total_count");
                     for(var x in sum){
@@ -200,7 +199,6 @@
                         }else{
                             var li = $('<li class="delimiter"><span>′</span></li>');
                         }
-                        console.log(li);
                         ul.append(li);
                     }
                 }
