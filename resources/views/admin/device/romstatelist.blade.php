@@ -95,12 +95,10 @@
         </div>
     </div>
 
-    @include('admin.common_brand_ebikejs');
+    @include('admin.common_brand_ebikejs')
 
     <script>
 
     </script>
-
-    @include('admin.common_submitjs')
 
 @endsection
