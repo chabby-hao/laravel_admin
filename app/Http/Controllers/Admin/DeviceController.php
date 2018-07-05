@@ -797,7 +797,7 @@ class DeviceController extends BaseController
         $model = TDeviceCode::getDeviceModel();
         $this->listSearch($model);
 
-        $datas = $model->groupBy(['rom', 'ver'])->selectRaw("count(sid) as total,rom,ver")->get()->toArray();
+        $datas = $model->groupBy(['rom', 'ver'])->selectRaw("count(sid) as total,rom,ver")->get();
         return view('admin.device.romstatelist', [
             'datas' => $datas,
         ]);
