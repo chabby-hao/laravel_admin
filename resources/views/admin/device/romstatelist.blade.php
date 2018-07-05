@@ -89,9 +89,7 @@
                             </tbody>
                         </table>
                     </div>
-                    {{--<div class="pager">
-                        <?php echo $page_nav ?>
-                    </div>--}}
+
                 </div>
             </div>
         </div>
