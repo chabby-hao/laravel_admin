@@ -146,24 +146,10 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
      */
     public static function getDeviceModel()
     {
-        //return TDeviceCode::where('type','>=',2);
-
-        //$brandis = BiBrand::getAllBrandIds();
-        //return TDeviceCode::whereIn('type', $brandis);
-
         $types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
         $types = Helper::transToOneDimensionalArray($types, 'type');
         $model = TDeviceCode::where('device_cycle','>', self::DEVICE_CYCLE_ALL);
-        //$model->where('onlined', 1);
         $model->whereIn('t_device_code.type', $types);
-
-        /*$ids = Cache::get(DeviceObject::CACHE_ONLINE);
-        if($ids){
-            $model->whereIn('sid', $ids);
-        }*/
-        //for test
-        //$model->whereBetween('sid',[60000,70000]);
-
         return $model;
     }
 

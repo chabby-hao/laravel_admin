@@ -7,7 +7,7 @@ class DeviceObject extends BaseObject
 
     //渠道品牌缓存前缀
     const CACHE_ALL_PRE = 'all:';//全部缓存
-    const CACHE_CHANNEL_PRE ='channel:';//渠道缓存前缀
+    const CACHE_CHANNEL_PRE = 'channel:';//渠道缓存前缀
     const CACHE_BRAND_PRE = 'brand:';//品牌缓存前缀
     const CACHE_EBIKE_TYPE_PRE = 'ebike_type:';//车型缓存前缀
 
@@ -26,13 +26,25 @@ class DeviceObject extends BaseObject
     const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';
     const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';
 
-    const CACHE_ONLINE = 'online';//有过数据的
+    const CACHE_ONLINED = 'onlined';//有过数据的
 
     const SWITCH_STATUS_TURNON = 1;//电门开
     const SWITCH_STATUS_TURNOFF = 0;//电门关
 
     const LOCK = 1;//已锁
     const UNLOCK = 0;//未锁
+
+    const ONLINE = 1;//在线
+    const OFFLINE = 0;//离线
+
+    public static function getOnlineOfflineTypeMap($type = null)
+    {
+        $map = [
+            self::ONLINE => '在线',
+            self::OFFLINE => '离线',
+        ];
+        return $type === null ? $map : $map[$type];
+    }
 
 
     const LOCK_TYPE_ANQI = 'lock';//锁车

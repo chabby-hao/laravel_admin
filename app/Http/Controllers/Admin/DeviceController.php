@@ -53,18 +53,18 @@ class DeviceController extends BaseController
     private function getSingleUdid($id)
     {
         $udid = $this->getUdid($id);
-        if(!$udid){
+        if (!$udid) {
             $udids = UserLogic::getUdidListByAdminPhone($id);
-            if($udids && count($udids) === 1){
+            if ($udids && count($udids) === 1) {
                 return $udids[0];
-            }elseif($udids && count($udids) > 1){
+            } elseif ($udids && count($udids) > 1) {
                 $str = '';
-                foreach ($udids as $udid){
-                    $str .= '<br/>' . '<a href="' . URL::action('Admin\DeviceController@detail',['id'=>$udid]) . '">' . $udid . ' </a>';
+                foreach ($udids as $udid) {
+                    $str .= '<br/>' . '<a href="' . URL::action('Admin\DeviceController@detail', ['id' => $udid]) . '">' . $udid . ' </a>';
                 }
                 $this->outputErrorWithDie('该手机号绑定了多个设备，请点击下列设备码进行查询:' . $str);
             }
-        }else{
+        } else {
             return $udid;
         }
     }
@@ -108,19 +108,19 @@ class DeviceController extends BaseController
             $data['shipOrder'] = $shipOrder;
             $data['name'] = DeviceLogic::getNameByUdid($udid);
             $data['master'] = DeviceLogic::getAdminInfoByUdid($udid);
-            if($data['master'] && $data['master']['phone']){
+            if ($data['master'] && $data['master']['phone']) {
                 $data['userConfig'] = UserLogic::getUserConfigByPhone($data['master']['phone']);
             }
             $data['followers'] = DeviceLogic::getFollowersByUdid($udid);
             $data['gpsSatCount'] = DeviceLogic::getGpsSatCount($data['imei']);
             //GPS信号强度
             $snr = DeviceLogic::getGpsSnr($data['imei']);
-            if($snr && $snr['arr']){
+            if ($snr && $snr['arr']) {
                 $snrStr = '';
-                foreach ($snr['arr'] as $arr){
+                foreach ($snr['arr'] as $arr) {
                     $snrStr .= 'id=' . $arr['id'] . ',signal=' . $arr['snr'] . '<br/>';
                 }
-                $data['snr'] = rtrim($snrStr,' ');
+                $data['snr'] = rtrim($snrStr, ' ');
                 $data['snrTime'] = Carbon::createFromTimestamp($snr['time'])->toDateTimeString();
             }
             $data['lastLocation'] = DeviceLogic::getLastLocationInfo($data['imei']);
@@ -415,21 +415,40 @@ class DeviceController extends BaseController
             $model->whereIn('sid', $ids);
         }
 
+        if (\Request::has('attach')) {
+            $attach = \Request::input('attach');
+            if ($attach) {
+                $cacheKeys = [
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_RIDING,
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_PARK,
+                ];
+            } else {
+                $cacheKeys = [
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
+                ];
+            }
+            $ids = [];
+            foreach ($cacheKeys as $cacheKey) {
+                $ids = array_merge($ids, Cache::store('file')->get($cacheKey) ?: []);
+            }
+            $model->whereIn('sid', $ids);
+        }
+
         if ($id = \Request::input('id')) {
             $udid = $this->getUdid($id);
-            if(!$udid){
+            if (!$udid) {
                 //管理员手机号查询
                 $udids = UserLogic::getUdidListByAdminPhone($id);
-                if($udids){
+                if ($udids) {
                     $model->whereIn('qr', $udids);
-                }else{
-                    $model->whereIn('qr',['']);
+                } else {
+                    $model->whereIn('qr', ['']);
                 }
-            }else{
+            } else {
                 $model->whereQr($udid);
             }
         }
-
 
 
         if ($deviceType = \Request::input('device_type')) {
@@ -566,7 +585,7 @@ class DeviceController extends BaseController
         $keys = array_keys($map);
 
         $paginate = TLockLog::whereUdid($udid)->whereIn('act', $keys)
-            ->whereBetween('add_time',[$startDatetime, $endDatetime])
+            ->whereBetween('add_time', [$startDatetime, $endDatetime])
             ->orderByDesc('id')->paginate();
 
         $data = $paginate->items();
@@ -627,7 +646,7 @@ class DeviceController extends BaseController
     {
         $id = $this->getId($request);
         $udid = $this->getUdid($id);
-        if(!$udid){
+        if (!$udid) {
             return $this->outPutError('查询不到数据');
         }
         list($model, ,) = $this->getTripModel();
@@ -640,7 +659,7 @@ class DeviceController extends BaseController
             $info && $rs[] = $info;
         }
         return $this->outPut([
-            'trip'=>$rs,
+            'trip' => $rs,
         ]);
 
     }
@@ -655,13 +674,13 @@ class DeviceController extends BaseController
         $tmp['date'] = Carbon::createFromTimestamp($mileRow->begin)->toDateString();
 
         $locs = LocationLogic::getLocationListFromDb($mileRow->udid, $mileRow->begin, $mileRow->end);
-        if(!$locs){
+        if (!$locs) {
             return false;
         }
         //$tmp['locs'] = $locs;
         $t = [];
         $loc = [];
-        foreach ($locs as $loc){
+        foreach ($locs as $loc) {
             $t[] = [floatval($loc['lng']), floatval($loc['lat'])];
         }
         $tmp['locs'] = $t;
@@ -774,8 +793,14 @@ class DeviceController extends BaseController
 
     public function romStatList()
     {
-        $datas = TDeviceCode::groupBy(['rom','ver'])->selectRaw("count(sid) as total,rom,ver")->get()->toArray();
-        dd($datas);
+
+        $model = TDeviceCode::getDeviceModel();
+        $this->listSearch($model);
+
+        $datas = $model->groupBy(['rom', 'ver'])->selectRaw("count(sid) as total,rom,ver")->get()->toArray();
+        return view('admin.device.romstatelist', [
+            'datas' => $datas,
+        ]);
     }
 
 }
