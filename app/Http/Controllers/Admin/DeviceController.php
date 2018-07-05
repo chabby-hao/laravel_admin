@@ -415,8 +415,8 @@ class DeviceController extends BaseController
             $model->whereIn('sid', $ids);
         }
 
-        if (\Request::has('attach')) {
-            $attach = \Request::input('attach');
+        $attach = \Request::input('attach');
+        if (is_numeric($attach)) {
             if ($attach) {
                 $cacheKeys = [
                     DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_RIDING,
