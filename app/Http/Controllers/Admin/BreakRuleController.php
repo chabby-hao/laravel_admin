@@ -68,8 +68,9 @@ class BreakRuleController extends BaseController
 
         $model = BiBreakRule::where($where);
 
+        $dateRange = $this->getDaterange();
         if ($request->input('daterange')) {
-            $model->whereBetween('violation_time', $this->getDaterange());
+            $model->whereBetween('violation_time', $dateRange);
         }
 
         $paginate = $model->orderByDesc('id')->paginate();
@@ -77,6 +78,8 @@ class BreakRuleController extends BaseController
         return view('admin.breakrule.breakrule', [
             'datas' => $paginate->items(),
             'page_nav' => MyPage::showPageNav($paginate),
+            'start'=>$dateRange[0],
+            'end'=>$dateRange[1],
         ]);
 
     }
