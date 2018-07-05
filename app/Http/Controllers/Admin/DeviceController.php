@@ -774,7 +774,7 @@ class DeviceController extends BaseController
 
     public function romStatList()
     {
-        $datas = TDeviceCode::groupBy(['rom','ver'])->select(['count(sid) as total','rom','ver'])->get()->toArray();
+        $datas = TDeviceCode::groupBy(['rom','ver'])->selectRaw('count(sid) as total','rom','ver')->get()->toArray();
         dd($datas);
     }
 
