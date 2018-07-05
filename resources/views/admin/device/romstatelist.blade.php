@@ -46,7 +46,7 @@
                                         <select class="w1 margintop" name="attach">
                                             <option value="">请选择在线状态</option>
                                             @foreach(\App\Objects\DeviceObject::getOnlineOfflineTypeMap() as $k => $v)
-                                                <option @if(Request::input('attach') == $k) selected @endif value="{{$k}}">{{$v}}</option>
+                                                <option @if(is_numeric(Request::input('attach')) && Request::input('attach') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
                                     @endif
