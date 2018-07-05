@@ -772,5 +772,10 @@ class DeviceController extends BaseController
         return view('admin.device.map');
     }
 
+    public function romStatList()
+    {
+        $datas = TDeviceCode::groupBy(['rom','ver'])->select(['count(id) as total','rom','ver'])->get()->toArray();
+        dd($datas);
+    }
 
 }

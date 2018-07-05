@@ -102,6 +102,9 @@
                 @if(Auth::user()->can('device/mileageList'))
                     <li><a href="{{URL::action('Admin\DeviceController@mileageList')}}">历史行程</a></li>
                 @endif
+                @if(Auth::user()->can('device/romStatList'))
+                    <li><a href="{{URL::action('Admin\DeviceController@romStatList')}}">固件统计列表</a></li>
+                @endif
             </ul>
         </li>
 
