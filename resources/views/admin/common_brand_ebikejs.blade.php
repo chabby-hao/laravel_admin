@@ -14,9 +14,9 @@
                 $.ajax({
                     url: '{{URL::action('Admin\BrandController@detail')}}',
                     data: {id: brandId},
-                    beforeSend: function () {
+                    /*beforeSend: function () {
 
-                    },
+                    },*/
                     success: function (data) {
                         if (ajax_check_res(data)) {
                             if (data.ebType) {
