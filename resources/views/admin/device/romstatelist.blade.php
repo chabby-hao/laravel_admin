@@ -99,10 +99,6 @@
 
     <script>
 
-        $(function () {
-
-        })
-
     </script>
 
     @include('admin.common_submitjs')
