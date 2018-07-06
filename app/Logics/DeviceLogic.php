@@ -1177,6 +1177,8 @@ class DeviceLogic extends BaseLogic
                 $province = $row[1];
                 $city = $row[2];
                 $chassis = $row[3];
+                $name = $row[4];
+
 
                 $province = str_replace('省', '', $province);
                 $city = str_replace('市', '', $city);
@@ -1185,10 +1187,11 @@ class DeviceLogic extends BaseLogic
                     'udid' => $udid,
                 ], [
                     'rate' => 10,
-                    'name' => $udid,
+                    'name' => $name ?: $udid,
                     'imei' => DeviceLogic::getImei($udid),
                     'type' => DeviceLogic::getBrandIdByUdid($udid),
                 ])->update([
+                    'name' => $name ?: $udid,
                     'province' => $province,
                     'city' => $city,
                     'chassis' => $chassis,
