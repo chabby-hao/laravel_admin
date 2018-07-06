@@ -18,7 +18,6 @@
                             @endif
                             <div class="control-group">
                                 <div class="inline-block w10">
-                                    <input class="w15 margintop" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
                                     <select class="w1 margintop" name="device_type">
                                         <option value="">请选择型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
