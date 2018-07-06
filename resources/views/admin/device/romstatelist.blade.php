@@ -81,7 +81,7 @@
                                 <tr class="gradeX">
                                     <td>{{++$t}}</td>
                                     <td>{{$data->rom}}</td>
-                                    <td>{{$data->ver}}</td>
+                                    <td>{{$data->mcu}}</td>
                                     <td>{{$data->total}}</td>
                                 </tr>
                             @endforeach
