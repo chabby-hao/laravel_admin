@@ -1291,6 +1291,7 @@ class DeviceLogic extends BaseLogic
         RedisLogic::del('dev:'.$imei);//删除设备当前的实时数据
         RedisLogic::del('dev_loc:'.$imei);//删除设备的定位点索引
         RedisLogic::del('dev_zone:'.$imei);//删除设备的安全区域设置数据
+        RedisLogic::del('zhangfei_charge:'.$imei);//删除电池数据
 
         //3、操作数据库
         //记录设备重置的日志
