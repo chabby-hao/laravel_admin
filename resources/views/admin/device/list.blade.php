@@ -100,6 +100,7 @@
                             <tr>
                                 <th>序号</th>
                                 <th>设备ID</th>
+                                <th>IMEI</th>
                                 <th>设备型号</th>
                                 <th>渠道</th>
                                 <th>车辆品牌</th>
@@ -120,6 +121,7 @@
                                 <tr class="gradeX">
                                     <td>{{++$t}}</td>
                                     <td>{{$data->udid}}</td>
+                                    <td>{{$data->imei}}</td>
                                     <td>{{$data->deviceTypeName}}</td>
                                     <td>{{$data->channelName}}</td>
                                     <td>{{$data->brandName}}</td>
