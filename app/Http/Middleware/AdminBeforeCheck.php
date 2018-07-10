@@ -37,8 +37,7 @@ class AdminBeforeCheck
     public function handle(Request $request, \Closure $next)
     {
 
-        Log::debug('user:' . Auth::user()->username);
-        Log::debug('admin route : ' . $request->route()->getActionName());
+        Log::debug('user:' . Auth::user()->username . ' --- admin route : ' . $request->route()->getActionName());
 
         $routeName = $request->route()->getName();
 
