@@ -1257,7 +1257,7 @@ class DeviceLogic extends BaseLogic
             if(!$ebikeType){
                 return false;
             }
-            $evmodel = $ebikeType->ev_model;
+            $evmodel = sprintf('%03s', $ebikeType->ev_model);
         }
 
 
