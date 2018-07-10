@@ -38,6 +38,7 @@ class AdminBeforeCheck
     {
 
         $a = session()->all();
+        Log::debug('user:' . Auth::user()->username);
         Log::debug('admin route : ' . $request->route()->getActionName());
         Log::debug('session  : ', $a);
 
