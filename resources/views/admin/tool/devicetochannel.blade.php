@@ -25,20 +25,20 @@
                                 </div>
                             </div>
 
-                            <div class="control-group hide">
-                                <label class="control-label"><span class="text-error">*</span>渠道类型 :</label>
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>渠道:</label>
                                 <div class="controls">
                                     <select name="channel_id" class="span11">
                                         <option value="">请选择</option>
-                                        <?php foreach (\App\Models\BiChannel::getChannelMap() as $key => $val){ ?>
-                                        <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
-                                        <?php }?>
+                                        @foreach(\App\Models\BiChannel::getChannelMap() as $id=> $name)
+                                            <option value="{{$id}}">{{$name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>车辆品牌:</label>
+                                <label class="control-label"><span class="text-error">*</span>品牌:</label>
                                 <div class="controls">
                                     <select name="brand_id" class="span11">
                                         <option value="">请选择</option>
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">车辆型号:</label>
+                                <label class="control-label">车型:</label>
                                 <div class="controls">
                                     <select name="ebike_type_id" class="span11">
                                         <option value="">请选择车型</option>
