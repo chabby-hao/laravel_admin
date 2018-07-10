@@ -259,4 +259,54 @@ class ToolController extends BaseController
         ]);
     }
 
+    public function deviceToChannel(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $input = $this->checkParams(['channel_id','brand_id','ebike_type_id', 'mode','way'], $request->input(),['ebike_type_id']);
+
+            if ($input['mode'] == 0) {
+                //单个udid
+                $udid = $this->getUdid($request->input('id'));
+                if (!$udid) {
+                    return $this->outPutError('设备码有误');
+                }
+                $imei = DeviceLogic::getImei($udid);
+                $imeis = [$imei];
+            } else {
+                //批量
+                $inputFilename = 'myfile';
+                if (!$request->hasFile($inputFilename)) {
+                    return $this->outPutError('请上传文件');
+                }
+                $data = Helper::readExcelFromRequest($request, $inputFilename);
+
+                if (!$data) {
+                    return $this->outPutError('请确认文件格式正确');
+                }
+
+                //取出第一行
+                array_shift($data);
+                $imeis = Helper::transToOneDimensionalArray($data, 0);
+
+                foreach ($imeis as $imei) {
+                    if (DeviceLogic::getUdid($imei)) {
+                        return $this->outPutError('imei不正确:' . $imei);
+                    }
+                }
+            }
+
+            foreach ($imeis as $imei){
+                DeviceLogic::deviceToChannel($imei, $input['channel_id'], $input['brand_id'], $input['ebike_type_id']);
+                if(!$input['way']){
+                    DeviceLogic::resetDevice($imei);
+                }
+            }
+
+            return $this->outputWithMsg('操作成功');
+        }
+
+
+        return view('admin.tool.devicetochannel');
+    }
+
 }

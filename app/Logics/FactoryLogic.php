@@ -59,9 +59,11 @@ class FactoryLogic extends BaseLogic
             }
         }
 
+        $order = BiOrder::find($shipOrder->order_id);
+
         foreach ($insert as $row){
             $imei = $row['imei'];
-            DeviceLogic::deviceToChannel($imei, $shipOrder->brand_id);
+            DeviceLogic::deviceToChannel($imei, $order->channel_id, $shipOrder->brand_id, $shipOrder->ebike_type_id);
             DeviceLogic::resetDevice($imei);
         }
 
@@ -73,7 +75,6 @@ class FactoryLogic extends BaseLogic
             $shipOrder->actuall_date = Carbon::now()->format('Y-m-d');
             $shipOrder->save();
 
-            $order = BiOrder::find($shipOrder->order_id);
             $count = count($imeis);
             $order->actuall_quantity += $count;//实际订单出货量
             if($count >= $order->ship_quantity){

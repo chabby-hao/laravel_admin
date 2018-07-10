@@ -1227,44 +1227,54 @@ class DeviceLogic extends BaseLogic
     /**
      * 设备加入渠道
      */
-    public static function deviceToChannel($imei, $type)
+    public static function deviceToChannel($imei, $channelId, $type, $ebikeTypeId)
     {
         $udid = self::getUdid($imei);
         # 设置已绑定设备类型数据
-        TDevice::whereImei($imei)->update(['type'=>$type]);
+        TDevice::whereImei($imei)->update(['type' => $type]);
 
 //        # 设置原始库设备类型数据
-        TDeviceCode::whereImei($imei)->update(['type'=>$type]);
+        $tDeviceCode = TDeviceCode::whereImei($imei)->first();
+        if(!$tDeviceCode){
+            return false;
+        }
+        $tDeviceCode->type = $type;
+        $tDeviceCode->channel_id = $channelId;
+        $tDeviceCode->brand_id = $type;
+        $tDeviceCode->ebike_type_id = $ebikeTypeId;
+        $tDeviceCode->save();
+        //TDeviceCode::whereImei($imei)->update(['type'=>$type]);
 
 //        # 设置用户库设备类型数据
         DB::connection('care_user')->update("update t_device set ptype=$type where udid='$udid'");
 
 //        # 判断设备是否已归类
         $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
-        $deviceCode = TDeviceCode::whereImei($imei)->first();
 
-        if(!$deviceCode){
-            return false;
+        $evmodel = 0;
+        if($ebikeTypeId){
+            $ebikeType = BiEbikeType::find($ebikeTypeId);
+            if(!$ebikeType){
+                return false;
+            }
+            $evmodel = $ebikeType->ev_model;
         }
 
-        $ebikeType = BiEbikeType::find($deviceCode->ebike_type_id);
-        if(!$ebikeType){
-            return false;
-        }
 
 
         TDeviceCategory::updateOrCreate([
             'udid'=>$udid,
         ],[
             'category'=>$type,
-            'channel'=>$model->channel,
-            'brand'=>$model->brand,
-            'model'=>$model->brand . $ebikeType->ev_model,
+            'channel'=>$model ? $model->channel : 0,
+            'brand'=>$model ? $model->brand: 0,
+            'model'=>$evmodel ? $model->brand . $evmodel : 0,
         ]);
 
         //将设备踢下线
         $cmd = CommandLogic::CMD_KICK_DEVICE_OFFLINE;
         CommandLogic::sendCmd($imei, $cmd);
+        return true;
     }
 
     /**

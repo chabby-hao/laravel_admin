@@ -87,6 +87,7 @@ Route::any('/tool/romUpdate','Admin\ToolController@romUpdate');
 Route::any('/tool/getFileUrl','Admin\ToolController@getFileUrl');
 Route::any('/tool/exportByImsi','Admin\ToolController@exportByImsi');
 Route::any('/tool/imsiRepeat','Admin\ToolController@imsiRepeat');
+Route::any('/tool/deviceToChannel','Admin\ToolController@deviceToChannel');
 
 
 Route::get('/breakRule/list','Admin\BreakRuleController@list');

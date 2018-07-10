@@ -55,7 +55,7 @@
                             <div id="channel" class="control-group hide">
                                 <label class="control-label"><span class="text-error">*</span>渠道类型 :</label>
                                 <div class="controls">
-                                    <select name="channel_id" type="text" class="span11">
+                                    <select name="channel_id" class="span11">
                                         <option value="">请选择</option>
                                         <?php foreach (\App\Models\BiChannel::getChannelMap() as $key => $val){ ?>
                                         <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>

@@ -186,6 +186,9 @@
                 @if(Auth::user()->can('tool/imsiRepeat'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@imsiRepeat')}}">Imsi重号查询</a></li>
                 @endif
+                @if(Auth::user()->can('tool/deviceToChannel'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@deviceToChannel')}}">设备加入渠道</a></li>
+                @endif
             </ul>
         </li>
 
