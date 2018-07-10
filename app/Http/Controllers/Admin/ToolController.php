@@ -289,7 +289,7 @@ class ToolController extends BaseController
                 $imeis = Helper::transToOneDimensionalArray($data, 0);
 
                 foreach ($imeis as $imei) {
-                    if (DeviceLogic::getUdid($imei)) {
+                    if (!DeviceLogic::getUdid($imei)) {
                         return $this->outPutError('imei不正确:' . $imei);
                     }
                 }

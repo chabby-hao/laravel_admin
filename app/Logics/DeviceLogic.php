@@ -1306,6 +1306,9 @@ class DeviceLogic extends BaseLogic
         //3、操作数据库
         //记录设备重置的日志
 
+        //清除绑定用户
+        TUserDevice::whereUdid($udid)->delete();
+
         //重置Mysql数据库激活时间数据
         TDeviceCode::whereImei($imei)->update(['active'=>0]);
 
