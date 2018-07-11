@@ -417,15 +417,17 @@ class DeviceController extends BaseController
 
         $attach = \Request::input('attach');
         if (is_numeric($attach)) {
-            if ($attach) {
+            if ($attach == DeviceObject::ONLINE) {
                 $cacheKeys = [
-                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_RIDING,
-                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_PARK,
+                    //DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_RIDING,
+                    //DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_PARK,
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_ONLINE,
                 ];
-            } else {
+            } elseif($attach == DeviceObject::OFFLINE) {
                 $cacheKeys = [
-                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
-                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
+                    //DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
+                    //DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
+                    DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE,
                 ];
             }
             $ids = [];
@@ -433,6 +435,15 @@ class DeviceController extends BaseController
                 $ids = array_merge($ids, Cache::store('file')->get($cacheKey) ?: []);
             }
             $model->whereIn('sid', $ids);
+        }
+
+        $active = \Request::input('active');
+        if (is_numeric($active)) {
+            if ($active == DeviceObject::ACTIVE) {
+                $model->where('active','>',0);
+            } elseif($active == DeviceObject::NOT_ACTIVE) {
+                $model->where('active','<=', 0);
+            }
         }
 
         if ($id = \Request::input('id')) {

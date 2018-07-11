@@ -42,10 +42,17 @@
                                                 请选择车型
                                             </option>
                                         </select>
+
                                         <select class="w1 margintop" name="attach">
                                             <option value="">请选择在线状态</option>
                                             @foreach(\App\Objects\DeviceObject::getOnlineOfflineTypeMap() as $k => $v)
                                                 <option @if(is_numeric(Request::input('attach')) && Request::input('attach') == $k) selected @endif value="{{$k}}">{{$v}}</option>
+                                            @endforeach
+                                        </select>
+                                        <select class="w1 margintop" name="active">
+                                            <option value="">请选择是否激活</option>
+                                            @foreach(\App\Objects\DeviceObject::getActiveTypeMap() as $k => $v)
+                                                <option @if(is_numeric(Request::input('active')) && Request::input('active') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
                                     @endif

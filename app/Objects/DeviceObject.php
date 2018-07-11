@@ -39,6 +39,9 @@ class DeviceObject extends BaseObject
     const ONLINE = 1;//在线
     const OFFLINE = 0;//离线
 
+    const ACTIVE = 1;//激活
+    const NOT_ACTIVE = 0;//未激活
+
     public static function getOnlineOfflineTypeMap($type = null)
     {
         $map = [
@@ -46,6 +49,16 @@ class DeviceObject extends BaseObject
             self::OFFLINE => '离线',
         ];
         return $type === null ? $map : $map[$type];
+    }
+
+    public static function getActiveTypeMap($type = null)
+    {
+        $map = [
+            self::NOT_ACTIVE=>'未激活',
+            self::ACTIVE=>'已激活',
+        ];
+        return $type === null ? $map : $map[$type];
+
     }
 
 
