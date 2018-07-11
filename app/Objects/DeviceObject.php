@@ -54,8 +54,8 @@ class DeviceObject extends BaseObject
     public static function getActiveTypeMap($type = null)
     {
         $map = [
+            self::ACTIVE=>'激活',
             self::NOT_ACTIVE=>'未激活',
-            self::ACTIVE=>'已激活',
         ];
         return $type === null ? $map : $map[$type];
 
