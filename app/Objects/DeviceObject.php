@@ -21,10 +21,12 @@ class DeviceObject extends BaseObject
     const CACHE_OBJ_PRE = 'dev:';
     //const CACHE_LIST_ALL = 'all';
 
-    const CACHE_LIST_RIDING = 'riding';
-    const CACHE_LIST_PARK = 'park';
-    const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';
-    const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';
+    const CACHE_LIST_RIDING = 'riding';//使用中
+    const CACHE_LIST_PARK = 'park';//使用中
+    const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';//使用中
+    const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';//使用中
+    const CACHE_LIST_ONLINE = 'online';
+    const CACHE_LIST_OFFLINE = 'offline';
 
     const CACHE_ONLINED = 'onlined';//有过数据的
 

@@ -88,9 +88,11 @@ class DeviceCache extends BaseCommand
         $park = [];
         $offlineLess48 = [];
         $offlineMore48 = [];
+        $online = [];
+        $offline = [];
         //$all = [];
         $beginTime = Carbon::now()->startOfDay()->getTimestamp();
-        $this->batchSearch($model, function ($deviceCode) use ($beginTime, &$riding, &$park, &$offlineMore48, &$offlineLess48) {
+        $this->batchSearch($model, function ($deviceCode) use ($beginTime, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$online, &$offline) {
 
             static $t = 0;
             /** @var TDeviceCode $deviceCode */
@@ -111,21 +113,31 @@ class DeviceCache extends BaseCommand
 
             echo "processing imei:$imei,udid:$udid...\n";
             echo ++$t . ".......\n";
-            if (DeviceLogic::isOnline($imei)) {
-                if (DeviceLogic::isTurnOn($imei)) {
-                    //骑行
-                    $riding[] = $sid;
+            if($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_INUSE){
+                if (DeviceLogic::isOnline($imei)) {
+                    if (DeviceLogic::isTurnOn($imei)) {
+                        //骑行
+                        $riding[] = $sid;
+                    } else {
+                        //停车
+                        $park[] = $sid;
+                    }
+                    $online[] = $sid;
                 } else {
-                    //停车
-                    $park[] = $sid;
+                    if (DeviceLogic::isContanct($imei, 48 * 3600)) {
+                        //离线小于48小时
+                        $offlineLess48[] = $sid;
+                    } else {
+                        //离线大于48小时
+                        $offlineMore48[] = $sid;
+                    }
+                    $offline[] = $sid;
                 }
-            } else {
-                if (DeviceLogic::isContanct($imei, 48 * 3600)) {
-                    //离线小于48小时
-                    $offlineLess48[] = $sid;
-                } else {
-                    //离线大于48小时
-                    $offlineMore48[] = $sid;
+            }else{
+                if (DeviceLogic::isOnline($imei)) {
+                    $online[] = $sid;
+                }else{
+                    $offline[] = $sid;
                 }
             }
             //$all[] = $udid;
@@ -141,6 +153,8 @@ class DeviceCache extends BaseCommand
         Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48, $offlineMore48, $carbon);
         Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_OFFLINE_MORE_48, count($offlineMore48), $carbon);
 
+        Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_ONLINE, $online, $carbon);
+        Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_OFFLINE, $offline, $carbon);
         //Cache::store('file')->put(DeviceObject::CACHE_LIST_PRE . DeviceObject::CACHE_LIST_ALL, $all, $carbon);
         //Cache::store('file')->put(DeviceObject::CACHE_LIST_COUNT_PRE . DeviceObject::CACHE_LIST_ALL, count($all), $carbon);
 
