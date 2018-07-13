@@ -40,8 +40,8 @@
                             <div class="control-group">
                                 <div class="inline-block w10">
                                     <input class="w15 margintop" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
-                                    <input class="w1 margintop" type="text" name="rom" value="{{Request::input('rom')}}" placeholder="MTK版本号(rom版本号)">
-                                    <input class="w1 margintop" type="text" name="mcu" value="{{Request::input('mcu')}}" placeholder="MCU版本号">
+                                    <input class="w15 margintop" type="text" name="rom" value="{{Request::input('rom')}}" placeholder="MTK版本号(rom版本号)">
+                                    <input class="w15 margintop" type="text" name="mcu" value="{{Request::input('mcu')}}" placeholder="MCU版本号">
                                     <select class="w1 margintop" name="device_type">
                                         <option value="">请选择型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
