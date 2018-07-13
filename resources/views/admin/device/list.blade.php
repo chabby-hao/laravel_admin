@@ -87,11 +87,8 @@
                             </div>
 
                         </form>
-                    </div>
 
-                    {{--设备状态tab--}}
-
-                    <div class="widget-content">
+                        {{--设备状态tab--}}
                         <div>
                             @foreach($deviceCycleMap as $key => $row)
                                 <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(  Request::input('status') == $key && ( is_numeric(Request::input('status')) || !Request::has('status') )) btn-success @endif">{{$row}}</a>
@@ -102,7 +99,9 @@
                                 <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
                             @endforeach
                         </div>
+
                     </div>
+
                 </div>
 
                 <div class="widget-box">
