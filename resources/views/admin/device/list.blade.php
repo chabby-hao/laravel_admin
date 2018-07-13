@@ -247,7 +247,10 @@
             });
 
             $(".reset").click(function(){
-                searchForm.find("input[type='text'], select").val("").attr({value:''});
+                searchForm.find("input[type='text']").val("").attr({value:''});
+                searchForm.find("select").each(function(){
+                    $(this).find("option").eq(0).prop("selected",true);
+                });
             })
 
         })
