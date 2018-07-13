@@ -239,8 +239,9 @@
 
             var searchForm = $(".search_form");
 
-            $(".status_tab").click(function(){
+            $(".status_tab").click(function () {
                 var query = searchForm.serialize();
+                query = query.replace(/status=\s+&/, '');
                 var status = $(this).attr('data-key');
                 location.href = '{{URL::action('Admin\DeviceController@list')}}' + '?status=' + status + '&' + query;
             });
