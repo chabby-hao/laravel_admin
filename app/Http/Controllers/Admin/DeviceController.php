@@ -461,11 +461,11 @@ class DeviceController extends BaseController
             }
         }
 
-        if ($rom = \Request::input('rom')) {
+        if ($rom = \Request::input('rom' || is_numeric(\Request::input('rom')))) {
             $model->whereRom($rom);
         }
 
-        if ($mcu = \Request::input('mcu')) {
+        if ($mcu = \Request::input('mcu') || is_numeric(\Request::input('mcu'))) {
             $model->whereMcu($mcu);
         }
 
@@ -811,11 +811,10 @@ class DeviceController extends BaseController
 
     public function romStatList()
     {
-
         $model = TDeviceCode::getDeviceModel();
         $this->listSearch($model);
 
-        $datas = $model->groupBy(['rom', 'mcu'])->selectRaw("count(sid) as total,rom,mcu")->orderByDesc('total')->get();
+        $datas = $model->groupBy(['rom', 'mcu'])->whereNotNull('rom')->whereNotNull('mcu')->selectRaw("count(sid) as total,rom,mcu")->orderByDesc('total')->get();
         return view('admin.device.romstatelist', [
             'datas' => $datas,
         ]);

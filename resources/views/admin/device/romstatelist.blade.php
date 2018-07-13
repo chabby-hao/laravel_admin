@@ -89,7 +89,7 @@
                                     <td>{{++$t}}</td>
                                     <td>{{$data->rom}}</td>
                                     <td>{{$data->mcu}}</td>
-                                    <td><a href="{{URL::action('Admin\DeviceController@list')}}?rom={{$data->rom}}&mcu={{$data->mcu}}">{{$data->total}}</a></td>
+                                    <td><a href="{{URL::action('Admin\DeviceController@list',['rom'=>$data->rom,'mcu'=>$data->mcu])}}">{{$data->total}}</a></td>
                                 </tr>
                             @endforeach
                             </tbody>
