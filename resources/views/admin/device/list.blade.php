@@ -18,7 +18,7 @@
                         @endif
                     </div>
                     <div class="widget-content">
-                        <form action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search">
+                        <form action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search search_form">
                             @if(Request::input('status'))
                                 <input type="hidden" name="status" value="{{Request::input('status')}}">
                             @endif
@@ -92,12 +92,12 @@
                         {{--设备状态tab--}}
                         <div>
                             @foreach($deviceCycleMap as $key => $row)
-                                <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(  Request::input('status') == $key && ( is_numeric(Request::input('status')) || !Request::has('status') )) btn-success @endif">{{$row}}</a>
+                                <button class="status_tab" href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(  Request::input('status') == $key && ( is_numeric(Request::input('status')) || !Request::has('status') )) btn-success @endif">{{$row}}</button>
                             @endforeach
                         </div>
                         <div>
                             @foreach($deviceStatusMap as $key => $row)
-                                <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
+                                <button class="status_tab" href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</button>
                             @endforeach
                         </div>
 
@@ -235,6 +235,14 @@
             //省市筛选
             $("select[name='province']").on('change', function () {
                 getCity();
+            });
+
+            var searchForm = $(".search_form");
+
+            $(".status_tab").click(function(){
+                var query = searchForm.serialize();
+                console.log(query);
+
             });
 
             $(".reset").click(function(){
