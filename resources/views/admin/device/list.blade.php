@@ -249,7 +249,7 @@
             $(".reset").click(function(){
                 searchForm.find("input[type='text']").val("").attr({value:''});
                 searchForm.find("select").each(function(){
-                    $(this).find("option").eq(0).prop("selected",true);
+                    $(this).find("option").removeAttr('selected');
                 });
             })
 
