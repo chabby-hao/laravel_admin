@@ -241,7 +241,7 @@
 
             $(".status_tab").click(function () {
                 var query = searchForm.serialize();
-                query = query.replace(/status=.*&/, '');
+                query = query.replace(/status=\w*&/, '');
                 var status = $(this).attr('data-key');
                 location.href = '{{URL::action('Admin\DeviceController@list')}}' + '?status=' + status + '&' + query;
             });
