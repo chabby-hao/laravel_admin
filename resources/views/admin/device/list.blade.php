@@ -247,11 +247,7 @@
             });
 
             $(".reset").click(function(){
-                console.log(1);
-                $("#id").val('222');
-                $("#id").attr({value:'222'});
-                $("select[name='channel_id']").val('');
-                console.log($("#id").val());
+                searchForm.find("input[type='text'], select").val("").attr({value:''});
             })
 
         })
