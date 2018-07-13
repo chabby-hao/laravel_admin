@@ -462,10 +462,12 @@ class DeviceController extends BaseController
         }
 
         if ($rom = \Request::input('rom' || is_numeric(\Request::input('rom')))) {
+            var_dump($rom);
             $model->whereRom($rom);
         }
 
         if ($mcu = \Request::input('mcu') || is_numeric(\Request::input('mcu'))) {
+            var_dump($mcu);
             $model->whereMcu($mcu);
         }
 
