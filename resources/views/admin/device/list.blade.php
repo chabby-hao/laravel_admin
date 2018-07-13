@@ -82,6 +82,7 @@
 
                                     <input type="submit" class="btn btn-success margintop search" value="查询">
                                     <input type="button" class="btn btn-info margintop export" value="导出">
+                                    <input type="reset" class="btn btn-warning margintop" value="重置">
                                 </div>
 
                             </div>
@@ -96,7 +97,7 @@
                         </div>
                         <div>
                             @foreach($deviceStatusMap as $key => $row)
-                                <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
+                                <a href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</a>
                             @endforeach
                         </div>
 
@@ -107,6 +108,7 @@
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>列表</h5>
+                        {{$page_nav}}
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered data-table">
@@ -155,7 +157,7 @@
                         </table>
                     </div>
                     <div class="pager">
-                        <?php echo $page_nav ?>
+                        {{$page_nav}}
                     </div>
                 </div>
             </div>

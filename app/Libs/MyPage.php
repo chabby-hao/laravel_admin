@@ -122,8 +122,8 @@ class MyPage {
         }
         $str.=$this->myde_next();
         $str.=$this->myde_last();
-        $str.="<p class='pageRemark'>共<b>" . $this->myde_page_count .
-        "</b>页<b>" . $this->myde_total . "</b>条数据</p>";
+        $str.="<span class='pageRemark'>共<b>" . $this->myde_page_count .
+        "</b>页<b>" . $this->myde_total . "</b>条数据</span>";
         $str.="</div>";
         $str = '<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="'.$id.'">'.$str.'</div>';
         $str = '<div class="pageNav fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">'.$str.'</div>';

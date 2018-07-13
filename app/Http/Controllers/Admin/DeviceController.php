@@ -371,7 +371,7 @@ class DeviceController extends BaseController
 
     private function getCountMap($map)
     {
-        $keyPre = $this->getCustomerKeyPre();
+        /*$keyPre = $this->getCustomerKeyPre();
         $where = $this->getWhere();
         $cacheTime = Carbon::now()->addMinutes(15);
         $typeId = Auth::user()->type_id;
@@ -385,6 +385,9 @@ class DeviceController extends BaseController
             });
 
             $map[$k] = $row . "($count)";
+        }*/
+        foreach ($map as $k => $row) {
+            $map[$k] = $row;
         }
         return $map;
     }
@@ -510,10 +513,12 @@ class DeviceController extends BaseController
         $deviceStatusMap = DeviceObject::getDeviceStatusCacheMap();
         $deviceCycleMap = TDeviceCode::getCycleMap();
         foreach ($deviceStatusMap as $k => $row) {
-            $deviceStatusMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+            //$deviceStatusMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+            $deviceStatusMap[$k] = $row;
         }
         foreach ($deviceCycleMap as $k => $row) {
-            $deviceCycleMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+            //$deviceCycleMap[$k] = $row . '(' . Cache::store('file')->get(DeviceObject::CACHE_LIST_COUNT_PRE . $k) . ')';
+            $deviceCycleMap[$k] = $row;
         }
         return [$deviceStatusMap, $deviceCycleMap];
     }
