@@ -462,6 +462,7 @@ class DeviceController extends BaseController
         }
 
         if ($rom = \Request::input('rom') || is_numeric(\Request::input('rom'))) {
+            var_dump($rom);
             $model->whereRom($rom);
         }
 
