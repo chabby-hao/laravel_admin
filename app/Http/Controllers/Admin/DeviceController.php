@@ -100,7 +100,8 @@ class DeviceController extends BaseController
             //补充信息
             $data['imsi'] = DeviceLogic::getImsi($data['imei']);
             $data['romVersion'] = DeviceLogic::getRomVersionByUdid($udid);
-            $data['ver'] = DeviceLogic::getVerByUdid($udid);
+            //$data['ver'] = DeviceLogic::getVerByUdid($udid);
+            $data['mcu'] = DeviceLogic::getMcuByUdid($udid);
 
 
             $shipOrder = DeliveryLogic::getOrderShipInfo($data['imei']);

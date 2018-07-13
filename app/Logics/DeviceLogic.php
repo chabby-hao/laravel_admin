@@ -1025,6 +1025,13 @@ class DeviceLogic extends BaseLogic
         });
     }
 
+    public static function getMcuByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function($deviceCode){
+            return $deviceCode->mcu;
+        });
+    }
+
     public static function getAdminInfoByUdid($udid)
     {
         $row = TUserDevice::whereUdid($udid)->whereOwner(0)->first();

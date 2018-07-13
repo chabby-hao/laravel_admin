@@ -57,7 +57,7 @@
                                 <th>IMEI</th>
                                 <th>IMSI</th>
                                 <th>固件版本</th>
-                                <th>协议版本</th>
+                                <th>MCU版本</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -67,7 +67,7 @@
                                 <td><%imei%></td>
                                 <td><%imsi%></td>
                                 <td><%romVersion%></td>
-                                <td><%ver%></td>
+                                <td><%mcu%></td>
                             </tr>
                             </tbody>
                         </table>
