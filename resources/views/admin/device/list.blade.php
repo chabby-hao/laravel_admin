@@ -24,7 +24,7 @@
                             @endif
                             <div class="control-group">
                                 <div class="inline-block w10">
-                                    <input class="w15 margintop" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
+                                    <input class="w15 margintop" type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
                                     <input class="w1 margintop" type="text" name="rom" value="{{Request::input('rom')}}" placeholder="MTK版本号(rom版本号)">
                                     <input class="w1 margintop" type="text" name="mcu" value="{{Request::input('mcu')}}" placeholder="MCU版本号">
                                     <select class="w1 margintop" name="attach">
@@ -249,6 +249,7 @@
             $(".reset").click(function(){
                 console.log(1);
                 $("#id").val('222');
+                $("#id").attr({value:'222'});
                 $("select[name='channel_id']").val('');
                 console.log($("#id").val());
             })
