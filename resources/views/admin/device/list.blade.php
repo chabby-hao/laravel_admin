@@ -241,12 +241,13 @@
 
             $(".status_tab").click(function(){
                 var query = searchForm.serialize();
+                var status = $(this).attr('data-key');
                 console.log(query);
-
+                location.href({{URL::action('Admin\DeviceController@list')}} + '?' + query + '&status=' + status)
             });
 
             $(".reset").click(function(){
-                $(this).parents("form").reset();
+                searchForm.find("input select").val('');
             })
 
         })
