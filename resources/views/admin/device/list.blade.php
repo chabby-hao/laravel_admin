@@ -242,7 +242,7 @@
             $(".status_tab").click(function(){
                 var query = searchForm.serialize();
                 var status = $(this).attr('data-key');
-                location.href('{{URL::action('Admin\DeviceController@list')}}' + '?status=' + status + '&' + query)
+                location.href = '{{URL::action('Admin\DeviceController@list')}}' + '?status=' + status + '&' + query;
             });
 
             $(".reset").click(function(){
