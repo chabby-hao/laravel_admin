@@ -108,7 +108,7 @@
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>列表</h5>
-                        {{$page_nav}}
+                        {!! $page_nav !!}
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered data-table">
@@ -157,7 +157,7 @@
                         </table>
                     </div>
                     <div class="pager">
-                        {{$page_nav}}
+                        {!! $page_nav !!}
                     </div>
                 </div>
             </div>
