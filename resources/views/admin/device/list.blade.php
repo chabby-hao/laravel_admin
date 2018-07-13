@@ -92,12 +92,12 @@
                         {{--设备状态tab--}}
                         <div>
                             @foreach($deviceCycleMap as $key => $row)
-                                <button class="status_tab" href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright @if(  Request::input('status') == $key && ( is_numeric(Request::input('status')) || !Request::has('status') )) btn-success @endif">{{$row}}</button>
+                                <button data-key="{{$key}}" class="btn marginright status_tab @if(  Request::input('status') == $key && ( is_numeric(Request::input('status')) || !Request::has('status') )) btn-success @endif">{{$row}}</button>
                             @endforeach
                         </div>
                         <div>
                             @foreach($deviceStatusMap as $key => $row)
-                                <button class="status_tab" href="{{URL::action('Admin\DeviceController@list', ['status'=>$key])}}" data-key="{{$key}}" class="btn marginright margintop @if(Request::input('status') === $key) btn-success @endif">{{$row}}</button>
+                                <button data-key="{{$key}}" class="btn marginright margintop status_tab @if(Request::input('status') === $key) btn-success @endif">{{$row}}</button>
                             @endforeach
                         </div>
 
