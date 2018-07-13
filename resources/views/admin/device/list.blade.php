@@ -247,7 +247,7 @@
             });
 
             $(".reset").click(function(){
-                searchForm.find("input,select").val('');
+                $("select").val('');
             })
 
         })
