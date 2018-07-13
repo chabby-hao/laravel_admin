@@ -243,7 +243,7 @@
                 var query = searchForm.serialize();
                 var status = $(this).attr('data-key');
                 console.log(query);
-                location.href({{URL::action('Admin\DeviceController@list')}} + '?' + query + '&status=' + status)
+                location.href('{{URL::action('Admin\DeviceController@list')}}' + '?' + query + '&status=' + status)
             });
 
             $(".reset").click(function(){
