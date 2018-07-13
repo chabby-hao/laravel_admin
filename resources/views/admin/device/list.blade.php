@@ -247,8 +247,10 @@
             });
 
             $(".reset").click(function(){
+                console.log(1);
                 $("#id").val('');
                 $("select[name='channel_id']").val('');
+                console.log($("#id").val());
             })
 
         })
