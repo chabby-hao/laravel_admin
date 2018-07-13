@@ -461,6 +461,13 @@ class DeviceController extends BaseController
             }
         }
 
+        if ($rom = \Request::input('rom')) {
+            $model->whereRom($rom);
+        }
+
+        if ($mcu = \Request::input('mcu')) {
+            $model->whereMcu($mcu);
+        }
 
         if ($deviceType = \Request::input('device_type')) {
             $model->whereDeviceType($deviceType);

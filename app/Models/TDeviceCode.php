@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Cache;
  * @property int $first
  * @property int $ver
  * @property int $rom
+ * @property int $mcu
  * @property int $model 0=>未知设备类型，1=eb001,2=eb001b,3=eb001c,4=eb001a,5=eb001d,7=B640,91=童鞋，92=手环，93=老人拐杖，99=测试
  * @property \Carbon\Carbon|null $product_date 生产时间
  * @property int $product_type 生产类型 1量产 2试产
@@ -34,6 +35,7 @@ use Illuminate\Support\Facades\Cache;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereQr($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereRegister($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereRom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereMcu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereSid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereStorageTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereType($value)
