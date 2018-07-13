@@ -2407,3 +2407,10 @@ form {
 .controls input[type="radio"],.controls input[type="checkbox"] {
     margin: 0;
 }
+
+.top-pager {
+    float: right;
+    margin-right: 5px;
+    display: inline-block;
+    height: 36px;
+}
