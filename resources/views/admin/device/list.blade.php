@@ -248,7 +248,7 @@
 
             $(".reset").click(function(){
                 console.log(1);
-                $("#id").val('');
+                $("#id").val('222');
                 $("select[name='channel_id']").val('');
                 console.log($("#id").val());
             })
