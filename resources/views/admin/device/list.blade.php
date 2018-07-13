@@ -82,7 +82,7 @@
 
                                     <input type="submit" class="btn btn-success margintop search" value="查询">
                                     <input type="button" class="btn btn-info margintop export" value="导出">
-                                    <input type="reset" class="btn btn-warning margintop" value="重置">
+                                    <input type="reset" class="btn btn-warning margintop reset" value="重置">
                                 </div>
 
                             </div>
@@ -237,6 +237,9 @@
                 getCity();
             });
 
+            $(".reset").click(function(){
+                $(this).parents("form").reset();
+            })
 
         })
 
