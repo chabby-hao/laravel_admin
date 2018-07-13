@@ -108,7 +108,7 @@
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
                         <h5>列表</h5>
-                        {!! $page_nav !!}
+                        <span class="pull-right">{!! $page_nav !!}</span>
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered data-table">
