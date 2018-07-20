@@ -64,8 +64,8 @@ class DeviceObject extends BaseObject
 
     const LOCK_TYPE_ANQI = 'lock';//锁车
     const UNLOCK_TYPE_ANQI = 'unlock';//解锁
-    const LOCK_TYPE_SWITCH_OFF = 'd_lock';//锁车开电门
-    const UNLOCK_TYPE_SIWTCH_ON = 'd_unlock';//锁车关电门
+    const LOCK_TYPE_SWITCH_OFF = 'd_lock';//锁车关电门
+    const UNLOCK_TYPE_SIWTCH_ON = 'd_unlock';//解锁开电门
     const LOCK_TYPE_BATTERY = 'p_lock';//电池锁
     const UNLOCK_TYPE_BATTERY = 'p_unlock';//电池解锁
     const LOCK_TYPE_SHANQI = 'sq_lock';//闪骑锁车
@@ -80,8 +80,8 @@ class DeviceObject extends BaseObject
         $map = [
             self::LOCK_TYPE_ANQI => '锁车',
             self::UNLOCK_TYPE_ANQI => '解锁',
-            self::LOCK_TYPE_SWITCH_OFF => '锁车开电门',
-            self::UNLOCK_TYPE_SIWTCH_ON => '锁车关电门',
+            self::LOCK_TYPE_SWITCH_OFF => '锁车关电门',
+            self::UNLOCK_TYPE_SIWTCH_ON => '解锁开电门',
             self::LOCK_TYPE_BATTERY => '电池锁',
             self::UNLOCK_TYPE_BATTERY => '电池解锁',
             self::LOCK_TYPE_SHANQI => '闪骑锁车',
