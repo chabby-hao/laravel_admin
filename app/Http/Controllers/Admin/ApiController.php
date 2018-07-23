@@ -29,11 +29,13 @@ class ApiController extends BaseController
     public function channelKeyAdd(Request $request)
     {
 
-        $data = $this->checkParams(['channel_id', 'channel_name'], $request->input());
+        if($request->isXmlHttpRequest()){
+            $data = $this->checkParams(['channel_id', 'channel_name'], $request->input());
 
-        $model = BiChannelSecret::create($data);
-        if($model){
-            return $this->outputRedirectWithMsg(URL::action('Admin\ApiController@channelKeyList'), '添加成功');
+            $model = BiChannelSecret::create($data);
+            if($model){
+                return $this->outputRedirectWithMsg(URL::action('Admin\ApiController@channelKeyList'), '添加成功');
+            }
         }
 
         return view('admin.api.channelkeyadd');
