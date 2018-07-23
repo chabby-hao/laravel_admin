@@ -36,10 +36,13 @@ class ApiController extends BaseController
 
             $data['secret'] = Helper::getRandStr(24);
 
-            $model = BiChannelSecret::create($data);
-            if($model){
-                return $this->outputRedirectWithMsg(URL::action('Admin\ApiController@channelKeyList'), '添加成功');
+            try{
+                BiChannelSecret::create($data);
+            }catch (\Exception $e){
+                return $this->outputErrorWithDie($e->getMessage());
             }
+
+            return $this->outputRedirectWithMsg(URL::action('Admin\ApiController@channelKeyList'), '添加成功');
         }
 
         return view('admin.api.channelkeyadd');
