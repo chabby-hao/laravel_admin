@@ -11,7 +11,7 @@
                         <form id="myform" enctype="multipart/form-data" method="post" class="form-horizontal">
 
                             <div class="control-group">
-                                <label class="control-label">cid(channel) :</label>
+                                <label class="control-label">cid:</label>
                                 <div class="controls">
                                     <input name="channel_name" value="" type="text" class="span11"/>
                                     <span class="help-block">该参数为对外定义渠道名，例：dewin</span>

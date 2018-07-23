@@ -18,7 +18,7 @@
                             <thead>
                             <tr>
                                 <th>渠道</th>
-                                <th>cid(channel)</th>
+                                <th>cid</th>
                                 <th>secret</th>
                                 <th>创建时间</th>
                             </tr>
