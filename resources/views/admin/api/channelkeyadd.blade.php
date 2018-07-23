@@ -8,7 +8,7 @@
                         <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
                     </div>
                     <div class="widget-content">
-                        <form id="myform" enctype="multipart/form-data" method="post" class="form-horizontal">
+                        <form id="myform" method="post" class="form-horizontal">
 
                             <div class="control-group">
                                 <label class="control-label">cid:</label>
