@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 23 May 2018 17:25:41 +0800.
+ * Date: Mon, 23 Jul 2018 16:51:04 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiDeliveryOrder
- *
+ * 
  * @property int $id
  * @property int $user_id
  * @property int $state
@@ -24,26 +24,11 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $delivery_quantity
  * @property int $brand_id
  * @property int $ebike_type_id
+ * @property int $battery_type
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ *
  * @package App\Models\Base
- * @property bool|null $battery_type 1、新普，2、艾比克，3中锂电池，4惠康锂电
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereActuallDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereBatteryType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereBrandId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereDeliveryDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereDeliveryQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereEbikeTypeId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereFactId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereOrderId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder wherePartNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereShipNo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiDeliveryOrder whereUserId($value)
- * @mixin \Eloquent
  */
 class BiDeliveryOrder extends Eloquent
 {
@@ -56,7 +41,8 @@ class BiDeliveryOrder extends Eloquent
 		'fact_id' => 'int',
 		'delivery_quantity' => 'int',
 		'brand_id' => 'int',
-		'ebike_type_id' => 'int'
+		'ebike_type_id' => 'int',
+		'battery_type' => 'int'
 	];
 
 	protected $dates = [

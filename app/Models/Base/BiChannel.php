@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 23 May 2018 17:25:41 +0800.
+ * Date: Mon, 23 Jul 2018 16:51:04 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,15 +11,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiChannel
- *
+ * 
  * @property int $id
  * @property string $channel_name
  * @property string $channel_remark
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiChannel whereChannelName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiChannel whereChannelRemark($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiChannel whereId($value)
- * @mixin \Eloquent
  */
 class BiChannel extends Eloquent
 {

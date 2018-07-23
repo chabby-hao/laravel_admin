@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 23 May 2018 17:25:41 +0800.
+ * Date: Mon, 23 Jul 2018 16:51:04 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,15 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class PermissionRole
- *
+ * 
  * @property int $permission_id
  * @property int $role_id
+ * 
  * @property \App\Models\Permission $permission
  * @property \App\Models\Role $role
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\PermissionRole wherePermissionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\PermissionRole whereRoleId($value)
- * @mixin \Eloquent
  */
 class PermissionRole extends Eloquent
 {
