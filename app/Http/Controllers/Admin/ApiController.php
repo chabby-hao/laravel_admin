@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 use App\Libs\MyPage;
 use App\Models\BiChannelSecret;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class ApiController extends BaseController
 {
