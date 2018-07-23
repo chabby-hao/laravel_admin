@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Libs\Helper;
 use App\Libs\MyPage;
 use App\Models\BiChannelSecret;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ class ApiController extends BaseController
 
         if($request->isXmlHttpRequest()){
             $data = $this->checkParams(['channel_id', 'channel_name'], $request->input());
+
+            $data['secret'] = Helper::getRandStr(24);
 
             $model = BiChannelSecret::create($data);
             if($model){
