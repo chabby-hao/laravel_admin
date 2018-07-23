@@ -192,6 +192,16 @@
             </ul>
         </li>
 
+            {{--工具管理--}}
+            <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>Api管理</span>
+                </a>
+                <ul>
+                    @if(Auth::user()->can('api/channelKeyList'))
+                        <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyList')}}">渠道秘钥列表</a></li>
+                    @endif
+                </ul>
+            </li>
+
 
     </ul>
 </div>
