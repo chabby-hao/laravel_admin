@@ -145,7 +145,7 @@ class Helper
             if (array_key_exists($filter, $arrData) && $arrData[$filter] !== '' && $arrData[$filter] !== null) {
                 $data[$filter] = $arrData[$filter];
             } elseif (in_array($filter, $allowEmptys)) {
-                $data[$filter] = null;
+                $data[$filter] = '';
             } else {
                 if ($returnKey) {
                     return $filter;
