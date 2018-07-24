@@ -21,9 +21,6 @@ namespace App\Models;
  */
 class BiChannelSecret extends \App\Models\Base\BiChannelSecret
 {
-	protected $hidden = [
-		'secret'
-	];
 
 	protected $fillable = [
 		'channel_id',
