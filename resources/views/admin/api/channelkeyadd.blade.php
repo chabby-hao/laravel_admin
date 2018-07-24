@@ -30,6 +30,14 @@
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label">推送url:</label>
+                                <div class="controls">
+                                    <input name="push_url" value="" type="text" class="span11"/>
+                                    <span class="help-block">提送url，例：http://example.com/api/notify</span>
+                                </div>
+                            </div>
+
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>

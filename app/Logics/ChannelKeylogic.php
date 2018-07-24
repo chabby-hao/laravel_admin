@@ -13,7 +13,7 @@ class ChannelKeylogic extends BaseLogic
 
     public static function refreshAllConfig()
     {
-        $datas = BiChannelSecret::select(['secret','channel_id','channel_name as channel'])->get()->toArray();
+        $datas = BiChannelSecret::select(['secret','channel_id','channel_name as channel','push_url'])->get()->toArray();
         $datas = Helper::transToKeyToArray($datas, 'channel_id');
         $datas = array_map(function($row){
             return json_encode($row);

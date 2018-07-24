@@ -33,7 +33,7 @@ class ApiController extends BaseController
     {
 
         if($request->isXmlHttpRequest()){
-            $data = $this->checkParams(['channel_id', 'channel_name'], $request->input());
+            $data = $this->checkParams(['channel_id', 'channel_name','push_url'], $request->input(), ['push_url']);
 
             $data['secret'] = Helper::getRandStr(24);
             try{
