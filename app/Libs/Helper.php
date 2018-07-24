@@ -207,13 +207,18 @@ class Helper
     /**
      * @param array $array
      * @param $key
+     * @param bool $removeKey
      * @return array
      */
-    public static function transToKeyToArray(array $array, $key)
+    public static function transToKeyToArray(array $array, $key, $removeKey = true)
     {
         $data = [];
         foreach ($array as $row){
-            $data[$row[$key]][] = $row;
+            $k = $row[$key];
+            if($removeKey){
+                unset($row[$key]);
+            }
+            $data[$k][] = $row;
         }
         return $data;
     }
