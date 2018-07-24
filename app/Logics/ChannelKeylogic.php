@@ -15,6 +15,9 @@ class ChannelKeylogic extends BaseLogic
     {
         $datas = BiChannelSecret::select(['secret','channel_id','channel_name'])->get()->toArray();
         $datas = Helper::transToKeyToArray($datas, 'channel_id');
+        $datas = array_map(function($row){
+            return json_encode($row);
+        }, $datas);
         return RedisLogic::hmSet(self::REDIS_HASH_KEY, $datas);
     }
 
