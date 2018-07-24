@@ -118,7 +118,7 @@ class CommandController extends Controller
     {
 
         if(env('APP_ENV') !== 'test'){
-            die('非法操作');
+            //die('非法操作');
         }
 
         if($data = Helper::arrayRequiredCheck(['imei','field','value'], $request->input())){
