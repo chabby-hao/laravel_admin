@@ -107,15 +107,15 @@ class DeviceCache extends BaseCommand
 
             //缓存设备,激活时间大于今天才缓存 ,这样会导致后台列表tab 和 list不一致
             //if($deviceCode->active > $beginTime){
-            DeviceLogic::simpleCreateDevice($imei);
+            $deviceObj = DeviceLogic::simpleCreateDevice($imei);
             //}
             DeviceLogic::clear();
 
             echo "processing imei:$imei,udid:$udid...\n";
             echo ++$t . ".......\n";
             if($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_INUSE){
-                if (DeviceLogic::isOnline($imei)) {
-                    if (DeviceLogic::isTurnOn($imei)) {
+                if ($deviceObj->getisOnline()) {
+                    if ($deviceObj->getTurnon()) {
                         //骑行
                         $riding[] = $sid;
                     } else {
@@ -124,7 +124,7 @@ class DeviceCache extends BaseCommand
                     }
                     $online[] = $sid;
                 } else {
-                    if (DeviceLogic::isContanct($imei, 48 * 3600)) {
+                    if ($deviceObj->getisContact()) {
                         //离线小于48小时
                         $offlineLess48[] = $sid;
                     } else {
@@ -134,7 +134,7 @@ class DeviceCache extends BaseCommand
                     $offline[] = $sid;
                 }
             }else{
-                if (DeviceLogic::isOnline($imei)) {
+                if ($deviceObj->getisOnline()) {
                     $online[] = $sid;
                 }else{
                     $offline[] = $sid;

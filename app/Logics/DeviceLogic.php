@@ -105,7 +105,7 @@ class DeviceLogic extends BaseLogic
         //$device->setDeliverdAt(static::getDeliverdAtByUdid($udid));
         //$device->setRegisterAt(static::getRegisterAtByUdid($udid));
         $device->setActiveAt(static::getActiveAtByUdid($udid));
-        $device->setIsOnline(static::isOnline($imei) ? 1 : 0);
+        $device->setIsOnline(static::isOnline($imei) ? DeviceObject::ONLINE : DeviceObject::OFFLINE);
         $device->setIsOnlineTrans($device->getisOnline() ? '在线' : '离线');
         $device->setIsContact(static::isContanct($imei) ? 1 : 0);
         //$device->setIsContactTrans($device->getisContact() ? '在联' : '失联');
