@@ -279,6 +279,7 @@ class DeviceController extends BaseController
             //$tmp = DeviceLogic::getDeviceFromCacheByUdid($device['qr']) ?: DeviceLogic::simpleCreateDevice($device['imei']);
             $data[] = [
                 'udid' => '`' . $device['qr'],
+                'imei' => '`' . $device['imei'],
                 'deviceTypeName' => $deviceTypeMap[$device['device_type']],
                 'channelName' => $channelMap[$device['channel_id']],
                 'brandName' => $brandMap[$device['brand_id']],
@@ -295,6 +296,7 @@ class DeviceController extends BaseController
 
         Helper::exportExcel([
             '设备码',
+            'IMEI',
             '型号',
             '渠道',
             '品牌',
