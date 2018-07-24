@@ -36,7 +36,7 @@ class ApiController extends BaseController
             $data = $this->checkParams(['channel_id', 'channel_name'], $request->input());
 
             $data['secret'] = Helper::getRandStr(24);
-
+            ChannelKeylogic::refreshAllConfig();
             try{
                 BiChannelSecret::create($data);
                 ChannelKeylogic::refreshAllConfig();
