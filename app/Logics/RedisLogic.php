@@ -216,6 +216,11 @@ class RedisLogic extends BaseLogic
         return self::getRedis()->exists($key);
     }
 
+    public static function hmSet($key, $data)
+    {
+        return self::getRedis()->hmset($key, $data);
+    }
+
     public static function isDeviceNeverOnline($imei)
     {
         $key = 'dev:' . $imei;

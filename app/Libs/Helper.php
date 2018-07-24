@@ -204,6 +204,20 @@ class Helper
         return $data;
     }
 
+    /**
+     * @param array $array
+     * @param $key
+     * @return array
+     */
+    public static function transToKeyToArray(array $array, $key)
+    {
+        $data = [];
+        foreach ($array as $row){
+            $data[$row[$key]][] = $row;
+        }
+        return $data;
+    }
+
     public static function readExcelFromRequest(Request $request, $filename)
     {
         try {
