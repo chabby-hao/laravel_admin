@@ -4,8 +4,8 @@
         <hr>
 
         <div class="row-fluid">
-            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyAdd'); ?>" class="btn btn-success">添加新渠道秘钥</a></span>
-            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyAdd'); ?>" class="btn btn-warning">刷新配置</a></span>
+            <span class="pull-right"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\ApiController@refreshChannelConfig'); ?>" class="btn btn-warning">刷新配置</a></span>
+            <span class="pull-right marginright"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyAdd'); ?>" class="btn btn-success">添加新渠道秘钥</a></span>
         </div>
 
         <div class="row-fluid">

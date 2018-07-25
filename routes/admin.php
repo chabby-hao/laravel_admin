@@ -94,6 +94,7 @@ Route::get('/breakRule/list','Admin\BreakRuleController@list');
 
 Route::any('/api/channelKeyList','Admin\ApiController@channelKeyList');
 Route::any('/api/channelKeyAdd','Admin\ApiController@channelKeyAdd');
+Route::any('/api/refreshChannelConfig','Admin\ApiController@refreshChannelConfig');
 
 
 
