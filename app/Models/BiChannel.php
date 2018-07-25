@@ -32,8 +32,9 @@ class BiChannel extends \App\Models\Base\BiChannel
         $rs = self::orderByDesc('id')->get();
         $map = Helper::transToKeyValueArray($rs, 'id', 'channel_name');
         if($cache){
-            return self::$cacheChannelMap = $map;
+            self::$cacheChannelMap = $map;
         }
+        return $map;
     }
 
     public static function getAllChannelIds()
