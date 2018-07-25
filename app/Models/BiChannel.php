@@ -21,10 +21,19 @@ class BiChannel extends \App\Models\Base\BiChannel
         'channel_remark'
     ];
 
-    public static function getChannelMap()
+    public static $cacheChannelMap = [];
+
+    public static function getChannelMap($cache = false)
     {
+        if(self::$cacheChannelMap){
+            return self::$cacheChannelMap;
+        }
+
         $rs = self::orderByDesc('id')->get();
-        return Helper::transToKeyValueArray($rs, 'id', 'channel_name');
+        $map = Helper::transToKeyValueArray($rs, 'id', 'channel_name');
+        if($cache){
+            return self::$cacheChannelMap = $map;
+        }
     }
 
     public static function getAllChannelIds()

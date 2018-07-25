@@ -17,7 +17,8 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>渠道</th>
+                                <th>渠道id</th>
+                                <th>渠道名</th>
                                 <th>cid</th>
                                 <th>secret</th>
                                 <th>推送url</th>
@@ -29,6 +30,7 @@
                                 @foreach($datas as $data)
                                     <tr class="gradeX">
                                         <td>{{$data->channel_id}}</td>
+                                        <td>{{\App\Models\BiChannel::getChannelMap()[$data->channel_id]}}</td>
                                         <td>{{$data->channel_name}}</td>
                                         <td>{{$data->secret}}</td>
                                         <td>{{$data->push_url}}</td>
