@@ -49,4 +49,13 @@ class ApiController extends BaseController
         return view('admin.api.channelkeyadd');
     }
 
+    public function refreshChannelConfig(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            ChannelKeylogic::refreshAllConfig();
+
+            return $this->outPutSuccess();
+        }
+    }
+
 }
