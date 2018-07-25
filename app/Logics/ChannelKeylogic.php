@@ -24,8 +24,8 @@ class ChannelKeylogic extends BaseLogic
 
         RedisLogic::getRedis()->transaction(function ($tx) use ($channelConfig, $channelSecret) {
             /** @var Client $tx */
-//            $tx->del(self::REDIS_HASH_CHANNEL_TO_CONFIG);
-//            $tx->del(self::REDIS_HASH_CHANNEL_TO_SECRET);
+            $tx->del([self::REDIS_HASH_CHANNEL_TO_CONFIG]);
+            $tx->del([self::REDIS_HASH_CHANNEL_TO_SECRET]);
             $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_CONFIG, $channelConfig);
             $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_SECRET, $channelSecret);
         });
