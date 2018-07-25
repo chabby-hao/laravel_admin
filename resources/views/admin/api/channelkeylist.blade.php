@@ -51,14 +51,16 @@
 @endsection
 
 <script>
-    $(".refresh").click(function () {
-        $.ajax({
-            url:'{{URL::action('Admin\ApiController@refreshChannelConfig')}}',
-            success:function (res) {
-                if(ajax_check_res(res)){
+    $(function(){
+        $(".refresh").click(function () {
+            $.ajax({
+                url:'{{URL::action('Admin\ApiController@refreshChannelConfig')}}',
+                success:function (res) {
+                    if(ajax_check_res(res)){
 
+                    }
                 }
-            }
+            })
         })
     })
 </script>
