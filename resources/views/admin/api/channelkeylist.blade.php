@@ -48,19 +48,18 @@
             </div>
         </div>
     </div>
-@endsection
+    <script>
+        $(function(){
+            $(".refresh").click(function () {
+                $.ajax({
+                    url:'{{URL::action('Admin\ApiController@refreshChannelConfig')}}',
+                    success:function (res) {
+                        if(ajax_check_res(res)){
 
-<script>
-    $(function(){
-        $(".refresh").click(function () {
-            $.ajax({
-                url:'{{URL::action('Admin\ApiController@refreshChannelConfig')}}',
-                success:function (res) {
-                    if(ajax_check_res(res)){
-
+                        }
                     }
-                }
+                })
             })
         })
-    })
-</script>
+    </script>
+@endsection
