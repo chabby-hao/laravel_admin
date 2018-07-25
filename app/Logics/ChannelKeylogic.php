@@ -18,11 +18,14 @@ class ChannelKeylogic extends BaseLogic
         $datas = BiChannelSecret::select(['secret','channel_id','channel_name as channel','push_url','push_types'])->get()->toArray();
         $channelConfig = Helper::transToKeyToArray($datas, 'channel_id');
         $channelConfig = array_map(function($row){
-            if($row['push_types']){
-                $row['push_types'] = explode(',', $row['push_types']);
-            }else{
-                $row['push_types'] = [];
+            foreach ($row as &$w){
+                if($w['push_types']){
+                    $w['push_types'] = explode(',', $w['push_types']);
+                }else{
+                    $w['push_types'] = [];
+                }
             }
+
             return json_encode($row);
         }, $channelConfig);
         var_dump($channelConfig);
