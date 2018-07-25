@@ -5,6 +5,7 @@ namespace App\Logics;
 
 use App\Libs\Helper;
 use App\Models\BiChannelSecret;
+use Predis\Client;
 
 class ChannelKeylogic extends BaseLogic
 {
@@ -20,8 +21,14 @@ class ChannelKeylogic extends BaseLogic
             return json_encode($row);
         }, $channelConfig);
         $channelSecret = Helper::transToKeyValueArray($datas, 'channel', 'secret');
-        RedisLogic::hmSet(self::REDIS_HASH_CHANNEL_TO_CONFIG, $channelConfig);
-        RedisLogic::hmSet(self::REDIS_HASH_CHANNEL_TO_SECRET, $channelSecret);
+
+        RedisLogic::getRedis()->transaction(function ($tx) use ($channelConfig, $channelSecret) {
+            /** @var Client $tx */
+            $tx->del(self::REDIS_HASH_CHANNEL_TO_CONFIG);
+            $tx->del(self::REDIS_HASH_CHANNEL_TO_SECRET);
+            $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_CONFIG, $channelConfig);
+            $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_SECRET, $channelSecret);
+        });
     }
 
 
