@@ -30,7 +30,7 @@
                                 @foreach($datas as $data)
                                     <tr class="gradeX">
                                         <td>{{$data->channel_id}}</td>
-                                        <td>{{\App\Models\BiChannel::getChannelMap()[$data->channel_id]}}</td>
+                                        <td>{{\App\Models\BiChannel::getChannelMap(true)[$data->channel_id]}}</td>
                                         <td>{{$data->channel_name}}</td>
                                         <td>{{$data->secret}}</td>
                                         <td>{{$data->push_url}}</td>

@@ -25,7 +25,7 @@ class BiChannel extends \App\Models\Base\BiChannel
 
     public static function getChannelMap($cache = false)
     {
-        if(self::$cacheChannelMap){
+        if($cache && self::$cacheChannelMap){
             return self::$cacheChannelMap;
         }
 
