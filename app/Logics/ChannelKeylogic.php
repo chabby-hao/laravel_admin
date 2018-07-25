@@ -22,10 +22,10 @@ class ChannelKeylogic extends BaseLogic
         }, $channelConfig);
         $channelSecret = Helper::transToKeyValueArray($datas, 'channel', 'secret');
 
-        RedisLogic::getRedis()->transaction(function ($tx) use ($channelConfig, $channelSecret) {
+        RedisLogic::getRedis()->pipeline(function ($tx) use ($channelConfig, $channelSecret) {
             /** @var Client $tx */
-            $tx->del([self::REDIS_HASH_CHANNEL_TO_CONFIG]);
-            $tx->del([self::REDIS_HASH_CHANNEL_TO_SECRET]);
+            $tx->del(self::REDIS_HASH_CHANNEL_TO_CONFIG);
+            $tx->del(self::REDIS_HASH_CHANNEL_TO_SECRET);
             $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_CONFIG, $channelConfig);
             $tx->hmSet(self::REDIS_HASH_CHANNEL_TO_SECRET, $channelSecret);
         });
