@@ -20,6 +20,8 @@ class ChannelKeylogic extends BaseLogic
         $channelConfig = array_map(function($row){
             if($row['push_types']){
                 $row['push_types'] = explode(',', $row['push_types']);
+            }else{
+                $row['push_types'] = [];
             }
             return json_encode($row);
         }, $channelConfig);
