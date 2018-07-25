@@ -10,6 +10,7 @@ namespace App\Models;
  * @property string $channel_name
  * @property string $secret
  * @property string $push_url
+ * @property string $push_types
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiChannelSecret whereChannelId($value)
@@ -19,6 +20,7 @@ namespace App\Models;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiChannelSecret whereSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiChannelSecret whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiChannelSecret wherePushUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiChannelSecret wherePushTypes($value)
  * @mixin \Eloquent
  */
 class BiChannelSecret extends \App\Models\Base\BiChannelSecret
@@ -28,6 +30,7 @@ class BiChannelSecret extends \App\Models\Base\BiChannelSecret
 		'channel_id',
 		'channel_name',
 		'secret',
-        'push_url'
+        'push_url',
+        'push_types'
 	];
 }

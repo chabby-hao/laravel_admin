@@ -23,6 +23,7 @@
                                 <th>cid</th>
                                 <th>secret</th>
                                 <th>推送url</th>
+                                <th>推送类型</th>
                                 <th>创建时间</th>
                             </tr>
                             </thead>
@@ -35,6 +36,7 @@
                                         <td>{{$data->channel_name}}</td>
                                         <td>{{$data->secret}}</td>
                                         <td>{{$data->push_url}}</td>
+                                        <td>{{$data->push_types}}</td>
                                         <td>{{$data->created_at}}</td>
                                     </tr>
                                 @endforeach
