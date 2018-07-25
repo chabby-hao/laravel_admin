@@ -28,7 +28,6 @@ class ChannelKeylogic extends BaseLogic
 
             return json_encode($row);
         }, $channelConfig);
-        var_dump($channelConfig);
         $channelSecret = Helper::transToKeyValueArray($datas, 'channel', 'secret');
 
         RedisLogic::getRedis()->pipeline(function ($tx) use ($channelConfig, $channelSecret) {
