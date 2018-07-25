@@ -24,6 +24,7 @@ class ChannelKeylogic extends BaseLogic
                 }else{
                     $w['push_types'] = [];
                 }
+                $w['push_url'] = $w['push_url'] ? : '';
             }
 
             return json_encode($row);
