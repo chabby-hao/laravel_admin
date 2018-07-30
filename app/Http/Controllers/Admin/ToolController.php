@@ -180,7 +180,7 @@ class ToolController extends BaseController
 
             $imsis = Helper::transToOneDimensionalArray($data, 0);
             foreach ($imsis as $k => &$imsi) {
-                $imsi = trim($imsi, " '");
+                $imsi = trim($imsi, " '`");
                 if(!$imsi){
                     unset($imsis[$k]);
                 }
@@ -199,6 +199,7 @@ class ToolController extends BaseController
             foreach ($rs as $row) {
                 $imei = $row->imei;
                 $imsi = $row->imsi;
+                $udid = $row->qr;
                 $num106 = $row->num_106;
                 $deviceObj = DeviceLogic::createDevice($imei);
                 $user = DeviceLogic::getAdminInfoByUdid($deviceObj->udid);
@@ -206,14 +207,14 @@ class ToolController extends BaseController
                 $rom = DeviceLogic::getRomVersionByUdid($deviceObj->udid);
                 $data[] = [
                     "'" . $num106,
-                    "'" . $deviceObj->udid,
+                    "'" . $udid,
                     "'" . $imsi,
-                    $deviceObj->channelName,
-                    $deviceObj->brandName,
-                    $deviceObj->ebikeTypeName,
+                    DeviceLogic::getChannelName($imei),
+                    DeviceLogic::getBrandName($imei),
+                    DeviceLogic::getEbikeTypeNameByUdid($udid),
                     "'" . $phone,
-                    $deviceObj->lastContact,
-                    $deviceObj->deliverdAt,
+                    DeviceLogic::getLastContact($imei),
+                    DeviceLogic::getDeliverdAtByUdid($udid),
                     $rom,
                 ];
             }
