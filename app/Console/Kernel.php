@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(WarningMile::class)->hourly();
             $schedule->command(DbSync::class)->everyThirtyMinutes();
             $schedule->command(DeviceCache::class)->everyThirtyMinutes();
-            $schedule->command(MapCache::class)->everyThirtyMinutes();
+            $schedule->command(MapCache::class)->hourly();
         }
     }
 
