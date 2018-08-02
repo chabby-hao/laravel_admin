@@ -30,7 +30,8 @@ class DbSync extends BaseCommand
     public function handle()
     {
         $this->categoryDicNew();
-        $this->deviceCode();
+        //已使用BI发货，不需要老的渠道品牌同步了
+        //$this->deviceCode();
     }
 
     /**
@@ -135,7 +136,7 @@ class DbSync extends BaseCommand
     }
 
     /**
-     * 设备码相关表同步
+     * 设备码相关表同步，按照老的渠道品牌逻辑刷新t_device_code
      */
     private function deviceCode()
     {
