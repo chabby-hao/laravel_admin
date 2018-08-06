@@ -13,7 +13,7 @@
 <!--<link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}"/>-->
     <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/legendCloudEye.css.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/legendCloudEye.css') }}"/>
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link href="{{asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"/>
 <!--<link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}"/>-->
