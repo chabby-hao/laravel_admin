@@ -62,8 +62,7 @@
                 //beforeSubmit : test,//ajax动画加载
                 success: function (data) {
                     if (ajax_check_res(data)) {
-
-                        render(data)
+                        window.render(data)
                     }
                 }
             });

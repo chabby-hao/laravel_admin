@@ -406,15 +406,17 @@
 
 <script>
 
+    $(function () {
         var template = $('#template').html();
         Mustache.parse(template);   // optional, speeds up future uses
 
-        function render(data)
-        {
+        window.render = function (data) {
             console.log(data);
             var target = $("#box");
             var rendered = Mustache.render(template, data);
             target.html(rendered);
         }
+    })
+
 
 </script>
