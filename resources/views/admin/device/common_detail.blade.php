@@ -406,7 +406,6 @@
 
 <script>
 
-    $(function(){
         var template = $('#template').html();
         Mustache.parse(template);   // optional, speeds up future uses
 
@@ -416,6 +415,5 @@
             var rendered = Mustache.render(template, data);
             target.html(rendered);
         }
-    })
 
 </script>
