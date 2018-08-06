@@ -411,6 +411,7 @@
 
         function render(data)
         {
+            console.log(data);
             var target = $("#box");
             var rendered = Mustache.render(template, data);
             target.html(rendered);
