@@ -38,7 +38,7 @@
                     </div>
                 </div>
 
-                @include('admin.device.common.detail')
+                @include('admin.device.common_detail')
 
 
             </div>
