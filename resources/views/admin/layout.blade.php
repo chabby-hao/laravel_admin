@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-en">
 <head>
     <title>新运营后台</title>
     <meta charset="UTF-8"/>
