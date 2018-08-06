@@ -5,6 +5,5 @@
 
 
     </div>
-    @include('admin.device.detail')
 
 @endsection
