@@ -830,4 +830,10 @@ class DeviceController extends BaseController
         ]);
     }
 
+    public function stat()
+    {
+
+        return view('admin.device.stat');
+    }
+
 }
