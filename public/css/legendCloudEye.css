@@ -4,8 +4,8 @@
 .car_info .span3 h3 span{color: #2c2c2c;font-size: 60px;text-align: center;margin: 0;line-height: 90px;font-family: impact;display: inline-block;}
 .car_info .span3 p{color: #000;font-size: 16px;text-align: center;font-family: PingFangSC-Regular;margin: 0;}
 .car_info .arr_down,.car_info .arr_up{width: 15px;height: 20px;position: absolute;top: 20px;}
-.car_info .arr_down{background: url({{ asset('image/green_arr.png') }}) no-repeat center center;}
-.car_info .arr_up{background: url({{ asset('image/red_arr.png') }}) no-repeat center center;}
+.car_info .arr_down{background: url(../image/green_arr.png) no-repeat center center;}
+.car_info .arr_up{background: url(../image/red_arr.png) no-repeat center center;}
 @media (min-width: 979px) and (max-width: 1300px) {
 	.car_info .span3{width: 47%;margin-left: 0;}
 }
