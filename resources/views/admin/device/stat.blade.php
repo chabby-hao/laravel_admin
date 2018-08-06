@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container-fluid">
-    		<div class="row-fluid car_info">
+    		<div class="row car_info">
 		  	<div class="span4">
 		  		<h3 class="car_jrhy">750</h3>
 		  		<p>今日活跃（人）</p>
