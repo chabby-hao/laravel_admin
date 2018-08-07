@@ -10,23 +10,21 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class FailedJob
+ * Class BiCustomer
  * 
  * @property int $id
- * @property string $connection
- * @property string $queue
- * @property string $payload
- * @property string $exception
- * @property \Carbon\Carbon $failed_at
+ * @property int $channel_id
+ * @property string $brand_name
+ * @property string $brand_remark
  *
  * @package App\Models\Base
  */
-class FailedJob extends Eloquent
+class BiCustomer extends Eloquent
 {
 	protected $connection = 'bi';
 	public $timestamps = false;
 
-	protected $dates = [
-		'failed_at'
+	protected $casts = [
+		'channel_id' => 'int'
 	];
 }
