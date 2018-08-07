@@ -10,16 +10,21 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiBrand
+ * Class BiActiveDevice
  * 
  * @property int $id
- * @property string $brand_name
- * @property string $brand_remark
+ * @property string $date
+ * @property int $total
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models\Base
  */
-class BiBrand extends Eloquent
+class BiActiveDevice extends Eloquent
 {
 	protected $connection = 'bi';
-	public $timestamps = false;
+
+	protected $casts = [
+		'total' => 'int'
+	];
 }

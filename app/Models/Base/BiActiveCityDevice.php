@@ -10,30 +10,23 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiBreakRule
+ * Class BiActiveCityDevice
  * 
  * @property int $id
- * @property string $lpn
- * @property string $car_username
- * @property string $car_phone
- * @property string $car_factory
- * @property int $violation_type
- * @property \Carbon\Carbon $violation_time
- * @property string $violation_location
+ * @property int $pid
+ * @property string $date
+ * @property int $total
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models\Base
  */
-class BiBreakRule extends Eloquent
+class BiActiveCityDevice extends Eloquent
 {
 	protected $connection = 'bi';
 
 	protected $casts = [
-		'violation_type' => 'int'
-	];
-
-	protected $dates = [
-		'violation_time'
+		'pid' => 'int',
+		'total' => 'int'
 	];
 }
