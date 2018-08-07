@@ -47,7 +47,7 @@ class DeviceAddressStat extends BaseCommand
 
         $provinceMap = array_flip($provinceMap);
 
-        $dayStartTime = Carbon::today()->startOfDay();
+        $dayStartTime = Carbon::today()->startOfDay()->getTimestamp();
         $date = Carbon::today()->toDateString();
 
         $model = TDeviceCode::getDeviceModel();
