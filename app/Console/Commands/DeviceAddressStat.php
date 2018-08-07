@@ -74,6 +74,8 @@ var_dump($dayStartTime);
             return [];
         });
 
+        var_dump($statActive);
+
         foreach ($statActive as $pid=>$total){
             BiActiveCityDevice::firstOrCreate([
                 'date'=>$date,
