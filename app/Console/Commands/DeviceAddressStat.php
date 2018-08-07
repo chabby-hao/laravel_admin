@@ -49,7 +49,7 @@ class DeviceAddressStat extends BaseCommand
 
         $dayStartTime = Carbon::today()->startOfDay()->getTimestamp();
         $date = Carbon::today()->toDateString();
-
+var_dump($dayStartTime);
         $model = TDeviceCode::getDeviceModel();
         $this->batchSearch($model, function (TDeviceCode $deviceCode) use ($provinceMap, &$statActive, $dayStartTime, $date) {
             static $t = 0;
