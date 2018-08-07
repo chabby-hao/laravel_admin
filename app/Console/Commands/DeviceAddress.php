@@ -45,13 +45,14 @@ class DeviceAddress extends BaseCommand
             static $t = 0;
             $imei = $deviceCode->imei;
 
-            echo ++$t . '------------------' . $imei . "\n";
+            echo ++$t . '------------------' . "\n";
 
             $loc = DeviceLogic::getLastLocationInfo($imei);
             if($loc['address']){
                 if(preg_match('/^[^省市区]+[省市区]/u', $loc['address'], $match)){
                     $province = $match[0];
                     if(isset($provinceMap[$province])){
+                        echo 'process success ------------' . $imei . "\n";
                         $deviceCode->pid = $provinceMap[$province];
                         $deviceCode->save();
                     }
