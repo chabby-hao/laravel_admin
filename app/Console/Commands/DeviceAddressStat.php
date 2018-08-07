@@ -92,4 +92,5 @@ class DeviceAddressStat extends BaseCommand
         Log::notice('device address stat complete, total : ' . $sum);
 
     }
+
 }
