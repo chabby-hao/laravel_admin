@@ -49,8 +49,8 @@ class DeviceAddressStat extends BaseCommand
 
         $dayStartTime = Carbon::today()->startOfDay()->getTimestamp();
         $date = Carbon::today()->toDateString();
-var_dump($dayStartTime);
         $model = TDeviceCode::getDeviceModel();
+
         $this->batchSearch($model, function (TDeviceCode $deviceCode) use ($provinceMap, &$statActive, $dayStartTime, $date) {
             static $t = 0;
             $imei = $deviceCode->imei;
@@ -74,10 +74,8 @@ var_dump($dayStartTime);
             return [];
         });
 
-        var_dump($statActive);
-
         foreach ($statActive as $pid=>$total){
-            BiActiveCityDevice::firstOrCreate([
+            BiActiveCityDevice::updateOrCreate([
                 'date'=>$date,
                 'pid'=>$pid,
             ],[
@@ -85,7 +83,7 @@ var_dump($dayStartTime);
             ]);
         }
         $sum = array_sum($statActive);
-        BiActiveDevice::firstOrCreate([
+        BiActiveDevice::updateOrCreate([
             'date'=>$date,
         ],[
             'total'=>array_sum($statActive),
