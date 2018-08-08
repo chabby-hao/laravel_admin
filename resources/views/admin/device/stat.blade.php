@@ -80,35 +80,8 @@
                         </div>                    
                     </form>
 				</div>
-				<div class="widget-box">
-                    <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
-                        <h5>基本信息</h5>
-                    </div>
-                    <div class="widget-content">
-                        <table class="table table-bordered data-table">
-                            <thead>
-                            <tr>
-                                <th>设备号</th>
-                                <th>车型</th>
-                                <th>IMEI</th>
-                                <th>IMSI</th>
-                                <th>固件版本</th>
-                                <th>MCU版本</th>
-                            </tr>
-                            </thead>
-                            <tbody>	                            
-                                <tr class="gradeX">
-                                    <td>123456235145</td>
-                                    <td>小牛-N1</td>
-                                    <td>3526262456234</td>
-                                    <td>956423514562</td>
-                                    <td>EB001531531213</td>
-                                    <td>493</td>
-                                </tr>	                           
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+				@include('admin.device.common_detail')
 			</div>
 
 	</div>

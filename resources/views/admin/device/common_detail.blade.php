@@ -420,3 +420,41 @@
 
 
 </script>
+<script>
+
+    $(function () {
+
+        var myform = $("#myform");
+
+        $("#mysubmit").click(function () {
+            myform.submit();
+        });
+
+        myform.ajaxForm({
+            dataType: 'json',
+            //beforeSubmit : test,//ajax动画加载
+            success: function (data) {
+                if (ajax_check_res(data)) {
+                    window.render(data)
+                }
+            }
+        });
+
+
+        //设备列表跳转过来的，直接自动查询
+        if ($("#id").val()) {
+            myform.submit();
+        }
+
+        $(".last").click(function(){
+            var id = $(this).text();
+            if(id){
+                $("#id").val(id);
+                myform.submit();
+            }
+        })
+
+    })
+
+
+</script>
