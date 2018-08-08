@@ -431,6 +431,7 @@
         });
 
         myform.ajaxForm({
+            url: '{{URL::action('Admin\DeviceController@detail')}}',
             dataType: 'json',
             //beforeSubmit : test,//ajax动画加载
             success: function (data) {
