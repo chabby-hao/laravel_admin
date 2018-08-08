@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 08 Aug 2018 10:56:20 +0800.
+ * Date: Wed, 08 Aug 2018 19:43:20 +0800.
  */
 
 namespace App\Models\Base;
@@ -15,7 +15,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property int $pid
  * @property string $date
- * @property int $total
+ * @property string $udid
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
@@ -26,7 +26,6 @@ class BiActiveCityDevice extends Eloquent
 	protected $connection = 'bi';
 
 	protected $casts = [
-		'pid' => 'int',
-		'total' => 'int'
+		'pid' => 'int'
 	];
 }
