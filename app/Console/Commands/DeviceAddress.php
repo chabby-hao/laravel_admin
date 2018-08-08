@@ -23,10 +23,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class DeviceAddressStat extends BaseCommand
+class DeviceAddress extends BaseCommand
 {
 
-    protected $signature = 'device:address_stat';
+    protected $signature = 'device:address';
     protected $description = '设备地址统计';
 
     public function __construct()
@@ -54,6 +54,7 @@ class DeviceAddressStat extends BaseCommand
         $this->batchSearch($model, function (TDeviceCode $deviceCode) use ($provinceMap, &$statActive, $dayStartTime, $date) {
             static $t = 0;
             $imei = $deviceCode->imei;
+            $udid = $deviceCode->qr;
 
             echo ++$t . '------------------' . "\n";
 
@@ -65,7 +66,18 @@ class DeviceAddressStat extends BaseCommand
                         echo 'process success ------------' . $imei . "\n";
                         $deviceCode->pid = $pid;
                         $deviceCode->save();
+
+                        BiActiveDevice::updateOrCreate([
+                            'date'=>$date,
+                            'udid'=>$udid,
+                        ]);
+
                         if ($loc['time'] && $loc['time'] > $dayStartTime) {
+                            BiActiveCityDevice::updateOrCreate([
+                                'date'=>$date,
+                                'pid'=>$pid,
+                                'udid'=>$udid,
+                            ]);
                             $statActive[$pid]++;
                         }
                     }
@@ -74,22 +86,7 @@ class DeviceAddressStat extends BaseCommand
             return [];
         });
 
-        foreach ($statActive as $pid=>$total){
-            BiActiveCityDevice::updateOrCreate([
-                'date'=>$date,
-                'pid'=>$pid,
-            ],[
-                'total'=>$total,
-            ]);
-        }
-        $sum = array_sum($statActive);
-        BiActiveDevice::updateOrCreate([
-            'date'=>$date,
-        ],[
-            'total'=>array_sum($statActive),
-        ]);
-
-        Log::notice('device address stat complete, total : ' . $sum);
+        Log::notice('device address stat complete, total : ' . array_sum($statActive), $statActive);
 
     }
 
