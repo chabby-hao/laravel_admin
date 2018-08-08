@@ -79,6 +79,8 @@ Route::any('/delivery/listDevice','Admin\DeliveryController@listDevice');
 Route::any('/map/show','Admin\MapController@show');
 
 Route::any('/brand/detail','Admin\BrandController@detail');
+Route::any('/channel/detail','Admin\ChannelController@detail');
+Route::any('/customer/detail','Admin\CustomerController@detail');
 
 
 Route::any('/tool/file','Admin\ToolController@file');

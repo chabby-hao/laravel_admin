@@ -2,12 +2,14 @@
 
     $(function () {
 
-        if($("select[name='brand_id']").val()){
+        var pselect = $("select[name='brand_id']");
+
+        if(pselect.val()){
             getEbikeType();
         }
 
         function getEbikeType(){
-            var brandId = $("select[name='brand_id']").val();
+            var brandId = pselect.val();
             var ebSelect = $("select[name='ebike_type_id']");
             ebSelect.html("<option value=''>请选择车型</option>");
             if (brandId) {
@@ -35,11 +37,11 @@
                     }
                 })
             } else {
-                $("select[name='ebike_type_id']").val('');
+                ebSelect.val('');
             }
         }
 
-        $("select[name='brand_id']").on('change', function () {
+        pselect.on('change', function () {
             getEbikeType();
         });
     });

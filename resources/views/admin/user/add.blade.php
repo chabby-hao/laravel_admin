@@ -47,7 +47,7 @@
                                         <option value="<?php echo $key ?>"><?php echo $val ?></option>
                                         <?php }?>
                                     </select>
-                                    <span class="help-block">如何选择全部，则可以看到全部数据；如果选择渠道商则可以看到该渠道下的所有数据；如果选择品牌商，则可以看品牌下的所有数据。</span>
+                                    <span class="help-block">如何选择全部，则可以看到全部数据；如果选择渠道商则可以看到该渠道下的所有数据；如果选择客户，则可以看客户下的所有数据。</span>
                                 </div>
                             </div>
 
@@ -63,14 +63,11 @@
                                 </div>
                             </div>
 
-                            <div id="brand" class="control-group hide">
-                                <label class="control-label"><span class="text-error">*</span>品牌 :</label>
+                            <div id="customer" class="control-group hide">
+                                <label class="control-label"><span class="text-error">*</span>客户 :</label>
                                 <div class="controls">
-                                    <select name="brand_id" type="text" class="span11">
+                                    <select name="customer_id" type="text" class="span11">
                                         <option value="">请选择</option>
-                                        <?php foreach (\App\Models\BiBrand::getBrandMap() as $key => $val){ ?>
-                                        <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
-                                        <?php }?>
                                     </select>
                                 </div>
                             </div>
@@ -81,7 +78,7 @@
                                     <select name="role_id" type="text" class="span11">
                                         <option value="">请选择</option>
                                         <?php foreach (\App\Models\Role::getRoleNameMap() as $key => $val){ ?>
-                                        <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
                                         <?php }?>
                                     </select>
                                 </div>
@@ -106,6 +103,7 @@
     </div>
 
     @include('admin.user.commonjs')
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 
 @endsection

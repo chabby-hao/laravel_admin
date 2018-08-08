@@ -21,6 +21,8 @@ class AdminBeforeCheck
     protected $noPermisVerify = [
         'device/searchCity',
         'brand/detail',
+        'channel/detail',
+        'customer/detail',
         'device/exportList',
         'device/map',
         'user/resetPassword',

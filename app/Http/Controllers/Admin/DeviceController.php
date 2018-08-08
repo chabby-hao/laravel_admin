@@ -394,21 +394,6 @@ class DeviceController extends BaseController
         return $map;
     }
 
-    private function getWhere()
-    {
-        $where = [];
-        /** @var BiUser $user */
-        $user = Auth::user();
-        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
-            //渠道商
-            $where['channel_id'] = $user->type_id;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
-            //品牌商
-            $where['brand_id'] = $user->type_id;
-        }
-        return $where;
-    }
-
     /**
      * @param TDeviceCode $model
      * @return mixed

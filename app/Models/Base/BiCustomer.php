@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 07 Aug 2018 14:28:34 +0800.
+ * Date: Wed, 08 Aug 2018 10:56:20 +0800.
  */
 
 namespace App\Models\Base;
@@ -14,8 +14,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property int $channel_id
- * @property string $brand_name
- * @property string $brand_remark
+ * @property string $customer_name
+ * @property string $customer_remark
  *
  * @package App\Models\Base
  */
