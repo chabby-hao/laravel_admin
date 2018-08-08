@@ -42,7 +42,7 @@
 	        {
 	            type: 'map',
 	            mapType: 'china',
-	            roam: true,
+	            roam: false,
 	            itemStyle: {
 	                normal: {
 	                    borderColor:'#89b5db',
