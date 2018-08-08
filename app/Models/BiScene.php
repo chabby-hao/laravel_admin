@@ -32,4 +32,10 @@ class BiScene extends \App\Models\Base\BiScene
         $rs = self::get()->toArray();
         return Helper::transToOneDimensionalArray($rs, 'id');
     }
+
+    public static function getTypeName()
+    {
+        $rs = self::orderByDesc('id')->get()->toArray();
+        return Helper::transToKeyValueArray($rs, 'id', 'scenes_name');
+    }
 }
