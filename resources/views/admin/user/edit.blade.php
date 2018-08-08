@@ -76,17 +76,6 @@
                                 </div>
                             </div>
 
-                            {{--<div id="brand" class="control-group hide">
-                                <label class="control-label"><span class="text-error">*</span>品牌 :</label>
-                                <div class="controls">
-                                    <select name="brand_id" type="text" class="span11">
-                                        <option value="">请选择</option>
-                                        <?php foreach (\App\Models\BiBrand::getBrandMap() as $key => $val){ ?>
-                                        <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
-                                        <?php }?>
-                                    </select>
-                                </div>
-                            </div>--}}
 
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>角色 :</label>
