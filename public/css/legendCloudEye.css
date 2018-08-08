@@ -34,5 +34,17 @@
 	.tb_box .span4{width: 100%;margin-top: 20px;}
 }
 
+/*信息展示*/
+.info_box{margin: 80px 0 45px;}
+.info_box .search_box{display: table; margin:0 auto; height: 50px;color: #909090;}
+.search_box .inline-block{margin-right: 2px;}
+.search_box .inline-block:nth-of-type(1) input{width: 250px; background: #eeeeee;border-color: #eeeeee;height: 48px;padding:0;color: #909090;text-align: center;margin-bottom: 10px;}
+.search_box .inline-block:nth-of-type(2) button{width: 200px; background: #19466d;border-color: #19466d;height: 49px;padding:0;border:0;color: #ffffff;text-align: center;margin-bottom: 10px;}
+.search_icon{width: 20px;height: 20px;background: url(../image/search_icon.png) no-repeat top center;display: inline-block;vertical-align: middle;}
+@media(max-width: 800px) {
+	.info_box .search_box{width: 250px;}
+	.search_box .inline-block:nth-of-type(2){display: table;margin:10px auto 0;}
+}
+
 
 

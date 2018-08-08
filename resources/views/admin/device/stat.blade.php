@@ -65,6 +65,51 @@
 			</div>					
 		</div>
 		<!-- 信息展示 -->
+			<div class="row-fluid info_box">
+				<div class="search_box">
+					<form id="" class="form-search">
+                        <div class="control-group">                              
+                            <div class="inline-block">
+                                <input type="text" id="id" name="id" value="" placeholder="请输入设备号">
+                                <input type="text" id="name" name="name" placeholder="请输入设备名称">
+                            </div>
+
+                            <div class="inline-block">
+                                <button type="button" id="mysubmit" class="btn btn-info" ><span class="search_icon"></span>搜索</button>
+                            </div>
+                        </div>                    
+                    </form>
+				</div>
+				<div class="widget-box">
+                    <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
+                        <h5>基本信息</h5>
+                    </div>
+                    <div class="widget-content">
+                        <table class="table table-bordered data-table">
+                            <thead>
+                            <tr>
+                                <th>设备号</th>
+                                <th>车型</th>
+                                <th>IMEI</th>
+                                <th>IMSI</th>
+                                <th>固件版本</th>
+                                <th>MCU版本</th>
+                            </tr>
+                            </thead>
+                            <tbody>	                            
+                                <tr class="gradeX">
+                                    <td>123456235145</td>
+                                    <td>小牛-N1</td>
+                                    <td>3526262456234</td>
+                                    <td>956423514562</td>
+                                    <td>EB001531531213</td>
+                                    <td>493</td>
+                                </tr>	                           
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+			</div>
 
 	</div>
 	<!-- 地图 -->
