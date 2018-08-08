@@ -23,10 +23,10 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class DeviceAddressStat extends BaseCommand
+class DeviceAddress extends BaseCommand
 {
 
-    protected $signature = 'device:address_stat';
+    protected $signature = 'device:address';
     protected $description = '设备地址统计';
 
     public function __construct()
@@ -67,13 +67,13 @@ class DeviceAddressStat extends BaseCommand
                         $deviceCode->pid = $pid;
                         $deviceCode->save();
 
-                        BiActiveDevice::updateOrInsert([
+                        BiActiveDevice::updateOrCreate([
                             'date'=>$date,
                             'udid'=>$udid,
                         ]);
 
                         if ($loc['time'] && $loc['time'] > $dayStartTime) {
-                            BiActiveCityDevice::updateOrInsert([
+                            BiActiveCityDevice::updateOrCreate([
                                 'date'=>$date,
                                 'pid'=>$pid,
                                 'udid'=>$udid,
