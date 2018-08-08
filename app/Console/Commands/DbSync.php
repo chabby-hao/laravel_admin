@@ -147,8 +147,8 @@ class DbSync extends BaseCommand
                     ]);
 
                     BiScene::firstOrCreate([
-                        'ev_model'=>$brandId,
-                        'customer_id'=>$row->type,
+                        'ev_model'=>$row->ev_model,
+                        'customer_id'=>$brandId,
                     ], [
                         'scenes_name' => $name,
                         'scenes_remark' => $row->remark,
