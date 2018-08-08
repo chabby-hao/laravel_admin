@@ -48,7 +48,7 @@
                                         <option @if($key == $user->user_type) selected  @endif value="<?php echo $key ?>"><?php echo $val ?></option>
                                         <?php }?>
                                     </select>
-                                    <span class="help-block">如何选择全部，则可以看到全部数据；如果选择渠道商则可以看到该渠道下的所有数据；如果选择品牌商，则可以看品牌下的所有数据。</span>
+                                    <span class="help-block">如何选择全部，则可以看到全部数据；如果选择渠道商则可以看到该渠道下的所有数据；如果选择客户，则可以看客户下的所有数据。</span>
                                 </div>
                             </div>
 

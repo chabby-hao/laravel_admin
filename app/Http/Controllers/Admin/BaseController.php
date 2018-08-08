@@ -70,7 +70,7 @@ class BaseController extends Controller
             //渠道商
             return DeviceObject::CACHE_CHANNEL_PRE;
         } elseif ($user->user_type == BiUser::USER_TYPE_CUSTOMER) {
-            //品牌商
+            //客户
             return DeviceObject::CACHE_CUSTOMER_PRE;
         } else {
             return DeviceObject::CACHE_ALL_PRE;
