@@ -31,4 +31,10 @@ class BiCustomer extends \App\Models\Base\BiCustomer
         $map = Helper::transToKeyValueArray($rs, 'id', 'customer_name');
         return $map;
     }
+
+    public static function getAllIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
 }

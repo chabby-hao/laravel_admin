@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiScene
@@ -25,4 +26,10 @@ class BiScene extends \App\Models\Base\BiScene
 		'customer_id',
 		'ev_model'
 	];
+
+    public static function getAllIds()
+    {
+        $rs = self::get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'id');
+    }
 }
