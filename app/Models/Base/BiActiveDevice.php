@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 08 Aug 2018 19:43:20 +0800.
+ * Date: Wed, 08 Aug 2018 20:07:31 +0800.
  */
 
 namespace App\Models\Base;
@@ -14,7 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property string $date
- * @property string $udid
+ * @property int $total
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
@@ -23,4 +23,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class BiActiveDevice extends Eloquent
 {
 	protected $connection = 'bi';
+
+	protected $casts = [
+		'total' => 'int'
+	];
 }

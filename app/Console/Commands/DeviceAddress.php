@@ -75,11 +75,6 @@ class DeviceAddress extends BaseCommand
                                 'udid'=>$udid,
                             ]);
 
-                            BiActiveDevice::updateOrCreate([
-                                'date'=>$date,
-                                'udid'=>$udid,
-                            ]);
-
                             $statActive[$pid]++;
                         }
                     }
@@ -88,7 +83,15 @@ class DeviceAddress extends BaseCommand
             return [];
         });
 
-        Log::notice('device address stat complete, total : ' . array_sum($statActive), $statActive);
+        $total = array_sum($statActive);
+
+        BiActiveDevice::updateOrCreate([
+            'date'=>$date,
+        ],[
+            'total'=>$total
+        ]);
+
+        Log::notice('device address stat complete, total : ' . $total, $statActive);
 
     }
 
