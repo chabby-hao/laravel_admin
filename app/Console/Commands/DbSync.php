@@ -108,11 +108,11 @@ class DbSync extends BaseCommand
                 //客户
                 try {
                     BiCustomer::firstOrCreate([
-                        'brand_name' => $name,
+                        'customer_name' => $name,
                         'channel_id'=>$channelId,
                     ], [
                         'id' => $row->type,
-                        'brand_remark' => $row->remark,
+                        'customer_remark' => $row->remark,
                     ]);
                 }catch (\Exception $e){
                     BiCustomer::where([
