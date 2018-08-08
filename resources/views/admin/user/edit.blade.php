@@ -64,7 +64,19 @@
                                 </div>
                             </div>
 
-                            <div id="brand" class="control-group hide">
+                            <div id="customer" class="control-group hide">
+                                <label class="control-label"><span class="text-error">*</span>客户 :</label>
+                                <div class="controls">
+                                    <select name="customer_id" class="span11">
+                                        <option value="">请选择</option>
+                                        <?php foreach (\App\Models\BiCustomer::getCustomerMap() as $key => $val){ ?>
+                                            <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{--<div id="brand" class="control-group hide">
                                 <label class="control-label"><span class="text-error">*</span>品牌 :</label>
                                 <div class="controls">
                                     <select name="brand_id" type="text" class="span11">
@@ -74,7 +86,7 @@
                                         <?php }?>
                                     </select>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>角色 :</label>
@@ -107,6 +119,7 @@
     </div>
 
     @include('admin.user.commonjs')
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 
 @endsection

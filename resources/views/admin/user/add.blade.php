@@ -63,7 +63,16 @@
                                 </div>
                             </div>
 
-                            <div id="brand" class="control-group hide">
+                            <div id="customer" class="control-group hide">
+                                <label class="control-label"><span class="text-error">*</span>客户 :</label>
+                                <div class="controls">
+                                    <select name="customer_id" type="text" class="span11">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{--<div id="brand" class="control-group hide">
                                 <label class="control-label"><span class="text-error">*</span>品牌 :</label>
                                 <div class="controls">
                                     <select name="brand_id" type="text" class="span11">
@@ -73,7 +82,7 @@
                                         <?php }?>
                                     </select>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>角色 :</label>
@@ -81,7 +90,7 @@
                                     <select name="role_id" type="text" class="span11">
                                         <option value="">请选择</option>
                                         <?php foreach (\App\Models\Role::getRoleNameMap() as $key => $val){ ?>
-                                        <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                            <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
                                         <?php }?>
                                     </select>
                                 </div>
@@ -106,6 +115,7 @@
     </div>
 
     @include('admin.user.commonjs')
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 
 @endsection

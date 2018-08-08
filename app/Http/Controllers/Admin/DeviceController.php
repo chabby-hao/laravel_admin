@@ -402,7 +402,7 @@ class DeviceController extends BaseController
         if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
             //渠道商
             $where['channel_id'] = $user->type_id;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
+        } elseif ($user->user_type == BiUser::USER_TYPE_CUSTOMER) {
             //品牌商
             $where['brand_id'] = $user->type_id;
         }

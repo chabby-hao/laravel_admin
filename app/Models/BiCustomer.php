@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiCustomer
@@ -23,4 +24,11 @@ class BiCustomer extends \App\Models\Base\BiCustomer
 		'customer_name',
 		'customer_remark'
 	];
+
+	public static function getCustomerMap()
+    {
+        $rs = self::all()->toArray();
+        $map = Helper::transToKeyValueArray($rs, 'id', 'customer_name');
+        return $map;
+    }
 }

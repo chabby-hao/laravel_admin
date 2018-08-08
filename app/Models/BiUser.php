@@ -49,7 +49,7 @@ class BiUser extends User
     //可查看数据类型
     const USER_TYPE_ALL = 0;//全部
     const USER_TYPE_CHANNEL = 1;//渠道商
-    const USER_TYPE_BRAND = 2;//品牌商
+    const USER_TYPE_CUSTOMER = 2;//品牌商
 
     protected $guarded = [];
 
@@ -58,7 +58,7 @@ class BiUser extends User
         $map = [
             self::USER_TYPE_ALL=>'全部',
             self::USER_TYPE_CHANNEL=>'渠道商',
-            self::USER_TYPE_BRAND=>'品牌商',
+            self::USER_TYPE_CUSTOMER=>'品牌商',
         ];
         return $userType !==null ? $map[$userType] : $map;
     }

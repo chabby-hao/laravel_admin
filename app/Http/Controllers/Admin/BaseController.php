@@ -69,7 +69,7 @@ class BaseController extends Controller
         if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
             //渠道商
             return DeviceObject::CACHE_CHANNEL_PRE;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
+        } elseif ($user->user_type == BiUser::USER_TYPE_CUSTOMER) {
             //品牌商
             return DeviceObject::CACHE_BRAND_PRE;
         } else {

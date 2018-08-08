@@ -127,7 +127,7 @@ class UserController extends BaseController
             $input['type_id'] = 0;
         } elseif ($input['user_type'] == BiUser::USER_TYPE_CHANNEL && $input['channel_id']) {
             $input['type_id'] = $input['channel_id'];
-        } elseif ($input['user_type'] == BiUser::USER_TYPE_BRAND && $input['brand_id']) {
+        } elseif ($input['user_type'] == BiUser::USER_TYPE_CUSTOMER && $input['brand_id']) {
             $input['type_id'] = $input['brand_id'];
         } else {
             return $this->outPutError('信息有误，请确认填写正确');
