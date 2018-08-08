@@ -86,7 +86,7 @@ class DeviceAddressStat extends BaseCommand
             return [];
         });
 
-        Log::notice('device address stat complete, total : ' . $sum, $statActive);
+        Log::notice('device address stat complete, total : ' . array_sum($statActive), $statActive);
 
     }
 
