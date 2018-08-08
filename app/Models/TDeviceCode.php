@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Cache;
  * @property int $rom
  * @property int $mcu
  * @property int $pid
+ * @property int $scene_id
+ * @property int $customer_id
  * @property int $model 0=>未知设备类型，1=eb001,2=eb001b,3=eb001c,4=eb001a,5=eb001d,7=B640,91=童鞋，92=手环，93=老人拐杖，99=测试
  * @property \Carbon\Carbon|null $product_date 生产时间
  * @property int $product_type 生产类型 1量产 2试产
@@ -42,6 +44,8 @@ use Illuminate\Support\Facades\Cache;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereVer($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode wherePid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TDeviceCode whereSceneId($value)
  * @mixin \Eloquent
  * @property int $ebike_type_id 车型Id
  * @property int $channel_id 渠道id
@@ -130,6 +134,8 @@ class TDeviceCode extends \App\Models\Base\TDeviceCode
         'delivered_at',
         'is_lost',
         'device_cycle',
+        'customer_id',
+        'scene_id',
 	];
 
     public static function getByUdid($udid)

@@ -33,7 +33,7 @@ class DbSync extends BaseCommand
     {
         $this->categoryDicNew();
         //已使用BI发货，不需要老的渠道品牌同步了
-        //$this->deviceCode();
+        $this->deviceCode();
     }
 
     /**
@@ -172,8 +172,6 @@ class DbSync extends BaseCommand
         //手动修改漏掉的渠道
         $dicNews[11] = ['name' => '双马'];
 
-        /*$types = TDeviceCategoryDicNew::whereLevel(5)->whereProducts(6)->get()->toArray();
-        $types = Helper::transToOneDimensionalArray($types, 'type');*/
         $page = 1;
         $perPage = 100;
         $model = TDeviceCode::getDeviceModelHasType();
@@ -214,15 +212,17 @@ class DbSync extends BaseCommand
 
                     $channelId = BiChannel::whereChannelName($channelName)->first()->id;
 
-                    $ebike = BiEbikeType::whereEbikeName($oldEvName)->first();
+                    //$ebikeId = BiEbikeType::whereEbikeName($oldEvName)->first()->id;
+                    $sceneId = BiScene::whereScenesName($oldEvName)->first()->id;
 
-                    $brandId = BiBrand::whereBrandName($brandName)->first()->id;
+                    //$brandId = BiBrand::whereBrandName($brandName)->first()->id;
+                    $customerId = BiCustomer::whereCustomerName($brandName)->first()->id;
 
-                    $ebikeId = $ebike->id;
-
-                    $deviceCode->channel_id = $channelId;
-                    $deviceCode->ebike_type_id = $ebikeId;
-                    $deviceCode->brand_id = $brandId;
+                    //$deviceCode->channel_id = $channelId;
+                    //$deviceCode->ebike_type_id = $ebikeId;
+                    //$deviceCode->brand_id = $brandId;
+                    $deviceCode->customer_id = $customerId;
+                    $deviceCode->scene_id = $sceneId;
 
 
                     //设备状态
@@ -231,9 +231,6 @@ class DbSync extends BaseCommand
                     } else {
                         $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;//渠道库存
                     }
-                    /*else{
-                        $deviceCode->device_cycle = TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE;
-                    }*/
 
 
                     //车型更新初始化
@@ -262,23 +259,6 @@ class DbSync extends BaseCommand
                         }
                     }
 
-                    //var_dump($deviceCode->toArray());
-
-                    /*$brandName = $dicNew->name;
-                    $brandId = BiBrand::whereBrandName($brandName)->first()->id;
-                    //$brandId = $row->category;
-                    $evModel = substr($row->model, -3);
-                    if($ebike = BiEbikeType::whereBrandId($brandId)->whereEvModel($evModel)->first()){
-                        $deviceCode->ebike_type_id = $ebike->id;
-                        if($dicNew = TDeviceCategoryDicNew::whereType($type)->whereLevel(5)->first()){
-                            $channel = $dicNew->channel;
-                            $channelName = $dicNews[$channel]['name'];
-                            $channelId = BiChannel::whereChannelName($channelName)->first()->id;
-                            $deviceCode->channel_id = $channelId;
-                            $deviceCode->save();
-                            echo "process success udid: $udid, chanel_id:$channelId, eb_type_id:{$ebike->id}" . "\n";
-                        }
-                    }*/
                 }
 
                 $deviceCode->save();
