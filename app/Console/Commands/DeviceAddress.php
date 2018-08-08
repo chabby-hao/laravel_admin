@@ -67,10 +67,6 @@ class DeviceAddress extends BaseCommand
                         $deviceCode->pid = $pid;
                         $deviceCode->save();
 
-                        BiActiveDevice::updateOrCreate([
-                            'date'=>$date,
-                            'udid'=>$udid,
-                        ]);
 
                         if ($loc['time'] && $loc['time'] > $dayStartTime) {
                             BiActiveCityDevice::updateOrCreate([
@@ -78,6 +74,12 @@ class DeviceAddress extends BaseCommand
                                 'pid'=>$pid,
                                 'udid'=>$udid,
                             ]);
+
+                            BiActiveDevice::updateOrCreate([
+                                'date'=>$date,
+                                'udid'=>$udid,
+                            ]);
+
                             $statActive[$pid]++;
                         }
                     }
