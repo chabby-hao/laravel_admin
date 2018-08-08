@@ -212,11 +212,11 @@ class DbSync extends BaseCommand
 
                     $channelId = BiChannel::whereChannelName($channelName)->first()->id;
 
-                    //$ebikeId = BiEbikeType::whereEbikeName($oldEvName)->first()->id;
-                    $sceneId = BiScene::whereScenesName($oldEvName)->first()->id;
+                    $ebikeId = BiEbikeType::whereEbikeName($oldEvName)->first()->id;
+                    $sceneId = BiScene::whereScenesName($oldEvName)->first()->id ?: 0;
 
-                    //$brandId = BiBrand::whereBrandName($brandName)->first()->id;
-                    $customerId = BiCustomer::whereCustomerName($brandName)->first()->id;
+                    $brandId = BiBrand::whereBrandName($brandName)->first()->id;
+                    $customerId = BiCustomer::whereCustomerName($brandName)->first()->id ?: 0;
 
                     //$deviceCode->channel_id = $channelId;
                     //$deviceCode->ebike_type_id = $ebikeId;
