@@ -18,6 +18,7 @@ namespace App\Models;
 class BiCustomer extends \App\Models\Base\BiCustomer
 {
 	protected $fillable = [
+        'id',
 		'channel_id',
 		'customer_name',
 		'customer_remark'
