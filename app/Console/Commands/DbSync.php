@@ -7,9 +7,11 @@ use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
+use App\Models\BiScene;
 use App\Models\TDeviceCategory;
 use App\Models\TDeviceCategoryDicNew;
 use App\Models\TDeviceCode;
@@ -58,6 +60,10 @@ class DbSync extends BaseCommand
 
         $arrFlip = array_flip($arr);
 
+
+        $channelMap = BiChannel::getChannelMap();
+        $channelMap = array_flip($channelMap);
+
         foreach ($res as $row) {
             $name = $row->name;
             if ($row->level == 2) {
@@ -82,7 +88,6 @@ class DbSync extends BaseCommand
                 //var_dump($a);exit;
             } elseif ($row->level == 5) {
                 //品牌
-
                 try {
                     BiBrand::firstOrCreate([
                         'brand_name' => $name,
@@ -98,6 +103,27 @@ class DbSync extends BaseCommand
                         'brand_remark' => $row->remark,
                     ]);
                 }
+
+                $channelId = $channelMap[$row->channel];
+                //客户
+                try {
+                    BiCustomer::firstOrCreate([
+                        'brand_name' => $name,
+                        'channel_id'=>$channelId,
+                    ], [
+                        'id' => $row->type,
+                        'brand_remark' => $row->remark,
+                    ]);
+                }catch (\Exception $e){
+                    BiCustomer::where([
+                        'id'=>$row->type,
+                        'channel_id'=>$channelId,
+                    ])->update([
+                        'customer_name' => $name,
+                        'customer_remark' => $row->remark,
+                    ]);
+                }
+
             }
         }
 
@@ -111,23 +137,22 @@ class DbSync extends BaseCommand
                     $brandName = $val->name;
                     $brandModel = BiBrand::whereBrandName($brandName)->first();
                     $brandId = $brandModel->id;
-                    try{
-                        BiEbikeType::firstOrCreate([
-                            'ebike_name' => $name,
-                            'ev_model'=>$row->ev_model,
-                        ], [
-                            'ebike_remark' => $row->remark,
-                            'brand_id' => $brandId,
-                        ]);
-                    }catch (\Exception $e){
-                        BiEbikeType::where([
-                            'ebike_name' => $name,
-                        ])->update([
-                            'ev_model'=>$row->ev_model,
-                            'ebike_remark' => $row->remark,
-                            'brand_id' => $brandId,
-                        ]);
-                    }
+
+                    BiEbikeType::firstOrCreate([
+                        'brand_id' => $brandId,
+                        'ev_model'=>$row->ev_model,
+                    ], [
+                        'ebike_remark' => $row->remark,
+                        'ebike_name' => $name,
+                    ]);
+
+                    BiScene::firstOrCreate([
+                        'ev_model'=>$row->ev_model,
+                        'customer_id'=>$row->type,
+                    ], [
+                        'scenes_name' => $name,
+                        'scenes_remark' => $row->remark,
+                    ]);
                 }
             }
         }
