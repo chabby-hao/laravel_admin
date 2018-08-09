@@ -81,7 +81,7 @@ class StatDevice extends BaseCommand
     {
         $where['date'] = Carbon::today()->toDateString();
         $total = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->count();
-        dd($total);
+        dump($total);
     }
 
 
