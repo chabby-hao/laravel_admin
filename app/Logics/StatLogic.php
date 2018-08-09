@@ -16,6 +16,7 @@ class StatLogic extends BaseLogic
     public static function setDailyActiveData($keyPre, $id, $data)
     {
         $cacheTime = Carbon::now()->addDay();
+        var_dump($keyPre, $id, $data);
         Cache::store('redis')->put('daily_active:' . $keyPre . $id, $data, $cacheTime);
     }
 
