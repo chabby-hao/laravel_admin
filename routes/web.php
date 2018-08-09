@@ -24,6 +24,7 @@ Route::get('/stat/requestCount','Bi\StatController@requestCount');
 });*/
 
 Route::get('/test', function(){
+    return ['code'=>333];
     echo 666;
     var_dump(\App\Logics\StatLogic::getDailyActiveData(\App\Objects\DeviceObject::CACHE_CHANNEL_PRE), 1);
     var_dump(877);
