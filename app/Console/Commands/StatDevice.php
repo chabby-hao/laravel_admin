@@ -39,17 +39,8 @@ class StatDevice extends BaseCommand
     public function handle()
     {
 
-        $ids = BiChannel::getAllChannelIds();
-
-        foreach ($ids as $id){
-            $where = [
-                'channel_id'=>$id
-            ];
-            $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->get()->toArray();
-            var_dump($rs);
-            exit;
-        }
-
+        $channels = BiChannel::getAllChannelIds();
+        $this->process($channels, 'channel_id',1);
 
 
         //日活跃
@@ -65,6 +56,31 @@ class StatDevice extends BaseCommand
         //七日活跃曲线图
 
         //出行次数分布
+    }
+
+    private function process($ids, $whereName, $keyPre)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        foreach ($ids as $id) {
+
+            if ($id && $whereName) {
+                $where = [$whereName => $id];
+            } else {
+                $where = [];
+            }
+            $this->dailyActive($where, $keyPre)
+
+        }
+
+    }
+
+    /**
+     * 日活跃
+     */
+    private function dailyActive($where, $keyPre)
+    {
+        $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->select(['count(*) as total'])->first();
+        var_dump($rs->total);
     }
 
 
