@@ -79,8 +79,9 @@ class StatDevice extends BaseCommand
      */
     private function dailyActive($where, $keyPre)
     {
+        $where['date'] = Carbon::today()->toDateString();
         $total = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->count();
-        var_dump($total);
+        dd($total);
     }
 
 
