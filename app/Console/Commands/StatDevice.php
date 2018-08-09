@@ -39,9 +39,17 @@ class StatDevice extends BaseCommand
     public function handle()
     {
 
-        $channelIds = BiChannel::getAllChannelIds();
+        $ids = BiChannel::getAllChannelIds();
 
-        $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->get()->toArray();
+        foreach ($ids as $id){
+            $where = [
+                'channel_id'=>$id
+            ];
+            $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->get()->toArray();
+            var_dump($rs);
+        }
+
+
         var_dump($rs);
 
 
