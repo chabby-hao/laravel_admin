@@ -68,7 +68,7 @@ class StatDevice extends BaseCommand
             } else {
                 $where = [];
             }
-            $this->dailyActive($where, $keyPre)
+            $this->dailyActive($where, $keyPre);
 
         }
 
