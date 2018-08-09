@@ -79,7 +79,7 @@ class StatDevice extends BaseCommand
      */
     private function dailyActive($where, $keyPre)
     {
-        $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->select(['count(*) as total'])->first();
+        $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->selectraw('count(*) as total')->first();
         var_dump($rs->total);
     }
 
