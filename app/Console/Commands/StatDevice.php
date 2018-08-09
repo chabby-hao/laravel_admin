@@ -6,6 +6,7 @@ namespace App\Console\Commands;
 use App\Libs\Helper;
 use App\Logics\DeviceLogic;
 use App\Logics\LocationLogic;
+use App\Logics\StatLogic;
 use App\Models\BiActiveCityDevice;
 use App\Models\BiActiveDevice;
 use App\Models\BiBrand;
@@ -40,7 +41,7 @@ class StatDevice extends BaseCommand
     {
 
         $channels = BiChannel::getAllChannelIds();
-        $this->process($channels, 'channel_id',1);
+        $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
 
 
         //日活跃
@@ -60,7 +61,6 @@ class StatDevice extends BaseCommand
 
     private function process($ids, $whereName, $keyPre)
     {
-        $cacheTime = Carbon::now()->addDay();
         foreach ($ids as $id) {
 
             if ($id && $whereName) {
@@ -68,7 +68,10 @@ class StatDevice extends BaseCommand
             } else {
                 $where = [];
             }
-            $this->dailyActive($where, $keyPre);
+            //日活跃
+            $this->dailyActive($where, $id, $keyPre);
+
+
 
         }
 
@@ -77,11 +80,12 @@ class StatDevice extends BaseCommand
     /**
      * 日活跃
      */
-    private function dailyActive($where, $keyPre)
+    private function dailyActive($where, $id,  $keyPre)
     {
         $where['date'] = Carbon::today()->toDateString();
         $total = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->count();
-        dump($total);
+
+        StatLogic::setDailyActiveData($keyPre, $id, $total);
     }
 
 

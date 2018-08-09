@@ -24,6 +24,7 @@ Route::get('/stat/requestCount','Bi\StatController@requestCount');
 });*/
 
 Route::get('/test', function(){
+    var_dump(\App\Logics\StatLogic::getDailyActiveData(\App\Objects\DeviceObject::CACHE_CHANNEL_PRE), 1);
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
