@@ -51,8 +51,6 @@ class StatDevice extends BaseCommand
         }
 
 
-        var_dump($rs);
-
 
         //日活跃
 
