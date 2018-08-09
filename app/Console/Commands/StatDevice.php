@@ -47,6 +47,7 @@ class StatDevice extends BaseCommand
             ];
             $rs = BiActiveCityDevice::join('care.t_device_code','qr','=','udid')->where($where)->get()->toArray();
             var_dump($rs);
+            exit;
         }
 
 
