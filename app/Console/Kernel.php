@@ -33,11 +33,11 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         if(env('APP_ENV') != 'local'){
-            $schedule->command(WarningMile::class)->hourly();
-            $schedule->command(DbSync::class)->everyFiveMinutes();
-            $schedule->command(DeviceCache::class)->everyThirtyMinutes();
-            $schedule->command(MapCache::class)->hourly();
-            $schedule->command(DeviceAddress::class)->everyFiveMinutes();
+            $schedule->command(WarningMile::class)->hourly()->runInBackground();
+            $schedule->command(DbSync::class)->everyFiveMinutes()->runInBackground();
+            $schedule->command(DeviceCache::class)->everyThirtyMinutes()->runInBackground();
+            $schedule->command(MapCache::class)->hourly()->runInBackground();
+            $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
         }
     }
 
