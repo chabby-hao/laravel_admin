@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\DbSync;
+use App\Console\Commands\DeviceAddress;
 use App\Console\Commands\DeviceCache;
 use App\Console\Commands\MapCache;
 use App\Console\Commands\Test;
@@ -36,6 +37,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(DbSync::class)->everyFiveMinutes();
             $schedule->command(DeviceCache::class)->everyThirtyMinutes();
             $schedule->command(MapCache::class)->hourly();
+            $schedule->command(DeviceAddress::class)->everyFiveMinutes();
         }
     }
 
