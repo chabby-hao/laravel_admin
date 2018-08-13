@@ -44,8 +44,6 @@ class StatDevice extends BaseCommand
     public function handle()
     {
 
-        $this->tripFrequencyDistribution([],'0', DeviceObject::CACHE_ALL_PRE);
-
         $channels = BiChannel::getAllChannelIds();
         $customers = BiCustomer::getAllIds();
         $scenes = BiScene::getAllIds();
@@ -261,7 +259,6 @@ class StatDevice extends BaseCommand
         $totalAll = count($rs);
 
         $countMap = array_count_values($rs);
-        var_dump($countMap);
         ksort($countMap);
         $map = [1, 2, 3, 4];
         $max = max($map);
@@ -288,8 +285,6 @@ class StatDevice extends BaseCommand
             'value' => $maxTotal,
             'zb' => number_format($maxTotal / $totalAll, 2),
         ];
-        var_dump($data, $totalAll, array_sum(array_values($countMap)));
-        exit;
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
