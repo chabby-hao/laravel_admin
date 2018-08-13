@@ -271,7 +271,7 @@ class StatDevice extends BaseCommand
                     break;
                 } elseif ($count == $cond) {
                     $data[] = [
-                        'name' => $cond . '次',
+                        'name' => $cond . 'ci',
                         'value' => $total,
                         'zb' => $totalAll === 0 ? 0 : number_format($total / $totalAll, 2),
                     ];
@@ -281,7 +281,7 @@ class StatDevice extends BaseCommand
 
         }
         $data[] = [
-            'name' => $max . '次以上',
+            'name' => $max . 'ci yi shang',
             'value' => $maxTotal,
             'zb' => $totalAll === 0 ? 0 : number_format($maxTotal / $totalAll, 2),
         ];
