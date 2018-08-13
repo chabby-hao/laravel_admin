@@ -6,7 +6,7 @@
 
         var pselect = $("select[name='channel_id']");
 
-        if(pselect.val()){
+        if(pselect.val() && !'{{Request::input('id')}}'){
             getCustomer();
         }
 
