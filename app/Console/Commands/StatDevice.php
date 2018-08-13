@@ -150,7 +150,7 @@ class StatDevice extends BaseCommand
      */
     private function activeGeographicalDistribution($where, $id, $keyPre)
     {
-        $provinceMap = BiProvince::getAllProvinceMap(false);
+        $provinceMap = BiProvince::getAllProvinceMap(true);
         // pid->province           pid->total         province->total
         $where['date'] = Carbon::today()->toDateString();
         $rs = BiActiveCityDevice::join('care.t_device_code', 'qr', '=', 'udid')
@@ -271,7 +271,7 @@ class StatDevice extends BaseCommand
                     break;
                 } elseif ($count == $cond) {
                     $data[] = [
-                        'name' => $cond . 'ci',
+                        'name' => $cond . '次',
                         'value' => $total,
                         'zb' => $totalAll === 0 ? 0 : number_format($total / $totalAll, 2),
                     ];
@@ -281,10 +281,11 @@ class StatDevice extends BaseCommand
 
         }
         $data[] = [
-            'name' => $max . 'ci yi shang',
+            'name' => $max . '次以上',
             'value' => $maxTotal,
             'zb' => $totalAll === 0 ? 0 : number_format($maxTotal / $totalAll, 2),
         ];
+        var_dump($data);
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
