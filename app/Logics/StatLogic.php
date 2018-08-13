@@ -135,7 +135,6 @@ class StatLogic extends BaseLogic
 
     public static function setTripFrequencyDistribution($data, $keypre, $id)
     {
-        var_dump($data);
         $cacheTime = Carbon::now()->addDay();
         Cache::store('redis')->put('trip_frequency_distribution:' . $keypre . $id, $data, $cacheTime);
     }
