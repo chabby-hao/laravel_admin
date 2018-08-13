@@ -72,7 +72,7 @@
                             if (data.children) {
                                 for (var i = 0; i < data.children.length; i++) {
                                     var eb = data['children'][i];
-                                    var ebOption = $("<option value='" + eb.id + "'>" + eb.customer_name + "</option>")
+                                    var ebOption = $("<option value='" + eb.id + "'>" + eb.scenes_name + "</option>")
                                     if (eb.id == '{{Request::input('scene_id')}}') {
                                         ebOption.attr({
                                             selected:true,
