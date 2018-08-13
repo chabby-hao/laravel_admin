@@ -15,9 +15,9 @@
     });
     if (select_user_type.val() === '{{\App\Models\BiUser::USER_TYPE_CHANNEL}}') {
         $("#channel").show();
-        $("#customer").find("select[name='brand_id']").val('');
+        //$("#customer").find("select[name='brand_id']").val('');
     } else if (select_user_type.val() === '{{\App\Models\BiUser::USER_TYPE_CUSTOMER}}') {
         $("#customer").show();
-        $("#channel").show().find("select[name='channel_id']").val('');
+        //$("#channel").show().find("select[name='channel_id']").val('');
     }
 </script>
