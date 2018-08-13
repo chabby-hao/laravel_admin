@@ -251,12 +251,14 @@ class StatDevice extends BaseCommand
     {
         $rs = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')
             ->where($where)
+            ->where('begin','>',strtotime('-1 day'))
             ->groupBy(['udid'])
             ->selectRaw('count(*) as total')
             ->get()->toArray();
 
         $rs = Helper::transToOneDimensionalArray($rs, 'total');
 
+        var_dump($rs);
         $totalAll = array_sum($rs);
 
         $countMap = array_count_values($rs);
