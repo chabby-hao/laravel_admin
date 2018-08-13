@@ -11,9 +11,11 @@ use App\Models\BiActiveCityDevice;
 use App\Models\BiActiveDevice;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
 use App\Models\BiProvince;
+use App\Models\BiScene;
 use App\Models\TDevice;
 use App\Models\TDeviceCategory;
 use App\Models\TDeviceCategoryDicNew;
@@ -43,23 +45,18 @@ class StatDevice extends BaseCommand
     {
 
         $channels = BiChannel::getAllChannelIds();
+        $customers = BiCustomer::getAllIds();
+        $scenes = BiScene::getAllIds();
+
+
+        $this->process([0], null, DeviceObject::CACHE_ALL_PRE);//全部
+
         $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
 
+        $this->process($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
 
-        //日活跃
+        $this->process($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
 
-        //出行次数
-
-        //出行频次
-        //出行距离
-
-        //活跃车辆地理分布 bi_active_city_devices
-
-        //车型分布
-
-        //七日活跃曲线图
-
-        //出行次数分布
     }
 
     private function process($ids, $whereName, $keyPre)
@@ -92,6 +89,8 @@ class StatDevice extends BaseCommand
             //七日活跃曲线图
             $this->activeCurve($where, $id, $keyPre);
 
+            //出行次数分布
+            $this->tripFrequencyDistribution($where, $ids, $keyPre);
 
         }
 
@@ -130,6 +129,7 @@ class StatDevice extends BaseCommand
 
         $freq = number_format($total / $count, 1);
 
+        StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
 
     /**
@@ -139,7 +139,7 @@ class StatDevice extends BaseCommand
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->sum('mile');
 
-
+        StatLogic::setTripDistance($total, $keyPre, $id);
     }
 
     /**
@@ -175,6 +175,8 @@ class StatDevice extends BaseCommand
             $provinceTotalMap[$provinceMap[$pid]] = $total;
         }
 
+        StatLogic::setActiveGeographicalDistribution($provinceTotalMap, $keyPre, $id);
+
     }
 
     /**
@@ -204,6 +206,8 @@ class StatDevice extends BaseCommand
             ];
         }
 
+        StatLogic::setVehicleDistribution($data, $keyPre, $id);
+
     }
 
     /**
@@ -228,6 +232,7 @@ class StatDevice extends BaseCommand
             ];
         }
 
+        StatLogic::setActiveCurve($data, $keyPre, $id);
     }
 
     /**
@@ -270,6 +275,9 @@ class StatDevice extends BaseCommand
 
         }
 
+        StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
+
     }
+
 
 }
