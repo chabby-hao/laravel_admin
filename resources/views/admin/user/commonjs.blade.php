@@ -18,6 +18,10 @@
         $("#customer").find("select[name='customer_id']").val('');
     } else if (select_user_type.val() === '{{\App\Models\BiUser::USER_TYPE_CUSTOMER}}') {
         $("#customer").show();
-        $("#channel").show().find("select[name='channel_id']").val('');
+        if('{{Request::input('id')}}'){
+
+        }else{
+            $("#channel").show().find("select[name='channel_id']").val('');
+        }
     }
 </script>
