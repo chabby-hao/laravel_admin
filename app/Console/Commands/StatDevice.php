@@ -189,7 +189,7 @@ class StatDevice extends BaseCommand
         $brandMap = BiBrand::getBrandMap();
 
         $rs = TDeviceCode::getDeviceModel()->where($where)->groupBy(['ebike_type_id'])
-            ->selectRaw('count(*) as total,ebike_type_id')->get();
+            ->selectRaw('count(*) as total,ebike_type_id')->get()->toArray();
 
         $totalRs = array_map(function ($v) {
             return $v['total'];
