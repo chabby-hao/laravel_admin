@@ -129,7 +129,7 @@ class StatDevice extends BaseCommand
 
         $count = TDeviceCode::where($where)->count();
 
-        $freq = $count == 0 ? 0 : number_format($total / $count / 30, 1);
+        $freq = $count === 0 ? 0 : number_format($total / $count / 30, 1);
 
         StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
@@ -165,7 +165,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => $provinceMap[$pid],
                 'value' => $total,
-                'zb' => number_format($total / $totalAll, 2),
+                'zb' => $totalAll === 0 ? 0 : number_format($total / $totalAll, 2),
             ];
         }
 
@@ -208,7 +208,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
                 'brand' => $brandMap[$brandId],
-                'zb' => number_format($deviceCode->total / $total, 2),
+                'zb' => $total === 0 ? 0 : number_format($deviceCode->total / $total, 2),
                 'value' => $deviceCode->total,
             ];
         }
@@ -235,7 +235,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => Carbon::createFromFormat('Y-m-d', $row->date)->format('m.d'),
                 'value' => $row->total,
-                'zb' => number_format($row->total / $totalAll, 2)
+                'zb' => $totalAll === 0 ? 0 : number_format($row->total / $totalAll, 2)
             ];
         }
 
@@ -273,7 +273,7 @@ class StatDevice extends BaseCommand
                     $data[] = [
                         'name' => $cond . '次',
                         'value' => $total,
-                        'zb' => number_format($total / $totalAll, 2),
+                        'zb' => $totalAll === 0 ? 0 : number_format($total / $totalAll, 2),
                     ];
                     break;
                 }
@@ -283,7 +283,7 @@ class StatDevice extends BaseCommand
         $data[] = [
             'name' => $max . '次以上',
             'value' => $maxTotal,
-            'zb' => number_format($maxTotal / $totalAll, 2),
+            'zb' => $totalAll === 0 ? 0 : number_format($maxTotal / $totalAll, 2),
         ];
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
