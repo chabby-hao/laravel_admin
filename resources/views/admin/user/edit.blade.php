@@ -115,7 +115,6 @@
     </div>
 
     @include('admin.user.commonjs')
-    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 
 @endsection
