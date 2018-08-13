@@ -18,6 +18,7 @@ use App\Logics\LocationLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Logics\RedisLogic;
+use App\Logics\StatLogic;
 use App\Logics\UserLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
@@ -815,8 +816,24 @@ class DeviceController extends BaseController
         ]);
     }
 
-    public function stat()
+    public function stat(Request $request)
     {
+
+        if($request->isXmlHttpRequest() || $request->input('a') == 1){
+            $keypre = $this->getCustomerKeyPre();
+            $id = Auth::user()->type_id;
+            $data = [
+                'dailyActive' => StatLogic::getDailyActive($keypre, $id),
+                'travelTimes' => StatLogic::getTravelTimes($keypre, $id),
+                'travelFrequency' => StatLogic::getTravelFrequency($keypre, $id),
+                'tripDistance' => StatLogic::getTripDistance($keypre, $id),
+                'activeGeographicalDistribution' => StatLogic::getActiveGeographicalDistribution($keypre, $id),
+                'vehicleDistribution' => StatLogic::getVehicleDistribution($keypre, $id),
+                'activeCurve' => StatLogic::getActiveCurve($keypre, $id),
+                'tripFrequencyDistribution' => StatLogic::getTripFrequencyDistribution($keypre, $id),
+            ];
+            return $this->outPut($data);
+        }
 
         return view('admin.device.stat');
     }
