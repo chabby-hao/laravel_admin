@@ -265,10 +265,14 @@ class StatDevice extends BaseCommand
         var_dump($countMap);
         ksort($countMap);
         $map = [1, 2, 3, 4];
+        $max = max($map);
+        $maxTotal = 0;
         $data = [];
         foreach ($countMap as $count => $total) {
             foreach ($map as $cond) {
-                if ($count == $cond) {
+                if ($count > $max) {
+                    $maxTotal += $total;
+                } elseif ($count == $cond) {
                     $data[] = [
                         'name' => $cond . '次',
                         'value' => $total,
@@ -276,17 +280,16 @@ class StatDevice extends BaseCommand
                     ];
                     break;
                 }
-                if ($count > $cond) {
-                    $data[] = [
-                        'name' => $cond . '次以上',
-                        'value' => $total,
-                        'zb' => ceil($total / $totalAll),
-                    ];
-                }
             }
 
         }
-        var_dump($data);exit;
+        $data[] = [
+            'name' => $max . '次以上',
+            'value' => $maxTotal,
+            'zb' => ceil($maxTotal / $totalAll),
+        ];
+        var_dump($data);
+        exit;
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
