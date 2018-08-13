@@ -25,10 +25,10 @@ Route::get('/stat/requestCount','Bi\StatController@requestCount');
 
 Route::get('/test', function(){
 
-    $a = \App\Logics\StatLogic::setTripFrequencyDistribution(111, 'all:', 0);
+    //$a = \App\Logics\StatLogic::setTripFrequencyDistribution(111, 'all:', 0);
     $b = \App\Logics\StatLogic::getTripFrequencyDistribution('all:', 0);
 
-    var_dump($a, $b);exit;
+    var_dump( $b);exit;
 
     echo 666;
     var_dump(\App\Logics\StatLogic::getDailyActiveData(\App\Objects\DeviceObject::CACHE_CHANNEL_PRE, 1));
