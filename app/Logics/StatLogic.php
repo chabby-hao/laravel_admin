@@ -137,7 +137,7 @@ class StatLogic extends BaseLogic
     {
         var_dump($data);
         $cacheTime = Carbon::now()->addDay();
-        Cache::store('redis')->put('trip_frequency_distribution:' . $keypre . $id, $data, $cacheTime);
+        Cache::store('redis')->put('aa:' . $keypre . $id, $data, $cacheTime);
     }
 
     /**
@@ -148,7 +148,7 @@ class StatLogic extends BaseLogic
      */
     public static function getTripFrequencyDistribution($keypre, $id = 0)
     {
-        return Cache::store('redis')->get('trip_frequency_distribution:' . $keypre . $id);
+        return Cache::store('redis')->get('aa:' . $keypre . $id);
     }
 
 
