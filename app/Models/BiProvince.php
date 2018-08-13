@@ -15,13 +15,15 @@ use App\Libs\Helper;
 class BiProvince extends \App\Models\Base\BiProvince
 {
 	protected $fillable = [
-		'province'
+		'province',
+        'short_name',
 	];
 
-	public static function getAllProvinceMap()
+	public static function getAllProvinceMap($short = false)
     {
+        $name = $short ? 'short_name' : 'province';
         $rs = self::all()->toArray();
-        $map = Helper::transToKeyValueArray($rs, 'id', 'province');
+        $map = Helper::transToKeyValueArray($rs, 'id', $name);
         return $map;
     }
 

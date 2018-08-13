@@ -44,6 +44,8 @@ class StatDevice extends BaseCommand
     public function handle()
     {
 
+        $this->tripFrequencyDistribution([],'0', DeviceObject::CACHE_ALL_PRE);
+
         $channels = BiChannel::getAllChannelIds();
         $customers = BiCustomer::getAllIds();
         $scenes = BiScene::getAllIds();
@@ -104,6 +106,7 @@ class StatDevice extends BaseCommand
         $where['date'] = Carbon::today()->toDateString();
         $total = BiActiveCityDevice::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->count();
 
+        $total = number_format($total, 1);
         StatLogic::setDailyActive($total, $keyPre, $id);
     }
 
@@ -113,8 +116,7 @@ class StatDevice extends BaseCommand
     private function travelTimes($where, $id, $keyPre)
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->count();
-
-        StatLogic::setTravelTimes($total, $keyPre, $id);
+        StatLogic::setTravelTimes(number_format($total, 1), $keyPre, $id);
         return $total;
     }
 
@@ -123,11 +125,13 @@ class StatDevice extends BaseCommand
      */
     private function travelFrequency($where, $id, $keyPre)
     {
+        $timesWhere = $where;
+        $timesWhere[0] = ['begin', '>', strtotime('-30 days')];
         $total = $this->travelTimes($where, $id, $keyPre);
 
         $count = TDeviceCode::where($where)->count();
 
-        $freq = $count == 0 ? 0 : number_format($total / $count, 1);
+        $freq = $count == 0 ? 0 : number_format($total / $count / 30, 1);
 
         StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
@@ -139,6 +143,7 @@ class StatDevice extends BaseCommand
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->sum('mile');
 
+        $total = number_format($total, 1);
         StatLogic::setTripDistance($total, $keyPre, $id);
     }
 
@@ -147,7 +152,7 @@ class StatDevice extends BaseCommand
      */
     private function activeGeographicalDistribution($where, $id, $keyPre)
     {
-        $provinceMap = BiProvince::getAllProvinceMap();
+        $provinceMap = BiProvince::getAllProvinceMap(false);
         // pid->province           pid->total         province->total
         $where['date'] = Carbon::today()->toDateString();
         $rs = BiActiveCityDevice::join('care.t_device_code', 'qr', '=', 'udid')
@@ -189,11 +194,13 @@ class StatDevice extends BaseCommand
         $brandMap = BiBrand::getBrandMap();
 
         $rs = TDeviceCode::getDeviceModel()->where($where)->groupBy(['ebike_type_id'])
-            ->selectRaw('count(*) as total,ebike_type_id')->get()->toArray();
+            ->selectRaw('count(*) as total,ebike_type_id')->get();
+
+        $arrs = $rs->toArray();
 
         $totalRs = array_map(function ($v) {
             return $v['total'];
-        }, $rs);
+        }, $arrs);
         $total = array_sum($totalRs);
 
 
@@ -253,6 +260,7 @@ class StatDevice extends BaseCommand
         $totalAll = array_sum($rs);
 
         $countMap = array_count_values($rs);
+        var_dump($countMap);
         ksort($countMap);
         $map = [1, 2, 3, 4];
         $data = [];
@@ -276,6 +284,7 @@ class StatDevice extends BaseCommand
             }
 
         }
+        var_dump($data);exit;
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
