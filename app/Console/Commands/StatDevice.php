@@ -167,7 +167,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => $provinceMap[$pid],
                 'value' => $total,
-                'zb' => ceil($total / $totalAll),
+                'zb' => number_format($total / $totalAll, 2),
             ];
         }
 
@@ -210,7 +210,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
                 'brand' => $brandMap[$brandId],
-                'zb' => ceil($deviceCode->total / $total),
+                'zb' => number_format($deviceCode->total / $total, 2),
                 'value' => $deviceCode->total,
             ];
         }
@@ -237,7 +237,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => Carbon::createFromFormat('Y-m-d', $row->date)->format('m.d'),
                 'value' => $row->total,
-                'zb' => ceil($row->total / $totalAll)
+                'zb' => number_format($row->total / $totalAll, 2)
             ];
         }
 
@@ -276,7 +276,7 @@ class StatDevice extends BaseCommand
                     $data[] = [
                         'name' => $cond . '次',
                         'value' => $total,
-                        'zb' => ceil($total / $totalAll),
+                        'zb' => number_format($total / $totalAll, 2),
                     ];
                     break;
                 }
@@ -286,7 +286,7 @@ class StatDevice extends BaseCommand
         $data[] = [
             'name' => $max . '次以上',
             'value' => $maxTotal,
-            'zb' => ceil($maxTotal / $totalAll),
+            'zb' => number_format($maxTotal / $totalAll, 2),
         ];
         var_dump($data);
         exit;
