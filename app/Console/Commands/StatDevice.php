@@ -272,6 +272,7 @@ class StatDevice extends BaseCommand
             foreach ($map as $cond) {
                 if ($count > $max) {
                     $maxTotal += $total;
+                    break;
                 } elseif ($count == $cond) {
                     $data[] = [
                         'name' => $cond . '次',
