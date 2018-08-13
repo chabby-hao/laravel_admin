@@ -52,6 +52,8 @@
                                 </div>
                             </div>
 
+                            <?php var_dump($user->channel_id)?>
+
                             <div id="channel" class="control-group hide">
                                 <label class="control-label"><span class="text-error">*</span>渠道类型 :</label>
                                 <div class="controls">
@@ -68,7 +70,6 @@
                                 <label class="control-label"><span class="text-error">*</span>客户 :</label>
                                 <div class="controls">
                                     <select name="customer_id" class="span11">
-                                        <option value="">请选择</option>
                                         <?php foreach (\App\Models\BiCustomer::getCustomerMap() as $key => $val){ ?>
                                             @if($user->user_type == \App\Models\BiUser::USER_TYPE_CUSTOMER)
                                                 @if($key == $user->type_id)
