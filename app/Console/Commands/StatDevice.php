@@ -184,11 +184,12 @@ class StatDevice extends BaseCommand
      */
     private function vehicleDistribution($where, $id, $keyPre)
     {
+        $ebikes = BiEbikeType::all()->keyBy('id');
         $ebikeTypeMap = BiEbikeType::getTypeName();
         $brandMap = BiBrand::getBrandMap();
 
         $rs = TDeviceCode::getDeviceModel()->where($where)->groupBy(['ebike_type_id'])
-            ->selectRaw('count(*) as total,ebike_type_id,brand_id')->get();
+            ->selectRaw('count(*) as total,ebike_type_id')->get();
 
         $totalRs = array_map(function ($v) {
             return $v['total'];
@@ -198,9 +199,10 @@ class StatDevice extends BaseCommand
 
         $data = [];
         foreach ($rs as $deviceCode) {
+            $brandId = $ebikes[$deviceCode->ebike_type_id]['brand_id'];
             $data[] = [
                 'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
-                'brand' => $brandMap[$deviceCode->brand_id],
+                'brand' => $brandMap[$brandId],
                 'zb' => ceil($deviceCode->total / $total),
                 'value' => $deviceCode->total,
             ];
