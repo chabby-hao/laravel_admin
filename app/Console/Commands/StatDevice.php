@@ -191,8 +191,14 @@ class StatDevice extends BaseCommand
         $ebikeTypeMap = BiEbikeType::getTypeName();
         $brandMap = BiBrand::getBrandMap();
 
-        $rs = TDeviceCode::getDeviceModel()->where($where)->groupBy(['ebike_type_id'])
+        $rs = TDeviceCode::getDeviceModel()->where($where)->where('ebike_type_id','!=','')->groupBy(['ebike_type_id'])
             ->selectRaw('count(*) as total,ebike_type_id')->get();
+
+        foreach ($rs as $k => $row){
+            if(!$row->ebike_type_id){
+                unset($rs[$k]);
+            }
+        }
 
         $arrs = $rs->toArray();
 
