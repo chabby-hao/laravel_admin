@@ -52,8 +52,6 @@
                                 </div>
                             </div>
 
-                            <?php var_dump($user->channel_id)?>
-
                             <div id="channel" class="control-group hide">
                                 <label class="control-label"><span class="text-error">*</span>渠道类型 :</label>
                                 <div class="controls">
@@ -115,6 +113,7 @@
     </div>
 
     @include('admin.user.commonjs')
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 
 @endsection
