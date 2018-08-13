@@ -51,11 +51,11 @@ class StatDevice extends BaseCommand
 
         $this->process([0], null, DeviceObject::CACHE_ALL_PRE);//全部
 
-//        $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
-//
-//        $this->process($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
-//
-//        $this->process($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
+        $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
+
+        $this->process($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
+
+        $this->process($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
 
     }
 
@@ -90,7 +90,7 @@ class StatDevice extends BaseCommand
             $this->activeCurve($where, $id, $keyPre);
 
             //出行次数分布
-            $this->tripFrequencyDistribution($where, $ids, $keyPre);
+            $this->tripFrequencyDistribution($where, $id, $keyPre);
 
         }
 
@@ -285,7 +285,6 @@ class StatDevice extends BaseCommand
             'value' => $maxTotal,
             'zb' => $totalAll === 0 ? 0 : number_format($maxTotal / $totalAll, 2),
         ];
-        var_export($data);
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
