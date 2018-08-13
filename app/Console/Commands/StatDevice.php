@@ -285,7 +285,7 @@ class StatDevice extends BaseCommand
             'value' => $maxTotal,
             'zb' => $totalAll === 0 ? 0 : number_format($maxTotal / $totalAll, 2),
         ];
-        var_dump($data);
+        var_export($data);
 
         StatLogic::setTripFrequencyDistribution($data, $keyPre, $id);
 
