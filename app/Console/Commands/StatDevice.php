@@ -127,7 +127,7 @@ class StatDevice extends BaseCommand
 
         $count = TDeviceCode::where($where)->count();
 
-        $freq = number_format($total / $count, 1);
+        $freq = $count == 0 ? 0 : number_format($total / $count, 1);
 
         StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
