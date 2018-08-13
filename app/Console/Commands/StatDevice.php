@@ -51,11 +51,11 @@ class StatDevice extends BaseCommand
 
         $this->process([0], null, DeviceObject::CACHE_ALL_PRE);//全部
 
-        $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
-
-        $this->process($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
-
-        $this->process($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
+//        $this->process($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);
+//
+//        $this->process($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
+//
+//        $this->process($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
 
     }
 
