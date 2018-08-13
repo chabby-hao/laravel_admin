@@ -258,8 +258,7 @@ class StatDevice extends BaseCommand
 
         $rs = Helper::transToOneDimensionalArray($rs, 'total');
 
-        var_dump($rs);
-        $totalAll = array_sum($rs);
+        $totalAll = count($rs);
 
         $countMap = array_count_values($rs);
         var_dump($countMap);
