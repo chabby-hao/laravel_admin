@@ -7,7 +7,7 @@
         var pselect = $("select[name='channel_id']");
 
         if(pselect.val()){
-            getCustomer();
+            //getCustomer();
         }
 
         function getCustomer(){
