@@ -17,10 +17,11 @@ $middleware = [
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
     //\App\Http\Middleware\VerifyCsrfToken::class,
-    \App\Http\Middleware\AdminBeforeCheck::class,
+    //\App\Http\Middleware\AdminBeforeCheck::class,
 ];
 if(env('APP_ENV') === 'production'){
     $middleware[] = \App\Http\Middleware\VerifyCsrfToken::class;
+    $middleware[] = \App\Http\Middleware\AdminBeforeCheck::class;
 }
 
 Route::middlewareGroup('admin', $middleware);
