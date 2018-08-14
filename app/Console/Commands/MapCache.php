@@ -53,7 +53,7 @@ class MapCache extends BaseCommand
         $this->cacheData($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
         $this->cacheData($deviceTypes, 'device_type', DeviceObject::CACHE_DEVICE_TYPE_PRE);//设备型号
 
-        $this->chmodCache0777();
+        //$this->chmodCache0777();
     }
 
     private function cacheData($ids, $whereName = null, $keyPre)

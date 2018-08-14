@@ -119,6 +119,10 @@ class DeviceObject extends BaseObject
     public $brandName = '';//品牌名称
     public $channelId = 0;//渠道id
     public $channelName = '';//渠道名称
+    public $customerId = 0;//客户id
+    public $customerName = '';//客户名
+    public $sceneId = 0;//场景id
+    public $sceneName = '';//场景名称
     public $deliverdAt = '';//出货时间,datetime
     public $registerAt = '';//生成时间,datetime
     public $activeAt = '';//激活时间,datetime
