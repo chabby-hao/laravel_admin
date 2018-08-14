@@ -310,4 +310,19 @@ class ToolController extends BaseController
         return view('admin.tool.devicetochannel');
     }
 
+    public function cmdSend(Request $request)
+    {
+
+        if($request->isXmlHttpRequest()){
+            $input = $this->checkParams(['id','cmd'], $request->input());
+            if($udid = $this->getUdid($input['id'])){
+                CommandLogic::sendCmdByUdid($udid, $input['cmd']);
+                return $this->outPutSuccess();
+            }
+            return $this->outPutError('数据有误');
+        }
+
+        return view('admin.tool.cmdsend');
+    }
+
 }
