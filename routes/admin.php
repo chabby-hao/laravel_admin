@@ -10,14 +10,20 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middlewareGroup('admin', [
+
+$middleware = [
     \App\Http\Middleware\EncryptCookies::class,
     \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
     //\App\Http\Middleware\VerifyCsrfToken::class,
     \App\Http\Middleware\AdminBeforeCheck::class,
-]);
+];
+if(env('APP_ENV') === 'production'){
+    $middleware[] = \App\Http\Middleware\VerifyCsrfToken::class;
+}
+
+Route::middlewareGroup('admin', $middleware);
 
 Route::any('/index/welcome', 'Admin\IndexController@welcome')->name('admin-home');
 
