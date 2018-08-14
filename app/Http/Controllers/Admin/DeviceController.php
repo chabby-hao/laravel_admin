@@ -22,9 +22,11 @@ use App\Logics\StatLogic;
 use App\Logics\UserLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
+use App\Models\BiScene;
 use App\Models\BiUser;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
@@ -329,6 +331,8 @@ class DeviceController extends BaseController
         $brandMap = BiBrand::getBrandMap();
         $ebikeTypeMap = BiEbikeType::getTypeName();
         $channelMap = BiChannel::getChannelMap();
+        $customerMap = BiCustomer::getCustomerMap();
+        $sceneMap = BiScene::getTypeName();
 
         /** @var TDeviceCode $device */
         foreach ($deviceList as $device) {
@@ -338,6 +342,8 @@ class DeviceController extends BaseController
             $deviceObj->setEbikeTypeName($ebikeTypeMap[$device->ebike_type_id]);
             $deviceObj->setBrandName($brandMap[$device->brand_id]);
             $deviceObj->setChannelName($channelMap[$device->channel_id]);
+            $deviceObj->setCustomerName($customerMap[$device->customer_id]);
+            $deviceObj->setSceneName($sceneMap[$device->scene_id]);
             $data[] = $deviceObj;
         }
 
