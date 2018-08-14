@@ -198,8 +198,8 @@ class StatDevice extends BaseCommand
         foreach ($rs as $deviceCode) {
             $brandId = $ebikes[$deviceCode->ebike_type_id]['brand_id'];
             $data[] = [
-                'name' => $ebikeTypeMap[$deviceCode->ebike_type_id] ? : '未知',
-                'brand' => $brandMap[$brandId] ? : '未知',
+                'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
+                'brand' => $brandMap[$brandId],
                 'zb' => $total === 0 ? 0 : number_format($deviceCode->total / $total, 2),
                 'value' => $deviceCode->total,
             ];
