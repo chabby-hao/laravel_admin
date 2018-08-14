@@ -160,24 +160,16 @@ class StatDevice extends BaseCommand
         $totalAll = array_sum($pidTotalMap);
 
         $data = [];
-        foreach ($pidTotalMap as $pid => $total) {
+        foreach ($provinceMap as $pid => $province) {
+            $value = $pidTotalMap[$pid] ? : 0;
             $data[] = [
-                'name' => $provinceMap[$pid],
-                'value' => $total,
-                'zb' => $totalAll === 0 ? 0 : number_format($total / $totalAll, 2),
+                'name'=>$provinceMap[$pid],
+                'value'=>$value,
+                'zb'=>$totalAll === 0 ? 0 : number_format($value / $totalAll, 2),
             ];
         }
 
-        $provinceTotalMap = [];
-        foreach ($provinceMap as $pid => $province) {
-            $provinceTotalMap[$province] = 0;
-        }
-
-        foreach ($pidTotalMap as $pid => $total) {
-            $provinceTotalMap[$provinceMap[$pid]] = $total;
-        }
-
-        StatLogic::setActiveGeographicalDistribution($provinceTotalMap, $keyPre, $id);
+        StatLogic::setActiveGeographicalDistribution($data, $keyPre, $id);
 
     }
 
