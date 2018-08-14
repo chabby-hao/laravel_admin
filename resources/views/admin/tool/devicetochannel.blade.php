@@ -126,7 +126,7 @@
         })
 
     </script>
-    @include('admin.common_brand_ebikejs')
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_submitjs')
 @endsection
 
