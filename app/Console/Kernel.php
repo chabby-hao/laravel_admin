@@ -6,6 +6,7 @@ use App\Console\Commands\DbSync;
 use App\Console\Commands\DeviceAddress;
 use App\Console\Commands\DeviceCache;
 use App\Console\Commands\MapCache;
+use App\Console\Commands\StatDevice;
 use App\Console\Commands\Test;
 use App\Console\Commands\WarningMile;
 use Illuminate\Console\Scheduling\Schedule;
@@ -38,6 +39,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(DeviceCache::class)->everyThirtyMinutes()->runInBackground();
             $schedule->command(MapCache::class)->hourly()->runInBackground();
             $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
+            $schedule->command(StatDevice::class)->everyFifteenMinutes()->runInBackground();
         }
     }
 
