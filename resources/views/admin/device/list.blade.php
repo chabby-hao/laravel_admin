@@ -119,6 +119,8 @@
                                 <th>IMEI</th>
                                 <th>设备型号</th>
                                 <th>渠道</th>
+                                <th>客户</th>
+                                <th>场景</th>
                                 <th>车辆品牌</th>
                                 <th>车辆型号</th>
                                 <th>激活时间</th>
@@ -140,6 +142,8 @@
                                     <td>{{$data->imei}}</td>
                                     <td>{{$data->deviceTypeName}}</td>
                                     <td>{{$data->channelName}}</td>
+                                    <td>{{$data->customerName}}</td>
+                                    <td>{{$data->sceneName}}</td>
                                     <td>{{$data->brandName}}</td>
                                     <td>{{$data->ebikeTypeName}}</td>
                                     <td>{{$data->activeAt}}</td>
