@@ -104,7 +104,6 @@ class StatDevice extends BaseCommand
         $where['date'] = Carbon::today()->toDateString();
         $total = BiActiveCityDevice::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->count();
 
-        $total = number_format($total, 1);
         StatLogic::setDailyActive($total, $keyPre, $id);
     }
 
@@ -114,7 +113,7 @@ class StatDevice extends BaseCommand
     private function travelTimes($where, $id, $keyPre)
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->count();
-        StatLogic::setTravelTimes(number_format($total, 1), $keyPre, $id);
+        StatLogic::setTravelTimes($total, $keyPre, $id);
         return $total;
     }
 
