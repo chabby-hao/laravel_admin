@@ -194,11 +194,6 @@ class StatDevice extends BaseCommand
         $rs = TDeviceCode::getDeviceModel()->where($where)->where('ebike_type_id','!=','')->groupBy(['ebike_type_id'])
             ->selectRaw('count(*) as total,ebike_type_id')->get();
 
-        foreach ($rs as $k => $row){
-            if(!$row->ebike_type_id){
-                unset($rs[$k]);
-            }
-        }
 
         $arrs = $rs->toArray();
 
@@ -212,8 +207,8 @@ class StatDevice extends BaseCommand
         foreach ($rs as $deviceCode) {
             $brandId = $ebikes[$deviceCode->ebike_type_id]['brand_id'];
             $data[] = [
-                'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
-                'brand' => $brandMap[$brandId],
+                'name' => $ebikeTypeMap[$deviceCode->ebike_type_id] ? : '未知',
+                'brand' => $brandMap[$brandId] ? : '未知',
                 'zb' => $total === 0 ? 0 : number_format($deviceCode->total / $total, 2),
                 'value' => $deviceCode->total,
             ];
