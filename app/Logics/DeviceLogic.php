@@ -1234,8 +1234,10 @@ class DeviceLogic extends BaseLogic
     /**
      * 设备加入渠道
      */
-    public static function deviceToChannel($imei, $channelId, $type, $ebikeTypeId)
+    public static function deviceToChannel($imei, $channelId, $type, $sceneId)
     {
+        $type = $type ?: 0;
+        $sceneId = $sceneId ?: 0;
         $udid = self::getUdid($imei);
         # 设置已绑定设备类型数据
         TDevice::whereImei($imei)->update(['type' => $type]);
@@ -1247,8 +1249,8 @@ class DeviceLogic extends BaseLogic
         }
         $tDeviceCode->type = $type;
         $tDeviceCode->channel_id = $channelId;
-        $tDeviceCode->brand_id = $type;
-        $tDeviceCode->ebike_type_id = $ebikeTypeId;
+        $tDeviceCode->customer_id = $type;
+        $tDeviceCode->scene_id = $sceneId;
         $tDeviceCode->save();
         //TDeviceCode::whereImei($imei)->update(['type'=>$type]);
 
@@ -1259,8 +1261,8 @@ class DeviceLogic extends BaseLogic
         $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
 
         $evmodel = 0;
-        if($ebikeTypeId){
-            $ebikeType = BiEbikeType::find($ebikeTypeId);
+        if($sceneId){
+            $ebikeType = BiEbikeType::find($sceneId);
             if(!$ebikeType){
                 return false;
             }

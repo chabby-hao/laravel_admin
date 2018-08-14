@@ -63,7 +63,7 @@ class FactoryLogic extends BaseLogic
 
         foreach ($insert as $row){
             $imei = $row['imei'];
-            DeviceLogic::deviceToChannel($imei, $order->channel_id, $shipOrder->brand_id, $shipOrder->ebike_type_id);
+            DeviceLogic::deviceToChannel($imei, $order->channel_id, $order->customer_id, $order->scene_id);
             DeviceLogic::resetDevice($imei);
         }
 
@@ -86,6 +86,8 @@ class FactoryLogic extends BaseLogic
                 'delivered_at'=>Carbon::now(),
                 'device_cycle'=>TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE,
                 'channel_id'=>$order->channel_id,
+                'customer_id'=>$order->customer_id,
+                'scene_id'=>$order->scene_id,
                 'brand_id'=>$shipOrder->brand_id,
                 'ebike_type_id'=>$shipOrder->ebike_type_id,
                 'device_type'=>$order->device_type,
