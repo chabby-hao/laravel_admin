@@ -204,7 +204,8 @@ class StatDevice extends BaseCommand
         $brandMap = BiBrand::getBrandMap();
 
         $rs = TDeviceCode::getDeviceModel()->where($where)->where('ebike_type_id','!=','')->groupBy(['ebike_type_id'])
-            ->selectRaw('count(*) as total,ebike_type_id')->get();
+            ->selectRaw('count(*) as total,ebike_type_id')
+            ->orderByDesc('total')->get();
 
 
         $arrs = $rs->toArray();
@@ -216,7 +217,9 @@ class StatDevice extends BaseCommand
 
 
         $data = [];
+        $t = 0;
         foreach ($rs as $deviceCode) {
+            ++$t;
             $brandId = $ebikes[$deviceCode->ebike_type_id]['brand_id'];
             $data[] = [
                 'name' => $ebikeTypeMap[$deviceCode->ebike_type_id],
@@ -224,6 +227,9 @@ class StatDevice extends BaseCommand
                 'zb' => $total === 0 ? 0 : number_format($deviceCode->total / $total, 2),
                 'value' => $deviceCode->total,
             ];
+            if($t === 6){
+                break;
+            }
         }
 
         StatLogic::setVehicleDistribution($data, $keyPre, $id);
