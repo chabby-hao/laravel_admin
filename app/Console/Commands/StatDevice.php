@@ -273,7 +273,7 @@ class StatDevice extends BaseCommand
             ->selectRaw('count(*) as total')
             ->get()->toArray();
 
-        $totalAll = TDeviceCode::getDeviceModel()->count();
+        $totalAll = TDeviceCode::where($where)->count();
 
         $rs = Helper::transToOneDimensionalArray($rs, 'total');
 
