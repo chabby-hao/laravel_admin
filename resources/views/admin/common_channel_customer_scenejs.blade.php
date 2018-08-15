@@ -61,7 +61,7 @@
         var cid = '{{Request::input('customer_id')}}';
 
         if(cid){
-            getCustomer();
+            getCustomer(cid);
         }
 
         function getCustomer(){
