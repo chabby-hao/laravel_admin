@@ -16,7 +16,7 @@ $(function(){
        cache: false,
        data:{},
        success:function(data){
-       	$('.mask').css({'display':'none'});
+       		$('.mask').css({'display':'none'});
        		//数字滚动
 		    var options = {
 		      useEasing : true, 
@@ -225,7 +225,6 @@ $(function(){
 		
 		    // 七日活跃折线图
 		    var zheData=data.activeCurve;
-		    console.log(zheData);
 		    var zheXd=[];   //x轴name 
 		    var zheYd=[];   //value值
 		    $.each(zheData, function(i,result) {
