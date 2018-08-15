@@ -34,8 +34,8 @@ $(function(){
 		    p2num2.start();
 		    p2num3.start();
 		    p2num4.start();
-			$('.car_info .arr_down').css({'display':'block'});
-			$('.car_info .arr_up').css({'display':'block'});
+			$('.car_info .arr_down').css({'display':'inline-block'});
+			$('.car_info .arr_up').css({'display':'inline-block'});
 		    // 地图
 		    var mapData=data.activeGeographicalDistribution;
 		    var myCharts5 = echarts.init(document.getElementById('myMap'));  
