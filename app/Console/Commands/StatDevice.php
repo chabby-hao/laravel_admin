@@ -254,7 +254,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => Carbon::createFromFormat('Y-m-d', $row->date)->format('m.d'),
                 'value' => $row->total,
-                'zb' => $totalAll === 0 ? 0 : number_format($row->total / $totalAll, 2)
+                'zb' => $totalAll === 0 ? 0 : number_format($row->total / $totalAll, 3)
             ];
         }
 
