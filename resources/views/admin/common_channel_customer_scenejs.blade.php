@@ -58,6 +58,10 @@
             getCustomer();
         }
 
+        if('{{Request::input('customer_id')}}'){
+            getCustomer();
+        }
+
         function getCustomer(){
             var id = pselect.val();
             var select = $("select[name='scene_id']");
