@@ -58,14 +58,14 @@
             getCustomer();
         }
 
-        var id = '{{Request::input('customer_id')}}';
+        var cid = '{{Request::input('customer_id')}}';
 
-        if(id){
+        if(cid){
             getCustomer();
         }
 
         function getCustomer(){
-            var id = pselect.val() || id;
+            var id = pselect.val() || cid;
             alert(id);
             var select = $("select[name='scene_id']");
             select.html("<option value=''>请选择场景</option>");
