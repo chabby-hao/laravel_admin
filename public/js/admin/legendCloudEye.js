@@ -51,7 +51,8 @@ $(function(){
 		                var value = (params.value + '').split('.');
 		                value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
 		                var zb=params.data.zb;
-		                return params.name + '<br/>' + '活跃车辆: ' + value+ '<br/>' +'占比: '+zb*100+'%';
+		                zb=accMul(zb,100);
+		                return params.name + '<br/>' + '活跃车辆: ' + value+ '<br/>' +'占比: '+zb+'%';
 		            }
 		        },
 		        dataRange: {
@@ -344,7 +345,7 @@ $(function(){
 		        legend: {
 		            x : 'center',
 		            y : 'bottom',
-		            data:['1次','2次','3次','4次','4次以上'],
+		            data:['0次','1次','2次','3次','3次以上'],
 		            selectedMode:false,       
 		        },      
 		        calculable : true,
