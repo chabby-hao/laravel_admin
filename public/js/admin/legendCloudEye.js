@@ -397,10 +397,18 @@ $(function(){
 
 });
 window.onresize = function(){
-    setTimeout(myCharts5.resize(),100);
-    setTimeout(myCharts.resize(),100);
-    setTimeout(myCharts2.resize(),100);
-    setTimeout(myCharts4.resize(),100);
+	setTimeout(function(){
+		myCharts5.resize();
+	},100);
+	setTimeout(function(){
+		myCharts.resize();
+	},100);
+	setTimeout(function(){
+		myCharts2.resize();
+	},100);
+	setTimeout(function(){
+		myCharts4.resize();
+	},100);   
 };
 
 
