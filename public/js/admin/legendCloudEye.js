@@ -10,7 +10,7 @@ $(function(){
  	$('.mask').css({'display':'block'});
 	$.ajax({ 
        type:"get",
-       url:"http://bidev.vipcare.com/admin/device/stat?a=1",
+       url:"/admin/device/stat",
        async:true,
        dataType:'json',
        cache: false,

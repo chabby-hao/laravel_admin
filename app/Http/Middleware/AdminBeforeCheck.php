@@ -39,9 +39,9 @@ class AdminBeforeCheck
      */
     public function handle(Request $request, \Closure $next)
     {
-        if(env('app_env') !== 'production'){
+        /*if(env('app_env') !== 'production'){
             header("Access-Control-Allow-Origin: *");
-        }
+        }*/
 
         Log::debug('user:' . Auth::user()->username . ' --- admin route : ' . $request->route()->getActionName());
 
