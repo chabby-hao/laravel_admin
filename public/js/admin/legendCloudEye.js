@@ -386,39 +386,22 @@ $(function(){
 		        ]
 		    };
 		    myCharts4.setOption(option4);
-       	
-       	
-       	
-       	
-       	
-       	
-           
+     
        },
        error:function(){
            // console.log(msg);
        }
 	});
 
-     
-    // $('.car_jrhy').html(data.dailyActive);
-    // $('.car_cxcs').html(data.travelTimes);
-    // $('.car_cxpc').html(data.travelFrequency);
-    // $('.car_cxjl').html(data.tripDistance);
-
-    
-    
-    window.onresize = function(){
-        setTimeout(myCharts5.resize(),100);
-        setTimeout(myCharts.resize(),100);
-        setTimeout(myCharts2.resize(),100);
-        setTimeout(myCharts4.resize(),100);
-    };
 
 
-
-
-
-})
+});
+window.onresize = function(){
+    setTimeout(myCharts5.resize(),100);
+    setTimeout(myCharts.resize(),100);
+    setTimeout(myCharts2.resize(),100);
+    setTimeout(myCharts4.resize(),100);
+};
 
 
 
