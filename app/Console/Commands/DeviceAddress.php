@@ -59,6 +59,7 @@ class DeviceAddress extends BaseCommand
             echo ++$t . '------------------' . "\n";
 
             $loc = DeviceLogic::getLastLocationInfo($imei);
+            DeviceLogic::clear();
             if ($loc['address']) {
                 if (preg_match('/^[^省市区]+[省市区]/u', $loc['address'], $match)) {
                     $province = $match[0];
