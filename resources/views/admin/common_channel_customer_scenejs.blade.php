@@ -13,7 +13,7 @@
         function getCustomer(){
             var id = pselect.val();
             var select = $("select[name='customer_id']");
-            select.html("<option value=''>请选择</option>");
+            select.html("<option value=''>请选择客户</option>");
             if (id) {
                 $.ajax({
                     url: '{{URL::action('Admin\ChannelController@detail')}}',
@@ -59,7 +59,7 @@
         function getCustomer(){
             var id = pselect.val();
             var select = $("select[name='scene_id']");
-            select.html("<option value=''>请选择</option>");
+            select.html("<option value=''>请选择场景</option>");
             if (id) {
                 $.ajax({
                     url: '{{URL::action('Admin\CustomerController@detail')}}',

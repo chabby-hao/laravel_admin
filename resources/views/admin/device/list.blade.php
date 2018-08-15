@@ -53,6 +53,16 @@
                                                 <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
+                                        <select class="w1 margintop" name="customer_id">
+                                            <option value="">
+                                                请选择客户
+                                            </option>
+                                        </select>
+                                        <select class="w1 margintop" name="scene_id">
+                                            <option value="">
+                                                请选择场景
+                                            </option>
+                                        </select>
                                         <select class="w1 margintop" name="brand_id">
                                             <option value="">请选择品牌</option>
                                             @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
@@ -168,6 +178,7 @@
         </div>
     </div>
 
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_brand_ebikejs');
 
     <script>

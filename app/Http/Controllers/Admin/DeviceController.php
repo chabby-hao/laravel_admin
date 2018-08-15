@@ -477,6 +477,14 @@ class DeviceController extends BaseController
             $model->whereChannelId($channel);
         }
 
+        if($customer = \Request::input('customer_id')){
+            $model->whereCustomerId($customer);
+        }
+
+        if($scene = \Request::input('scene_id')){
+            $model->whereSceneId($scene);
+        }
+
         if ($brand = \Request::input('brand_id')) {
             $model->whereBrandId($brand);
         }
