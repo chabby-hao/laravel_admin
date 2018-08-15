@@ -131,9 +131,9 @@ class MapController extends BaseController
             $keyPre = DeviceObject::CACHE_DEVICE_TYPE_PRE;
         }elseif($field == 'channel_id'){
             $keyPre = DeviceObject::CACHE_CHANNEL_PRE;
-        }elseif($field == 'brand_id'){
+        }elseif($field == 'customer_id'){
             $keyPre = DeviceObject::CACHE_CUSTOMER_PRE;
-        }elseif($field == 'ebike_type_id'){
+        }elseif($field == 'scene_id'){
             $keyPre = DeviceObject::CACHE_SCENE_PRE;
         }else{
             $keyPre = '';

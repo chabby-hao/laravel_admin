@@ -9,6 +9,8 @@ use App\Libs\Helper;
  * @property int $id
  * @property int $state 状态,0=未完成，1=已完成，2=已作废
  * @property int $channel_id 渠道
+ * @property int $customer_id 客户
+ * @property int $scene_id 场景
  * @property int $order_quantity 订单数量
  * @property int $product_type 设备型号,B
  * @property \Carbon\Carbon|null $expect_delivery 期望交货时间
@@ -55,6 +57,8 @@ class BiOrder extends \App\Models\Base\BiOrder
         'user_id',
         'order_no',
         'channel_id',
+        'customer_id',
+        'scene_id',
         'order_quantity',
         'device_type',
         'expect_delivery',

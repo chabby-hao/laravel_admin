@@ -65,7 +65,11 @@ class BiUser extends User
 
     public static function getUserWithRole($id)
     {
-        return BiUser::join('role_user','id','=','user_id')->find($id);
+        $user =  BiUser::join('role_user','id','=','user_id')->find($id);
+        if($user->user_type == self::USER_TYPE_CUSTOMER){
+            $user->channel_id = BiCustomer::find($user->type_id)->channel_id;
+        }
+        return $user;
     }
 
 }

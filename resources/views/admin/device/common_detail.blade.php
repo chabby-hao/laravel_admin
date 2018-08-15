@@ -145,10 +145,27 @@
                         <h5>车辆信息</h5>
                     </div>
                     <div class="widget-content">
+
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
                                 <th>渠道</th>
+                                <th>客户</th>
+                                <th>场景</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td><%channelName%></td>
+                                <td><%customerName%></td>
+                                <td><%sceneName%></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-bordered data-table">
+                            <thead>
+                            <tr>
                                 <th>品牌</th>
                                 <th>车型</th>
                                 <th>车架号</th>
@@ -158,7 +175,6 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td><%channelName%></td>
                                 <td><%brandName%></td>
                                 <td><%ebikeTypeName%></td>
                                 <td><%chassis%></td>

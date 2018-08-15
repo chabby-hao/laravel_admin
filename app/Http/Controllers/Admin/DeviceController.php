@@ -18,12 +18,15 @@ use App\Logics\LocationLogic;
 use App\Logics\MileageLogic;
 use App\Logics\MsgLogic;
 use App\Logics\RedisLogic;
+use App\Logics\StatLogic;
 use App\Logics\UserLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
+use App\Models\BiScene;
 use App\Models\BiUser;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
@@ -328,6 +331,8 @@ class DeviceController extends BaseController
         $brandMap = BiBrand::getBrandMap();
         $ebikeTypeMap = BiEbikeType::getTypeName();
         $channelMap = BiChannel::getChannelMap();
+        $customerMap = BiCustomer::getCustomerMap();
+        $sceneMap = BiScene::getTypeName();
 
         /** @var TDeviceCode $device */
         foreach ($deviceList as $device) {
@@ -337,6 +342,8 @@ class DeviceController extends BaseController
             $deviceObj->setEbikeTypeName($ebikeTypeMap[$device->ebike_type_id]);
             $deviceObj->setBrandName($brandMap[$device->brand_id]);
             $deviceObj->setChannelName($channelMap[$device->channel_id]);
+            $deviceObj->setCustomerName($customerMap[$device->customer_id]);
+            $deviceObj->setSceneName($sceneMap[$device->scene_id]);
             $data[] = $deviceObj;
         }
 
@@ -815,8 +822,24 @@ class DeviceController extends BaseController
         ]);
     }
 
-    public function stat()
+    public function stat(Request $request)
     {
+
+        if($request->isXmlHttpRequest() || $request->input('a') == 1){
+            $keypre = $this->getCustomerKeyPre();
+            $id = Auth::user()->type_id;
+            $data = [
+                'dailyActive' => StatLogic::getDailyActive($keypre, $id),
+                'travelTimes' => StatLogic::getTravelTimes($keypre, $id),
+                'travelFrequency' => StatLogic::getTravelFrequency($keypre, $id),
+                'tripDistance' => StatLogic::getTripDistance($keypre, $id),
+                'activeGeographicalDistribution' => StatLogic::getActiveGeographicalDistribution($keypre, $id),
+                'vehicleDistribution' => StatLogic::getVehicleDistribution($keypre, $id),
+                'activeCurve' => StatLogic::getActiveCurve($keypre, $id),
+                'tripFrequencyDistribution' => StatLogic::getTripFrequencyDistribution($keypre, $id),
+            ];
+            return $this->outPut($data);
+        }
 
         return view('admin.device.stat');
     }

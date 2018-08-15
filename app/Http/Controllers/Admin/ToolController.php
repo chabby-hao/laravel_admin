@@ -263,7 +263,7 @@ class ToolController extends BaseController
     public function deviceToChannel(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $input = $this->checkParams(['channel_id','brand_id','ebike_type_id', 'mode','way'], $request->input(),['ebike_type_id']);
+            $input = $this->checkParams(['channel_id','customer_id','scene_id', 'mode','way'], $request->input(),['scene_id']);
 
             if ($input['mode'] == 0) {
                 //单个udid
@@ -297,7 +297,7 @@ class ToolController extends BaseController
             }
 
             foreach ($imeis as $imei){
-                DeviceLogic::deviceToChannel($imei, $input['channel_id'], $input['brand_id'], $input['ebike_type_id']);
+                DeviceLogic::deviceToChannel($imei, $input['channel_id'], $input['customer_id'], $input['scene_id']);
                 if(!$input['way']){
                     DeviceLogic::resetDevice($imei);
                 }

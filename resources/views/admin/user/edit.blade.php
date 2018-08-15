@@ -58,7 +58,7 @@
                                     <select name="channel_id" class="span11">
                                         <option value="">请选择</option>
                                         <?php foreach (\App\Models\BiChannel::getChannelMap() as $key => $val){ ?>
-                                        <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                        <option @if($user->user_type == \App\Models\BiUser::USER_TYPE_CHANNEL && $key == $user->type_id || $user->user_type == \App\Models\BiUser::USER_TYPE_CUSTOMER && $key == $user->channel_id ) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
                                         <?php }?>
                                     </select>
                                 </div>
@@ -68,9 +68,14 @@
                                 <label class="control-label"><span class="text-error">*</span>客户 :</label>
                                 <div class="controls">
                                     <select name="customer_id" class="span11">
-                                        <option value="">请选择</option>
                                         <?php foreach (\App\Models\BiCustomer::getCustomerMap() as $key => $val){ ?>
-                                            <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                            @if($user->user_type == \App\Models\BiUser::USER_TYPE_CUSTOMER)
+                                                @if($key == $user->type_id)
+                                                    <option value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                                @endif
+                                            @else
+                                                <option @if($key == $user->type_id) selected @endif value="<?php echo $key; ?>"><?php echo $val; ?></option>
+                                            @endif
                                         <?php }?>
                                     </select>
                                 </div>

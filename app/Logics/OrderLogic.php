@@ -22,6 +22,8 @@ class OrderLogic extends BaseLogic
             $order->order_no = 'O' . date('YmdHis') . mt_rand(10,99);
             $order->state = BiOrder::ORDER_STATE_INIT;
             $order->channel_id = $data['channel_id'];
+            $order->customer_id = $data['customer_id'];
+            $order->scene_id = $data['scene_id'];
             $order->order_quantity = $data['order_quantity'];
             $order->device_type = $data['device_type'];
             $order->expect_delivery = $data['expect_delivery'];

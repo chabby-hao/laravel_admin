@@ -119,6 +119,10 @@ class DeviceObject extends BaseObject
     public $brandName = '';//品牌名称
     public $channelId = 0;//渠道id
     public $channelName = '';//渠道名称
+    public $customerId = 0;//客户id
+    public $customerName = '';//客户名
+    public $sceneId = 0;//场景id
+    public $sceneName = '';//场景名称
     public $deliverdAt = '';//出货时间,datetime
     public $registerAt = '';//生成时间,datetime
     public $activeAt = '';//激活时间,datetime
@@ -788,6 +792,70 @@ class DeviceObject extends BaseObject
     public function setDeviceCycleTrans($deviceCycleTrans)
     {
         $this->deviceCycleTrans = $deviceCycleTrans;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerId(): int
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * @param int $customerId
+     */
+    public function setCustomerId($customerId): void
+    {
+        $this->customerId = $customerId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerName(): string
+    {
+        return $this->customerName;
+    }
+
+    /**
+     * @param string $customerName
+     */
+    public function setCustomerName($customerName): void
+    {
+        $this->customerName = $customerName;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSceneId(): int
+    {
+        return $this->sceneId;
+    }
+
+    /**
+     * @param int $sceneId
+     */
+    public function setSceneId($sceneId): void
+    {
+        $this->sceneId = $sceneId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSceneName(): string
+    {
+        return $this->sceneName;
+    }
+
+    /**
+     * @param string $sceneName
+     */
+    public function setSceneName($sceneName): void
+    {
+        $this->sceneName = $sceneName;
     }
 
 

@@ -14,8 +14,10 @@ use App\Logics\DeviceLogic;
 use App\Logics\OrderLogic;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
 use App\Models\BiOrder;
+use App\Models\BiScene;
 use App\Models\TDevice;
 use App\Models\TDeviceCode;
 use Illuminate\Http\Request;
@@ -32,11 +34,10 @@ class OrderController extends BaseController
         $data = BiOrder::find($id);
         if($data){
             $data->channel_name = BiChannel::getChannelMap()[$data['channel_id']];
+            $data->customer_name = BiCustomer::getCustomerMap()[$data['customer_id']];
+            $data->scene_name = BiScene::getTypeName()[$data['scene_id']];
             $data->device_type_name = BiDeviceType::getNameMap()[$data['device_type']];
             $output = $data->toArray();
-            /*$output['channel_name'] = BiChannel::getChannelMap()[$data['channel_id']];
-            $output['device_type_name'] = BiDeviceType::getNameMap()[$data['device_type']];
-            $output['expect_delivery'] = $data->expect_delivery->format('Y-m-d');*/
             return $this->outPut($output);
         }else{
             return $this->outPutError();
@@ -61,12 +62,14 @@ class OrderController extends BaseController
         if ($request->isXmlHttpRequest()) {
             $input = $this->checkParams([
                 'channel_id',
+                'customer_id',
+                'scene_id',
                 'order_quantity',
                 'device_type',
                 'expect_delivery',
                 'after_sale',
                 'remark',
-            ], $request->input(), ['remark']);
+            ], $request->input(), ['remark','customer_id','scene_id']);
 
             $input['user_id'] = Auth::id();
 

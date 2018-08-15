@@ -47,13 +47,13 @@ class MapCache extends BaseCommand
 
         $this->cacheData([0], null, DeviceObject::CACHE_ALL_PRE);//全部
         //$this->cacheData($brands, 'brand_id', DeviceObject::CACHE_CUSTOMER_PRE);//品牌
-        $this->cacheData($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//品牌
+        $this->cacheData($customers, 'customer_id', DeviceObject::CACHE_CUSTOMER_PRE);//客户
         $this->cacheData($channels, 'channel_id', DeviceObject::CACHE_CHANNEL_PRE);//渠道
         //$this->cacheData($ebikeTypes, 'ebike_type_id', DeviceObject::CACHE_SCENE_PRE);//车型
-        $this->cacheData($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//车型
+        $this->cacheData($scenes, 'scene_id', DeviceObject::CACHE_SCENE_PRE);//场景
         $this->cacheData($deviceTypes, 'device_type', DeviceObject::CACHE_DEVICE_TYPE_PRE);//设备型号
 
-        $this->chmodCache0777();
+        //$this->chmodCache0777();
     }
 
     private function cacheData($ids, $whereName = null, $keyPre)

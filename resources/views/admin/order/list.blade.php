@@ -23,6 +23,8 @@
                                 <th>出货数量</th>
                                 <th>型号</th>
                                 <th>渠道</th>
+                                <th>客户</th>
+                                <th>场景</th>
                                 <th>账号</th>
                                 <th>售后订单</th>
                                 <th>状态</th>
@@ -39,6 +41,8 @@
                                     <td>{{$data->actuall_quantity}}</td>
                                     <td>{{$data->name}}</td>
                                     <td>{{\App\Models\BiChannel::getChannelMap()[$data->channel_id]}}</td>
+                                    <td>{{\App\Models\BiCustomer::getCustomerMap()[$data->customer_id]}}</td>
+                                    <td>{{\App\Models\BiScene::getTypeName()[$data->scene_id]}}</td>
                                     <td>{{$data->username}}</td>
                                     <td>{{\App\Models\BiOrder::getAfterSaleTypeName($data->after_sale)}}</td>
                                     <td>{{\App\Models\BiOrder::getStateTypeName($data->state)}}</td>

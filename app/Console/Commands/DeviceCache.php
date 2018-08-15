@@ -34,11 +34,11 @@ class DeviceCache extends BaseCommand
     public function handle()
     {
         $this->cacheOnlineDevices();
-        $this->chmodCache0777();
+        //$this->chmodCache0777();
         $this->cacheDeviceCycle();
-        $this->chmodCache0777();
+        //$this->chmodCache0777();
         $this->cacheDeviceStatus();
-        $this->chmodCache0777();
+        //$this->chmodCache0777();
     }
 
     /**
