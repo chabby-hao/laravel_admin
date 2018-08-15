@@ -92,6 +92,15 @@
         @endif
 
 
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>安骑物联</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('device/stat'))
+                    <li><a href="{{URL::action('Admin\DeviceController@stat')}}">车辆</a></li>
+                @endif
+            </ul>
+        </li>
+
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
             </a>
             <ul>
