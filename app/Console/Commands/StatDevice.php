@@ -273,13 +273,17 @@ class StatDevice extends BaseCommand
             ->selectRaw('count(*) as total')
             ->get()->toArray();
 
+        $totalAll = TDeviceCode::getDeviceModel()->count();
+
         $rs = Helper::transToOneDimensionalArray($rs, 'total');
 
-        $totalAll = count($rs);
+        $total0 = $totalAll - count($rs);
+        //$totalAll = count($rs);
 
         $countMap = array_count_values($rs);
+        $countMap[0] = $total0;
         ksort($countMap);
-        $map = [1, 2, 3, 4];
+        $map = [0, 1, 2, 3, 4];
         $max = max($map);
         $maxTotal = 0;
         $data = [];
