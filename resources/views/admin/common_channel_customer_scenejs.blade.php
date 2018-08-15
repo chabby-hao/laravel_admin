@@ -45,6 +45,8 @@
 
         pselect.on('change', function () {
             getCustomer();
+            var select = $("select[name='scene_id']");
+            select.html("<option value=''>请选择场景</option>");
         });
     });
 
