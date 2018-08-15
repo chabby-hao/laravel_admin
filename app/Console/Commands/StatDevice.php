@@ -68,6 +68,10 @@ class StatDevice extends BaseCommand
             } else {
                 $where = [];
             }
+
+            //七日活跃曲线图
+            $this->activeCurve($where, $id, $keyPre);
+
             //日活跃
             $this->dailyActive($where, $id, $keyPre);
 
@@ -85,9 +89,6 @@ class StatDevice extends BaseCommand
 
             //车型分布
             $this->vehicleDistribution($where, $id, $keyPre);
-
-            //七日活跃曲线图
-            $this->activeCurve($where, $id, $keyPre);
 
             //出行次数分布
             $this->tripFrequencyDistribution($where, $id, $keyPre);
@@ -124,11 +125,11 @@ class StatDevice extends BaseCommand
     {
         $timesWhere = $where;
         $timesWhere[0] = ['begin', '>', strtotime('-30 days')];
-        $total = $this->travelTimes($where, $id, $keyPre);
+        $total = $this->travelTimes($timesWhere, $id, $keyPre);
 
         $count = TDeviceCode::where($where)->count();
 
-        $freq = $count === 0 ? 0 : number_format($total / $count / 30, 1);
+        $freq = $count === 0 ? 0 : number_format($total / $count / 30, 1, '.','');
 
         StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
@@ -140,7 +141,7 @@ class StatDevice extends BaseCommand
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->sum('mile');
 
-        $total = number_format($total, 1);
+        $total = round($total);
         StatLogic::setTripDistance($total, $keyPre, $id);
     }
 
@@ -171,11 +172,11 @@ class StatDevice extends BaseCommand
 
         /*
          * {
-                        name:"南海诸岛",value:0,
-                        itemStyle:{
-                            normal:{opacity:0,label:{show:false}}
-                        }
-                      }
+            name:"南海诸岛",value:0,
+            itemStyle:{
+                normal:{opacity:0,label:{show:false}}
+            }
+          }
          */
         $data[] = [
             'name'=>'南海诸岛',
@@ -254,7 +255,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name' => Carbon::createFromFormat('Y-m-d', $row->date)->format('m.d'),
                 'value' => $row->total,
-                'zb' => $totalAll === 0 ? 0 : number_format($row->total / $totalAll, 2)
+                'zb' => $totalAll === 0 ? 0 : number_format($row->total / $totalAll, 3)
             ];
         }
 
@@ -273,13 +274,17 @@ class StatDevice extends BaseCommand
             ->selectRaw('count(*) as total')
             ->get()->toArray();
 
+        $totalAll = TDeviceCode::getDeviceModel()->where($where)->count();
+
         $rs = Helper::transToOneDimensionalArray($rs, 'total');
 
-        $totalAll = count($rs);
+        $total0 = $totalAll - count($rs);
+        //$totalAll = count($rs);
 
         $countMap = array_count_values($rs);
+        $countMap[0] = $total0;
         ksort($countMap);
-        $map = [1, 2, 3, 4];
+        $map = [0, 1, 2, 3];
         $max = max($map);
         $maxTotal = 0;
         $data = [];

@@ -39,7 +39,7 @@
                                             <option @if(is_numeric(Request::input('active')) && Request::input('active') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
-                                    <br>
+                                    <br/>
                                     <select class="w1 margintop" name="device_type">
                                         <option value="">请选择型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
@@ -53,6 +53,17 @@
                                                 <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
+                                        <select class="w1 margintop" name="customer_id">
+                                            <option value="">
+                                                请选择客户
+                                            </option>
+                                        </select>
+                                        <select class="w1 margintop" name="scene_id">
+                                            <option value="">
+                                                请选择场景
+                                            </option>
+                                        </select>
+                                        <br/>
                                         <select class="w1 margintop" name="brand_id">
                                             <option value="">请选择品牌</option>
                                             @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
@@ -168,6 +179,7 @@
         </div>
     </div>
 
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_brand_ebikejs');
 
     <script>
