@@ -166,7 +166,7 @@ class StatDevice extends BaseCommand
             $data[] = [
                 'name'=>$provinceMap[$pid],
                 'value'=>$value,
-                'zb'=>$totalAll === 0 ? 0 : number_format($value / $totalAll, 2),
+                'zb'=>$totalAll === 0 ? 0 : number_format($value / $totalAll, 3),
             ];
         }
 
