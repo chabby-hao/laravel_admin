@@ -386,6 +386,20 @@ $(function(){
 		        ]
 		    };
 		    myCharts4.setOption(option4);
+		    window.onresize = function(){
+				setTimeout(function(){
+					myCharts5.resize();
+				},100);
+				setTimeout(function(){
+					myCharts.resize();
+				},100);
+				setTimeout(function(){
+					myCharts2.resize();
+				},100);
+				setTimeout(function(){
+					myCharts4.resize();
+				},100);   
+			};
      
        },
        error:function(){
@@ -396,20 +410,7 @@ $(function(){
 
 
 });
-window.onresize = function(){
-	setTimeout(function(){
-		myCharts5.resize();
-	},100);
-	setTimeout(function(){
-		myCharts.resize();
-	},100);
-	setTimeout(function(){
-		myCharts2.resize();
-	},100);
-	setTimeout(function(){
-		myCharts4.resize();
-	},100);   
-};
+
 
 
 
