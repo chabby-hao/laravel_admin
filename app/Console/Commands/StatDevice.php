@@ -172,11 +172,11 @@ class StatDevice extends BaseCommand
 
         /*
          * {
-                        name:"南海诸岛",value:0,
-                        itemStyle:{
-                            normal:{opacity:0,label:{show:false}}
-                        }
-                      }
+            name:"南海诸岛",value:0,
+            itemStyle:{
+                normal:{opacity:0,label:{show:false}}
+            }
+          }
          */
         $data[] = [
             'name'=>'南海诸岛',
