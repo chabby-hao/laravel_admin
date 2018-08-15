@@ -51,6 +51,7 @@ $(function(){
 		                var value = (params.value + '').split('.');
 		                value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
 		                var zb=params.data.zb;
+		                zb=accMul(zb,100);
 		                return params.name + '<br/>' + '活跃车辆: ' + value+ '<br/>' +'占比: '+zb*100+'%';
 		            }
 		        },
