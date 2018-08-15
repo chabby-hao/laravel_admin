@@ -65,8 +65,7 @@
         }
 
         function getCustomer(){
-            var id = pselect.val() || cid;
-            alert(id);
+            var id = pselect.val() || arguments[0];
             var select = $("select[name='scene_id']");
             select.html("<option value=''>请选择场景</option>");
             if (id) {
