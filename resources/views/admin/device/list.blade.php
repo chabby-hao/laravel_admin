@@ -39,7 +39,7 @@
                                             <option @if(is_numeric(Request::input('active')) && Request::input('active') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
-                                    <br>
+                                    <br/>
                                     <select class="w1 margintop" name="device_type">
                                         <option value="">请选择型号</option>
                                         @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
@@ -53,6 +53,17 @@
                                                 <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
                                             @endforeach
                                         </select>
+                                        <select class="w1 margintop" name="customer_id">
+                                            <option value="">
+                                                请选择客户
+                                            </option>
+                                        </select>
+                                        <select class="w1 margintop" name="scene_id">
+                                            <option value="">
+                                                请选择场景
+                                            </option>
+                                        </select>
+                                        <br/>
                                         <select class="w1 margintop" name="brand_id">
                                             <option value="">请选择品牌</option>
                                             @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
@@ -119,6 +130,8 @@
                                 <th>IMEI</th>
                                 <th>设备型号</th>
                                 <th>渠道</th>
+                                <th>客户</th>
+                                <th>场景</th>
                                 <th>车辆品牌</th>
                                 <th>车辆型号</th>
                                 <th>激活时间</th>
@@ -140,6 +153,8 @@
                                     <td>{{$data->imei}}</td>
                                     <td>{{$data->deviceTypeName}}</td>
                                     <td>{{$data->channelName}}</td>
+                                    <td>{{$data->customerName}}</td>
+                                    <td>{{$data->sceneName}}</td>
                                     <td>{{$data->brandName}}</td>
                                     <td>{{$data->ebikeTypeName}}</td>
                                     <td>{{$data->activeAt}}</td>
@@ -164,6 +179,7 @@
         </div>
     </div>
 
+    @include('admin.common_channel_customer_scenejs')
     @include('admin.common_brand_ebikejs');
 
     <script>

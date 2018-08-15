@@ -15,11 +15,13 @@ use App\Logics\DeliveryLogic;
 use App\Logics\DeviceLogic;
 use App\Logics\FactoryLogic;
 use App\Models\BiBrand;
+use App\Models\BiCustomer;
 use App\Models\BiDeliveryDevice;
 use App\Models\BiDeliveryOrder;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiOrder;
+use App\Models\BiScene;
 use App\Models\BiUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,7 +46,7 @@ class DeliveryController extends BaseController
         $paginate = $model
             ->orderBy('bi_delivery_orders.state')
             ->orderByDesc('bi_delivery_orders.id')
-            ->select(['bi_delivery_orders.*', 'bi_orders.order_no', 'bi_users.username', 'bi_device_types.name as device_type_name','bi_channels.channel_name'])
+            ->select(['bi_delivery_orders.*', 'bi_orders.order_no', 'bi_orders.customer_id', 'bi_orders.scene_id', 'bi_users.username', 'bi_device_types.name as device_type_name', 'bi_channels.channel_name'])
             ->paginate();
 
         return $paginate;
@@ -188,11 +190,17 @@ class DeliveryController extends BaseController
 
         $datas = $paginate->items();
 
+        $customerMap = BiCustomer::getCustomerMap();
+        $sceneMap = BiScene::getTypeName();
+        $brandMap = BiBrand::getBrandMap();
+        $ebikeTypeMap = BiEbikeType::getTypeName();
 
         /** @var BiDeliveryOrder $data */
         foreach ($datas as $data){
-            $data->brand_name = $data->brand_id ? BiBrand::getBrandMap()[$data->brand_id] : '';
-            $data->ebike_type_name = $data->ebike_type_id ? BiEbikeType::getTypeName()[$data->ebike_type_id] : '';
+            $data->customer_name = $data->customer_id ? $customerMap[$data->customer_id] : '';
+            $data->scene_name = $data->scene_id ? $sceneMap[$data->scene_id] : '';
+            $data->brand_name = $data->brand_id ? $brandMap[$data->brand_id] : '';
+            $data->ebike_type_name = $data->ebike_type_id ? $ebikeTypeMap[$data->ebike_type_id] : '';
         }
 
         return view('admin.delivery.list', [

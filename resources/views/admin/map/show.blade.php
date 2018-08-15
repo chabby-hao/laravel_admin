@@ -332,15 +332,15 @@
                             <option value="{{$id}}" class="myoption">{{$name}}</option>
                         @endforeach
                     </select>
-                    <select name="brand_id" class="selectpicker" data-width="100px" data-size="10">
-                        <option value="" class="myoption">选择品牌</option>
-                        @foreach(\App\Models\BiBrand::getBrandMap() as $id=>$name)
+                    <select name="customer_id" class="selectpicker" data-width="100px" data-size="10">
+                        <option value="" class="myoption">选择客户</option>
+                        @foreach(\App\Models\BiCustomer::getCustomerMap() as $id=>$name)
                             <option value="{{$id}}" class="myoption">{{$name}}</option>
                         @endforeach
                     </select>
-                    <select name="ebike_type_id" class="selectpicker" data-width="200px" data-size="10">
-                        <option value="" class="myoption">选择车型</option>
-                        @foreach(\App\Models\BiEbikeType::getTypeName() as $id=>$name)
+                    <select name="scene_id" class="selectpicker" data-width="200px" data-size="10">
+                        <option value="" class="myoption">选择场景</option>
+                        @foreach(\App\Models\BiScene::getTypeName() as $id=>$name)
                             <option value="{{$id}}" class="myoption">{{$name}}</option>
                         @endforeach
                     </select>

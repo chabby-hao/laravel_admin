@@ -21,6 +21,8 @@ class AdminBeforeCheck
     protected $noPermisVerify = [
         'device/searchCity',
         'brand/detail',
+        'channel/detail',
+        'customer/detail',
         'device/exportList',
         'device/map',
         'user/resetPassword',
@@ -37,6 +39,9 @@ class AdminBeforeCheck
      */
     public function handle(Request $request, \Closure $next)
     {
+        if(env('app_env') !== 'production'){
+            header("Access-Control-Allow-Origin: *");
+        }
 
         Log::debug('user:' . Auth::user()->username . ' --- admin route : ' . $request->route()->getActionName());
 

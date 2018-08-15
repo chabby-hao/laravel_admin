@@ -23,6 +23,8 @@
                                 <th>型号</th>
                                 <th>出货日期</th>
                                 <th>渠道</th>
+                                <th>客户</th>
+                                <th>场景</th>
                                 <th>品牌</th>
                                 <th>车型</th>
                                 <th>账号</th>
@@ -40,6 +42,8 @@
                                     <td>{{$data->device_type_name}}</td>
                                     <td>{{$data->delivery_date}}</td>
                                     <td>{{$data->channel_name}}</td>
+                                    <td>{{$data->customer_name}}</td>
+                                    <td>{{$data->scene_name}}</td>
                                     <td>{{$data->brand_name}}</td>
                                     <td>{{$data->ebike_type_name}}</td>
                                     <td>{{$data->username}}</td>

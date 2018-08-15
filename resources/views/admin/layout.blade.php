@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-en">
 <head>
     <title>新运营后台</title>
     <meta charset="UTF-8"/>
@@ -14,6 +14,7 @@
 <!--<link rel="stylesheet" href="{{ asset('css/fullcalendar.css') }}"/>-->
     <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/legendCloudEye.css') }}"/>
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet"/>
     <link href="{{asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" rel="stylesheet"/>
 <!--<link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}"/>-->
@@ -90,6 +91,15 @@
                     <span>首页</span></a></li>
         @endif
 
+
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>安骑物联</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('device/stat'))
+                    <li><a href="{{URL::action('Admin\DeviceController@stat')}}">车辆</a></li>
+                @endif
+            </ul>
+        </li>
 
         <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>设备管理</span>
             </a>

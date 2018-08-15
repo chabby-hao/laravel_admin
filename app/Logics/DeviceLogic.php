@@ -5,9 +5,11 @@ namespace App\Logics;
 use App\Libs\Helper;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
+use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
+use App\Models\BiScene;
 use App\Models\TChipMileage;
 use App\Models\TDevice;
 use App\Models\TDeviceCategory;
@@ -160,6 +162,10 @@ class DeviceLogic extends BaseLogic
         $device->setBrandName(static::getBrandNameByUdid($udid));
         $device->setChannelId(static::getChannelIdByUdid($udid));
         $device->setChannelName(static::getChannelNameByUdid($udid));
+        $device->setCustomerId(static::getCustomerIdByUdid($udid));
+        $device->setCustomerName(static::getCustomerNameByUdid($udid));
+        $device->setSceneId(static::getSceneIdByUdid($udid));
+        $device->setSceneName(static::getSceneNameByUdid($udid));
         $device->setDeliverdAt(static::getDeliverdAtByUdid($udid));
         $device->setRegisterAt(static::getRegisterAtByUdid($udid));
         $device->setActiveAt(static::getActiveAtByUdid($udid));
@@ -485,6 +491,36 @@ class DeviceLogic extends BaseLogic
         return self::deviceCodeCallBack($udid, function ($deviceCode) {
             $channel = BiChannel::find($deviceCode->channel_id);
             return $channel ? $channel->channel_name : '';
+        });
+    }
+
+    public static function getCustomerIdByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return $deviceCode->customer_id;
+        });
+    }
+
+    public static function getCustomerNameByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            $val = BiCustomer::find($deviceCode->customer_id);
+            return $val ? $val->customer_name : '';
+        });
+    }
+
+    public static function getSceneIdByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            return $deviceCode->scene_id;
+        });
+    }
+
+    public static function getSceneNameByUdid($udid)
+    {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
+            $val = BiScene::find($deviceCode->scene_id);
+            return $val ? $val->scenes_name : '';
         });
     }
 
@@ -1234,8 +1270,10 @@ class DeviceLogic extends BaseLogic
     /**
      * 设备加入渠道
      */
-    public static function deviceToChannel($imei, $channelId, $type, $ebikeTypeId)
+    public static function deviceToChannel($imei, $channelId, $type, $sceneId)
     {
+        $type = $type ?: 0;
+        $sceneId = $sceneId ?: 0;
         $udid = self::getUdid($imei);
         # 设置已绑定设备类型数据
         TDevice::whereImei($imei)->update(['type' => $type]);
@@ -1247,8 +1285,8 @@ class DeviceLogic extends BaseLogic
         }
         $tDeviceCode->type = $type;
         $tDeviceCode->channel_id = $channelId;
-        $tDeviceCode->brand_id = $type;
-        $tDeviceCode->ebike_type_id = $ebikeTypeId;
+        $tDeviceCode->customer_id = $type;
+        $tDeviceCode->scene_id = $sceneId;
         $tDeviceCode->save();
         //TDeviceCode::whereImei($imei)->update(['type'=>$type]);
 
@@ -1259,8 +1297,8 @@ class DeviceLogic extends BaseLogic
         $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
 
         $evmodel = 0;
-        if($ebikeTypeId){
-            $ebikeType = BiEbikeType::find($ebikeTypeId);
+        if($sceneId){
+            $ebikeType = BiEbikeType::find($sceneId);
             if(!$ebikeType){
                 return false;
             }

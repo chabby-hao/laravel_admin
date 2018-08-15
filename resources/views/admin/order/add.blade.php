@@ -22,6 +22,24 @@
                             </div>
 
                             <div class="control-group">
+                                <label class="control-label">客户 :</label>
+                                <div class="controls">
+                                    <select name="customer_id" type="text" class="span11">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">场景 :</label>
+                                <div class="controls">
+                                    <select name="scene_id" type="text" class="span11">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>订单数量:</label>
                                 <div class="controls">
                                     <input name="order_quantity" value="" type="number" class="span11"/>
@@ -81,6 +99,7 @@
             </div>
         </div>
     </div>
+    @include('admin.common_channel_customer_scenejs')
     <script>
 
         $('#expect_delivery').datepicker({

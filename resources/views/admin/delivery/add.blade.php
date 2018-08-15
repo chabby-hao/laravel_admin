@@ -29,6 +29,20 @@
                             </div>
 
                             <div class="control-group">
+                                <label class="control-label">客户名称:</label>
+                                <div class="controls">
+                                    <input id="customer_name" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">场景:</label>
+                                <div class="controls">
+                                    <input id="scene_name" readonly value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>订单数量:</label>
                                 <div class="controls">
                                     <input id="order_quantity" readonly value="" type="text" class="span11"/>
@@ -147,6 +161,8 @@
                         if (ajax_check_res(data)) {
                             console.log(data);
                             $("#channel_name").val(data.channel_name);
+                            $("#customer_name").val(data.customer_name);
+                            $("#scene_name").val(data.scene_name);
                             $("#order_quantity").val(data.order_quantity);
                             $("#device_type_name").val(data.device_type_name);
                             $("#expect_delivery").val(data.expect_delivery);

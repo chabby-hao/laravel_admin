@@ -69,9 +69,9 @@ class BaseController extends Controller
         if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
             //渠道商
             return DeviceObject::CACHE_CHANNEL_PRE;
-        } elseif ($user->user_type == BiUser::USER_TYPE_BRAND) {
-            //品牌商
-            return DeviceObject::CACHE_BRAND_PRE;
+        } elseif ($user->user_type == BiUser::USER_TYPE_CUSTOMER) {
+            //客户
+            return DeviceObject::CACHE_CUSTOMER_PRE;
         } else {
             return DeviceObject::CACHE_ALL_PRE;
         }
@@ -218,6 +218,21 @@ class BaseController extends Controller
             return $this->outputErrorWithDie('请填写完整信息', []);
         }
         return $data;
+    }
+
+    protected function getWhere()
+    {
+        $where = [];
+        /** @var BiUser $user */
+        $user = Auth::user();
+        if ($user->user_type == BiUser::USER_TYPE_CHANNEL) {
+            //渠道商
+            $where['channel_id'] = $user->type_id;
+        } elseif ($user->user_type == BiUser::USER_TYPE_CUSTOMER) {
+            //客户
+            $where['customer_id'] = $user->type_id;
+        }
+        return $where;
     }
 
 }

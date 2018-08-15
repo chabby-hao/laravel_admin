@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,14 +10,20 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middlewareGroup('admin', [
+
+$middleware = [
     \App\Http\Middleware\EncryptCookies::class,
     \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
     \Illuminate\Session\Middleware\StartSession::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    \App\Http\Middleware\VerifyCsrfToken::class,
+    //\App\Http\Middleware\VerifyCsrfToken::class,
     \App\Http\Middleware\AdminBeforeCheck::class,
-]);
+];
+if(env('APP_ENV') === 'production'){
+    $middleware[] = \App\Http\Middleware\VerifyCsrfToken::class;
+}
+
+Route::middlewareGroup('admin', $middleware);
 
 Route::any('/index/welcome', 'Admin\IndexController@welcome')->name('admin-home');
 
@@ -58,6 +62,7 @@ Route::any('/device/exportList','Admin\DeviceController@exportList');
 Route::any('/device/map','Admin\DeviceController@map');
 Route::any('/device/tripTrails','Admin\DeviceController@tripTrails');
 Route::any('/device/romStatList','Admin\DeviceController@romStatList');
+Route::any('/device/stat','Admin\DeviceController@stat');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');
@@ -78,6 +83,8 @@ Route::any('/delivery/listDevice','Admin\DeliveryController@listDevice');
 Route::any('/map/show','Admin\MapController@show');
 
 Route::any('/brand/detail','Admin\BrandController@detail');
+Route::any('/channel/detail','Admin\ChannelController@detail');
+Route::any('/customer/detail','Admin\CustomerController@detail');
 
 
 Route::any('/tool/file','Admin\ToolController@file');

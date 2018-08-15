@@ -47,7 +47,7 @@
                 } else if (user_type === '{{\App\Models\BiUser::USER_TYPE_CHANNEL}}') {
                     $("#brand").hide();
                     $("#channel").show();
-                } else if (user_type === '{{\App\Models\BiUser::USER_TYPE_BRAND}}') {
+                } else if (user_type === '{{\App\Models\BiUser::USER_TYPE_CUSTOMER}}') {
                     $("#brand").show();
                     $("#channel").hide();
                 }

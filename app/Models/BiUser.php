@@ -34,7 +34,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
  * @property string|null $remember_token
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereRememberToken($value)
- * @property bool $user_type 0=全部，1=渠道商，2=品牌商
+ * @property bool $user_type 0=全部，1=渠道商，2=客户
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereUserType($value)
  * @property string|null $login_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiUser whereLoginAt($value)
@@ -49,7 +49,7 @@ class BiUser extends User
     //可查看数据类型
     const USER_TYPE_ALL = 0;//全部
     const USER_TYPE_CHANNEL = 1;//渠道商
-    const USER_TYPE_BRAND = 2;//品牌商
+    const USER_TYPE_CUSTOMER = 2;//客户
 
     protected $guarded = [];
 
@@ -58,14 +58,18 @@ class BiUser extends User
         $map = [
             self::USER_TYPE_ALL=>'全部',
             self::USER_TYPE_CHANNEL=>'渠道商',
-            self::USER_TYPE_BRAND=>'品牌商',
+            self::USER_TYPE_CUSTOMER=>'客户',
         ];
         return $userType !==null ? $map[$userType] : $map;
     }
 
     public static function getUserWithRole($id)
     {
-        return BiUser::join('role_user','id','=','user_id')->find($id);
+        $user =  BiUser::join('role_user','id','=','user_id')->find($id);
+        if($user->user_type == self::USER_TYPE_CUSTOMER){
+            $user->channel_id = BiCustomer::find($user->type_id)->channel_id;
+        }
+        return $user;
     }
 
 }
