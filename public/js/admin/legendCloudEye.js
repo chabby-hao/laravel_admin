@@ -344,7 +344,7 @@ $(function(){
 		        legend: {
 		            x : 'center',
 		            y : 'bottom',
-		            data:['1次','2次','3次','4次','4次以上'],
+		            data:['0次','1次','2次','3次','3次以上'],
 		            selectedMode:false,       
 		        },      
 		        calculable : true,
