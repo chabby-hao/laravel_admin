@@ -128,7 +128,7 @@ class StatDevice extends BaseCommand
 
         $count = TDeviceCode::where($where)->count();
 
-        $freq = $count === 0 ? 0 : number_format($total / $count / 30, 1);
+        $freq = $count === 0 ? 0 : number_format($total / $count / 30, 1, '.','');
 
         StatLogic::setTravelFrequency($freq, $keyPre, $id);
     }
@@ -140,7 +140,7 @@ class StatDevice extends BaseCommand
     {
         $total = TEvMileageGp::join('care.t_device_code', 'qr', '=', 'udid')->where($where)->sum('mile');
 
-        $total = number_format($total, 1);
+        $total = round($total);
         StatLogic::setTripDistance($total, $keyPre, $id);
     }
 
