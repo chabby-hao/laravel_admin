@@ -124,7 +124,7 @@ class StatDevice extends BaseCommand
     {
         $timesWhere = $where;
         $timesWhere[0] = ['begin', '>', strtotime('-30 days')];
-        $total = $this->travelTimes($where, $id, $keyPre);
+        $total = $this->travelTimes($timesWhere, $id, $keyPre);
 
         $count = TDeviceCode::where($where)->count();
 
