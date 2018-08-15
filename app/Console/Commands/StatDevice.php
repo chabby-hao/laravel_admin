@@ -68,6 +68,10 @@ class StatDevice extends BaseCommand
             } else {
                 $where = [];
             }
+
+            //七日活跃曲线图
+            $this->activeCurve($where, $id, $keyPre);
+
             //日活跃
             $this->dailyActive($where, $id, $keyPre);
 
@@ -85,9 +89,6 @@ class StatDevice extends BaseCommand
 
             //车型分布
             $this->vehicleDistribution($where, $id, $keyPre);
-
-            //七日活跃曲线图
-            $this->activeCurve($where, $id, $keyPre);
 
             //出行次数分布
             $this->tripFrequencyDistribution($where, $id, $keyPre);
