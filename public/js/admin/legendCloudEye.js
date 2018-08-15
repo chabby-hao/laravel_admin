@@ -39,10 +39,10 @@ $(function(){
       prefix : '', 
       suffix : '' 
     };
-    var p2num1 = new CountUp("p2-num1", 0, data.dailyActive, 0, 2.5, options);
-    var p2num2 = new CountUp("p2-num2", 0, data.travelTimes, 0, 2.5, options);
-    var p2num3 = new CountUp("p2-num3", 0, data.travelFrequency, 1, 2.5, options);
-    var p2num4 = new CountUp("p2-num4", 0, data.tripDistance, 1, 2.5, options);
+    var p2num1 = new CountUp("p2-num1", 0, myData.dailyActive, 0, 2.5, options);
+    var p2num2 = new CountUp("p2-num2", 0, myData.travelTimes, 0, 2.5, options);
+    var p2num3 = new CountUp("p2-num3", 0, myData.travelFrequency, 1, 2.5, options);
+    var p2num4 = new CountUp("p2-num4", 0, myData.tripDistance, 1, 2.5, options);
     p2num1.start();
     p2num2.start();
     p2num3.start();
