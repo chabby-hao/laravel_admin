@@ -7,7 +7,7 @@ $(function(){
          try{m+=s2.split(".")[1].length}catch(e){}  
          return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)  
     };
-    var myData;
+    var myData={};
     
 	$.ajax({ 
        type:"get",
@@ -24,7 +24,7 @@ $(function(){
        }
 	});
 
-    //console.log(data)
+      console.log(myData)
     // $('.car_jrhy').html(data.dailyActive);
     // $('.car_cxcs').html(data.travelTimes);
     // $('.car_cxpc').html(data.travelFrequency);
