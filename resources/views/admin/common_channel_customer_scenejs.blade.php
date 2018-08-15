@@ -59,6 +59,7 @@
         }
 
         if('{{Request::input('customer_id')}}'){
+            alert(1);
             getCustomer();
         }
 
