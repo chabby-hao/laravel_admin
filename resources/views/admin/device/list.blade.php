@@ -63,6 +63,7 @@
                                                 请选择场景
                                             </option>
                                         </select>
+                                        <br/>
                                         <select class="w1 margintop" name="brand_id">
                                             <option value="">请选择品牌</option>
                                             @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
