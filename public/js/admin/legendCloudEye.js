@@ -7,6 +7,7 @@ $(function(){
          try{m+=s2.split(".")[1].length}catch(e){}  
          return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m)  
     };
+    var myData;
     
 	$.ajax({ 
        type:"get",
@@ -16,14 +17,14 @@ $(function(){
        cache: false,
        data:{},
        success:function(data){
-           return data;
+           myData=data;
        },
        error:function(){
            // console.log(msg);
        }
 	});
 
-    console.log(data)
+    //console.log(data)
     // $('.car_jrhy').html(data.dailyActive);
     // $('.car_cxcs').html(data.travelTimes);
     // $('.car_cxpc').html(data.travelFrequency);
@@ -48,7 +49,7 @@ $(function(){
     p2num4.start();
 
     // 地图
-    var mapData=data.activeGeographicalDistribution;
+    var mapData=myData.activeGeographicalDistribution;
     var myCharts5 = echarts.init(document.getElementById('myMap'));  
     var option5 = {
         title : {
@@ -116,7 +117,7 @@ $(function(){
     myCharts5.setOption(option5);
 
     //车型分布柱状图
-    var zhuData=data.vehicleDistribution;
+    var zhuData=myData.vehicleDistribution;
     var zhuXd=[];   //x轴name 
     var zhuYd=[];   //value值
     $.each(zhuData, function(i,result) {
@@ -235,7 +236,7 @@ $(function(){
     myCharts.setOption(option);
 
     // 七日活跃折线图
-    var zheData=data.activeCurve;
+    var zheData=myData.activeCurve;
     console.log(zheData);
     var zheXd=[];   //x轴name 
     var zheYd=[];   //value值
@@ -340,7 +341,7 @@ $(function(){
 
     // 出行次数饼图
 
-    var bingData=data.tripFrequencyDistribution;
+    var bingData=myData.tripFrequencyDistribution;
     var myCharts4 = echarts.init(document.getElementById('tb_trip'));
     var i=0;
     var colors=['#6bc3dc','#ee5b3e','#b5b5b5','#faa046','#589fcc'];
