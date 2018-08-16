@@ -357,7 +357,7 @@ $(function(){
 		                roseType : 'area',
 		                itemStyle:{
 		                    normal:{
-		                        color:function(){
+		                        color:function(params){
 		                            return colors[params.dataIndex];
 		                        },
 		                        label: {
