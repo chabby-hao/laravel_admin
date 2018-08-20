@@ -32,7 +32,6 @@
                             </tbody>
                         </table>
 
-                        <%#shipOrder%>
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
@@ -44,14 +43,13 @@
                             </thead>
                             <tbody>
                             <tr class="gradeX">
-                                <td><%order_no%></td>
-                                <td><%order_created_at%></td>
-                                <td><%ship_no%></td>
-                                <td><%actuall_date%></td>
+                                <td><%shipOrder.order_no%></td>
+                                <td><%shipOrder.order_created_at%></td>
+                                <td><%shipOrder.ship_no%></td>
+                                <td><%deliveredAt%></td>
                             </tr>
                             </tbody>
                         </table>
-                        <%/shipOrder%>
 
                         <table class="table table-bordered data-table">
                             <thead>
