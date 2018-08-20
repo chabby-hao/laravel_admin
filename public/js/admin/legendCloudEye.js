@@ -141,6 +141,14 @@ $(function(){
 		                    color: '#7a7a7a',
 		                    fontSize:12,
 		                },
+		                formatter:function(value,index){
+		                    if (index % 2 != 0) {
+		                        return '\n\n' + value;
+		                    }
+		                    else {
+		                        return value;
+		                    }
+		                }
 		            },
 		            axisLine: {
 		                lineStyle: {
@@ -331,7 +339,6 @@ $(function(){
 		
 		    var bingData=data.tripFrequencyDistribution;
 		    var myCharts4 = echarts.init(document.getElementById('tb_trip'));
-		    var i=0;
 		    var colors=['#6bc3dc','#ee5b3e','#b5b5b5','#faa046','#589fcc'];
 		    var option4 = {
 		        tooltip : {
@@ -358,8 +365,8 @@ $(function(){
 		                roseType : 'area',
 		                itemStyle:{
 		                    normal:{
-		                        color:function(){
-		                            return colors[i++];
+		                        color:function(params){
+		                            return colors[params.dataIndex];
 		                        },
 		                        label: {
 		                            formatter: function(params){
