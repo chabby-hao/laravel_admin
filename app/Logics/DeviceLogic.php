@@ -1348,6 +1348,16 @@ class DeviceLogic extends BaseLogic
         RedisLogic::del('dev_zone:'.$imei);//删除设备的安全区域设置数据
         RedisLogic::del('zhangfei_charge:'.$imei);//删除电池数据
 
+        $deviceCode = TDeviceCode::whereImei($imei)->first();
+
+        if ($deviceCode) {
+            RedisLogic::hmSet('dev:' . $imei, [
+                'channel' => $deviceCode->channel_id,
+                'type' => $deviceCode->type,
+            ]);
+        }
+
+
         //3、操作数据库
         //记录设备重置的日志
 
