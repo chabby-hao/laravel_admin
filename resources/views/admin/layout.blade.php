@@ -200,6 +200,9 @@
                 @if(Auth::user()->can('tool/deviceToChannel'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@deviceToChannel')}}">设备加入渠道包</a></li>
                 @endif
+                @if(Auth::user()->can('tool/cmdSend'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@cmdSend')}}">命令调试</a></li>
+                @endif
             </ul>
         </li>
 

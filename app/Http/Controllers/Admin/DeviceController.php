@@ -110,6 +110,8 @@ class DeviceController extends BaseController
             $shipOrder = DeliveryLogic::getOrderShipInfo($data['imei']);
 
             $data['shipOrder'] = $shipOrder;
+            $data['deliveredAt'] = $deviceObj->getDeliverdAt();
+
             $data['name'] = DeviceLogic::getNameByUdid($udid);
             $data['master'] = DeviceLogic::getAdminInfoByUdid($udid);
             if ($data['master'] && $data['master']['phone']) {

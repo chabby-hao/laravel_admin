@@ -33,7 +33,7 @@ class DbSync extends BaseCommand
     {
         $this->categoryDicNew();
         //已使用BI发货，不需要老的渠道品牌同步了
-        $this->deviceCode();
+        //$this->deviceCode();
     }
 
     /**

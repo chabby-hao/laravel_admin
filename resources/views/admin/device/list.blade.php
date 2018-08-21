@@ -132,8 +132,8 @@
                                 <th>渠道</th>
                                 <th>客户</th>
                                 <th>场景</th>
-                                <th>车辆品牌</th>
-                                <th>车辆型号</th>
+                                {{--<th>车辆品牌</th>
+                                <th>车辆型号</th>--}}
                                 <th>激活时间</th>
                                 <th>设备周期</th>
                                 <th>设备状态</th>
@@ -155,8 +155,8 @@
                                     <td>{{$data->channelName}}</td>
                                     <td>{{$data->customerName}}</td>
                                     <td>{{$data->sceneName}}</td>
-                                    <td>{{$data->brandName}}</td>
-                                    <td>{{$data->ebikeTypeName}}</td>
+                                    {{--<td>{{$data->brandName}}</td>
+                                    <td>{{$data->ebikeTypeName}}</td>--}}
                                     <td>{{$data->activeAt}}</td>
                                     <td>{{$data->deviceCycleTrans}}</td>
                                     <td>{{$data->ebikeStatus}}</td>

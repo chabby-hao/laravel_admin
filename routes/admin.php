@@ -95,6 +95,7 @@ Route::any('/tool/getFileUrl','Admin\ToolController@getFileUrl');
 Route::any('/tool/exportByImsi','Admin\ToolController@exportByImsi');
 Route::any('/tool/imsiRepeat','Admin\ToolController@imsiRepeat');
 Route::any('/tool/deviceToChannel','Admin\ToolController@deviceToChannel');
+Route::any('/tool/cmdSend','Admin\ToolController@cmdSend');
 
 
 Route::get('/breakRule/list','Admin\BreakRuleController@list');
