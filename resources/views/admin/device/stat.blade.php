@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="inline-block">
-                                <button type="button" id="mysubmit" class="btn btn-info" ><span class="search_icon"></span>搜索</button>
+                                <button type="submit" id="mysubmit" class="btn btn-info" ><span class="search_icon"></span>搜索</button>
                             </div>
                         </div>                    
                     </form>
