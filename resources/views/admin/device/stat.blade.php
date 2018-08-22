@@ -1,4 +1,12 @@
 @extends('admin.layout')
+<style>
+	/*8.22新增 应对整体优化*/
+	@media(max-width: 480px) {
+		#content{overflow-x: hidden;}
+		#content-header{width: 100%;}
+		.container-fluid{width: auto;}
+	}
+</style>
 @section('content')
 
     <div class="container-fluid">
