@@ -137,11 +137,11 @@
 			<form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
 				<div class="input-group mb-3">					
 					<span class="input_icon"><img src="/images/home/input_icon1.png"/></span>					
-					<input type="text" class="" placeholder="账户名称">
+					<input type="text" name="name" class="" placeholder="账户名称">
 				</div>
 				<div class="input-group">					
 					<span class="input_icon"><img src="/images/home/input_icon2.png"/></span>					
-					<input type="password" class="" placeholder="用户密码">
+					<input type="password" name="pwd" class="" placeholder="用户密码">
 				</div>
 				<p class="login_tip"></p>
 				<button type="submit" class="login_btn">登录</button>
