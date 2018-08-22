@@ -155,7 +155,7 @@
 <script src="/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/special.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/bootstrapV4.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/jquery-form/jquery.form.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	var h = window.innerHeight;
 	$('.part1_box').css({'height':h});
