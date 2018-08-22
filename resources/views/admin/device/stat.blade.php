@@ -3,7 +3,7 @@
 <style>
 	/*8.22新增 应对整体优化*/
 	@media(max-width: 480px) {
-		#content{overflow-x: hidden;}
+		#content{overflow-x: visible;}
 		#content-header{width: 100%;}
 		.container-fluid{width: auto;}
 	}
