@@ -1,4 +1,5 @@
 @extends('admin.layout')
+@section('content')
 <style>
 	/*8.22新增 应对整体优化*/
 	@media(max-width: 480px) {
@@ -7,8 +8,6 @@
 		.container-fluid{width: auto;}
 	}
 </style>
-@section('content')
-
     <div class="container-fluid">
 		<div class="row-fluid car_info">
 			<div class="span3">
