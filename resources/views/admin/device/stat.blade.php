@@ -92,7 +92,7 @@
                     </form>
 				</div>
 
-				@include('admin.device.common_detail')
+				{{--@include('admin.device.common_detail')--}}
 			</div>
 
 	</div>
