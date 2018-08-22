@@ -157,60 +157,67 @@
 <script src="/js/bootstrapV4.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/jquery-form/jquery.form.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-	var h = window.innerHeight;
-	$('.part1_box').css({'height':h});
-	$('.login').click(function(){
-		$('.ranglu').css({'opacity':'0'});
-		$('.login_big_bg').css({'height':h});
-		$('.login_big_bg').css({'display':'block'});
-		$('body').css('overflow','hidden');		
-	});
-	$('.login_big_bg').on('touchmove', function(event) {
-	    event.preventDefault();
-	});
-	$('.login_cha').click(function(){
-		$('.ranglu').css({'opacity':'1'});
-		$('.login_big_bg').css({'display':'none'});
-		$('body').css('overflow','auto');
-	});
+	$(function(){
+		var h = window.innerHeight;
+		$('.part1_box').css({'height':h});
+		$('.login').click(function(){
+			$('.ranglu').css({'opacity':'0'});
+			$('.login_big_bg').css({'height':h});
+			$('.login_big_bg').css({'display':'block'});
+			$('body').css('overflow','hidden');		
+		});
+		$('.login_big_bg').on('touchmove', function(event) {
+		    event.preventDefault();
+		});
+		$('.login_cha').click(function(){
+			$('.ranglu').css({'opacity':'1'});
+			$('.login_big_bg').css({'display':'none'});
+			$('body').css('overflow','auto');
+		});
+		
+		$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+	    var myform = $("#loginform");
+	    myform.ajaxForm({
+	        dataType: 'json',
+	        success: function (res) {
+	            if (res.code=== 200) {
+	                location.href=res.redirect;
+	            }else{
+	                $(".login_tip").html(res.msg);
+	            }
+	        }
+	    });
 	
-	$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-    var myform = $("#loginform");
-    myform.ajaxForm({
-        dataType: 'json',
-        success: function (res) {
-            if (res.code=== 200) {
-                location.href=res.redirect;
-            }else{
-                $(".login_tip").html(res.msg);
-            }
-        }
-    });
-
-    var refreshTotal = function(){
-        $.ajax({
-            url:'http://bi.vipcare.com/stat/requestCount',
-            success:function(res){
-                if(res.code === 200){
-                    var sum = res.data.sum;
-                    var ul = $("#total_count");
-                    //<li><span>2</span></li>
-                    var str = '';
-                    for(var x in sum){
-                        if(!isNaN(sum[x])){
-                            var li = "<li><span>" + sum[x] + "</span></li>";
-                        }else{
-                            var li = '<li class="delimiter"><span>′</span></li>';
-                        }
-                        str += li;
-                    }
-                    ul.html(str);
-                }
-            }
-        })
-    };
-    refreshTotal();
-    setInterval(refreshTotal, 1000);
+	    var refreshTotal = function(){
+	        $.ajax({
+	            url:'{{URL::action('Bi\StatController@requestCount')}}',
+	            success:function(res){
+	                if(res.code === 200){
+	                    var sum = res.data.sum;
+	                    var ul = $("#total_count");
+	                    //<li><span>2</span></li>
+	                    var str = '';
+	                    for(var x in sum){
+	                        if(!isNaN(sum[x])){
+	                            var li = "<li><span>" + sum[x] + "</span></li>";
+	                        }else{
+	                            var li = '<li class="delimiter"><span>′</span></li>';
+	                        }
+	                        str += li;
+	                    }
+	                    ul.html(str);
+	                }
+	            }
+	        })
+	    };
+	    refreshTotal();
+	    setInterval(refreshTotal, 1000);
+		
+		
+		
+		
+	})
+	
 
 	
 	
