@@ -134,7 +134,7 @@
 		<div class="login_inner_box">
 			<img class="login_logo" src="/images/home/login_logo.png"/>
 			<span class="login_cha"><img src="/images/home/input_icon3.png"/></span>
-			<form id="loginform" class="form-vertical" action="http://bi.vipcare.com/admin/auth/login" method="post">
+			<form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
 				<div class="input-group mb-3">					
 					<span class="input_icon"><img src="/images/home/input_icon1.png"/></span>					
 					<input type="text" class="" placeholder="账户名称">
