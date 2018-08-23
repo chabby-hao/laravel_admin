@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="inline-block">
                                     <input type="text" id="id" name="id" value="{{Request::input('id')}}" placeholder="设备号/IMEI/IMSI/手机号">
-                                    <input type="text" id="name" name="name" placeholder="设备名称">
+                                    <input type="text" id="name" name="name" value="{{Request::input('name')}}" placeholder="设备名称">
                                 </div>
 
                                 <div class="inline-block">

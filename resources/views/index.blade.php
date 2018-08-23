@@ -1,230 +1,225 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- CSRF Token -->
+	<meta charset="UTF-8" />
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/index.css">
-
-    <title>BI</title>
+	<title>BI</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrapV4.min.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/indexNew.css"/>
 </head>
 <body>
-<div class="bi-header">
-    <video class="bi-video" src="/video/dabj.mp4" poster="/image/dabj_poster.png" muted autoplay loop></video>
-    <div class="bi-top">
-        <div class="bi-nav">
-            <span class="bi-logo"><img class="logo" src="/image/logo@2x.png" alt=""></span>
-            <div style="display: none" class="bi-nav-a">
-                <a href="javascript:;">关于我们</a>
-                <a href="javascript:;">技术支持</a>
-                <a href="javascript:;">成为伙伴</a>
-            </div>
-        </div>
-        <div class="bi-login">
-            <a id="login" href="javascript:;">登录</a>
-        </div>
-        <div class="bi-top-icon"><img src="/image/biaoqian1@2x.png" alt=""></div>
-    </div>
+	<div class="container-fluid part1_box">		
+		<canvas id="canv" width="" height=""></canvas>
+		<nav class="navbar  justify-content-between myNav">
+			<a class="navbar-brand" href="#">
+				<img src="/images/home/bi_logo.png"/>
+			</a>		  
+		    <div class="form-inline">
+		      	<a id="login" href="javascript:;" class="login">登录</a>
+		      	<span class="trapezoid"></span>
+		    </div>
+		</nav>
+		<!--历史访问-->	
+		<div class="history_visit">
+			<div class="ranglu">
+				<div class="hv_box">
+					 <ul id="total_count">
+						<li><span>0</span></li>
+						<li><span>7</span></li>
+						<li class="delimiter"><span>′</span></li>
+						<li><span>4</span></li>
+						<li><span>6</span></li>
+						<li><span>5</span></li>
+						<li class="delimiter"><span>′</span></li>
+						<li><span>8</span></li>
+						<li><span>0</span></li>
+						<li><span>9</span></li>
+						<li class="delimiter"><span>′</span></li>
+						<li><span>6</span></li>
+						<li><span>5</span></li>
+						<li><span>3</span></li>
+					</ul>
+				</div>
+				<p class="history_title">历史访问请求量</p>
+				
+				<!--图片模式-->
+				<div class="brokenBox"></div>
+			</div>
+			<div class="part1_footer">
+				<span class="trapezoid_footer"></span>
+				<span class="part1_footer_title">Copyright © 2016-2018 VIPCARE. All Rights Reserved.</span>
+			</div>		
+		</div>
+	</div>
+	<div class="container-fluid part2_box">
+		<div class="part2_top clearfix">
+			<p class="fl">合作伙伴</p>
+			<span class="trapezoid fr"></span>
+			<p class="fr">合作咨询：bd@vipcare.com 021-6403 0850</p>			
+		</div>
+		<div class="panter_box">
+			<div class="row">
+			  <div class=""><img src="/images/home/parter_img1.png"/></div>
+			  <div class=""><img src="/images/home/parter_img2.png"/></div>
+			  <div class=""><img src="/images/home/parter_img3.png"/></div>
+			  <div class=""><img src="/images/home/parter_img4.png"/></div>
+			  <div class=""><img src="/images/home/parter_img5.png"/></div>
+			  <div class=""><img src="/images/home/parter_img6.png"/></div>
+			  <div class=""><img src="/images/home/parter_img7.png"/></div>
+			  <div class=""><img src="/images/home/parter_img8.png"/></div>
+			  <div class=""><img src="/images/home/parter_img9.png"/></div>
+			  <div class=""><img src="/images/home/parter_img10.png"/></div>
+			  <div class=""><img src="/images/home/parter_img11.png"/></div>
+			  <div class=""><img src="/images/home/parter_img12.png"/></div>
+			  <div class=""><img src="/images/home/parter_img13.png"/></div>
+			  <div class=""><img src="/images/home/parter_img14.png"/></div>
+			  <div class=""><img src="/images/home/parter_img15.png"/></div>
+			  <div class=""><img src="/images/home/parter_img16.png"/></div>
+			  <div class=""><img src="/images/home/parter_img17.png"/></div>
+			  <div class=""><img src="/images/home/parter_img18.png"/></div>
+			  <div class=""><img src="/images/home/parter_img19.png"/></div>
+			  <div class=""><img src="/images/home/parter_img20.png"/></div>
+			</div>
+		</div>
+	</div>
+	<!--footer-->
+	<div class="container-fluid footer">
+		<div class="row">
+		    <div class="col footer_qrcode">		   
+		    		<img src="/images/home/qrcode.png"/>
+		      	<p>超牛管家官方公众号</p> 
+		    </div>
+		    <div class="col-6 footer_mid">
+		      <ul class="fl">
+		      	<li><a href="javascript:;">产品</a></li>
+		      	<li><a href="">超牛管家</a></li>
+		      	<li><a href="">安心充</a></li>
+		      	<li><a href="">运营系统</a></li>
+		      </ul>
+		      <ul class="fl">
+		      	<li><a href="javascript:;">工具</a></li>
+		      	<li><a href="javascript:;">API文档</a></li>
+		      	<li><a href="javascript:;">智慧芯测试</a></li>
+		      	<li><a href="javascript:;">操作手册</a></li>
+		      </ul>
+		      <ul class="fl">
+		      	<li><a href="javascript:;">品牌</a></li>
+		      	<li><a href="javascript:;">公众号</a></li>
+		      	<li><a href="javascript:;">小程序</a></li>
+		      </ul>
+		      <ul class="fl">
+		      	<li><a href="javascript:;">关于我们</a></li>
+		      	<li><a href="javascript:;">联系我们</a></li>
+		      	<li><a href="javascript:;">加入我们</a></li>
+		      </ul>
+		    </div>
+		    <div class="col footer_ri">
+		      <img class="foo_anqi_logo" src="/images/home/anqi_logo.png"/>
+		      <div class="wei_box clearfix">
+		      	<a href="javascript:;"><img src="/images/home/wechat_icon.png"/></a>
+		      	<a href="javascript:;"><img src="/images/home/qq_icon.png"/></a>
+		      </div>
+		    </div>
+		</div>
+		<p class="footer_bott">沪ICP备15011485号-2 Copyright © 2016-2018 VIPCARE. All Rights Reserved.</p>
+	</div>
+	
+	<!--登录-->
+	<div class="login_big_bg">
+		<div class="login_inner_box">
+			<img class="login_logo" src="/images/home/login_logo.png"/>
+			<span class="login_cha"><img src="/images/home/input_icon3.png"/></span>
+			<form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
+				<div class="input-group mb-3">					
+					<span class="input_icon"><img src="/images/home/input_icon1.png"/></span>					
+					<input type="text" name="name" class="" placeholder="账户名称">
+				</div>
+				<div class="input-group">					
+					<span class="input_icon"><img src="/images/home/input_icon2.png"/></span>					
+					<input type="password" name="pwd" class="" placeholder="用户密码">
+				</div>
+				<p class="login_tip"></p>
+				<button type="submit" class="login_btn">登录</button>
+			</form>
+		</div>
+	</div>
 
-    <div class="bi-point">
-        <span class="point-1">驾驶舱</span>
-        <span class="point-2">车辆统计</span>
-        <span class="point-3">用户画像</span>
-        <span class="point-4">品质分析</span>
-        <span class="point-5">营销服务</span>
-    </div>
-
-    <div class="bi-history">
-        <div class="bi-number">
-            <ul id="total_count">
-                {{--<li><span>1</span></li>--}}
-                {{--<li><span>2</span></li>--}}
-                {{--<li><span>3</span></li>--}}
-                {{--<li class="delimiter"><span>′</span></li>--}}
-                {{--<li><span>5</span></li>--}}
-                {{--<li><span>6</span></li>--}}
-                {{--<li><span>1</span></li>--}}
-                {{--<li><span>7</span></li>--}}
-                {{--<li><span>8</span></li>--}}
-                {{--<li class="delimiter"><span>′</span></li>--}}
-                {{--<li><span>3</span></li>--}}
-                {{--<li><span>4</span></li>--}}
-                {{--<li><span>7</span></li>--}}
-                {{--<li><span>1</span></li>--}}
-            </ul>
-        </div>
-        <label class="bi-history-text">设备请求总量</label>
-    </div>
-
-    <form id="loginform" class="form-vertical" action="{{URL::action('Admin\AuthController@login')}}" method="post">
-        <div class="bi-login-model">
-            <div class="bi-login-logo">
-                <img src="/image/logo@2x.png" alt="">
-            </div>
-            <div class="bi-login-group">
-                <div class="bi-close"><img src="/image/guanbi@2x.png" alt=""></div>
-                <div class="bi-login-box">
-                    <span class="bi-login-icon"><img src="/image/zhanghao@2x.png" alt=""></span>
-                    <input type="text" name="name" placeholder="账户名称"/>
-                </div>
-                <div class="bi-login-box">
-                    <span class="bi-login-icon"><img src="/image/mima@2x.png" alt=""></span>
-                    <input type="password" name="pwd" placeholder="用户密码"/>
-                </div>
-                <div class="bi-login-box">
-                    <span class="bi-login-error"></span>
-                </div>
-
-                <div class="bi-login-go">
-                    <button class="btn">登录</button>
-                </div>
-
-                <div class="bi-login-bottom" style="display: none;">
-                    <div class="forget"><a href="javascript:;">忘记密码</a></div>
-                    <div class="register-now"><a href="javascript:;">立即注册 ></a></div>
-                </div>
-
-            </div>
-        </div>
-    </form>
-
-    <div class="login-shade">
-    </div>
-
-    <div class="bi-header-icon2">
-        <img src="/image/biaoqian2@2x.png" alt="">
-        <span>Copyright © 2016-2018 VIPCARE. All Rights Reserved.</span>
-    </div>
-</div>
-<div class="bi-content">
-
-    <div class="bi-content-top">
-        <span class="bi-content-partner">合作伙伴</span>
-        <span class="bi-zixun">合作咨询：bd@vipcare.com 021-6403 0850</span>
-        <div class="bi-icon"><img src="/image/biaoqian3@2x.png" alt=""></div>
-    </div>
-
-    <div class="bi-partner">
-        <img class="bi-hezuo" src="/image/hezuo@2x.png" alt="">
-    </div>
-</div>
-<div class="bi-footer">
-    <div class="bi-qrcode">
-        <img class="bi-wechat-qr" src="/image/qr.png" alt="">
-        <span class="bi-wechat-text">超牛管家官方公众号</span>
-    </div>
-
-    <div class="bi-footer-content">
-        <div class="bi-footer-item">
-            <a href="javascript:;">产品</a>
-            <a href="javascript:;">超牛管家</a>
-            <a href="https://anxinchong.vipcare.com/admin">安心充</a>
-            <a href="http://admin.vipcare.com">运营系统</a>
-        </div>
-        <div class="bi-footer-item">
-            <a href="javascript:;">工具</a>
-            <a href="javascript:;">API文档</a>
-            <a href="javascript:;">智慧芯测试</a>
-            <a href="javascript:;">操作手册</a>
-        </div>
-        <div class="bi-footer-item">
-            <a href="javascript:;">品牌</a>
-            <a href="javascript:;">公众号</a>
-            <a href="javascript:;">小程序</a>
-        </div>
-        <div class="bi-footer-item">
-            <a href="javascript:;">关于我们</a>
-            <a href="javascript:;">联系我们</a>
-            <a href="javascript:;">加入我们</a>
-        </div>
-    </div>
-
-    <div class="bi-contanct">
-        <div class="bi-logo-box">
-            <div class="bi-anqi"><img class="bi-anqi-logo" src="/image/anqi_logo@2x.png" alt=""></div>
-            <img class="bi-wechat" src="/image/weixin@2x.png" alt="">
-            <img class="bi-qq" src="/image/qq@2x.png" alt="">
-        </div>
-    </div>
-
-    <div class="bi-copy">
-        沪ICP备15011485号-2   	Copyright © 2016-2018 VIPCARE. All Rights Reserved.
-    </div>
-</div>
-
+	
+	
 </body>
+<script src="/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/special.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrapV4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/jquery-form/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		var h = window.innerHeight;
+		$('.part1_box').css({'height':h});
+		$('.login').click(function(){
+			$('.ranglu').css({'opacity':'0'});
+			$('.login_big_bg').css({'height':h});
+			$('.login_big_bg').css({'display':'block'});
+			$('body').css('overflow','hidden');		
+		});
+		$('.login_big_bg').on('touchmove', function(event) {
+		    event.preventDefault();
+		});
+		$('.login_cha').click(function(){
+			$('.ranglu').css({'opacity':'1'});
+			$('.login_big_bg').css({'display':'none'});
+			$('body').css('overflow','auto');
+		});
+		
+		$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+	    var myform = $("#loginform");
+	    myform.ajaxForm({
+	        dataType: 'json',
+	        success: function (res) {
+	            if (res.code=== 200) {
+	                location.href=res.redirect;
+	            }else{
+	                $(".login_tip").html(res.msg);
+	            }
+	        }
+	    });
+	
+	    var refreshTotal = function(){
+	        $.ajax({
+	            url:'{{URL::action('Bi\StatController@requestCount')}}',
+	            success:function(res){
+	                if(res.code === 200){
+	                    var sum = res.data.sum;
+	                    var ul = $("#total_count");
+	                    //<li><span>2</span></li>
+	                    var str = '';
+	                    for(var x in sum){
+	                        if(!isNaN(sum[x])){
+	                            var li = "<li><span>" + sum[x] + "</span></li>";
+	                        }else{
+	                            var li = '<li class="delimiter"><span>′</span></li>';
+	                        }
+	                        str += li;
+	                    }
+	                    ul.html(str);
+	                }
+	            }
+	        })
+	    };
+	    refreshTotal();
+	    setInterval(refreshTotal, 1000);
+		
+		
+		
+		
+	})
+	
+
+	
+	
+</script>
 </html>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/jquery3/jquery.slim.min.js"></script>
-<script src="/popper/umd/popper.min.js"></script>
-<script src="/bootstrap4/js/bootstrap.min.js"></script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/jquery-form/jquery.form.js"></script>
-<script>
-
-    $(function () {
-
-        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-
-        var myform = $("#loginform");
-        myform.ajaxForm({
-            dataType: 'json',
-            success: function (res) {
-                if (res.code=== 200) {
-                    location.href=res.redirect;
-                }else{
-                    $(".bi-login-error").text(res.msg);
-                }
-            }
-        })
-
-        var refreshTotal = function(){
-            $.ajax({
-                url:'{{URL::action('Bi\StatController@requestCount')}}',
-                success:function(res){
-                    if(res.code === 200){
-                        var sum = res.data.sum;
-                        var ul = $("#total_count");
-                        //<li><span>2</span></li>
-                        var str = '';
-                        for(var x in sum){
-                            if(!isNaN(sum[x])){
-                                var li = "<li><span>" + sum[x] + "</span></li>";
-                            }else{
-                                var li = '<li class="delimiter"><span>′</span></li>';
-                            }
-                            str += li;
-                        }
-                        ul.html(str);
-                    }
-                }
-            })
-        }
-
-        refreshTotal();
-
-        setInterval(refreshTotal, 1000);
-
-
-    })
-
-</script>
-
-<script>
-    $("#login").click(function () {
-        $(".bi-login-model,.login-shade").show();
-        $(".bi-point,.bi-history").hide();
-    })
-
-    $(".bi-close").click(function () {
-        $(".bi-login-model,.login-shade").hide();
-        $(".bi-point,.bi-history").show();
-    })
-</script>
