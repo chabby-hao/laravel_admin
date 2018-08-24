@@ -53,6 +53,7 @@ class UpiotSync extends BaseCommand
 
             //异步获取
             $upiotApi->getCardInfoAsync($imsi, function($cardInfo){
+                echo json_encode($cardInfo) . "\n";
                 BiCardLiangxun::updateOrCreate([
                     'imsi'=>$cardInfo['imsi'],
                 ], $cardInfo);
