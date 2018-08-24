@@ -1332,9 +1332,11 @@ class DeviceLogic extends BaseLogic
         $udid = self::getUdid($imei);
 
         //1、解绑用户
-        $client = new Client();
+        //user 服务已经停用
+        /*$client = new Client();
         $url = "http://user.qqfind.me:8080/care.api/user/device/unbindingAll.json?udid=$udid&type=0";
-        $client->get($url);
+        $client->get($url);*/
+        TUserDevice::whereUdid($udid)->delete();
 
         //2、删除redis中的相关数据
         RedisLogic::getRedis()->select(1);
