@@ -192,7 +192,7 @@
 	                        }
 	                        str += li;
 	                    }
-	                    ul.append(str);
+	                    ul.html(str);
 	                }
 	            }
 	        })
