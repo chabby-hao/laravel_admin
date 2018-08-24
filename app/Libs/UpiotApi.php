@@ -3,6 +3,7 @@
 namespace App\Libs;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -69,7 +70,7 @@ class UpiotApi
      */
     public function getCardInfoAsync($imsi, callable $func)
     {
-        $uri = "/api/card/$imsi";
+        $uri = "/api/card/$imsi/";
         $client = $this->getClient();
         $promise = $client->getAsync($uri);
         $promise->then(
@@ -80,6 +81,10 @@ class UpiotApi
                 } else {
                     Log::error('upiot get cardInfo error ' . $res->getBody());
                 }
+            },
+            function(RequestException $e){
+                echo $e->getMessage() . "\n";
+                echo $e->getRequest()->getMethod() . "\N";
             }
         );
     }
