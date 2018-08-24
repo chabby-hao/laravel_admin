@@ -12,6 +12,8 @@ use Psr\Http\Message\ResponseInterface;
 class UpiotApi
 {
 
+    public static $promises = [];
+
     private $username = 'vipcare';
     private $password = '123123';
 
@@ -74,12 +76,12 @@ class UpiotApi
         $client = $this->getClient();
         $promise = $client->getAsync($uri);
         $promise->then(
-            function (ResponseInterface $res) use ($func) {
+            function (ResponseInterface $res) use ($func, $uri) {
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
-                    Log::error('upiot get cardInfo error ' . $res->getBody());
+                    Log::error("upiot get cardInfo error $uri " . $res->getBody());
                 }
             },
             function(RequestException $e){
@@ -87,6 +89,9 @@ class UpiotApi
                 echo $e->getRequest()->getMethod() . "\n";
             }
         );
+
+        self::$promises[] = $promise;
+        return $promise;
     }
 
 
@@ -143,7 +148,6 @@ class UpiotApi
         if ($withToken) {
             $options[RequestOptions::HEADERS] = ['Authorization' => "JWT {$this->getToken()}"];
         }
-        var_dump($options);
         $client = new Client($options);
         return $client;
     }
