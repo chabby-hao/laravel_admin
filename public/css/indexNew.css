@@ -51,7 +51,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	.hv_box ul li{margin: 0 2.5px;height: 40px;line-height: 40px;width: 22px;}
 	.hv_box li span{font-size: 18px;}
 	.history_title{font-size: 1rem;line-height: 4rem;}
-	.hv_box ul .delimiter{height: 40px;line-height: 86px;}
+	.hv_box ul .delimiter{height: 40px;line-height: 86px;margin-left: 2.5px;}
 }
 
 /*图片模式*/
