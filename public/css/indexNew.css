@@ -48,7 +48,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 .history_title{font-size: 1.4rem;color: #fff;text-align: center;}
 @media only screen and (max-width: 625px) {
 	.history_visit{top:40%;}
-	.hv_box ul li{margin: 0;height: 40px;line-height: 40px;width: 22px;}
+	.hv_box ul li{margin: 0 3px;height: 40px;line-height: 40px;width: 22px;}
 	.hv_box li span{font-size: 18px;}
 	.history_title{font-size: 1rem;line-height: 4rem;}
 	.hv_box ul .delimiter{height: 40px;line-height: 86px;}
@@ -149,6 +149,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	.part1_footer{margin: 10% 5% 0;}
 	.part2_top p{font-size: 0.6rem;}
 	.footer_mid{padding-left: 3%;}
+	.hv_box ul li{margin: 0 2px;}
 }
 /*登录*/
 .login_big_bg{width: 100%;height: auto;background-color:rgba(0,2,8,0.5);position: fixed;top: 0;left: 0;z-index: 9;display: none;}
