@@ -97,9 +97,9 @@
 		    <div class="col-6 footer_mid">
 		      <ul class="fl">
 		      	<li><a href="javascript:;">产品</a></li>
-		      	<li><a href="">超牛管家</a></li>
-		      	<li><a href="">安心充</a></li>
-		      	<li><a href="">运营系统</a></li>
+		      	<li><a href="javascript:;">超牛管家</a></li>
+		      	<li><a href="https://anxinchong.vipcare.com/admin">安心充</a></li>
+		      	<li><a href="http://admin.vipcare.com">运营系统</a></li>
 		      </ul>
 		      <ul class="fl">
 		      	<li><a href="javascript:;">工具</a></li>
