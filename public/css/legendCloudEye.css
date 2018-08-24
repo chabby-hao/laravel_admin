@@ -13,6 +13,14 @@
 	.car_info .span3 h3 span{font-size: 42px;}
 	.car_info .arr_down,.car_info .arr_up{top: 25px;}
 }
+@media(max-width: 500px) {
+	.car_info .span3 h3 span{font-size: 40px;}
+	.car_info .arr_down,.car_info .arr_up{top: 28px;}
+}
+@media(max-width: 320px) {
+	.car_info .span3 h3 span{font-size: 34px;}
+	.car_info .arr_down,.car_info .arr_up{top: 30px;}
+}
 /*地图*/
 .map_box{width: 100%;height: auto;background: #4c5459;border-radius: 5px;position: relative;}
 .map_title_lt{font-size: 16px;color: #ffffff;line-height: 70px;float: left; font-weight: 300;margin: 0; margin-left: 2rem;}
