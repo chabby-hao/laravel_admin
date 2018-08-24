@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 08 Aug 2018 20:07:31 +0800.
+ * Date: Fri, 24 Aug 2018 14:36:39 +0800.
  */
 
 namespace App\Models\Base;
@@ -17,6 +17,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $order_no
  * @property int $state
  * @property int $channel_id
+ * @property int $customer_id
+ * @property int $scene_id
  * @property int $order_quantity
  * @property int $device_type
  * @property \Carbon\Carbon $expect_delivery
@@ -37,6 +39,8 @@ class BiOrder extends Eloquent
 		'user_id' => 'int',
 		'state' => 'int',
 		'channel_id' => 'int',
+		'customer_id' => 'int',
+		'scene_id' => 'int',
 		'order_quantity' => 'int',
 		'device_type' => 'int',
 		'after_sale' => 'int',

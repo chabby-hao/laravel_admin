@@ -11,6 +11,8 @@ use App\Libs\Helper;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiProvince whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiProvince whereProvince($value)
  * @mixin \Eloquent
+ * @property string|null $short_name
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiProvince whereShortName($value)
  */
 class BiProvince extends \App\Models\Base\BiProvince
 {

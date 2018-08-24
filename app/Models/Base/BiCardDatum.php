@@ -10,22 +10,27 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiFile
+ * Class BiCardDatum
  * 
  * @property int $id
- * @property string $filename
- * @property string $fileurl
- * @property int $filetype
+ * @property string $msisdn
+ * @property string $imsi
+ * @property \Carbon\Carbon $date
+ * @property float $data_usage
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models\Base
  */
-class BiFile extends Eloquent
+class BiCardDatum extends Eloquent
 {
 	protected $connection = 'bi';
 
 	protected $casts = [
-		'filetype' => 'int'
+		'data_usage' => 'float'
+	];
+
+	protected $dates = [
+		'date'
 	];
 }
