@@ -38,6 +38,8 @@ use App\Libs\Helper;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereShipQuantity($value)
  * @property int $actuall_quantity 实际已出货量
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereActuallQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOrder whereSceneId($value)
  */
 class BiOrder extends \App\Models\Base\BiOrder
 {
