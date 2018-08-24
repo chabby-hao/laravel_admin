@@ -80,6 +80,8 @@ class UpiotApi
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
+                    //1分钟20次
+                    sleep(3);
                 } else {
                     Log::error("upiot get cardInfo error $uri " . $res->getBody());
                 }
