@@ -84,7 +84,7 @@ class UpiotApi
             },
             function(RequestException $e){
                 echo $e->getMessage() . "\n";
-                echo $e->getRequest()->getMethod() . "\N";
+                echo $e->getRequest()->getMethod() . "\n";
             }
         );
     }
@@ -143,6 +143,7 @@ class UpiotApi
         if ($withToken) {
             $options[RequestOptions::HEADERS] = ['Authorization' => "JWT {$this->getToken()}"];
         }
+        var_dump($options);
         $client = new Client($options);
         return $client;
     }
