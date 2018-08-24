@@ -29,7 +29,7 @@
 			<div class="ranglu">
 				<div class="hv_box">
 					 <ul id="total_count">
-						<li><span>0</span></li>
+						<!--<li><span>0</span></li>
 						<li><span>7</span></li>
 						<li class="delimiter"><span>′</span></li>
 						<li><span>4</span></li>
@@ -42,7 +42,7 @@
 						<li class="delimiter"><span>′</span></li>
 						<li><span>6</span></li>
 						<li><span>5</span></li>
-						<li><span>3</span></li>
+						<li><span>3</span></li>-->
 					</ul>
 				</div>
 				<p class="history_title">历史访问请求量</p>
