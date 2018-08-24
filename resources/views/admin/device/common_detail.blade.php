@@ -461,6 +461,10 @@
             myform.submit();
         }
 
+        if ($("#name").val()) {
+            myform.submit();
+        }
+
         $(".last").click(function(){
             var id = $(this).text();
             if(id){

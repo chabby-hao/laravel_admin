@@ -78,7 +78,7 @@
 		<!-- 信息展示 -->
 			<div class="row-fluid info_box">
 				<div class="search_box">
-					<form id="myform" class="form-search">
+					<form id="myform" action="{{URL::action('Admin\DeviceController@detail')}}" class="form-search">
                         <div class="control-group">                              
                             <div class="inline-block">
                                 <input type="text" id="id" name="id" value="" placeholder="请输入设备号">
@@ -86,13 +86,13 @@
                             </div>
 
                             <div class="inline-block">
-                                <button type="button" id="mysubmit" class="btn btn-info" ><span class="search_icon"></span>搜索</button>
+                                <button type="submit" id="mysubmit" class="btn btn-info" ><span class="search_icon"></span>搜索</button>
                             </div>
                         </div>                    
                     </form>
 				</div>
 
-				@include('admin.device.common_detail')
+				{{--@include('admin.device.common_detail')--}}
 			</div>
 
 	</div>

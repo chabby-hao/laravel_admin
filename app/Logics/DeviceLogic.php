@@ -536,7 +536,7 @@ class DeviceLogic extends BaseLogic
                 return Carbon::parse($deviceCode->delivered_at)->toDateTimeString();
             } else {
                 $row = DB::connection('care_log')->selectOne("select * from t_device_category where udid='$udid'");
-                return $row ? $row->delivered_ts : '';
+                return $row && $row->delivered_ts ? $row->delivered_ts : '';
             }
         });
     }
