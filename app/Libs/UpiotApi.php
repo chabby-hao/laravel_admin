@@ -46,6 +46,31 @@ class UpiotApi
         }
     }
 
+    public function getCardListAsync(callable $func)
+    {
+        $uri = "/api/card/$imsi/";
+        $client = $this->getClient();
+        $promise = $client->getAsync($uri);
+        $promise->then(
+            function (ResponseInterface $res) use ($func, $uri) {
+                $arr = json_decode($res->getBody()->getContents(), true);
+                if ($arr && $arr['code'] === 200) {
+                    $func($arr);
+                } else {
+                    Log::error("upiot get cardInfo error $uri " . $res->getBody());
+                }
+            },
+            function(RequestException $e){
+                echo $e->getMessage() . "\n";
+                echo $e->getRequest()->getMethod() . "\n";
+            }
+        );
+
+        self::$promises[] = $promise;
+        $promise->wait();
+        return $promise;
+    }
+
     /**
      * @param $imsi 4开头 4600xxxxxxx0515
      * {
@@ -80,8 +105,6 @@ class UpiotApi
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
-                    //1分钟20次
-                    sleep(3);
                 } else {
                     Log::error("upiot get cardInfo error $uri " . $res->getBody());
                 }
@@ -138,6 +161,9 @@ class UpiotApi
                 }
             }
         );
+
+        self::$promises[] = $promise;
+        $promise->wait();
 
         return $promise;
     }

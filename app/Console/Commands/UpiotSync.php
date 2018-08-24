@@ -60,6 +60,7 @@ class UpiotSync extends BaseCommand
                     'imsi'=>$cardInfo['imsi'],
                 ], $cardInfo);
             });
+            sleep(3);
         });
 
 
