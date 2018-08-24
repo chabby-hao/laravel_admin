@@ -45,6 +45,8 @@ class UpiotSync extends BaseCommand
 
         $this->batchSearch($model, function (TDeviceCode $deviceCode) use ($upiotApi) {
 
+            echo "{$deviceCode->imei} processing \n";
+
             if(!$deviceCode->imsi){
                 return [];
             }
