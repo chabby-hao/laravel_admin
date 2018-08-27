@@ -39,6 +39,12 @@ class UpiotSync extends BaseCommand
 
     public function handle()
     {
+
+        $this->cardListSync();
+
+        exit;
+
+
         $model = TDeviceCode::getDeviceModel();
 
         $upiotApi = new UpiotApi();
@@ -64,6 +70,21 @@ class UpiotSync extends BaseCommand
         });
 
 
+    }
+
+    private function cardListSync()
+    {
+        $upiot = new UpiotApi();
+        $upiot->cardListSyncAsync(function($data){
+            foreach ($data as $row){
+                BiCardLiangxun::firstOrCreate([
+                    'msisdn'=>$row['msisdn'],
+                ],[
+                    'iccid'=>$row['iccid'],
+                    'imsi'=>$row['imsi'],
+                ]);
+            }
+        });
     }
 
 

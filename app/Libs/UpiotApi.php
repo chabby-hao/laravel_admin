@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 class UpiotApi
 {
 
-    public static $promises = [];
+    public $promises = [];
 
     private $username = 'vipcare';
     private $password = '123123';
@@ -46,18 +46,36 @@ class UpiotApi
         }
     }
 
-    public function getCardListAsync(callable $func)
+    public function clearPromise()
     {
-        $uri = "/api/card/$imsi/";
+        if($this->promises){
+            foreach ($this->promises as $promise){
+                try{
+                    $promise->wait();
+                }catch (\Exception $e){
+                    echo $e->getMessage() . '------' . $e->getCode() . "\n";
+                }
+            }
+            $this->promises = [];
+        }
+    }
+
+    public function cardListSyncAsync(callable $func, $page = 1, $perPage = 100)
+    {
+        $uri = "/api/card/card_no_list/?page=$page&per_page=$perPage";
         $client = $this->getClient();
         $promise = $client->getAsync($uri);
         $promise->then(
-            function (ResponseInterface $res) use ($func, $uri) {
+            function (ResponseInterface $res) use ($func, $uri, $page, $perPage) {
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
-                    $func($arr);
+
+                    $func($arr['data']);
+
+                    $this->cardListSyncAsync($func, ++$page, $perPage);
+
                 } else {
-                    Log::error("upiot get cardInfo error $uri " . $res->getBody());
+                    Log::error("upiot sync cardList error $uri " . $res->getBody());
                 }
             },
             function(RequestException $e){
@@ -66,7 +84,8 @@ class UpiotApi
             }
         );
 
-        self::$promises[] = $promise;
+        $this->promises[] = $promise;
+        sleep(3);
         $promise->wait();
         return $promise;
     }
@@ -117,10 +136,7 @@ class UpiotApi
             }
         );
 
-        self::$promises[] = $promise;
-
-        $promise->wait();
-        sleep(5);
+        $this->promises[] = $promise;sleep(5);
         exit;
         return $promise;
     }
@@ -167,7 +183,7 @@ class UpiotApi
             }
         );
 
-        self::$promises[] = $promise;
+        $this->promises[] = $promise;
         $promise->wait();
 
         return $promise;
