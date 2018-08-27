@@ -116,7 +116,7 @@ class UpiotApi
         );
 
         self::$promises[] = $promise;
-        sleep(200);
+        sleep(5);
         exit;
         $promise->wait();
         return $promise;
