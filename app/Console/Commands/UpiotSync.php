@@ -76,6 +76,7 @@ class UpiotSync extends BaseCommand
     {
         $upiot = new UpiotApi();
         $upiot->cardListSyncAsync(function($data){
+            $this->getMaxCache();
             foreach ($data as $row){
                 BiCardLiangxun::firstOrCreate([
                     'msisdn'=>$row['msisdn'],

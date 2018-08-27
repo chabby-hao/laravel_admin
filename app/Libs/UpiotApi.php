@@ -67,7 +67,8 @@ class UpiotApi
         $promise = $client->getAsync($uri);
         $promise->then(
             function (ResponseInterface $res) use ($func, $uri, $page, $perPage) {
-                $arr = json_decode($res->getBody()->getContents(), true);
+                $body = $res->getBody()->getContents();
+                $arr = json_decode($body, true);
                 if ($arr && $arr['code'] === 200) {
 
                     $func($arr['data']);
@@ -75,6 +76,7 @@ class UpiotApi
                     $this->cardListSyncAsync($func, ++$page, $perPage);
 
                 } else {
+                    echo $body . "\n";
                     Log::error("upiot sync cardList error $uri " . $res->getBody());
                 }
             },
