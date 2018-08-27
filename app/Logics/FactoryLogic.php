@@ -48,6 +48,7 @@ class FactoryLogic extends BaseLogic
                 'imei'=>$imei,
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now(),
+                'state'=> BiDeliveryDevice::STATE_OK,
             ];
         }
 

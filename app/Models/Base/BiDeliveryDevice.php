@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 24 Aug 2018 14:36:39 +0800.
+ * Date: Mon, 27 Aug 2018 16:44:42 +0800.
  */
 
 namespace App\Models\Base;
@@ -17,6 +17,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $imei
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property int $state
  *
  * @package App\Models\Base
  */
@@ -25,6 +26,7 @@ class BiDeliveryDevice extends Eloquent
 	protected $connection = 'bi';
 
 	protected $casts = [
-		'delivery_order_id' => 'int'
+		'delivery_order_id' => 'int',
+		'state' => 'int'
 	];
 }

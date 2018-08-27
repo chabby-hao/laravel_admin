@@ -6,6 +6,7 @@ use App\Libs\Helper;
 use App\Models\BiBrand;
 use App\Models\BiChannel;
 use App\Models\BiCustomer;
+use App\Models\BiDeliveryDevice;
 use App\Models\BiDeviceType;
 use App\Models\BiEbikeType;
 use App\Models\BiProductType;
@@ -1410,6 +1411,8 @@ class DeviceLogic extends BaseLogic
         //锁车日志
         TLockLog::whereUdid($udid)->delete();
         TChipMileage::whereUdid($udid)->delete();
+
+        BiDeliveryDevice::whereImei($imei)->update(['state'=>BiDeliveryDevice::STATE_INVALID]);
 
         //将设备踢下线
         CommandLogic::sendCmd($imei, CommandLogic::CMD_KICK_DEVICE_OFFLINE);

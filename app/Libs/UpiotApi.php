@@ -151,7 +151,7 @@ class UpiotApi
 
 
     /**
-     * @param $msisdns 卡号 【'10648xxxxxxxx','10648xxxxxxxx']
+     * @param array $msisdns 卡号 【'10648xxxxxxxx','10648xxxxxxxx']
      * @param $date
      * {
          * "code": 状态码,

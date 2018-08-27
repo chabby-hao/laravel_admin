@@ -113,7 +113,7 @@ class DeliveryController extends BaseController
             }
 
             //IMEI已被用
-            $devices = BiDeliveryDevice::whereIn('imei', $imeis)->get(['imei'])->toArray();
+            $devices = BiDeliveryDevice::whereIn('imei', $imeis)->whereState(BiDeliveryDevice::STATE_OK)->get(['imei'])->toArray();
             if($devices){
                 return $this->outPutError('IMEI已被用',['data'=>Helper::transToOneDimensionalArray($devices,'imei')]);
             }

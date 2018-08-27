@@ -10,6 +10,7 @@ use App\Logics\LocationLogic;
 use App\Models\BiActiveCityDevice;
 use App\Models\BiActiveDevice;
 use App\Models\BiBrand;
+use App\Models\BiCardDatum;
 use App\Models\BiCardLiangxun;
 use App\Models\BiChannel;
 use App\Models\BiEbikeType;
@@ -41,6 +42,8 @@ class UpiotSync extends BaseCommand
     {
 
         $this->cardListSync();
+
+        $this->cardDataUsageSync();
 
         $this->cardInfoSync();
 
@@ -83,6 +86,48 @@ class UpiotSync extends BaseCommand
                 BiCardLiangxun::updateOrCreate([
                     'imsi'=>$cardInfo['imsi'],
                 ], $cardInfo);
+            });
+            if($upiotApi->promiseCount() >= 20){
+                $upiotApi->clearPromise();
+            }
+            sleep(3);
+        });
+        $upiotApi->clearPromise();
+    }
+
+    private function cardDataUsageSync()
+    {
+        $model = BiCardLiangxun::where([]);
+
+        $upiotApi = new UpiotApi();
+        $date = Carbon::now()->format('Ymd');
+
+        $msisdns = [];
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
+
+            $msisdns[] = $row->msisdn;
+            //PS:imsi 是从4开头，device_code 这张表存的前面都多带个9，我也不晓得为啥.
+
+            //异步获取
+            $upiotApi->getDataUsageAsync($msisdns, $date, function($data) use ($date){
+                echo json_encode($data) . "\n";
+                if($data['data']){
+                    foreach ($data['data'] as $item){
+                        BiCardLiangxun::updateOrCreate([
+                            'msisdn'=>$item['msisdn'],
+                        ],[
+                            'current_date_usage'=>$item['current_date_usage'],
+                        ]);
+
+                        BiCardDatum::updateOrCreate([
+                            'msisdn'=>$item['msisdn'],
+                            'date'=>$date,
+                        ],[
+                            'data_usage'=>$item['data_usage'],
+                        ]);
+
+                    }
+                }
             });
             if($upiotApi->promiseCount() >= 20){
                 $upiotApi->clearPromise();
