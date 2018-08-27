@@ -107,7 +107,7 @@ class UpiotApi
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
-                    echo
+                    echo $body . "\n";
                     Log::error("upiot get cardInfo error $uri " . $res->getBody());
                 }
             },
