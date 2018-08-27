@@ -180,13 +180,19 @@ class UpiotApi
             ]
         ]);
 
+        var_dump([
+            RequestOptions::JSON => [
+                'msisdns' => $msisdns,
+                'query_date' => $date,
+            ]]);
+
         $promise->then(
             function (ResponseInterface $res) use ($func) {
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
-                    Log::error('upiot get cardInfo error ' . $res->getBody()->getContents());
+                    Log::error('upiot get usagelog error ' . $res->getBody()->getContents());
                 }
             }
         );

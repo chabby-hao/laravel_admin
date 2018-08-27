@@ -30,7 +30,4 @@ class BiCardDatum extends Eloquent
 		'data_usage' => 'float'
 	];
 
-	protected $dates = [
-		'date'
-	];
 }
