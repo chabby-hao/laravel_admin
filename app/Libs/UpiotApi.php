@@ -62,7 +62,7 @@ class UpiotApi
 
     public function cardListSyncAsync(callable $func, $page = 1, $perPage = 100)
     {
-        $uri = "/api/card/card_no_list/?page=$page&per_page=$perPage";
+        $uri = "/api/card_no_list/?page=$page&per_page=$perPage";
         $client = $this->getClient();
         $promise = $client->getAsync($uri);
         $promise->then(
@@ -84,7 +84,6 @@ class UpiotApi
             }
         );
 
-        $this->promises[] = $promise;
         sleep(3);
         $promise->wait();
         return $promise;
