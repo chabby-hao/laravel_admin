@@ -42,6 +42,28 @@ class UpiotSync extends BaseCommand
 
         $this->cardListSync();
 
+        $this->cardInfoSync();
+
+    }
+
+    private function cardListSync()
+    {
+        $upiot = new UpiotApi();
+        $upiot->cardListSync(function($data){
+            $this->getMaxCache();
+            foreach ($data as $row){
+                BiCardLiangxun::firstOrCreate([
+                    'msisdn'=>$row['msisdn'],
+                ],[
+                    'iccid'=>$row['iccid'],
+                    'imsi'=>$row['imsi'],
+                ]);
+            }
+        });
+    }
+
+    private function cardInfoSync()
+    {
         $model = BiCardLiangxun::where([]);
 
         $upiotApi = new UpiotApi();
@@ -68,24 +90,6 @@ class UpiotSync extends BaseCommand
             sleep(3);
         });
         $upiotApi->clearPromise();
-
-
-    }
-
-    private function cardListSync()
-    {
-        $upiot = new UpiotApi();
-        $upiot->cardListSync(function($data){
-            $this->getMaxCache();
-            foreach ($data as $row){
-                BiCardLiangxun::firstOrCreate([
-                    'msisdn'=>$row['msisdn'],
-                ],[
-                    'iccid'=>$row['iccid'],
-                    'imsi'=>$row['imsi'],
-                ]);
-            }
-        });
     }
 
 

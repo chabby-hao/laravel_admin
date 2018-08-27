@@ -81,11 +81,12 @@ class UpiotApi
         }
     }
 
-    public function cardListSync(callable $func, $page = 1, $perPage = 100)
+    public function cardListSync(callable $func, $page = 1, $perPage = 300)
     {
 
-        $ret = false;
+
         do{
+            $ret = false;
             $data = $this->listSync($page, $perPage);
             if($data){
                 $func($data['data']);
@@ -154,17 +155,17 @@ class UpiotApi
      * @param $msisdns 卡号 【'10648xxxxxxxx','10648xxxxxxxx']
      * @param $date
      * {
-     * "code": 状态码,
-     * "data":
-     * [{
-     * "msisdn": "卡号1",
-     * "data_usage": 查询日期用量(M)
-     * }, {
-     * "msisdn": "卡号2",
-     * "data_usage": 查询日期用量(M)
-     * }],
-     * "query_date": "2017****",
-     * "failed": ["失败卡号1", "失败卡号2", ...]
+         * "code": 状态码,
+         * "data":
+         * [{
+         * "msisdn": "卡号1",
+         * "data_usage": 查询日期用量(M)
+         * }, {
+         * "msisdn": "卡号2",
+         * "data_usage": 查询日期用量(M)
+         * }],
+         * "query_date": "2017****",
+         * "failed": ["失败卡号1", "失败卡号2", ...]
      * }
      *
      * @return bool|mixed
@@ -186,7 +187,7 @@ class UpiotApi
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
-                    Log::error('upiot get cardInfo error ' . $res->getBody());
+                    Log::error('upiot get cardInfo error ' . $res->getBody()->getContents());
                 }
             }
         );
@@ -201,7 +202,7 @@ class UpiotApi
     {
         $options = [
             'base_uri' => 'http://ec.upiot.net',
-            RequestOptions::TIMEOUT => 10,
+            RequestOptions::TIMEOUT => 30,
         ];
         if ($withToken) {
             $options[RequestOptions::HEADERS] = ['Authorization' => "JWT {$this->getToken()}"];
