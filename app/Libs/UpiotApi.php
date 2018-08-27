@@ -102,10 +102,12 @@ class UpiotApi
         $promise = $client->getAsync($uri);
         $promise->then(
             function (ResponseInterface $res) use ($func, $uri) {
-                $arr = json_decode($res->getBody()->getContents(), true);
+                $body = $res->getBody()->getContents()
+                $arr = json_decode($body, true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
+                    echo
                     Log::error("upiot get cardInfo error $uri " . $res->getBody());
                 }
             },
