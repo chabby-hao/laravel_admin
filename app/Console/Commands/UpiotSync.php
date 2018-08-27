@@ -100,8 +100,7 @@ class UpiotSync extends BaseCommand
         $model = BiCardLiangxun::where([]);
 
         $upiotApi = new UpiotApi();
-        //$date = Carbon::now()->previousWeekday()->format('Ymd');
-        $date = '20180826';
+        $date = Carbon::yesterday()->format('Ymd');
 
         $msisdns = [];
         $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
