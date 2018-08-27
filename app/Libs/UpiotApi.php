@@ -65,35 +65,38 @@ class UpiotApi
         }
     }
 
-    public function cardListSyncAsync(callable $func, $page = 1, $perPage = 100)
+    private function listSync($page = 1, $perPage = 100)
     {
         $uri = "/api/card_no_list/?page=$page&per_page=$perPage";
         $client = $this->getClient();
-        $promise = $client->getAsync($uri);
-        $promise->then(
-            function (ResponseInterface $res) use ($func, $uri, $page, $perPage) {
-                $body = $res->getBody()->getContents();
-                $arr = json_decode($body, true);
-                if ($arr && $arr['code'] === 200) {
+        $r = $client->get($uri);
+        $body = $r->getBody()->getContents();
+        $arr = json_decode($body, true);
+        if ($arr && $arr['code'] === 200) {
+            return $arr;
+        } else {
+            echo $body . "\n";
+            Log::error("upiot sync cardList error $uri " . $body);
+            return false;
+        }
+    }
 
-                    $func($arr['data']);
+    public function cardListSync(callable $func, $page = 1, $perPage = 100)
+    {
 
-                    $this->cardListSyncAsync($func, ++$page, $perPage);
-
-                } else {
-                    echo $body . "\n";
-                    Log::error("upiot sync cardList error $uri " . $res->getBody());
+        $ret = false;
+        do{
+            $data = $this->listSync($page, $perPage);
+            if($data){
+                $func($data['data']);
+                if(++$page <= $data['num_pages']){
+                    $ret = true;
                 }
-            },
-            function(RequestException $e){
-                echo $e->getMessage() . "\n";
-                echo $e->getRequest()->getMethod() . "\n";
             }
-        );
+            //1分钟20次
+            sleep(3);
+        }while($ret);
 
-        sleep(3);
-        $promise->wait();
-        return $promise;
     }
 
     /**

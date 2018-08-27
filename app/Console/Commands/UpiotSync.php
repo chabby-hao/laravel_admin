@@ -75,7 +75,7 @@ class UpiotSync extends BaseCommand
     private function cardListSync()
     {
         $upiot = new UpiotApi();
-        $upiot->cardListSyncAsync(function($data){
+        $upiot->cardListSync(function($data){
             $this->getMaxCache();
             foreach ($data as $row){
                 BiCardLiangxun::firstOrCreate([
