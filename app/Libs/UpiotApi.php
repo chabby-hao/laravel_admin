@@ -84,7 +84,6 @@ class UpiotApi
     public function cardListSync(callable $func, $page = 1, $perPage = 300)
     {
 
-
         do{
             $ret = false;
             $data = $this->listSync($page, $perPage);
