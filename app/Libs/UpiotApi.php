@@ -102,7 +102,7 @@ class UpiotApi
         $promise = $client->getAsync($uri);
         $promise->then(
             function (ResponseInterface $res) use ($func, $uri) {
-                $body = $res->getBody()->getContents()
+                $body = $res->getBody()->getContents();
                 $arr = json_decode($body, true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
@@ -118,10 +118,9 @@ class UpiotApi
         );
 
         self::$promises[] = $promise;
-
-        $promise->wait();
         sleep(5);
         exit;
+        $promise->wait();
         return $promise;
     }
 
