@@ -46,6 +46,11 @@ class UpiotApi
         }
     }
 
+    public function promiseCount()
+    {
+        return count($this->promises);
+    }
+
     public function clearPromise()
     {
         if($this->promises){
@@ -137,8 +142,7 @@ class UpiotApi
             }
         );
 
-        $this->promises[] = $promise;sleep(5);
-        exit;
+        $this->promises[] = $promise;
         return $promise;
     }
 

@@ -42,32 +42,32 @@ class UpiotSync extends BaseCommand
 
         $this->cardListSync();
 
-        exit;
-
-
-        $model = TDeviceCode::getDeviceModel();
+        $model = BiCardLiangxun::where([]);
 
         $upiotApi = new UpiotApi();
 
-        $this->batchSearch($model, function (TDeviceCode $deviceCode) use ($upiotApi) {
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi) {
 
-            echo "{$deviceCode->imei} processing \n";
+            echo "{$row->imsi} processing \n";
 
-            if(!$deviceCode->imsi){
+            if(!$row->imsi){
                 return [];
             }
-            //imsi 是从4开头，device_code 这张表存的前面都多带个9，我也不晓得为啥.
-            $imsi = substr($deviceCode->imsi, 1);
+            //PS:imsi 是从4开头，device_code 这张表存的前面都多带个9，我也不晓得为啥.
 
             //异步获取
-            $upiotApi->getCardInfoAsync($imsi, function($cardInfo){
+            $upiotApi->getCardInfoAsync($row->imsi, function($cardInfo){
                 echo json_encode($cardInfo) . "\n";
                 BiCardLiangxun::updateOrCreate([
                     'imsi'=>$cardInfo['imsi'],
                 ], $cardInfo);
             });
+            if($upiotApi->promiseCount() >= 20){
+                $upiotApi->clearPromise();
+            }
             sleep(3);
         });
+        $upiotApi->clearPromise();
 
 
     }
