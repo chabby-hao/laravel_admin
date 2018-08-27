@@ -116,10 +116,10 @@ class UpiotApi
                 echo $e->getRequest()->getMethod() . "\n";
             }
         );
-
-        self::$promises[] = $promise;
         sleep(5);
         exit;
+        self::$promises[] = $promise;
+
         $promise->wait();
         return $promise;
     }
