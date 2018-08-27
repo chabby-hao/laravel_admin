@@ -106,7 +106,10 @@ class UpiotSync extends BaseCommand
         $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
 
             $msisdns[] = $row->msisdn;
-            //PS:imsi 是从4开头，device_code 这张表存的前面都多带个9，我也不晓得为啥.
+
+            if(count($msisdns) <= 20){
+                return [];
+            }
 
             //异步获取
             $upiotApi->getDataUsageAsync($msisdns, $date, function($data) use ($date){
@@ -132,6 +135,7 @@ class UpiotSync extends BaseCommand
             if($upiotApi->promiseCount() >= 20){
                 $upiotApi->clearPromise();
             }
+            $msisdns = [];
             sleep(3);
         });
         $upiotApi->clearPromise();
