@@ -22,7 +22,12 @@ abstract class BaseCommand extends Command
      */
     protected function batchSearch($model, callable $func)
     {
-        $page = 1;
+        $model->chunk(500, function($datas) use ($func){
+            foreach ($datas as $data){
+                $func($data);
+            }
+        });
+        /*$page = 1;
         $perPage = 500;
         $rtn = [];
         do {
@@ -35,7 +40,7 @@ abstract class BaseCommand extends Command
             }
 
         } while ($pagination->hasMorePages());
-        return $rtn;
+        return $rtn;*/
     }
 
     protected function chmodCache0777()
