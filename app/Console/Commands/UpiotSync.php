@@ -41,7 +41,7 @@ class UpiotSync extends BaseCommand
     public function handle()
     {
 
-        $this->cardListSync();
+        //$this->cardListSync();
 
         $this->cardDataUsageSync();
 
@@ -122,36 +122,5 @@ class UpiotSync extends BaseCommand
             }
         }
     }
-
-    /*private function cardInfoSync()
-    {
-        $model = BiCardLiangxun::where([]);
-
-        $upiotApi = new UpiotApi();
-
-        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi) {
-
-            echo "{$row->imsi} processing \n";
-
-            if(!$row->imsi){
-                return [];
-            }
-            //PS:imsi 是从4开头，device_code 这张表存的前面都多带个9，我也不晓得为啥.
-
-            //异步获取
-            $upiotApi->getCardInfoAsync($row->imsi, function($cardInfo){
-                echo json_encode($cardInfo) . "\n";
-                BiCardLiangxun::updateOrCreate([
-                    'imsi'=>$cardInfo['imsi'],
-                ], $cardInfo);
-            });
-            if($upiotApi->promiseCount() >= 20){
-                $upiotApi->clearPromise();
-            }
-            sleep(3);
-        });
-        $upiotApi->clearPromise();
-    }*/
-
 
 }

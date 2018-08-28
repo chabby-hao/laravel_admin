@@ -12,10 +12,30 @@ use Psr\Http\Message\ResponseInterface;
 class UpiotApi
 {
 
+    //异步请求句柄资源合集
     public $promises = [];
 
     private $username = 'vipcare';
     private $password = '123123';
+
+    public function promiseCount()
+    {
+        return count($this->promises);
+    }
+
+    public function clearPromise()
+    {
+        if($this->promises){
+            foreach ($this->promises as $promise){
+                try{
+                    $promise->wait();
+                }catch (\Exception $e){
+                    echo $e->getMessage() . '------' . $e->getCode() . "\n";
+                }
+            }
+            $this->promises = [];
+        }
+    }
 
     private function getToken()
     {
@@ -46,25 +66,6 @@ class UpiotApi
         }
     }
 
-    public function promiseCount()
-    {
-        return count($this->promises);
-    }
-
-    public function clearPromise()
-    {
-        if($this->promises){
-            foreach ($this->promises as $promise){
-                try{
-                    $promise->wait();
-                }catch (\Exception $e){
-                    echo $e->getMessage() . '------' . $e->getCode() . "\n";
-                }
-            }
-            $this->promises = [];
-        }
-    }
-
     private function listSync($bgCode, $page, $perPage)
     {
         $uri = "/api/card/?bg_code=$bgCode&page=$page&per_page=$perPage";
@@ -72,6 +73,30 @@ class UpiotApi
         $r = $client->get($uri);
         $body = $r->getBody()->getContents();
         $arr = json_decode($body, true);
+
+        /**
+         *  * {
+                 * "code": 200,
+                 * "msisdn": "10648xxxx1234",
+                 * "iccid": "8986xxxx1234",
+                 * "imsi": "4600xxxxxxx0515",
+                 * "carrier": 运营商,
+                 * "sp_code": 短信端口号,
+                 * "expiry_date": 计费结束日期,
+                 * "data_plan": 套餐大小,
+                 * "data_usage": 当月流量,
+                 * "account_status": 卡状态,
+                 * "active": 激活/未激活,
+                 * "test_valid_date":  测试期起始日期,
+                 * "silent_valid_date": 沉默期起始日期,
+                 * "test_used_data_usage": 测试期已用流量,
+                 * "active_date": 激活日期,
+                 * "data_balance": 剩余流量,
+                 * "outbound_date": 出库日期,
+                 * "support_sms": 是否支持短信
+         * }
+         */
+
         if ($arr && $arr['code'] === 200) {
             return $arr;
         } else {
@@ -101,57 +126,6 @@ class UpiotApi
         }
 
     }
-
-    /**
-     * @param $imsi 4开头 4600xxxxxxx0515
-     * {
-     * "code": 200,
-     * "msisdn": "10648xxxx1234",
-     * "iccid": "8986xxxx1234",
-     * "imsi": "4600xxxxxxx0515",
-     * "carrier": 运营商,
-     * "sp_code": 短信端口号,
-     * "expiry_date": 计费结束日期,
-     * "data_plan": 套餐大小,
-     * "data_usage": 当月流量,
-     * "account_status": 卡状态,
-     * "active": 激活/未激活,
-     * "test_valid_date":  测试期起始日期,
-     * "silent_valid_date": 沉默期起始日期,
-     * "test_used_data_usage": 测试期已用流量,
-     * "active_date": 激活日期,
-     * "data_balance": 剩余流量,
-     * "outbound_date": 出库日期,
-     * "support_sms": 是否支持短信
-     * }
-     * @return bool|mixed
-     */
-    public function getCardInfoAsync($imsi, callable $func)
-    {
-        $uri = "/api/card/$imsi/";
-        $client = $this->getClient();
-        $promise = $client->getAsync($uri);
-        $promise->then(
-            function (ResponseInterface $res) use ($func, $uri) {
-                $body = $res->getBody()->getContents();
-                $arr = json_decode($body, true);
-                if ($arr && $arr['code'] === 200) {
-                    $func($arr);
-                } else {
-                    echo $body . "\n";
-                    Log::error("upiot get cardInfo error $uri " . $res->getBody());
-                }
-            },
-            function(RequestException $e){
-                echo $e->getMessage() . "\n";
-                echo $e->getRequest()->getMethod() . "\n";
-            }
-        );
-
-        $this->promises[] = $promise;
-        return $promise;
-    }
-
 
     /**
      * @param array $msisdns 卡号 【'10648xxxxxxxx','10648xxxxxxxx']
