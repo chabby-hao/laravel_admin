@@ -110,21 +110,19 @@
                                 <th>计费结束日期</th>
                                 <th>测试期起始日期</th>
                                 <th>沉默期起始日期</th>
-                                <th>计费起始日期</th>
+                                <th>出库日期</th>
                                 <th>测试期流量</th>
                                 <th>设备号</th>
                                 <th>IMSI</th>
                                 <th>平台状态</th>
                                 <th>平台出货日期</th>
                                 <th>平台激活日期</th>
-                                <th>平台计费开始日期</th>
-                                <th>平台计费结束日期</th>
+                                <th>平台计费日期</th>
                                 <th>上次在线时间</th>
                                 <th>渠道</th>
                                 <th>固件版本</th>
                                 <th>MCU版本</th>
                                 <th>操作</th>
-                                <th>渠道</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -141,14 +139,25 @@
                                     <td>{{$data->current_date_usage}}</td>
                                     <td>{{$data->data_usage}}</td>
                                     <td>{{$data->data_usage-$data->data_plan > 0 ?: 0}}</td>
-                                    <td>{{$data->activeAt}}</td>
-                                    <td>{{$data->deviceCycleTrans}}</td>
-                                    <td>{{$data->ebikeStatus}}</td>
-                                    <td>{{$data->lastContact}}</td>
-                                    <td>{{$data->address}}</td>
+                                    <td>{{$data->active_date}}</td>
+                                    <td>{{$data->expiry_date}}</td>
+                                    <td>{{$data->test_valid_date}}</td>
+                                    <td>{{$data->silent_valid_date}}</td>
+                                    <td>{{$data->outbound_date}}</td>
+                                    <td>{{$data->test_used_data_usage}}</td>
+                                    <td>{{$data->udid}}</td>
+                                    <td>{{$data->imsi}}</td>
+                                    <td></td>
+                                    <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>
+                                    <td>{{$data->active_time > 0 ? \Illuminate\Support\Carbon::parse($data->active_time)->toDateString()}}</td>
+                                    <td>{{\App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid)['daterange']}}</td>
+                                    <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
+                                    <td>{{\App\Models\BiChannel::getChannelMap(true)[$data->channel_id]}}</td>
+                                    <td>{{$data->rom}}</td>
+                                    <td>{{$data->mcu}}</td>
                                     <td>{{$data->lastGps}}</td>
                                     <td>
-                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">详情</a>
+                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">明细</a>
                                     </td>
                                 </tr>
                             @endforeach

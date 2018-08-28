@@ -8,6 +8,7 @@ use App\Console\Commands\DeviceCache;
 use App\Console\Commands\MapCache;
 use App\Console\Commands\StatDevice;
 use App\Console\Commands\Test;
+use App\Console\Commands\UpiotSync;
 use App\Console\Commands\WarningMile;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(MapCache::class)->hourly()->runInBackground();
             $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
             $schedule->command(StatDevice::class)->everyFifteenMinutes()->runInBackground();
+            $schedule->command(UpiotSync::class)->hourly()->runInBackground();
         }
     }
 
