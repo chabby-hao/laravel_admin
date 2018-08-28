@@ -63,7 +63,67 @@ class UpiotSync extends BaseCommand
         });
     }
 
-    private function cardInfoSync()
+    private function cardDataUsageSync()
+    {
+        $model = BiCardLiangxun::where([]);
+
+        $upiotApi = new UpiotApi();
+        $date = Carbon::yesterday()->format('Ymd');
+
+        $msisdns = [];
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
+
+            $msisdns[] = $row->msisdn;
+
+            if(count($msisdns) <= 300){
+                return [];
+            }
+
+            //异步获取
+            $this->dataUsage($upiotApi, $msisdns, $date);
+            if($upiotApi->promiseCount() >= 20){
+                $upiotApi->clearPromise();
+            }
+            $msisdns = [];
+            sleep(3);
+            return [];
+        });
+        //异步获取
+        $this->dataUsage($upiotApi, $msisdns, $date);
+        $upiotApi->clearPromise();
+    }
+
+    private function dataUsage(UpiotApi $upiotApi, $msisdns, $date)
+    {
+        //异步获取
+        $upiotApi->getDataUsageAsync($msisdns, $date, function($data) use ($date){
+            $this->dataUsageDbUpdate($data, $date);
+        });
+    }
+
+    private function dataUsageDbUpdate($data, $date)
+    {
+        echo json_encode($data) . "\n";
+        if($data['data']){
+            foreach ($data['data'] as $item){
+                BiCardLiangxun::updateOrCreate([
+                    'msisdn'=>$item['msisdn'],
+                ],[
+                    'current_date_usage'=>$item['current_date_usage'],
+                ]);
+
+                BiCardDatum::updateOrCreate([
+                    'msisdn'=>$item['msisdn'],
+                    'date'=>$date,
+                ],[
+                    'data_usage'=>$item['data_usage'],
+                ]);
+
+            }
+        }
+    }
+
+    /*private function cardInfoSync()
     {
         $model = BiCardLiangxun::where([]);
 
@@ -91,53 +151,7 @@ class UpiotSync extends BaseCommand
             sleep(3);
         });
         $upiotApi->clearPromise();
-    }
-
-    private function cardDataUsageSync()
-    {
-        $model = BiCardLiangxun::where([]);
-
-        $upiotApi = new UpiotApi();
-        $date = Carbon::yesterday()->format('Ymd');
-
-        $msisdns = [];
-        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
-
-            $msisdns[] = $row->msisdn;
-
-            if(count($msisdns) <= 20){
-                return [];
-            }
-
-            //异步获取
-            $upiotApi->getDataUsageAsync($msisdns, $date, function($data) use ($date){
-                echo json_encode($data) . "\n";
-                if($data['data']){
-                    foreach ($data['data'] as $item){
-                        BiCardLiangxun::updateOrCreate([
-                            'msisdn'=>$item['msisdn'],
-                        ],[
-                            'current_date_usage'=>$item['current_date_usage'],
-                        ]);
-
-                        BiCardDatum::updateOrCreate([
-                            'msisdn'=>$item['msisdn'],
-                            'date'=>$date,
-                        ],[
-                            'data_usage'=>$item['data_usage'],
-                        ]);
-
-                    }
-                }
-            });
-            if($upiotApi->promiseCount() >= 20){
-                $upiotApi->clearPromise();
-            }
-            $msisdns = [];
-            sleep(3);
-        });
-        $upiotApi->clearPromise();
-    }
+    }*/
 
 
 }
