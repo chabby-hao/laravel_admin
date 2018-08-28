@@ -21,6 +21,7 @@ use App\Logics\RedisLogic;
 use App\Logics\StatLogic;
 use App\Logics\UserLogic;
 use App\Models\BiBrand;
+use App\Models\BiCardLiangxun;
 use App\Models\BiChannel;
 use App\Models\BiCustomer;
 use App\Models\BiDeviceType;
@@ -856,7 +857,7 @@ class DeviceController extends BaseController
 
     public function cardList()
     {
-        $r = TDeviceCode::join('bi.bi_card_liangxun', 'substr(t_device_code.imsi,2)','=','bi_card_liangxun')->limit(100)->get()->toArray();
+        $r = BiCardLiangxun::join('care.t_device_code', 'substr(t_device_code.imsi,2)','=','bi_card_liangxun')->limit(100)->get()->toArray();
         dd($r);
     }
 
