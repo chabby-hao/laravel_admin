@@ -406,7 +406,7 @@ class DeviceController extends BaseController
     }
 
     /**
-     * @param TDeviceCode $model
+     * @param Model $model
      * @return mixed
      */
     private function listSearch($model)
@@ -859,11 +859,25 @@ class DeviceController extends BaseController
     public function cardList()
     {
 
-
-        $r = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
+        $model = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
             $join->raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi');
-        })->limit(100)->get();
-        dd($r);
+        });
+
+        $this->listSearch($model);
+
+        $paginate = $model->orderByDesc('data_usage')->paginate(20);
+
+        $datas = $paginate->items();
+
+        foreach ($datas as $item){
+
+        }
+
+        return view('admin.device.cardlist', [
+            'datas' => $datas,
+            'page_nav' => MyPage::showPageNav($paginate),
+        ]);
+
     }
 
 }

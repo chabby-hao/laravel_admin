@@ -89,7 +89,7 @@ class UpiotSync extends BaseCommand
                 BiCardLiangxun::updateOrCreate([
                     'msisdn'=>$item['msisdn'],
                 ],[
-                    'current_date_usage'=>$item['current_date_usage'],
+                    'current_date_usage'=>$item['data_usage'],
                 ]);
 
                 BiCardDatum::updateOrCreate([

@@ -22,7 +22,7 @@ abstract class BaseCommand extends Command
      */
     protected function batchSearch($model, callable $func)
     {
-        $model->chunk(500, function($datas) use ($func){
+        return $model->chunk(1000, function($datas) use ($func){
             foreach ($datas as $data){
                 $func($data);
             }
