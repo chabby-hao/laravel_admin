@@ -65,9 +65,9 @@ class UpiotApi
         }
     }
 
-    private function listSync($page = 1, $perPage = 100)
+    private function listSync($bgCode, $page, $perPage)
     {
-        $uri = "/api/card/?page=$page&per_page=$perPage";
+        $uri = "/api/card/?bg_code=$bgCode&page=$page&per_page=$perPage";
         $client = $this->getClient();
         $r = $client->get($uri);
         $body = $r->getBody()->getContents();
@@ -81,21 +81,24 @@ class UpiotApi
         }
     }
 
-    public function cardListSync(callable $func, $page = 1, $perPage = 300)
+    public function cardListSync(callable $func,  $page = 1, $perPage = 300)
     {
 
-        do{
-            $ret = false;
-            $data = $this->listSync($page, $perPage);
-            if($data){
-                $func($data['data']);
-                if(++$page <= $data['num_pages']){
-                    $ret = true;
+        $bgCodes = $this->getBillingGroupCode();
+        foreach ($bgCodes as $bgCode){
+            do{
+                $ret = false;
+                $data = $this->listSync($bgCode, $page, $perPage);
+                if($data){
+                    $func($data['data']);
+                    if(++$page <= $data['num_pages']){
+                        $ret = true;
+                    }
                 }
-            }
-            //1分钟20次
-            sleep(3);
-        }while($ret);
+                //1分钟20次
+                sleep(3);
+            }while($ret);
+        }
 
     }
 
@@ -180,12 +183,6 @@ class UpiotApi
             ]
         ]);
 
-        var_dump([
-            RequestOptions::JSON => [
-                'msisdns' => $msisdns,
-                'query_date' => $date,
-            ]]);
-
         $promise->then(
             function (ResponseInterface $res) use ($func) {
                 $arr = json_decode($res->getBody()->getContents(), true);
@@ -201,6 +198,22 @@ class UpiotApi
         $promise->wait();
 
         return $promise;
+    }
+
+    /**
+     * 获取计费组列表
+     */
+    public function getBillingGroupCode()
+    {
+        $uri = "/api/billing_group/";
+        $client = $this->getClient();
+        $r = $client->get($uri);
+        $body = $r->getBody()->getContents();
+        $arr = json_decode($body, true);
+        if($arr && $arr['code'] === 200){
+            return Helper::transToOneDimensionalArray($arr['data'], 'bg_code');
+        }
+        return [];
     }
 
     private function getClient($withToken = true)
