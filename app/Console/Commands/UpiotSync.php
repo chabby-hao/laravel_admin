@@ -45,8 +45,6 @@ class UpiotSync extends BaseCommand
 
         $this->cardDataUsageSync();
 
-        //$this->cardInfoSync();
-
     }
 
     private function cardListSync()
@@ -75,7 +73,7 @@ class UpiotSync extends BaseCommand
 
             $msisdns[] = $row->msisdn;
 
-            if(count($msisdns) <= 50){
+            if(count($msisdns) <= 150){
                 return [];
             }
 
