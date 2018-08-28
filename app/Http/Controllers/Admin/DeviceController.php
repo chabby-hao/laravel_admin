@@ -41,6 +41,7 @@ use App\Objects\LocationObject;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -857,7 +858,9 @@ class DeviceController extends BaseController
 
     public function cardList()
     {
-        $r = BiCardLiangxun::join('care.t_device_code', 'substr(t_device_code.imsi,2)','=','bi_card_liangxun.imsi')->limit(100)->get()->toArray();
+        $r = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
+            $join->on('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi');
+        })->limit(100)->get()->toArray();
         dd($r);
     }
 
