@@ -63,6 +63,7 @@ Route::any('/device/map','Admin\DeviceController@map');
 Route::any('/device/tripTrails','Admin\DeviceController@tripTrails');
 Route::any('/device/romStatList','Admin\DeviceController@romStatList');
 Route::any('/device/stat','Admin\DeviceController@stat');
+Route::any('/device/cardList','Admin\DeviceController@cardList');
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');
