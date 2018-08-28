@@ -41,11 +41,11 @@ class UpiotSync extends BaseCommand
     public function handle()
     {
 
-        //$this->cardListSync();
+        $this->cardListSync();
 
         $this->cardDataUsageSync();
 
-        $this->cardInfoSync();
+        //$this->cardInfoSync();
 
     }
 
@@ -55,12 +55,10 @@ class UpiotSync extends BaseCommand
         $upiot->cardListSync(function($data){
             $this->getMaxCache();
             foreach ($data as $row){
+
                 BiCardLiangxun::firstOrCreate([
-                    'msisdn'=>$row['msisdn'],
-                ],[
-                    'iccid'=>$row['iccid'],
                     'imsi'=>$row['imsi'],
-                ]);
+                ],$row);
             }
         });
     }

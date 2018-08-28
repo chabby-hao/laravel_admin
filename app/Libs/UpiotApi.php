@@ -67,7 +67,7 @@ class UpiotApi
 
     private function listSync($page = 1, $perPage = 100)
     {
-        $uri = "/api/card_no_list/?page=$page&per_page=$perPage";
+        $uri = "/api/card/?page=$page&per_page=$perPage";
         $client = $this->getClient();
         $r = $client->get($uri);
         $body = $r->getBody()->getContents();
