@@ -856,7 +856,7 @@ class DeviceController extends BaseController
 
     public function cardList()
     {
-        $r = TDeviceCode::join('`bi`.`bi_card_liangxun`', 'substr(t_device_code.imsi,2)','=','bi_card_liangxun')->limit(100)->get()->toArray();
+        $r = TDeviceCode::join('bi.bi_card_liangxun', 'substr(t_device_code.imsi,2)','=','bi_card_liangxun')->limit(100)->get()->toArray();
         dd($r);
     }
 
