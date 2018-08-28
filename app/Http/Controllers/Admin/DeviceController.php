@@ -859,7 +859,7 @@ class DeviceController extends BaseController
     public function cardList()
     {
         $r = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
-            $join->on('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi');
+            $join->on(DB::raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi'));
         })->limit(100)->get()->toArray();
         dd($r);
     }
