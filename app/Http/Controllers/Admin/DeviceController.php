@@ -863,11 +863,11 @@ class DeviceController extends BaseController
             $join->raw(DB::raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi'));
         });
 
-        $this->listSearch($model);
+        //$this->listSearch($model);
 
         $paginate = $model
             ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id'])
-            ->orderByDesc('data_usage')->paginate(20);
+            ->orderByDesc('data_usage')->limit(20);
 
         dd($paginate);
 
