@@ -867,9 +867,8 @@ class DeviceController extends BaseController
 
         $paginate = $model
             ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id'])
-            ->orderByDesc('data_usage')->limit(20)->toSql();
+            ->orderByDesc('data_usage')->paginate();
 
-        var_dump($paginate);exit;
 
         dd($paginate);
 
