@@ -318,7 +318,6 @@ class DeviceLogic extends BaseLogic
     {
         if($card = BiCardLiangxun::whereMsisdn($msisdn)->first()){
             var_dump($card->imsi);
-            $imsi = ;
             if($deviceCode = TDeviceCode::whereImsi('9' . $card->imsi)->first()){
                 var_dump($deviceCode->qr);
                 return $deviceCode->qr;
