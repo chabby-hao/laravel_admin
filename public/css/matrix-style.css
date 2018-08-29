@@ -2428,3 +2428,8 @@ form {
 	#content-header {width: 305%;}
 	#content {overflow-x: scroll;}
 }
+
+.span12{
+    width: fit-content !important;
+    min-width: 100%;
+}
