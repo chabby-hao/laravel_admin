@@ -199,6 +199,7 @@ class UpiotApi
         if ($withToken) {
             $options[RequestOptions::HEADERS] = ['Authorization' => "JWT {$this->getToken()}"];
         }
+        var_dump($this->getToken());
         $client = new Client($options);
         return $client;
     }
