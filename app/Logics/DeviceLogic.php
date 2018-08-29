@@ -4,6 +4,7 @@ namespace App\Logics;
 
 use App\Libs\Helper;
 use App\Models\BiBrand;
+use App\Models\BiCardLiangxun;
 use App\Models\BiChannel;
 use App\Models\BiCustomer;
 use App\Models\BiDeliveryDevice;
@@ -311,6 +312,16 @@ class DeviceLogic extends BaseLogic
         } else {
             return false;
         }
+    }
+
+    public static function getUdidByMsisdn($msisdn)
+    {
+        if($card = BiCardLiangxun::whereMsisdn($msisdn)->first()){
+            if($deviceCode = TDeviceCode::whereImsi('9' . $card->imsi)->first()){
+                return $deviceCode->qr;
+            }
+        }
+        return false;
     }
 
     public static function getUdidByImsi($imsi)

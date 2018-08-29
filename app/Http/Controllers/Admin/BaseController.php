@@ -54,6 +54,8 @@ class BaseController extends Controller
         } elseif ($imei = RedisLogic::getImeiByBatteryId($id)) {
             //id=>batteryId
             return DeviceLogic::getUdid($imei);
+        } elseif ($udid == DeviceLogic::getUdidByMsisdn($id)) {
+            return $udid;
         } elseif ($udid = DewinLogic::getUdidByDewinId($id)) {
             //id=>dewinId
             return $udid;
