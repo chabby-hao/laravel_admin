@@ -334,7 +334,6 @@ hr {
     position: relative;
     min-height: 100%;
     width: auto;
-    overflow-x: scroll;
 }
 
 #content-header {
