@@ -55,6 +55,7 @@ class BaseController extends Controller
             //id=>batteryId
             return DeviceLogic::getUdid($imei);
         } elseif ($udid == DeviceLogic::getUdidByMsisdn($id)) {
+            //id=>msisdn
             return $udid;
         } elseif ($udid = DewinLogic::getUdidByDewinId($id)) {
             //id=>dewinId
