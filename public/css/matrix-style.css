@@ -2428,7 +2428,6 @@ form {
 	#content {overflow-x: scroll;}
 }
 
-.span12{
-    width: auto !important;
-    min-width: 100%;
+.widget-box{
+    overflow-x: visible;
 }
