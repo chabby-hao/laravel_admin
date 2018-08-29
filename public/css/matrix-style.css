@@ -12,7 +12,8 @@ html, body {
 /*Bootstrap-overlay*/
 
 body {
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
+    overflow-x: scroll;
     margin-top: -10px;
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
