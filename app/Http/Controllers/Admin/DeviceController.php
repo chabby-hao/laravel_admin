@@ -863,7 +863,7 @@ class DeviceController extends BaseController
             $join->whereRaw('substr(`t_device_code`.`imsi`,2) = `bi_card_liangxun`.`imsi`');
         });
 
-        //$this->listSearch($model);
+        $this->listSearch($model);
 
         $paginate = $model
             ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id'])
