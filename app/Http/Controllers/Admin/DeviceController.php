@@ -870,13 +870,8 @@ class DeviceController extends BaseController
             ->orderByDesc('data_usage')->paginate();
 
 
-        dd($paginate);
 
         $datas = $paginate->items();
-
-        foreach ($datas as $item){
-
-        }
 
         return view('admin.device.cardlist', [
             'datas' => $datas,

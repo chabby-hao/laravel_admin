@@ -1158,7 +1158,7 @@ class DeviceLogic extends BaseLogic
             'sim_status' => '未激活',//sim卡状态
             'daterange' => '',//有效期
             'renew' => 0,//续费次数
-            'service_status' => '',
+            'service_status' => '未激活',
         ];
         $active = self::getActiveAtByUdid($udid, 'Y-m-d H:i:s');
         $row = TPayment::whereUdid($udid)->first();

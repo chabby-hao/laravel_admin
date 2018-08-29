@@ -147,15 +147,15 @@
                                     <td>{{$data->test_used_data_usage}}</td>
                                     <td>{{$data->udid}}</td>
                                     <td>{{$data->imsi}}</td>
-                                    <td></td>
+                                    <?php $paymentInfo = \App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid) ?>
+                                    <td>{{$paymentInfo['service_status']}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>
                                     <td>{{$data->active_time > 0 ? \Illuminate\Support\Carbon::parse($data->active_time)->toDateString()}}</td>
-                                    <td>{{\App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid)['daterange']}}</td>
+                                    <td>{{$paymentInfo['daterange']}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
-                                    <td>{{\App\Models\BiChannel::getChannelMap(true)[$data->channel_id]}}</td>
+                                    <td>{{\App\Logics\DeviceLogic::getChannelNameByUdid($data->udid)}}</td>
                                     <td>{{$data->rom}}</td>
                                     <td>{{$data->mcu}}</td>
-                                    <td>{{$data->lastGps}}</td>
                                     <td>
                                         <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">明细</a>
                                     </td>
