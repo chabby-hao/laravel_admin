@@ -860,14 +860,14 @@ class DeviceController extends BaseController
     {
 
         $model = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
-            $join->raw(DB::raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi'));
+            $join->raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi');
         });
 
         //$this->listSearch($model);
 
         $paginate = $model
             ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id'])
-            ->orderByDesc('data_usage')->paginate();
+            ->orderByDesc('data_usage')->simplePaginate();
 
         dd($paginate);
 
