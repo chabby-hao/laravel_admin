@@ -18,7 +18,7 @@
                         @endif
                     </div>
                     <div class="widget-content">
-                        <form action="{{URL::action('Admin\DeviceController@list')}}" method="get" class="form-search search_form">
+                        <form action="" method="get" class="form-search search_form">
                             @if(Request::input('status'))
                                 <input type="hidden" name="status" value="{{Request::input('status')}}">
                             @endif
