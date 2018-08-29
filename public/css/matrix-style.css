@@ -258,9 +258,8 @@ hr {
 
 /* Sidebar Navigation */
 #sidebar {
-    /*display: block;*/
-    /*float: left;*/
-    height: 100%;
+    display: block;
+    float: left;
     position: relative;
     width: 220px;
     z-index: 16;
