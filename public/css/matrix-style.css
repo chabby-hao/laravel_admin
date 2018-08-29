@@ -258,8 +258,10 @@ hr {
 
 /* Sidebar Navigation */
 #sidebar {
-    display: block;
-    float: left;
+    /*display: block;*/
+    /*float: left;*/
+    display: inline-block;
+    height: 100%;
     position: relative;
     width: 220px;
     z-index: 16;
@@ -328,12 +330,13 @@ hr {
     /*background: none repeat scroll 0 0 #eeeeee;*/
     background: none repeat scroll 0 0 #f9f9f9;
     /*margin-left: 220px;*/
-    left: 220px;
+    /*left: 220px;*/
     margin-right: 0;
     padding-bottom: 25px;
     position: relative;
     min-height: 100%;
-    width: fit-content;
+    width: 800px;
+
     min-width: 100%;
 }
 
