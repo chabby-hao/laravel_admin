@@ -331,7 +331,8 @@ hr {
     /*margin-right: 0;*/
     padding-bottom: 25px;
     position: relative;
-    width: auto;
+    width: fit-content;
+    min-width: 100%;
 }
 
 #content-header {
@@ -2426,8 +2427,4 @@ form {
 	.container-fluid{width: 320%;}
 	#content-header {width: 305%;}
 	#content {overflow-x: scroll;}
-}
-
-.widget-content .table{
-    overflow-x: scroll !important;
 }
