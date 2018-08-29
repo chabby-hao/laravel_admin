@@ -265,6 +265,7 @@ hr {
     position: relative;
     width: 220px;
     z-index: 16;
+    vertical-align: top;
 }
 
 #sidebar > ul {
