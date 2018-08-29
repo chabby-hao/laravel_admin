@@ -450,7 +450,6 @@ class DeviceController extends BaseController
 
         if ($id = \Request::input('id')) {
             $udid = $this->getUdid($id);
-            var_dump($udid);
             if (!$udid) {
                 //管理员手机号查询
                 $udids = UserLogic::getUdidListByAdminPhone($id);
