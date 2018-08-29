@@ -333,7 +333,7 @@ hr {
     padding-bottom: 25px;
     position: relative;
     min-height: 100%;
-    width: auto;
+    width: fit-content;
 }
 
 #content-header {
