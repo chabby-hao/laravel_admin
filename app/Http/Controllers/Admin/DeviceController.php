@@ -860,7 +860,7 @@ class DeviceController extends BaseController
     {
 
         $model = BiCardLiangxun::join('care.t_device_code', function (JoinClause $join){
-            $join->raw(DB::raw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi'));
+            $join->whereRaw('substr(t_device_code.imsi,2) = bi_card_liangxun.imsi');
         });
 
         //$this->listSearch($model);
