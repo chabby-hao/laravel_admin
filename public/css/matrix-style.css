@@ -2431,6 +2431,6 @@ form {
 }
 
 .span12{
-    width: auto;
+    width: auto !important;
     min-width: 100%;
 }
