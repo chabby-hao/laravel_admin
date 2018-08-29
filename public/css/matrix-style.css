@@ -261,11 +261,10 @@ hr {
     /*display: block;*/
     /*float: left;*/
     display: inline-block;
-    min-height: 100%;
+    height: 100%;
     position: relative;
     width: 220px;
     z-index: 16;
-    vertical-align: top;
 }
 
 #sidebar > ul {
@@ -330,16 +329,13 @@ hr {
 #content {
     /*background: none repeat scroll 0 0 #eeeeee;*/
     background: none repeat scroll 0 0 #f9f9f9;
-    /*margin-left: 220px;*/
+    margin-left: 220px;
     /*left: 220px;*/
-    margin-right: 0;
+    /*margin-right: 0;*/
     padding-bottom: 25px;
     position: relative;
     min-height: 100%;
-    display: inline-block;
-    /*width: 800px;*/
-    width: 100%;
-    overflow-x: visible;
+    width: auto;
 }
 
 #content-header {
