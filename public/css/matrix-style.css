@@ -260,7 +260,6 @@ hr {
 #sidebar {
     /*display: block;*/
     /*float: left;*/
-    display: inline-block;
     height: 100%;
     position: relative;
     width: 220px;
