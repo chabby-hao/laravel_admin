@@ -866,7 +866,7 @@ class DeviceController extends BaseController
         $this->listSearch($model);
 
         $paginate = $model
-            ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id'])
+            ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id','rom','mcu'])
             ->orderByDesc('data_usage')->paginate();
 
 

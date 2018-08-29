@@ -147,10 +147,10 @@
                                     <td>{{$data->test_used_data_usage}}</td>
                                     <td>{{$data->udid}}</td>
                                     <td>{{$data->imsi}}</td>
-                                    <?php $paymentInfo = \App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid) ?>
+                                    <?php $paymentInfo = \App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid); ?>
                                     <td>{{$paymentInfo['service_status']}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>
-                                    <td>{{$data->active_time > 0 ? \Illuminate\Support\Carbon::parse($data->active_time)->toDateString()}}</td>
+                                    <td>{{\App\Logics\DeviceLogic::getActiveAtByUdid($data->udid)}}</td>
                                     <td>{{$paymentInfo['daterange']}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getChannelNameByUdid($data->udid)}}</td>
