@@ -331,7 +331,6 @@ hr {
     /*margin-right: 0;*/
     padding-bottom: 25px;
     position: relative;
-    width: fit-content;
     min-width: 100%;
 }
 
