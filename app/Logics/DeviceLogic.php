@@ -317,7 +317,6 @@ class DeviceLogic extends BaseLogic
     public static function getUdidByMsisdn($msisdn)
     {
         if($card = BiCardLiangxun::whereMsisdn($msisdn)->first()){
-            var_dump($card->imsi);
             if($deviceCode = TDeviceCode::whereImsi('9' . $card->imsi)->first()){
                 var_dump($deviceCode->qr);
                 return $deviceCode->qr;
