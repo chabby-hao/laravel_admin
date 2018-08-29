@@ -2429,5 +2429,5 @@ form {
 }
 
 .widget-content .table{
-    overflow-x: visible;
+    overflow-x: scroll !important;
 }
