@@ -91,11 +91,13 @@
                                 <th>序号</th>
                                 {{--<th>卡来源</th>--}}
                                 <th>物联卡号</th>
+                                <th>设备号</th>
+                                <th>IMSI</th>
                                 <th>卡状态</th>
                                 {{--<th>运营商</th>--}}
                                 <th>套餐</th>
-                                <th>当日流量MB</th>
                                 <th>当月流量MB</th>
+                                <th>当日流量MB</th>
                                 <th>超出流量MB</th>
                                 <th>激活日期</th>
                                 {{--<th>计费结束日期</th>--}}
@@ -103,8 +105,6 @@
                                 {{--<th>沉默期起始日期</th>--}}
                                 {{--<th>出库日期</th>--}}
                                 {{--<th>测试期流量</th>--}}
-                                <th>设备号</th>
-                                <th>IMSI</th>
                                 <th>平台状态</th>
                                 {{--<th>平台出货日期</th>--}}
                                 <th>平台激活日期</th>
@@ -124,11 +124,13 @@
                                     <td>{{++$t}}</td>
                                     {{--<td>量讯</td>--}}
                                     <td>{{$data->msisdn}}</td>
+                                    <td>{{$data->udid}}</td>
+                                    <td>{{$data->imsi}}</td>
                                     <td>{{\App\Models\BiCardLiangxun::getAccountStatusMap($data->account_status)}}</td>
-{{--                                    <td>{{$data->carrier}}</td>--}}
+                                    {{--                                    <td>{{$data->carrier}}</td>--}}
                                     <td>{{$data->data_plan}}</td>
-                                    <td>{{$data->current_date_usage}}</td>
                                     <td>{{$data->data_usage}}</td>
+                                    <td>{{$data->current_date_usage}}</td>
                                     <td>{{$data->data_usage-$data->data_plan > 0 ?: 0}}</td>
                                     <td>{{$data->active_date}}</td>
                                     {{--<td>{{$data->expiry_date}}</td>--}}
@@ -136,9 +138,8 @@
                                     {{--<td>{{$data->silent_valid_date}}</td>--}}
                                     {{--<td>{{$data->outbound_date}}</td>--}}
                                     {{--<td>{{$data->test_used_data_usage}}</td>--}}
-                                    <td>{{$data->udid}}</td>
-                                    <td>{{$data->imsi}}</td>
 {{--                                    <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>--}}
+                                    <td>{{\App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid)['service_status']}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getActiveAtByUdid($data->udid)}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getChannelNameByUdid($data->udid)}}</td>
