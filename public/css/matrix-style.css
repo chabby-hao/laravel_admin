@@ -2428,6 +2428,6 @@ form {
 	#content {overflow-x: scroll;}
 }
 
-.widget-box{
+.widget-content .table{
     overflow-x: visible;
 }
