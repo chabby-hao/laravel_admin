@@ -157,12 +157,6 @@ class UpiotApi
             ]
         ]);
 
-        var_dump([
-            RequestOptions::JSON => [
-                'msisdns' => $msisdns,
-                'query_date' => $date,
-            ]]);
-
         $promise->then(
             function (ResponseInterface $res) use ($func) {
                 var_dump($res->getBody());
@@ -172,6 +166,10 @@ class UpiotApi
                 } else {
                     Log::error('upiot get usagelog error ' . $res->getBody()->getContents());
                 }
+            },
+            function (RequestException $e) {
+                echo $e->getMessage() . "\n";
+                echo $e->getRequest()->getMethod() ."\n";
             }
         );
 
