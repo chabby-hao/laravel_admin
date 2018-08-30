@@ -886,7 +886,7 @@ class DeviceController extends BaseController
         $msisdn = Input::get('msisdn');
         $udid = $this->getUdid($msisdn);
 
-        list($startDatetime, $endDatetime) = $this->getDaterange(null, 'Ymd');
+        list($startDatetime, $endDatetime) = $this->getDaterange(Carbon::today()->subMonths(2), 'Ymd');
 
 
         $paginate = BiCardDatum::whereMsisdn($msisdn)
