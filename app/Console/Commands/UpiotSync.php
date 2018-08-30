@@ -77,7 +77,7 @@ class UpiotSync extends BaseCommand
             //异步获取
             call_user_func($call, $upiotApi, $msisdns, $date);
             //$this->dataUsage($upiotApi, $msisdns, $date);
-            if($upiotApi->promiseCount() >= 40){
+            if($upiotApi->promiseCount() >= 30){
                 $upiotApi->clearPromise();
             }
             $msisdns = [];
