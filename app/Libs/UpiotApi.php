@@ -157,6 +157,12 @@ class UpiotApi
             ]
         ]);
 
+        var_dump([
+            RequestOptions::JSON => [
+                'msisdns' => $msisdns,
+                'query_date' => $date,
+            ]]);
+
         $promise->then(
             function (ResponseInterface $res) use ($func) {
                 $arr = json_decode($res->getBody()->getContents(), true);
