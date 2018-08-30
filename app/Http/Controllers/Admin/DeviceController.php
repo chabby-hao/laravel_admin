@@ -894,12 +894,6 @@ class DeviceController extends BaseController
             ->orderByDesc('date')->paginate();
 
         $data = $paginate->items();
-        /** @var TLockLog $row */
-        foreach ($data as $row) {
-
-        }
-
-        //$devices = TLockLog::->orderByDesc('sid')->select('t_device_code.*')->paginate();
 
         return view('admin.device.carddailylist', [
             'datas' => $data,

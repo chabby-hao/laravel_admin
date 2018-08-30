@@ -113,7 +113,9 @@
                 @if(Auth::user()->can('device/mileageList'))
                     <li><a href="{{URL::action('Admin\DeviceController@mileageList')}}">历史行程</a></li>
                 @endif
-
+                @if(Auth::user()->can('device/cardList'))
+                    <li><a href="{{URL::action('Admin\DeviceController@cardList')}}">流量列表</a></li>
+                @endif
             </ul>
         </li>
 

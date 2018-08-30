@@ -146,7 +146,7 @@
                                     <td>{{$data->mcu}}</td>
                                     <td>
                                         <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">详情</a>
-                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">明细</a>
+                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@cardDailyList',['msisdn'=>$data->udid])}}">明细</a>
                                     </td>
                                 </tr>
                             @endforeach
