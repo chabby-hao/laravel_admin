@@ -148,6 +148,7 @@ class UpiotApi
      */
     public function getDataUsageAsync($msisdns, $date, callable $func)
     {
+        var_dump($msisdns);
         $uri = "/api/card/usagelog/";
         $client = $this->getClient();
         $promise = $client->postAsync($uri, [
