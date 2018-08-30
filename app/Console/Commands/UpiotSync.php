@@ -92,6 +92,7 @@ class UpiotSync extends BaseCommand
     protected function twoDayAgoDataUsage(UpiotApi $upiotApi, $msisdns, $date)
     {
         //异步获取
+        var_dump($date);
         $upiotApi->getDataUsageAsync($msisdns, $date, function ($data) use ($date) {
             echo json_encode($data) . "\n";
             if ($data['data']) {
