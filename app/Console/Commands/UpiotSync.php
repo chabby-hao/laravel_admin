@@ -26,7 +26,7 @@ class UpiotSync extends BaseCommand
     public function handle()
     {
 
-        //$this->cardListSync();
+//        $this->cardListSync();
 
         $this->cardDataUsageSync();
 
@@ -52,14 +52,15 @@ class UpiotSync extends BaseCommand
      */
     protected function cardDataUsageSync()
     {
-        $predate = Carbon::today()->subDays(3)->format('Ymd');
+        $date = Carbon::today()->subDays(3)->format('Ymd');
+        $this->cardDataUsage($date);
         $date = Carbon::today()->subDays(2)->format('Ymd');
-        $this->cardDataUsage($predate,[$this, 'dataUsage']);
-        $this->cardDataUsage($date,[$this, 'dataUsage']);
-
+        $this->cardDataUsage($date);
+        $date = Carbon::today()->subDays(1)->format('Ymd');
+        $this->cardDataUsage($date);
     }
 
-    protected function cardDataUsage($date, $call)
+    protected function cardDataUsage($date)
     {
         //已销号的查不出流量
         $model = BiCardLiangxun::where('account_status','!=','04');
@@ -68,7 +69,7 @@ class UpiotSync extends BaseCommand
         //$date = Carbon::yesterday()->format('Ymd');
 
         $msisdns = [];
-        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date, $call) {
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
 
             $msisdns[] = $row->msisdn;
 
@@ -77,8 +78,7 @@ class UpiotSync extends BaseCommand
             }
 
             //异步获取
-            call_user_func($call, $upiotApi, $msisdns, $date);
-            //$this->dataUsage($upiotApi, $msisdns, $date);
+            $this->dataUsage($upiotApi, $msisdns, $date);
             if($upiotApi->promiseCount() >= 20){
                 $upiotApi->clearPromise();
             }
@@ -87,20 +87,8 @@ class UpiotSync extends BaseCommand
             return [];
         });
         //异步获取
-        call_user_func($call, $upiotApi, $msisdns, $date);
+        $this->dataUsage($upiotApi, $msisdns, $date);
         $upiotApi->clearPromise();
-    }
-
-    protected function twoDayAgoDataUsage(UpiotApi $upiotApi, $msisdns, $date)
-    {
-        //异步获取
-        $upiotApi->getDataUsageAsync($msisdns, $date, function ($data) use ($date) {
-            if ($data['data']) {
-                foreach ($data['data'] as $item) {
-                    Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 24);
-                }
-            }
-        });
     }
 
     protected function getKey($msisdn, $date)
