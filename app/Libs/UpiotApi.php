@@ -106,7 +106,7 @@ class UpiotApi
         }
     }
 
-    public function cardListSync(callable $func,  $page = 1, $perPage = 300)
+    public function cardListSync(callable $func,  $page = 1, $perPage = 500)
     {
 
         $bgCodes = $this->getBillingGroupCode();
