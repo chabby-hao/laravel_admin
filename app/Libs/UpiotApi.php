@@ -165,6 +165,7 @@ class UpiotApi
 
         $promise->then(
             function (ResponseInterface $res) use ($func) {
+                var_dump($res->getBody());
                 $arr = json_decode($res->getBody()->getContents(), true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
