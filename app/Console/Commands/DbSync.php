@@ -46,17 +46,7 @@ class DbSync extends BaseCommand
 
         $res = $db->where(['products' => 6])->orderBy('type')->get()->toArray();
 
-        $arr = [
-            BiProductType::PRODUCT_TYPE_EB001 => 'EB001',
-            BiProductType::PRODUCT_TYPE_EB001B => 'EB001B',
-            BiProductType::PRODUCT_TYPE_EB001C => 'EB001C',
-            BiProductType::PRODUCT_TYPE_EB001A => 'EB001A',
-            BiProductType::PRODUCT_TYPE_EB001D => 'EB001D',
-            BiProductType::PRODUCT_TYPE_EB001W => 'EB001W',
-            BiProductType::PRODUCT_TYPE_B640 => 'B640',
-            BiProductType::PRODUCT_TYPE_EB003A => 'EB003A',
-            BiProductType::PRODUCT_TYPE_EB485 => 'EB485',
-        ];
+        $arr = BiProductType::getNameMap();
 
         $arrFlip = array_flip($arr);
 

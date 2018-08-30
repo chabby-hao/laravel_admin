@@ -52,10 +52,10 @@ class UpiotSync extends BaseCommand
      */
     protected function cardDataUsageSync()
     {
-        $predate = Carbon::today()->subDays(2)->format('Ymd');
-        $date = Carbon::yesterday()->format('Ymd');
-        $this->cardDataUsage($predate,[$this, 'twoDayAgoDataUsage']);
-        $this->cardDataUsage($date,[$this, 'dataUsage']);
+        $predate = Carbon::today()->subDays(3)->format('Ymd');
+        $date = Carbon::today()->subDays(2)->format('Ymd');
+        $this->cardDataUsage($predate,[$this, 'dataUsageDbUpdate']);
+        $this->cardDataUsage($date,[$this, 'dataUsageDbUpdate']);
 
     }
 
@@ -121,7 +121,13 @@ class UpiotSync extends BaseCommand
         $predate = Carbon::parse($date)->subDay(1)->format('Ymd');
         if($data['data']){
             foreach ($data['data'] as $item){
-                $preUsage = Cache::store('redis')->get($this->getKey($item['msisdn'], $predate)) ?: 0;
+                Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 24);
+                $preUsage = Cache::store('redis')->get($this->getKey($item['msisdn'], $predate));
+
+                if($preUsage === null){
+                    continue;
+                }
+
                 $diff = $item['data_usage'] - $preUsage;
                 $dataUsage = $diff > 0 ? $diff : 0;
                 BiCardLiangxun::updateOrCreate([

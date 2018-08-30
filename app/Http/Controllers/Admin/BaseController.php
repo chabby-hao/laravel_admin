@@ -124,7 +124,7 @@ class BaseController extends Controller
         return $paginate;
     }
 
-    protected function getDaterange($preDay = null)
+    protected function getDaterange($preDay = null, $format = 'Y-m-d H:i:s')
     {
         $dateRange = Input::get('daterange');
         if ($dateRange) {
@@ -134,8 +134,8 @@ class BaseController extends Controller
                 list($startDatetime, $endDatetime) = explode('-', $dateRange);
             }
         } else {
-            $preDay = $preDay ?: Carbon::now()->startOfDay()->toDateTimeString();
-            list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->endOfDay()->toDateTimeString()];
+            $preDay = $preDay ?: Carbon::now()->startOfDay()->format($format);
+            list($startDatetime, $endDatetime) = [$preDay, Carbon::now()->endOfDay()->format($format)];
         }
         return [trim($startDatetime), trim($endDatetime)];
     }

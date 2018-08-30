@@ -21,6 +21,7 @@ use App\Logics\RedisLogic;
 use App\Logics\StatLogic;
 use App\Logics\UserLogic;
 use App\Models\BiBrand;
+use App\Models\BiCardDatum;
 use App\Models\BiCardLiangxun;
 use App\Models\BiChannel;
 use App\Models\BiCustomer;
@@ -878,6 +879,35 @@ class DeviceController extends BaseController
             'page_nav' => MyPage::showPageNav($paginate),
         ]);
 
+    }
+
+    public function cardDailyList()
+    {
+        $msisdn = Input::get('msisdn');
+        $udid = $this->getUdid($msisdn);
+
+        list($startDatetime, $endDatetime) = $this->getDaterange(null, 'Ymd');
+
+
+        $paginate = BiCardDatum::whereMsisdn($msisdn)
+            ->whereBetween('date',[$startDatetime, $endDatetime])
+            ->orderByDesc('date')->paginate();
+
+        $data = $paginate->items();
+        /** @var TLockLog $row */
+        foreach ($data as $row) {
+
+        }
+
+        //$devices = TLockLog::->orderByDesc('sid')->select('t_device_code.*')->paginate();
+
+        return view('admin.device.carddailylist', [
+            'datas' => $data,
+            'udid'=>$udid,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
     }
 
 }
