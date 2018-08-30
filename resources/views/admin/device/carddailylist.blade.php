@@ -27,7 +27,7 @@
 
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-time"></i></span>
-                        <h5>{{Request::input('msisdn')}}的明细，设备码:{{$udid}}</h5>
+                        <h5>{{Request::input('msisdn')}}的明细, 设备码:{{$udid}}</h5>
                     </div>
                     <div class="widget-content nopadding">
                         <table class="table table-bordered data-table">
