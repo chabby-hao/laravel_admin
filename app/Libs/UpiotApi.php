@@ -159,12 +159,13 @@ class UpiotApi
 
         $promise->then(
             function (ResponseInterface $res) use ($func) {
-                var_dump($res->getBody());
-                $arr = json_decode($res->getBody()->getContents(), true);
+                $body = $res->getBody()->getContents();
+                echo $body . "\n";
+                $arr = json_decode($body, true);
                 if ($arr && $arr['code'] === 200) {
                     $func($arr);
                 } else {
-                    Log::error('upiot get usagelog error ' . $res->getBody()->getContents());
+                    Log::error('upiot get usagelog error ' . $body);
                 }
             },
             function (RequestException $e) {
