@@ -178,7 +178,7 @@ class UpiotApi
         );
 
         $this->promises[] = $promise;
-        $promise->wait();
+        //$promise->wait();
 
         return $promise;
     }
