@@ -42,7 +42,6 @@ class UpiotApi
 
         $key = 'upiot:token';
 
-        var_dump(1);
         if ($token = Cache::store('redis')->get($key)) {
             var_dump($token);
             return $token;
@@ -57,7 +56,6 @@ class UpiotApi
         ]);
         //{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpcGNhcmUiLCJleHAiOjE1MzUwMjUzOTF9.-iR0xWiaDNfCTXLcrGvlBlfv5J2UdI_WumC-VDo1J2c", "code": 200}
         $body = $r->getBody()->getContents();
-        var_dump($token);
         $arr = json_decode($body, true);
         if ($arr && $arr['code'] === 200) {
             //success
@@ -210,7 +208,6 @@ class UpiotApi
         if ($withToken) {
             $options[RequestOptions::HEADERS] = ['Authorization' => "JWT {$this->getToken()}"];
         }
-        var_dump($this->getToken());
         $client = new Client($options);
         return $client;
     }
