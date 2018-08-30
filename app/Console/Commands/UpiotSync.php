@@ -26,9 +26,9 @@ class UpiotSync extends BaseCommand
     public function handle()
     {
 
-        //$this->cardListSync();
+        $this->cardListSync();
 
-        $this->cardDataUsageSync();
+        //$this->cardDataUsageSync();
 
     }
 
