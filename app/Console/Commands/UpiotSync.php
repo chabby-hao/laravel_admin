@@ -53,12 +53,12 @@ class UpiotSync extends BaseCommand
     {
         $predate = Carbon::today()->subDays(2)->format('Ymd');
         $date = Carbon::yesterday()->format('Ymd');
-        $this->cardDataUsage($predate);
-        $this->cardDataUsage($date);
+        $this->cardDataUsage($predate,[$this, 'twoDayAgoDataUsage']);
+        $this->cardDataUsage($date,[$this, 'dataUsage']);
 
     }
 
-    protected function cardDataUsage($date)
+    protected function cardDataUsage($date, $call)
     {
         $model = BiCardLiangxun::where([]);
 
@@ -66,7 +66,7 @@ class UpiotSync extends BaseCommand
         //$date = Carbon::yesterday()->format('Ymd');
 
         $msisdns = [];
-        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date) {
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date, $call) {
 
             $msisdns[] = $row->msisdn;
 
@@ -75,7 +75,8 @@ class UpiotSync extends BaseCommand
             }
 
             //异步获取
-            $this->dataUsage($upiotApi, $msisdns, $date);
+            call_user_func($call, $upiotApi, $msisdns, $date);
+            //$this->dataUsage($upiotApi, $msisdns, $date);
             if($upiotApi->promiseCount() >= 20){
                 $upiotApi->clearPromise();
             }
@@ -84,7 +85,7 @@ class UpiotSync extends BaseCommand
             return [];
         });
         //异步获取
-        $this->dataUsage($upiotApi, $msisdns, $date);
+        call_user_func($call, $upiotApi, $msisdns, $date);
         $upiotApi->clearPromise();
     }
 
