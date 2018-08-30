@@ -28,7 +28,7 @@ class UpiotSync extends BaseCommand
 
         $this->cardListSync();
 
-        //$this->cardDataUsageSync();
+        $this->cardDataUsageSync();
 
     }
 
@@ -36,9 +36,10 @@ class UpiotSync extends BaseCommand
     {
         $upiot = new UpiotApi();
         $upiot->cardListSync(function($data){
-            $this->getMaxCache();
-            foreach ($data as $row){
 
+            $this->getMaxCache();
+
+            foreach ($data as $row){
                 BiCardLiangxun::firstOrCreate([
                     'imsi'=>$row['imsi'],
                 ],$row);
@@ -60,7 +61,8 @@ class UpiotSync extends BaseCommand
 
     protected function cardDataUsage($date, $call)
     {
-        $model = BiCardLiangxun::where([]);
+        //已销号的查不出流量
+        $model = BiCardLiangxun::where('account_status','!=','04');
 
         $upiotApi = new UpiotApi();
         //$date = Carbon::yesterday()->format('Ymd');
@@ -93,7 +95,6 @@ class UpiotSync extends BaseCommand
     {
         //异步获取
         $upiotApi->getDataUsageAsync($msisdns, $date, function ($data) use ($date) {
-            echo json_encode($data) . "\n";
             if ($data['data']) {
                 foreach ($data['data'] as $item) {
                     Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 24);
@@ -118,7 +119,6 @@ class UpiotSync extends BaseCommand
     protected function dataUsageDbUpdate($data, $date)
     {
         $predate = Carbon::parse($date)->subDay(1)->format('Ymd');
-        echo json_encode($data) . "\n";
         if($data['data']){
             foreach ($data['data'] as $item){
                 $preUsage = Cache::store('redis')->get($this->getKey($item['msisdn'], $predate)) ?: 0;

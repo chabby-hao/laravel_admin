@@ -72,6 +72,7 @@ class UpiotApi
         $client = $this->getClient();
         $r = $client->get($uri);
         $body = $r->getBody()->getContents();
+        echo $body . "\n";
         $arr = json_decode($body, true);
 
         /**
