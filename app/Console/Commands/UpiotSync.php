@@ -54,6 +54,7 @@ class UpiotSync extends BaseCommand
     {
         $predate = Carbon::today()->subDays(3)->format('Ymd');
         $date = Carbon::today()->subDays(2)->format('Ymd');
+        var_dump($predate, $date);exit;
         $this->cardDataUsage($predate,[$this, 'dataUsageDbUpdate']);
         $this->cardDataUsage($date,[$this, 'dataUsageDbUpdate']);
 
