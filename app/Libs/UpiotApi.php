@@ -44,6 +44,7 @@ class UpiotApi
 
         var_dump(1);
         if ($token = Cache::store('redis')->get($key)) {
+            var_dump($token);
             return $token;
         }
         $uri = '/api/access_token/';
