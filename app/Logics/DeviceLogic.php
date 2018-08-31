@@ -1429,4 +1429,16 @@ class DeviceLogic extends BaseLogic
         CommandLogic::sendCmd($imei, CommandLogic::CMD_KICK_DEVICE_OFFLINE);
     }
 
+    public static function getCardInfoByImsi($imsi)
+    {
+        $model = BiCardLiangxun::whereImsi($imsi)->first();
+        if($model){
+            $info = $model->toArray();
+            $info['account_status_name'] = BiCardLiangxun::getAccountStatusMap($model->account_status);
+            $info['from'] = '量讯';
+            return $info;
+        }
+        return [];
+    }
+
 }

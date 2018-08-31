@@ -189,7 +189,7 @@ class DeviceController extends BaseController
             $data['caremsg'] = $this->getMsgCount($udid);
 
             $realimsi = substr($data['imsi'], 1);
-            $data['cardInfo'] = BiCardLiangxun::whereImsi($realimsi)->first();
+            $data['cardInfo'] = DeviceLogic::getCardInfoByImsi($realimsi);
 
 
             $lastIds = json_decode($lastIds, true);
