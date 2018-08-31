@@ -466,6 +466,7 @@
 
     </div>
 </div>
+<%/cardInfo%>
 
 </script>
 
