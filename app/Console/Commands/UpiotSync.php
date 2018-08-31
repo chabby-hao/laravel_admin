@@ -52,10 +52,10 @@ class UpiotSync extends BaseCommand
      */
     protected function cardDataUsageSync()
     {
-        $date = Carbon::today()->subDays(3)->format('Ymd');
-        $this->cardDataUsage($date);
-        $date = Carbon::today()->subDays(2)->format('Ymd');
-        $this->cardDataUsage($date);
+//        $date = Carbon::today()->subDays(3)->format('Ymd');
+//        $this->cardDataUsage($date);
+//        $date = Carbon::today()->subDays(2)->format('Ymd');
+//        $this->cardDataUsage($date);
         $date = Carbon::today()->subDays(1)->format('Ymd');
         $this->cardDataUsage($date);
     }
