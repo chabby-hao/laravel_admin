@@ -131,7 +131,7 @@
                                     <td>{{$data->data_usage}}</td>
                                     <td>{{$data->current_date_usage}}</td>
                                     <td>{{($data->data_usage-$data->data_plan) > 0 ? -($data->data_usage-$data->data_plan) : 0}}</td>
-                                    <td>{{$data->active_date}}</td>
+                                    <td>{{$data->active_date->toDateString()}}</td>
                                     {{--<td>{{$data->expiry_date}}</td>--}}
                                     {{--<td>{{$data->test_valid_date}}</td>--}}
                                     {{--<td>{{$data->silent_valid_date}}</td>--}}
