@@ -425,8 +425,7 @@
                 <th>卡状态</th>
                 <th>运营商</th>
                 <th>套餐</th>
-                <th>当月流量MB</th>
-                <th>超出流量MB</th>
+                <th>当月流量</th>
             </tr>
             </thead>
             <tbody>
@@ -435,6 +434,9 @@
                 <td><%cardInfo.msisdn%></td>
                 <td><%cardInfo.account_status_name%></td>
                 <td><%cardInfo.carrier%></td>
+                <td><%cardInfo.data_plan%>MB/月</td>
+                <td><%cardInfo.data_usage%>MB</td>
+                <td>-<%cardInfo.data_over%>MB</td>
             </tr>
             </tbody>
         </table>
@@ -446,19 +448,20 @@
                 <th>计费结束日期</th>
                 <th>测试期起始日期</th>
                 <th>沉默期起始日期</th>
-                <th>计费起始日期</th>
+                <th>出库日期</th>
                 <th>测试期流量</th>
             </tr>
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%lastTrip.dateTime%></td>
-                <td><%lastTrip.mile%>公里</td>
-                <td><%lastTrip.duration%>分钟</td>
-                <td><%lastTrip.speed%>km/h</td>
-                <td><%lastTrip.energy%>kw/h</td>
+                <td><%cardInfo.active_date%></td>
+                <td><%cardInfo.expiry_date%></td>
+                <td><%cardInfo.test_valid_date%></td>
+                <td><%cardInfo.silent_valid_date%></td>
+                <td><%cardInfo.outbound_date%></td>
+                <td><%cardInfo.test_used_data_usage%>MB</td>
                 <td>
-                    <a href='<%mileageUrl%>' class="text-success">历史行程</a>
+                    <a href='<%mileageUrl%>' class="text-success">日明细</a>
                 </td>
             </tr>
             </tbody>

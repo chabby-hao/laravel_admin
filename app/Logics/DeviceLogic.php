@@ -316,8 +316,8 @@ class DeviceLogic extends BaseLogic
 
     public static function getUdidByMsisdn($msisdn)
     {
-        if($card = BiCardLiangxun::whereMsisdn($msisdn)->first()){
-            if($deviceCode = TDeviceCode::whereImsi('9' . $card->imsi)->first()){
+        if ($card = BiCardLiangxun::whereMsisdn($msisdn)->first()) {
+            if ($deviceCode = TDeviceCode::whereImsi('9' . $card->imsi)->first()) {
                 return $deviceCode->qr;
             }
         }
@@ -543,7 +543,7 @@ class DeviceLogic extends BaseLogic
      */
     public static function getDeliverdAtByUdid($udid)
     {
-        return self::deviceCodeCallBack($udid, function ($deviceCode) use($udid) {
+        return self::deviceCodeCallBack($udid, function ($deviceCode) use ($udid) {
             if ($deviceCode->delivered_at) {
                 return Carbon::parse($deviceCode->delivered_at)->toDateTimeString();
             } else {
@@ -1000,7 +1000,7 @@ class DeviceLogic extends BaseLogic
     public static function getGpsSnr($imei)
     {
         $snrJson = RedisLogic::getDevDataByImei($imei)['SnrJson'];
-        if($snrJson){
+        if ($snrJson) {
             return json_decode($snrJson, true);
         }
         return [];
@@ -1075,7 +1075,7 @@ class DeviceLogic extends BaseLogic
 
     public static function getMcuByUdid($udid)
     {
-        return self::deviceCodeCallBack($udid, function($deviceCode){
+        return self::deviceCodeCallBack($udid, function ($deviceCode) {
             return $deviceCode->mcu;
         });
     }
@@ -1292,7 +1292,7 @@ class DeviceLogic extends BaseLogic
 
 //        # 设置原始库设备类型数据
         $tDeviceCode = TDeviceCode::whereImei($imei)->first();
-        if(!$tDeviceCode){
+        if (!$tDeviceCode) {
             return false;
         }
         $tDeviceCode->type = $type;
@@ -1309,23 +1309,22 @@ class DeviceLogic extends BaseLogic
         $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
 
         $evmodel = 0;
-        if($sceneId){
+        if ($sceneId) {
             $ebikeType = BiEbikeType::find($sceneId);
-            if(!$ebikeType){
+            if (!$ebikeType) {
                 return false;
             }
             $evmodel = sprintf('%03s', $ebikeType->ev_model);
         }
 
 
-
         TDeviceCategory::updateOrCreate([
-            'udid'=>$udid,
-        ],[
-            'category'=>$type,
-            'channel'=>$model ? $model->channel : 0,
-            'brand'=>$model ? $model->brand: 0,
-            'model'=>$evmodel ? $model->brand . $evmodel : 0,
+            'udid' => $udid,
+        ], [
+            'category' => $type,
+            'channel' => $model ? $model->channel : 0,
+            'brand' => $model ? $model->brand : 0,
+            'model' => $evmodel ? $model->brand . $evmodel : 0,
         ]);
 
         //将设备踢下线
@@ -1353,16 +1352,16 @@ class DeviceLogic extends BaseLogic
         //2、删除redis中的相关数据
         RedisLogic::getRedis()->select(1);
 
-        $locs = RedisLogic::zRangeByScore('dev_imei:'.$imei,0,time()+3600);
-        foreach ($locs as $key=>$loc){
-            RedisLogic::del("loc:".$loc);
+        $locs = RedisLogic::zRangeByScore('dev_imei:' . $imei, 0, time() + 3600);
+        foreach ($locs as $key => $loc) {
+            RedisLogic::del("loc:" . $loc);
         }
-        RedisLogic::del('dev:'.$imei);//删除设备当前的实时数据
-        RedisLogic::del('dev_loc:'.$imei);//删除设备的定位点索引
-        RedisLogic::del('dev_zone:'.$imei);//删除设备的安全区域设置数据
-        RedisLogic::del('zhangfei_charge:'.$imei);//删除电池数据
+        RedisLogic::del('dev:' . $imei);//删除设备当前的实时数据
+        RedisLogic::del('dev_loc:' . $imei);//删除设备的定位点索引
+        RedisLogic::del('dev_zone:' . $imei);//删除设备的安全区域设置数据
+        RedisLogic::del('zhangfei_charge:' . $imei);//删除电池数据
 
-        if(env('APP_ENV') === 'test'){
+        if (env('APP_ENV') === 'test') {
             //测试环境下，直接修改redis哈希
             $deviceCode = TDeviceCode::whereImei($imei)->first();
             if ($deviceCode) {
@@ -1374,8 +1373,6 @@ class DeviceLogic extends BaseLogic
         }
 
 
-
-
         //3、操作数据库
         //记录设备重置的日志
 
@@ -1383,7 +1380,7 @@ class DeviceLogic extends BaseLogic
         TUserDevice::whereUdid($udid)->delete();
 
         //重置Mysql数据库激活时间数据
-        TDeviceCode::whereImei($imei)->update(['active'=>0]);
+        TDeviceCode::whereImei($imei)->update(['active' => 0]);
 
         //删除Mysql数据库设备过期时间数据(未激活)
         TPayment::whereUdid($udid)->delete();
@@ -1423,7 +1420,7 @@ class DeviceLogic extends BaseLogic
         TLockLog::whereUdid($udid)->delete();
         TChipMileage::whereUdid($udid)->delete();
 
-        BiDeliveryDevice::whereImei($imei)->update(['state'=>BiDeliveryDevice::STATE_INVALID]);
+        BiDeliveryDevice::whereImei($imei)->update(['state' => BiDeliveryDevice::STATE_INVALID]);
 
         //将设备踢下线
         CommandLogic::sendCmd($imei, CommandLogic::CMD_KICK_DEVICE_OFFLINE);
@@ -1432,9 +1429,11 @@ class DeviceLogic extends BaseLogic
     public static function getCardInfoByImsi($imsi)
     {
         $model = BiCardLiangxun::whereImsi($imsi)->first();
-        if($model){
+        if ($model) {
             $info = $model->toArray();
             $info['account_status_name'] = BiCardLiangxun::getAccountStatusMap($model->account_status);
+            $info['data_over'] = ($model->data_usage - $model->data_plan) > 0 ?
+                ($model->data_usage - $model->data_plan) : 0;
             $info['from'] = '量讯';
             return $info;
         }

@@ -189,7 +189,12 @@ class DeviceController extends BaseController
             $data['caremsg'] = $this->getMsgCount($udid);
 
             $realimsi = substr($data['imsi'], 1);
-            $data['cardInfo'] = DeviceLogic::getCardInfoByImsi($realimsi);
+
+            if($cardInfo = DeviceLogic::getCardInfoByImsi($realimsi)){
+                $data['cardInfo'] = $cardInfo;
+                $data['cardUrl'] = URL::action('Admin\DeviceController@cardDailyList',['msisdn'=>$cardInfo['msisdn']]);
+            }
+
 
 
             $lastIds = json_decode($lastIds, true);
