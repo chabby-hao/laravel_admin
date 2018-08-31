@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(MapCache::class)->hourly()->runInBackground();
             $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
             $schedule->command(StatDevice::class)->everyFifteenMinutes()->runInBackground();
-            $schedule->command(UpiotSync::class)->withoutOverlapping()->everyMinute()->runInBackground();
+            $schedule->command(UpiotSync::class)->hourly()->withoutOverlapping()->runInBackground();
         }
     }
 
