@@ -1428,6 +1428,9 @@ class DeviceLogic extends BaseLogic
 
     public static function getCardInfoByImsi($imsi)
     {
+        if(!$imsi){
+            return [];
+        }
         $model = BiCardLiangxun::whereImsi($imsi)->first();
         if ($model) {
             $info = $model->toArray();
