@@ -1299,6 +1299,9 @@ class DeviceLogic extends BaseLogic
         $tDeviceCode->channel_id = $channelId;
         $tDeviceCode->customer_id = $type;
         $tDeviceCode->scene_id = $sceneId;
+        $productNameMap = array_flip(BiProductType::getNameMap());
+        $m = TDeviceCategoryDicNew::whereType($type)->first();
+        $tDeviceCode->model = $productNameMap[$m->model];
         $tDeviceCode->save();
         //TDeviceCode::whereImei($imei)->update(['type'=>$type]);
 
