@@ -109,7 +109,7 @@ class UpiotSync extends BaseCommand
         $predate = Carbon::parse($date)->subDay(1)->format('Ymd');
         if($data['data']){
             foreach ($data['data'] as $item){
-                Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 24);
+                Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 48);
                 $preUsage = Cache::store('redis')->get($this->getKey($item['msisdn'], $predate));
 
                 if($preUsage === null){
