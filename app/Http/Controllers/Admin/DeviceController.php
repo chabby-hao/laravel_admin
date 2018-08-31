@@ -188,6 +188,14 @@ class DeviceController extends BaseController
             //提醒消息
             $data['caremsg'] = $this->getMsgCount($udid);
 
+            $realimsi = substr($data['imsi'], 1);
+
+            if($cardInfo = DeviceLogic::getCardInfoByImsi($realimsi)){
+                $data['cardInfo'] = $cardInfo;
+                $data['cardUrl'] = URL::action('Admin\DeviceController@cardDailyList',['msisdn'=>$cardInfo['msisdn']]);
+            }
+
+
 
             $lastIds = json_decode($lastIds, true);
 
@@ -867,9 +875,8 @@ class DeviceController extends BaseController
         $this->listSearch($model);
 
         $paginate = $model
-            ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id','rom','mcu'])
+            ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id','rom','mcu','t_device_code.active as active_time'])
             ->orderByDesc('data_usage')->paginate();
-
 
 
         $datas = $paginate->items();

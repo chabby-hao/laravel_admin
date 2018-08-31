@@ -131,7 +131,7 @@
                                     <td>{{$data->data_usage}}</td>
                                     <td>{{$data->current_date_usage}}</td>
                                     <td>{{($data->data_usage-$data->data_plan) > 0 ? -($data->data_usage-$data->data_plan) : 0}}</td>
-                                    <td>{{$data->active_date}}</td>
+                                    <td>{{$data->active_date->toDateString()}}</td>
                                     {{--<td>{{$data->expiry_date}}</td>--}}
                                     {{--<td>{{$data->test_valid_date}}</td>--}}
                                     {{--<td>{{$data->silent_valid_date}}</td>--}}
@@ -139,14 +139,14 @@
                                     {{--<td>{{$data->test_used_data_usage}}</td>--}}
 {{--                                    <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>--}}
                                     <td>{{\App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid)['service_status']}}</td>
-                                    <td>{{\App\Logics\DeviceLogic::getActiveAtByUdid($data->udid)}}</td>
+                                    <td>{{$data->active_time ? \Illuminate\Support\Carbon::createFromTimestamp($data->active_time)->toDateString() : ''}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
-                                    <td>{{\App\Logics\DeviceLogic::getChannelNameByUdid($data->udid)}}</td>
+                                    <td>{{\App\Models\BiChannel::getChannelMap(true)[$data->channel_id]}}</td>
                                     <td>{{$data->rom}}</td>
                                     <td>{{$data->mcu}}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{URL::action('Admin\DeviceController@detail',['id'=>$data->udid])}}">详情</a>
-                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@cardDailyList',['msisdn'=>$data->udid])}}">明细</a>
+                                        <a class="btn btn-info" href="{{URL::action('Admin\DeviceController@cardDailyList',['msisdn'=>$data->msisdn])}}">明细</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -44,6 +44,8 @@ namespace App\Models;
 class BiCardLiangxun extends \App\Models\Base\BiCardLiangxun
 {
 
+    protected $dateFormat = 'Y-m-d';
+
     //00 - 正使用, 10 - 测试期, 02 - 停机 03 - 预销号, 04 - 销号, 11 - 沉默期 12 - 停机保号, 99 - 未知
     public static function getAccountStatusMap($type = null)
     {
