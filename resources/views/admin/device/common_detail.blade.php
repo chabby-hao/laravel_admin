@@ -304,8 +304,8 @@
         <table class="table table-bordered data-table">
             <thead>
             <tr>
-                <th>设备状态</th>
-                <th>设备使用有效期</th>
+                <th>设备服务状态</th>
+                <th>设备服务有效期</th>
                 <th>续费次数</th>
                 <th>服务状态</th>
             </tr>
