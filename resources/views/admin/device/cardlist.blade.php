@@ -139,7 +139,7 @@
                                     {{--<td>{{$data->test_used_data_usage}}</td>--}}
 {{--                                    <td>{{\App\Logics\DeviceLogic::getDeliverdAtByUdid($data->udid)}}</td>--}}
                                     <td>{{\App\Logics\DeviceLogic::getPaymentInfoByUdid($data->udid)['service_status']}}</td>
-                                    <td>{{$data->active_time ? \Illuminate\Support\Carbon::parse($data->active_time)->toDateString() : ''}}</td>
+                                    <td>{{$data->active_time ? \Illuminate\Support\Carbon::createFromTimestamp($data->active_time)->toDateString() : ''}}</td>
                                     <td>{{\App\Logics\DeviceLogic::getLastContact($data->imei)}}</td>
                                     <td>{{\App\Models\BiChannel::getChannelMap(true)[$data->channel_id]}}</td>
                                     <td>{{$data->rom}}</td>
