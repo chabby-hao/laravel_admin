@@ -188,6 +188,9 @@ class DeviceController extends BaseController
             //提醒消息
             $data['caremsg'] = $this->getMsgCount($udid);
 
+            $realimsi = substr($data['imsi'], 1);
+            $data['cardInfo'] = BiCardLiangxun::whereImsi($realimsi)->toArray();
+
 
             $lastIds = json_decode($lastIds, true);
 
