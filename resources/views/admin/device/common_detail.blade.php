@@ -426,6 +426,7 @@
                 <th>运营商</th>
                 <th>套餐</th>
                 <th>当月流量</th>
+                <th>超出流量</th>
             </tr>
             </thead>
             <tbody>
@@ -450,6 +451,7 @@
                 <th>沉默期起始日期</th>
                 <th>出库日期</th>
                 <th>测试期流量</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -461,7 +463,7 @@
                 <td><%cardInfo.outbound_date%></td>
                 <td><%cardInfo.test_used_data_usage%>MB</td>
                 <td>
-                    <a href='<%mileageUrl%>' class="text-success">日明细</a>
+                    <a href='<%cardUrl%>' class="text-success">日明细</a>
                 </td>
             </tr>
             </tbody>
