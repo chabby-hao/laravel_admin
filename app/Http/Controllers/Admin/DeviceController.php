@@ -878,8 +878,6 @@ class DeviceController extends BaseController
             ->select(['bi_card_liangxun.*','imei','qr as udid','channel_id','rom','mcu','t_device_code.active as active_time'])
             ->orderByDesc('data_usage')->paginate();
 
-        dd($paginate);
-
 
         $datas = $paginate->items();
 
