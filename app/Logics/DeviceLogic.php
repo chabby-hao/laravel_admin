@@ -1282,7 +1282,7 @@ class DeviceLogic extends BaseLogic
     /**
      * 设备加入渠道
      */
-    public static function deviceToChannel($imei, $channelId, $type, $sceneId)
+    public static function deviceToChannel($imei, $channelId, $type, $sceneId, $brandId = 0, $ebikeTypeId = 0)
     {
         $type = $type ?: 0;
         $sceneId = $sceneId ?: 0;
@@ -1299,6 +1299,14 @@ class DeviceLogic extends BaseLogic
         $tDeviceCode->channel_id = $channelId;
         $tDeviceCode->customer_id = $type;
         $tDeviceCode->scene_id = $sceneId;
+
+        if($brandId){
+            $tDeviceCode->brand_id = $brandId;
+        }
+        if($ebikeTypeId){
+            $tDeviceCode->ebike_type_id = $ebikeTypeId;
+        }
+
         $productNameMap = array_flip(BiProductType::getNameMap());
         $m = TDeviceCategoryDicNew::whereType($type)->first();
         $tDeviceCode->model = $productNameMap[$m->model];

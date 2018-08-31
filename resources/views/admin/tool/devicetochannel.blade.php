@@ -59,6 +59,27 @@
                             </div>
 
                             <div class="control-group">
+                                <label class="control-label">品牌:</label>
+                                <div class="controls">
+                                    <select name="brand_id" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\BiBrand::getBrandMap() as $id=> $name)
+                                            <option value="{{$id}}">{{$name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">车型:</label>
+                                <div class="controls">
+                                    <select name="ebike_type_id" class="span11">
+                                        <option value="">请选择车型</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>提交方式 :</label>
                                 <div class="controls">
                                     <label>
@@ -127,6 +148,7 @@
 
     </script>
     @include('admin.common_channel_customer_scenejs')
+    @include('admin.common_brand_ebikejs')
     @include('admin.common_submitjs')
 @endsection
 
