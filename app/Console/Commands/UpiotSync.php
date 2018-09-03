@@ -14,7 +14,7 @@ class UpiotSync extends BaseCommand
 
     const CACHE_KEY_PRE = 'pre_data_usage:';
 
-    protected $signature = 'upiot:sync';
+    protected $signature = 'upiot:sync {--date=}';
     protected $description = '流量统计脚本';
 
     public function __construct()
@@ -52,12 +52,8 @@ class UpiotSync extends BaseCommand
      */
     protected function cardDataUsageSync()
     {
-        $date = Carbon::today()->subDays(4)->format('Ymd');
-        $this->cardDataUsage($date);
-        $date = Carbon::today()->subDays(3)->format('Ymd');
-        $this->cardDataUsage($date);
-        $date = Carbon::today()->subDays(2)->format('Ymd');
-        $this->cardDataUsage($date);
+        $date = $this->option('date');
+        var_dump($date);
         $date = Carbon::today()->subDays(1)->format('Ymd');
         $this->cardDataUsage($date);
     }
