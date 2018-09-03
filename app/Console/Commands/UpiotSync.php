@@ -23,11 +23,10 @@ class UpiotSync extends BaseCommand
     }
 
 
-    public function handle($aa)
+    public function handle()
     {
 
-        var_dump($aa);
-        $this->cardListSync();
+        //$this->cardListSync();
 
         $this->cardDataUsageSync();
 
