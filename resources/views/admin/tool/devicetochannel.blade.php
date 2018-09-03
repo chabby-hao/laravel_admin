@@ -11,15 +11,15 @@
                         <form id="myform" enctype="multipart/form-data" method="post" class="form-horizontal">
 
                             <div class="control-group">
-                                <label class="control-label"><span class="text-error">*</span>拉渠道方式 :</label>
+                                <label class="control-label"><span class="text-error">*</span>编辑方式 :</label>
                                 <div class="controls">
                                     <label>
                                         <input  type="radio" name="way" value="0" checked/>
-                                        <span>拉渠道+清除数据</span>
+                                        <span>编辑+清除数据</span>
                                     </label>
                                     <label>
                                         <input  type="radio" name="way" value="1"/>
-                                        <span>只拉渠道</span>
+                                        <span>编辑</span>
                                     </label>
 
                                 </div>
@@ -75,6 +75,18 @@
                                 <div class="controls">
                                     <select name="ebike_type_id" class="span11">
                                         <option value="">请选择车型</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">电池型号:</label>
+                                <div class="controls">
+                                    <select name="battery_type" class="span11">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\BiDeliveryOrder::getBatteryTypeMap() as $id=>$name)
+                                            <option value="{{$id}}">{{$name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
