@@ -761,7 +761,7 @@
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(255,0,0)'
+                        color: 'rgb(127,160,255)'
                     }
                 }
             },
@@ -774,7 +774,7 @@
                 data: convertData,
                 symbol: 'circle',//image://./cheliang2@2x.png  pin
                 symbolSize: function () {
-                    return 12;
+                    return 44;
                 },
                 hoverAnimation: true,
                 tooltip: {},
