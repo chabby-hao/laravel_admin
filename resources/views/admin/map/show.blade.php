@@ -765,35 +765,6 @@
                     }
                 }
             },
-            {
-                name: 'chongdianpeng',
-                type: 'scatter',
-                /*large: true,
-                 largeThreshold:30000,*/
-                coordinateSystem: 'bmap',
-                data: convertData,
-                symbol: 'circle',//image://./cheliang2@2x.png  pin
-                symbolSize: function () {
-                    return 44;
-                },
-                hoverAnimation: true,
-                tooltip: {},
-                label: {
-                    normal: {
-                        formatter: '{b}',
-                        position: 'top',
-                        show: false
-                    },
-                    emphasis: {
-                        show: false
-                    },
-                },
-                itemStyle: {
-                    normal: {
-                        color: 'rgb(255,0,0)'
-                    }
-                }
-            },
         ]
     };
 
