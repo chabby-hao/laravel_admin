@@ -899,7 +899,8 @@
 
     $(".choose-cheliang").click(function () {
         if($(this).hasClass('choose-active')){
-            console.log(11);
+            location.href='{{URL::action('Admin\MapController@show',['more'=>1])}}';
+            return;
         }
         bottoms.show();
         manualTrigger();

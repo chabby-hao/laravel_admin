@@ -96,6 +96,15 @@ class MapController extends BaseController
 
     private function getKeyMap()
     {
+
+        if(!Input::get('more')){
+            $map = [
+                DeviceObject::CACHE_LIST_ACTIVED=>'已激活',
+                DeviceObject::CACHE_LIST_OTHERS=>'其他',
+            ];
+            return $map;
+        }
+
         if ($this->isCustomer()) {
             $map = [
                 TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE => '渠道库存',//渠道库存
@@ -122,10 +131,6 @@ class MapController extends BaseController
                 //TDeviceCode::DEVICE_CYCLE_USE_EXPIRE => '使用过期',//使用过期
             ];
 
-            $map = [
-                DeviceObject::CACHE_LIST_ACTIVED=>'已激活',
-                DeviceObject::CACHE_LIST_OTHERS=>'其他',
-            ];
         }
         return $map;
     }
