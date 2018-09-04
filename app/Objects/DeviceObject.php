@@ -25,6 +25,8 @@ class DeviceObject extends BaseObject
     const CACHE_LIST_PARK = 'park';//使用中
     const CACHE_LIST_OFFLINE_LESS_48 = 'offline_less48';//使用中
     const CACHE_LIST_OFFLINE_MORE_48 = 'offline_more48';//使用中
+    const CACHE_LIST_ACTIVED = 'actived';//已激活
+    const CACHE_LIST_OTHERS = 'others';//其他=库存+渠道库存
     const CACHE_LIST_ONLINE = 'online';
     const CACHE_LIST_OFFLINE = 'offline';
 

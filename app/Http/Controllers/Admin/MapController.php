@@ -121,6 +121,11 @@ class MapController extends BaseController
                 //TDeviceCode::DEVICE_CYCLE_REFURBISHMENT_USER => '翻新用户',//翻新用户
                 //TDeviceCode::DEVICE_CYCLE_USE_EXPIRE => '使用过期',//使用过期
             ];
+
+            $map = [
+                DeviceObject::CACHE_LIST_ACTIVED=>'已激活',
+                DeviceObject::CACHE_LIST_OTHERS=>'其他',
+            ];
         }
         return $map;
     }

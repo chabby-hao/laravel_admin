@@ -76,7 +76,9 @@ class MapCache extends BaseCommand
             $offlineMore48 = [];
             $storage = [];
             $channelStorage = [];
-            $this->batchSearch($model, function ($deviceCode) use (&$channelStorage, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage) {
+            $actived = [];
+            $others = [];
+            $this->batchSearch($model, function ($deviceCode) use (&$channelStorage, &$riding, &$park, &$offlineMore48, &$offlineLess48, &$storage, &$actived, &$others) {
                 static $t = 0;
                 /** @var TDeviceCode $deviceCode */
                 $imei = $deviceCode->imei;
@@ -118,8 +120,12 @@ class MapCache extends BaseCommand
                 //库存
                 if ($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_STORAGE) {
                     $storage[] = $udid;
+                    $others[] = $udid;
                 }elseif($deviceCode->device_cycle == TDeviceCode::DEVICE_CYCLE_CHANNEL_STORAGE){
                     $channelStorage[] = $udid;
+                    $others[] = $udid;
+                }else{
+                    $actived[] = $udid;
                 }
 
             });
@@ -132,6 +138,8 @@ class MapCache extends BaseCommand
                 DeviceObject::CACHE_LIST_PARK,
                 DeviceObject::CACHE_LIST_OFFLINE_LESS_48,
                 DeviceObject::CACHE_LIST_OFFLINE_MORE_48,
+                DeviceObject::CACHE_LIST_ACTIVED,
+                DeviceObject::CACHE_LIST_OTHERS,
             ];
             $map2 = [
                 $storage,
@@ -140,6 +148,8 @@ class MapCache extends BaseCommand
                 $park,
                 $offlineLess48,
                 $offlineMore48,
+                $actived,
+                $others,
             ];
 
 
