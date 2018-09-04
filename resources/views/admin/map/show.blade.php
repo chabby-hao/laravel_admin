@@ -761,7 +761,7 @@
                 },
                 itemStyle: {
                     normal: {
-                        color: 'rgb(127,160,255)'
+                        color: 'rgb(255,0,0)'
                     }
                 }
             },
