@@ -867,11 +867,12 @@
         })
     });
 
-    function triggerQixing() {
+    function manualTrigger() {
         $("li[name='{{\App\Objects\DeviceObject::CACHE_LIST_RIDING}}']").trigger('click');
+        $("li[name='{{\App\Objects\DeviceObject::CACHE_LIST_ACTIVED}}']").trigger('click');
     }
 
-    triggerQixing();
+    manualTrigger();
 
 
     $.ajax({
@@ -893,7 +894,7 @@
 
     $(".cheliang,.choose-cheliang").click(function () {
         bottoms.show();
-        triggerQixing();
+        manualTrigger();
     })
 
     $(".chongdianpeng,.choose-chongdianpeng").click(function () {
