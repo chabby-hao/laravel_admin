@@ -892,12 +892,12 @@
         }
     })
 
-    $(".choose-cheliang").click(function () {
+    $(".cheliang").click(function () {
         bottoms.show();
         manualTrigger();
     })
 
-    $(".cheliang").click(function () {
+    $(".choose-cheliang").click(function () {
         if($(this).hasClass('current')){
             console.log(11);
         }
