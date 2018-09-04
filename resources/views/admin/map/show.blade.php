@@ -898,8 +898,12 @@
     })
 
     $(".choose-cheliang").click(function () {
-        if($(this).hasClass('choose-active')){
-            location.href='{{URL::action('Admin\MapController@show',['more'=>1])}}';
+        if($(this).hasClass('choose-active') ){
+            if('{{Request::input('more')}}' !== '1'){
+                location.href='{{URL::action('Admin\MapController@show',['more'=>1])}}';
+            }else{
+                location.href='{{URL::action('Admin\MapController@show')}}';
+            }
             return;
         }
         bottoms.show();
