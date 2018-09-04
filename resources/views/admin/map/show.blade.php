@@ -415,6 +415,19 @@
 
 <script>
 
+    $(".choose-cheliang").click(function () {
+        if($(this).hasClass('choose-active') ){
+            if('{{Request::input('more')}}' !== '1'){
+                location.href='{{URL::action('Admin\MapController@show',['more'=>1])}}';
+            }else{
+                location.href='{{URL::action('Admin\MapController@show')}}';
+            }
+            return;
+        }
+        bottoms.show();
+        manualTrigger();
+    })
+
     var chooseDivs = $(".choose-div");
     //车辆/充电棚/服务网点 切换
     chooseDivs.click(function () {
@@ -893,19 +906,6 @@
     })
 
     $(".cheliang").click(function () {
-        bottoms.show();
-        manualTrigger();
-    })
-
-    $(".choose-cheliang").click(function () {
-        if($(this).hasClass('choose-active') ){
-            if('{{Request::input('more')}}' !== '1'){
-                location.href='{{URL::action('Admin\MapController@show',['more'=>1])}}';
-            }else{
-                location.href='{{URL::action('Admin\MapController@show')}}';
-            }
-            return;
-        }
         bottoms.show();
         manualTrigger();
     })
