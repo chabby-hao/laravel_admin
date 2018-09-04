@@ -892,7 +892,15 @@
         }
     })
 
-    $(".cheliang,.choose-cheliang").click(function () {
+    $(".choose-cheliang").click(function () {
+        bottoms.show();
+        manualTrigger();
+    })
+
+    $(".cheliang").click(function () {
+        if($(this).hasClass('current')){
+            console.log(11);
+        }
         bottoms.show();
         manualTrigger();
     })
