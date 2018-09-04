@@ -898,7 +898,7 @@
     })
 
     $(".choose-cheliang").click(function () {
-        if($(this).hasClass('current')){
+        if($(this).hasClass('choose-active')){
             console.log(11);
         }
         bottoms.show();
