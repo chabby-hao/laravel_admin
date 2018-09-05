@@ -97,6 +97,7 @@ class MapController extends BaseController
     private function getKeyMap()
     {
 
+        var_dump(Input::get());
         if(!Input::get('more')){
             $map = [
                 DeviceObject::CACHE_LIST_ACTIVED=>'已激活',
