@@ -40,7 +40,7 @@ class UpiotSync extends BaseCommand
             $this->getMaxCache();
 
             foreach ($data as $row){
-                BiCardLiangxun::firstOrCreate([
+                BiCardLiangxun::updateOrCreate([
                     'imsi'=>$row['imsi'],
                 ],$row);
             }
