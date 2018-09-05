@@ -410,6 +410,7 @@
 </div>
 
 
+@if(Auth::user()->can('device/cardList'))
 {{--sim卡信息--}}
 <%#cardInfo%>
 <div class="widget-box">
@@ -472,6 +473,7 @@
     </div>
 </div>
 <%/cardInfo%>
+@endif
 
 </script>
 
