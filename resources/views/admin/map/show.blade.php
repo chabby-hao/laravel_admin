@@ -14,9 +14,11 @@
     <!-- 引入百度地图扩展 -->
     <script src="{{asset('map/bmap.min.js')}}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  {{--  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>--}}
+
+    <script src="{{asset('jquery3/jquery.min.js')}}"></script>
 
     <script src="{{asset('js/jquery-form/jquery.form.js')}}"></script>
 
