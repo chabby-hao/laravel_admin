@@ -824,7 +824,7 @@
 
     //var url = 'http://api.vipcare.com/map/getEbikeData';
     //var url2 = 'http://api.vipcare.com/map/getEbikeCount';
-    var url = '{{URL::action('Admin\MapController@show')}}';
+    var url = '{{Request::fullUrl()}}';
 
     //var bottoms = $("#bottom");
     var bottoms = $('.choose-li');
