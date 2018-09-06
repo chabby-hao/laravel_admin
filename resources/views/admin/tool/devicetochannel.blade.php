@@ -42,9 +42,6 @@
                                 <div class="controls">
                                     <select name="customer_id" class="span11">
                                         <option value="">请选择</option>
-                                        @foreach(\App\Models\BiCustomer::getCustomerMap() as $id=> $name)
-                                            <option value="{{$id}}">{{$name}}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
