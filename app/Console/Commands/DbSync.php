@@ -96,6 +96,9 @@ class DbSync extends BaseCommand
 
                 $channelName = TDeviceCategoryDicNew::where(['channel' => $row->channel, 'level' => 3])->first()['name'];
                 $channelId = $channelMap[$channelName];
+                if(!$channelId){
+                    continue;
+                }
                 //客户
                 try {
                     BiCustomer::firstOrCreate([
