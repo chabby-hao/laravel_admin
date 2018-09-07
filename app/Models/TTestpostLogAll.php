@@ -3,7 +3,7 @@
 namespace App\Models;
 
 /**
- * App\Models\TTestpostLog
+ * App\Models\TTestpostLogAll
  *
  * @property int $id
  * @property string $mstsn
