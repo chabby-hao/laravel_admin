@@ -85,7 +85,11 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>核心板</th>
+                                <th>MstSn</th>
+                                <th>MInfo</th>
+                                <th>CPAct</th>
+                                <th>CiNum</th>
+                                <th>时间</th>
                                 <th>核心板版本</th>
                                 <th>imei</th>
                                 <th>底板通信</th>
@@ -115,30 +119,35 @@
                             <?php $t = 0; ?>
                             @foreach($datas as $row)
                                 <tr class="gradeX">
-                                    <td>{{$row['Ctype']}};         </td>
-                                    <td>{{$row['Cver']}};          </td>
-                                    <td>{{$row['IMEI']}};          </td>
-                                    <td>{{$row['BBCon']}};         </td>
-                                    <td>{{$row['Gsen']}};          </td>
-                                    <td>{{$row['BTMac']}};         </td>
-                                    <td>{{$row['BTkey']}};         </td>
-                                    <td>{{$row['GPSSt']}};         </td>
-                                    <td>{{$row['GPRSSt']}};        </td>
-                                    <td>{{$row['Btype']}};         </td>
-                                    <td>{{$row['Bver']}};          </td>
-                                    <td>{{$row['BTStat']}};        </td>
-                                    <td>{{$row['I2C']}};           </td>
-                                    <td>{{$row['OWCin']}};         </td>
-                                    <td>{{$row['OWCout']}};        </td>
-                                    <td>{{$row['Lock']}};          </td>
-                                    <td>{{$row['Volt']/10}}v; </td>
-                                    <td>{{$row['Online']}};        </td>
-                                    <td>{{$row['Odomte']}};        </td>
-                                    <td>{{$row['SPEED']}};         </td>
-                                    <td>{{$row['DGPS']}};          </td>
-                                    <td>{{$row['DGSM']}};          </td>
-                                    <td>{{$row['imsi']}};          </td>
-                                    <td>{{$row['PowGate']}};</td>
+                                    <td>{{$row['MstSn']}}          </td>
+                                    <td>{{$row['MInfo']}}          </td>
+                                    <td>{{$row['CPAct']}}          </td>
+                                    <td>{{$row['CiNum']}}          </td>
+                                    <td>{{$row['addtime']}}          </td>
+                                    <td>{{$row['Ctype']}}          </td>
+                                    <td>{{$row['Cver']}}           </td>
+                                    <td>{{$row['IMEI']}}           </td>
+                                    <td>{{$row['BBCon']}}          </td>
+                                    <td>{{$row['Gsen']}}           </td>
+                                    <td>{{$row['BTMac']}}          </td>
+                                    <td>{{$row['BTkey']}}          </td>
+                                    <td>{{$row['GPSSt']}}          </td>
+                                    <td>{{$row['GPRSSt']}}         </td>
+                                    <td>{{$row['Btype']}}          </td>
+                                    <td>{{$row['Bver']}}           </td>
+                                    <td>{{$row['BTStat']}}         </td>
+                                    <td>{{$row['I2C']}}            </td>
+                                    <td>{{$row['OWCin']}}          </td>
+                                    <td>{{$row['OWCout']}}         </td>
+                                    <td>{{$row['Lock']}}           </td>
+                                    <td>{{$row['Volt']/10}}v  </td>
+                                    <td>{{$row['Online']}}         </td>
+                                    <td>{{$row['Odomte']}}         </td>
+                                    <td>{{$row['SPEED']}}          </td>
+                                    <td>{{$row['DGPS']}}           </td>
+                                    <td>{{$row['DGSM']}}           </td>
+                                    <td>{{$row['imsi']}}           </td>
+                                    <td>{{$row['PowGate']}} </td>
                                 </tr>
                             @endforeach
                             </tbody>
