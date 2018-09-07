@@ -27,6 +27,7 @@ class DetectController extends BaseController
                 unset($where[$key]);
             }
         }
+        unset($where['page']);
 
         $paginate = TTestpostLogAll::where($where)->orderByDesc('id')->paginate();
         $datas = $paginate->items();
