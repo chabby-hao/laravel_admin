@@ -107,7 +107,7 @@ Route::any('/api/channelKeyAdd','Admin\ApiController@channelKeyAdd');
 Route::any('/api/refreshChannelConfig','Admin\ApiController@refreshChannelConfig');
 
 
-
+Route::any('/detect/factoryTestList','Admin\DetectController@factoryTestList');
 
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');

@@ -19,18 +19,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $json_data
  * @property string $imsi
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereAddtime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereCinum($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereImsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereJsonData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\TTestpostLog whereMstsn($value)
  * @mixin \Eloquent
  */
-class TTestpostLog extends Eloquent
+class TTestpostLogAll extends Eloquent
 {
 	protected $connection = 'care';
-	protected $table = 't_testpost_log';
+	protected $table = 't_testpost_log_all';
 	public $timestamps = false;
 
 	protected $casts = [

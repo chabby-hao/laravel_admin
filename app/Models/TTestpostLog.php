@@ -11,15 +11,15 @@ namespace App\Models;
  * @property \Carbon\Carbon $addtime
  * @property string $json_data
  * @property string|null $imsi
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereAddtime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereCinum($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereImsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereJsonData($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLog whereMstsn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereAddtime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereCinum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereImsi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereJsonData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TTestpostLogAll whereMstsn($value)
  * @mixin \Eloquent
  */
-class TTestpostLog extends \App\Models\Base\TTestpostLog
+class TTestpostLogAll extends \App\Models\Base\TTestpostLogAll
 {
 	protected $fillable = [
 		'mstsn',
