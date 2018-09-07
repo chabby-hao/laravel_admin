@@ -7,66 +7,17 @@
         <div class="row-fluid">
             <div class="span12">
 
-                {{--<div class="widget-box">
+                <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-search"></i> </span>
                         <h5>筛选查询</h5>
                     </div>
                     <div class="widget-content">
                         <form method="get" class="form-search">
-                            @if(Request::input('status'))
-                                <input type="hidden" name="status" value="{{Request::input('status')}}">
-                            @endif
                             <div class="control-group">
                                 <div class="inline-block w10">
-                                    <select class="w1 margintop" name="device_type">
-                                        <option value="">请选择型号</option>
-                                        @foreach(\App\Models\BiDeviceType::getNameMap() as $k => $v)
-                                            <option @if(Request::input('device_type') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if(Auth::user()->user_type == \App\Models\BiUser::USER_TYPE_ALL)
-                                        <select class="w1 margintop" name="channel_id">
-                                            <option value="">请选择渠道</option>
-                                            @foreach(\App\Models\BiChannel::getChannelMap() as $k => $v)
-                                                <option @if(Request::input('channel_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                            @endforeach
-                                        </select>
-                                        <select class="w1 margintop" name="customer_id">
-                                            <option value="">
-                                                请选择客户
-                                            </option>
-                                        </select>
-                                        <select class="w1 margintop" name="scene_id">
-                                            <option value="">
-                                                请选择场景
-                                            </option>
-                                        </select>
-                                        <select class="w1 margintop" name="brand_id">
-                                            <option value="">请选择品牌</option>
-                                            @foreach(\App\Models\BiBrand::getBrandMap() as $k => $v)
-                                                <option @if(Request::input('brand_id') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                            @endforeach
-                                        </select>
-                                        <select class="w1 margintop" name="ebike_type_id">
-                                            <option value="">
-                                                请选择车型
-                                            </option>
-                                        </select>
-
-                                        <select class="w1 margintop" name="attach">
-                                            <option value="">请选择在线状态</option>
-                                            @foreach(\App\Objects\DeviceObject::getOnlineOfflineTypeMap() as $k => $v)
-                                                <option @if(is_numeric(Request::input('attach')) && Request::input('attach') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                            @endforeach
-                                        </select>
-                                        <select class="w1 margintop" name="active">
-                                            <option value="">请选择是否激活</option>
-                                            @foreach(\App\Objects\DeviceObject::getActiveTypeMap() as $k => $v)
-                                                <option @if(is_numeric(Request::input('active')) && Request::input('active') == $k) selected @endif value="{{$k}}">{{$v}}</option>
-                                            @endforeach
-                                        </select>
-                                    @endif
-
+                                    <input class="w1 margintop" type="text" name="MstSn" value="{{Request::input('MstSn')}}" placeholder="MstSn">
+                                    <input class="w1 margintop" type="text" name="CiNum" value="{{Request::input('CiNum')}}" placeholder="CiNum">
+                                    <input class="w1 margintop" type="text" name="CPAct" value="{{Request::input('CPAct')}}" placeholder="CPAct">
                                     <input type="submit" class="btn btn-success margintop search" value="查询">
 
                                 </div>
@@ -75,7 +26,7 @@
 
                         </form>
                     </div>
-                </div>--}}
+                </div>
 
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>

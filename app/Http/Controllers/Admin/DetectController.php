@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Libs\MyPage;
 use App\Models\TTestpostLogAll;
+use Illuminate\Http\Request;
 
 class DetectController extends BaseController
 {
@@ -17,9 +18,12 @@ class DetectController extends BaseController
     /**
      * 工装检测列表
      */
-    public function factoryTestList()
+    public function factoryTestList(Request $request)
     {
-        $paginate = TTestpostLogAll::orderByDesc('id')->paginate();
+
+        $where = $request->input();
+
+        $paginate = TTestpostLogAll::where($where)->orderByDesc('id')->paginate();
         $datas = $paginate->items();
 
         /** @var TTestpostLogAll $v */
@@ -41,15 +45,6 @@ class DetectController extends BaseController
     }
 
     private $detectMap = [
-//        'Ctype' => [
-//            1 => '杭州安显（EB001）',
-//            2 => '表示高标（EB001?)',
-//            3 => '安显（EB001）：新协议、带一线通（GPS）输出',
-//            4 => '安显（EB001A）：新协议、带一线通（GPS）输出',
-//            5 => 'EB003：新思维一线通输入，标准安显一线通输入，输出一路一线通',
-//            6 => 'EB001B 闪骑/安骑',
-//            7 => 'EB001B西游',
-//        ],
         'Ctype' => [
             0 => '安骑',
             1 => '闪骑',
@@ -63,7 +58,6 @@ class DetectController extends BaseController
             5 => 'EB003：新思维一线通输入，标准安显一线通输入，输出一路一线通',
             6 => 'EB001B 闪骑/安骑',
             7 => 'EB001B西游'],
-//        'Btype' => [0 => 'MT2503AV', 1 => 'MT6261'],
         'OWCin' => [0 => '异常', 1 => '正常', 2 => '不支持'],
         'OWCout' => [0 => '异常', 1 => '正常', 2 => '不支持'],
         'I2C' => [0 => '异常', 1 => '正常', 2 => '不支持'],
