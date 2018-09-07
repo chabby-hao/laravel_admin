@@ -22,6 +22,11 @@ class DetectController extends BaseController
     {
 
         $where = $request->input();
+        foreach ($where as $key => $item){
+            if($item === '' || $item === null){
+                unset($where[$key]);
+            }
+        }
 
         $paginate = TTestpostLogAll::where($where)->orderByDesc('id')->paginate();
         $datas = $paginate->items();
