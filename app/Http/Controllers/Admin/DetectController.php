@@ -34,8 +34,6 @@ class DetectController extends BaseController
             }
         }
 
-        dd($datas);
-
         return view('admin.detect.factorytestlist', [
             'datas' => $datas,
             'page_nav' => MyPage::showPageNav($paginate),
