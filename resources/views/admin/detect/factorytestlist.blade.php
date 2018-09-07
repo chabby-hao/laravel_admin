@@ -90,6 +90,7 @@
                                 <th>CPAct</th>
                                 <th>CiNum</th>
                                 <th>时间</th>
+                                <th>核心板</th>
                                 <th>核心板版本</th>
                                 <th>imei</th>
                                 <th>底板通信</th>
