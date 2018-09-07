@@ -20,7 +20,7 @@ class DetectController extends BaseController
     public function factoryTestList()
     {
         $paginate = TTestpostLogAll::orderByDesc('id')->paginate();
-        $datas = $paginate->items();
+        $datas = $paginate->items()->toArray();
 
         /** @var TTestpostLogAll $v */
         foreach ($datas as $k => $v) {
