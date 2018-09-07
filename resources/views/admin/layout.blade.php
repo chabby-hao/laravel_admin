@@ -208,15 +208,25 @@
             </ul>
         </li>
 
-            {{--工具管理--}}
-            <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>Api管理</span>
-                </a>
-                <ul>
-                    @if(Auth::user()->can('api/channelKeyList'))
-                        <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyList')}}">渠道秘钥列表</a></li>
-                    @endif
-                </ul>
-            </li>
+        {{--工具管理--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>Api管理</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('api/channelKeyList'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyList')}}">渠道秘钥列表</a></li>
+                @endif
+            </ul>
+        </li>
+
+        {{--检测--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>检测管理</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('detect/factoryTestList'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\DetectController@factoryTestList')}}">工装检测日志</a></li>
+                @endif
+            </ul>
+        </li>
 
 
     </ul>
