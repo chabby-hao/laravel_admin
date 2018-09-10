@@ -81,7 +81,7 @@ class UpiotApi
         ];
         $promise = $client->postAsync($uri, $option);
 
-        var_dump($option);
+        echo json_encode($option) . "\n";
 
         $promise->then(
             function (ResponseInterface $res) use ($func) {
