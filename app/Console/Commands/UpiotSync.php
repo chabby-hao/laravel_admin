@@ -58,7 +58,7 @@ class UpiotSync extends BaseCommand
 
             $msisdns[] = $row->msisdn;
 
-            if(count($msisdns) <= 50){
+            if(count($msisdns) <= 49){
                 return [];
             }
 
