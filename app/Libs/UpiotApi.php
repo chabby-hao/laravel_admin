@@ -68,6 +68,40 @@ class UpiotApi
         }
     }
 
+    private function listSyncByDb($page = 1, $perPage = 100)
+    {
+        $uri = "/api/card/?page=$page&per_page=$perPage";
+        $client = $this->getClient();
+        $r = $client->get($uri);
+        $body = $r->getBody()->getContents();
+        $arr = json_decode($body, true);
+        if ($arr && $arr['code'] === 200) {
+            return $arr;
+        } else {
+            echo $body . "\n";
+            Log::error("upiot sync cardList error $uri " . $body);
+            return false;
+        }
+    }
+
+    public function cardListSyncByDb(callable $func, $page = 1, $perPage = 300)
+    {
+
+        do{
+            $ret = false;
+            $data = $this->listSyncByDb($page, $perPage);
+            if($data){
+                $func($data['data']);
+                if(++$page <= $data['num_pages']){
+                    $ret = true;
+                }
+            }
+            //1分钟20次
+            sleep(3);
+        }while($ret);
+
+    }
+
     private function listSync($bgCode, $page, $perPage)
     {
         $uri = "/api/card/?bg_code=$bgCode&page=$page&per_page=$perPage";

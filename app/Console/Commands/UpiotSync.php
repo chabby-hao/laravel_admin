@@ -32,6 +32,21 @@ class UpiotSync extends BaseCommand
 
     }
 
+    protected function cardListSyncByDb()
+    {
+        $upiot = new UpiotApi();
+        $upiot->cardListSyncByDb(function($data){
+
+            $this->getMaxCache();
+
+            foreach ($data as $row){
+                BiCardLiangxun::updateOrCreate([
+                    'imsi'=>$row['imsi'],
+                ],$row);
+            }
+        });
+    }
+
     protected function cardListSync()
     {
         $upiot = new UpiotApi();
