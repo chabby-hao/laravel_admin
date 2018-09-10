@@ -36,7 +36,6 @@ class BiCardLiangxun extends Eloquent
 {
 	protected $connection = 'bi';
 	protected $table = 'bi_card_liangxun';
-	public $timestamps = false;
 
 	protected $casts = [
 		'data_plan' => 'float',
