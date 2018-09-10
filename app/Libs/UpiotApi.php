@@ -68,38 +68,39 @@ class UpiotApi
         }
     }
 
-    private function listSyncByDb($page = 1, $perPage = 100)
+    public function cardListSyncByDb($msisdns, $date, callable $func)
     {
-        $uri = "/api/card/?page=$page&per_page=$perPage";
+
+        $uri = "/api/card/card_usage_info/";
         $client = $this->getClient();
-        $r = $client->get($uri);
-        $body = $r->getBody()->getContents();
-        $arr = json_decode($body, true);
-        if ($arr && $arr['code'] === 200) {
-            return $arr;
-        } else {
-            echo $body . "\n";
-            Log::error("upiot sync cardList error $uri " . $body);
-            return false;
-        }
-    }
+        $promise = $client->postAsync($uri, [
+            RequestOptions::JSON => [
+                'msisdns' => $msisdns,
+                'query_date' => $date,
+            ]
+        ]);
 
-    public function cardListSyncByDb(callable $func, $page = 1, $perPage = 300)
-    {
-
-        do{
-            $ret = false;
-            $data = $this->listSyncByDb($page, $perPage);
-            if($data){
-                $func($data['data']);
-                if(++$page <= $data['num_pages']){
-                    $ret = true;
+        $promise->then(
+            function (ResponseInterface $res) use ($func) {
+                $body = $res->getBody()->getContents();
+                echo $body . "\n";
+                $arr = json_decode($body, true);
+                if ($arr && $arr['code'] === 200) {
+                    $func($arr);
+                } else {
+                    Log::error('upiot get usagelog error ' . $body);
                 }
+            },
+            function (RequestException $e) {
+                echo $e->getMessage() . "\n";
+                echo $e->getRequest()->getMethod() ."\n";
             }
-            //1分钟20次
-            sleep(3);
-        }while($ret);
+        );
 
+        $this->promises[] = $promise;
+        //$promise->wait();
+
+        return $promise;
     }
 
     private function listSync($bgCode, $page, $perPage)

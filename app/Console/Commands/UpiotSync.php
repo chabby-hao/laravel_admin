@@ -36,17 +36,45 @@ class UpiotSync extends BaseCommand
 
     protected function cardListSyncByDb()
     {
-        $upiot = new UpiotApi();
-        $upiot->cardListSyncByDb(function($data){
+        $date = $this->option('date');
+        $date or $date = Carbon::today()->format('Ym');
+        var_dump($date);
 
-            $this->getMaxCache();
+        //已销号的查不出流量
+        $model = BiCardLiangxun::where('account_status','!=','04');
 
-            foreach ($data as $row){
-                BiCardLiangxun::updateOrCreate([
-                    'imsi'=>$row['imsi'],
-                ],$row);
+        $upiotApi = new UpiotApi();
+
+        $msisdns = [];
+        $call = function($data){
+            if($data['data']){
+                foreach ($data['data'] as $item){
+                    BiCardLiangxun::updateOrCreate([
+                        'imsi'=>$item['imsi'],
+                    ],$item);
+                }
             }
+        };
+        $this->batchSearch($model, function (BiCardLiangxun $row) use ($upiotApi, &$msisdns, $date, $call) {
+
+            $msisdns[] = $row->msisdn;
+
+            if(count($msisdns) <= 50){
+                return [];
+            }
+
+            //异步获取
+            $upiotApi->cardListSyncByDb($msisdns, $date, $call);
+            if($upiotApi->promiseCount() >= 20){
+                $upiotApi->clearPromise();
+            }
+            $msisdns = [];
+            sleep(3);
+            return [];
         });
+        //异步获取
+        $upiotApi->cardListSyncByDb($msisdns, $date, $call);
+        $upiotApi->clearPromise();
     }
 
     protected function cardListSync()
