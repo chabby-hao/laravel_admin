@@ -48,6 +48,7 @@ class UpiotSync extends BaseCommand
         $call = function($data){
             if($data['data']){
                 foreach ($data['data'] as $item){
+                    unset($item['carrier']);
                     BiCardLiangxun::updateOrCreate([
                         'imsi'=>$item['imsi'],
                     ],$item);
