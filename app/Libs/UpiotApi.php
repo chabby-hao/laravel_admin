@@ -80,6 +80,8 @@ class UpiotApi
             ]
         ]);
 
+        var_dump('cardListSyncByDb:------' . $date);
+
         $promise->then(
             function (ResponseInterface $res) use ($func) {
                 $body = $res->getBody()->getContents();

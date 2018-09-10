@@ -36,8 +36,7 @@ class UpiotSync extends BaseCommand
 
     protected function cardListSyncByDb()
     {
-        $date = $this->option('date');
-        $date or $date = Carbon::today()->format('Ym');
+        $date = Carbon::today()->format('Ym');
         var_dump($date);
 
         //已销号的查不出流量
