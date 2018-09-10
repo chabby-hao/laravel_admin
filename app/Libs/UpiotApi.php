@@ -71,12 +71,12 @@ class UpiotApi
     public function cardListSyncByDb($msisdns, $date, callable $func)
     {
 
-        $uri = "/api/card/card_usage_info/";
+        $uri = "/api/card_usage_info/";
         $client = $this->getClient();
         $promise = $client->postAsync($uri, [
             RequestOptions::JSON => [
                 'msisdns' => $msisdns,
-                'query_date' => $date,
+                'month' => $date,
             ]
         ]);
 
