@@ -73,14 +73,15 @@ class UpiotApi
 
         $uri = "/api/card_usage_info/";
         $client = $this->getClient();
-        $promise = $client->postAsync($uri, [
+        $option = [
             RequestOptions::JSON => [
                 'msisdns' => $msisdns,
                 'month' => $date,
             ]
-        ]);
+        ];
+        $promise = $client->postAsync($uri, $option);
 
-        var_dump('cardListSyncByDb:------' . $date);
+        var_dump($option);
 
         $promise->then(
             function (ResponseInterface $res) use ($func) {
