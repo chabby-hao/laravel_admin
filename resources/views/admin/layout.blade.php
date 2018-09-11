@@ -208,6 +208,9 @@
                 @if(Auth::user()->can('tool/userDeviceDel'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceDel')}}">设备用户清空</a></li>
                 @endif
+                @if(Auth::user()->can('tool/userDeviceAdd'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceAdd')}}">设备用户添加</a></li>
+                @endif
             </ul>
         </li>
 
