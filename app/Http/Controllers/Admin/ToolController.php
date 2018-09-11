@@ -19,6 +19,7 @@ use App\Models\BiFile;
 use App\Models\BiUser;
 use App\Models\Role;
 use App\Models\TDeviceCode;
+use App\Models\TUserDevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -305,7 +306,7 @@ class ToolController extends BaseController
                     DeviceLogic::resetDevice($imei);
                 }
                 if($input['battery_type']){
-                    RedisLogic::hSet('battery_type', $imei, $input['battery_type']);
+                    RedisLogic::hSet('battery_type', $imei, $input['battery_type'], 1);
                 }
             }
 
@@ -329,6 +330,22 @@ class ToolController extends BaseController
         }
 
         return view('admin.tool.cmdsend');
+    }
+
+    public function userDeviceDel(Request $request)
+    {
+
+        if($request->isXmlHttpRequest()){
+            if(!$udid = $this->getUdid($this->getId($request))){
+                return $this->outPutError('设备码有误');
+            }
+
+            TUserDevice::whereUdid($udid)->delete();
+
+            return $this->outPutSuccess();
+        }
+
+        return view('admin.tool.userdevicedel');
     }
 
 }
