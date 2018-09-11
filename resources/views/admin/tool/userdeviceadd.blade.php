@@ -34,7 +34,7 @@
                                             <option value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
-                                    <span class="help-block text-danger">注：如果选择管理员并且设备已绑定管理员，则会替换掉原有的管理员</span>
+                                    <span class="help-block text-error">注：如果选择管理员并且设备已绑定管理员，则新号码会替换掉原有的管理员</span>
                                 </div>
                             </div>
 
