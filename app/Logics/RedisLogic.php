@@ -180,8 +180,13 @@ class RedisLogic extends BaseLogic
         return self::lPush(self::REDIS_LIST_KEY_PRE . ($listNumber - 1), $val);
     }
 
-    public static function hSet($key, $hashKey, $value)
+    public static function hSet($key, $hashKey, $value, $db = null)
     {
+
+        if($db !== null){
+            self::getRedis()->select($db);
+        }
+
         Log::info("redis hset $key $hashKey $value");
         $res = self::getRedis()->hSet($key, $hashKey, $value);
         if ($res !== false) {
