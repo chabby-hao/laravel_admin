@@ -374,7 +374,7 @@ class ToolController extends BaseController
             return $this->outPutSuccess();
         }
 
-        return view('admin.tool.userdevicedel');
+        return view('admin.tool.userdeviceadd');
     }
 
 }
