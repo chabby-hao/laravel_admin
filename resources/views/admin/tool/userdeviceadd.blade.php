@@ -31,7 +31,7 @@
                                     <select name="owner">
                                         <option value="">请选择</option>
                                         @foreach(\App\Models\TUserDevice::getUserTypeMap() as $k=>$v)
-                                            <option value="{{$k}}">$v</option>
+                                            <option value="{{$k}}">{{$v}}</option>
                                         @endforeach
                                     </select>
                                 </div>

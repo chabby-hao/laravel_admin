@@ -206,10 +206,10 @@
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@cmdSend')}}">命令调试</a></li>
                 @endif
                 @if(Auth::user()->can('tool/userDeviceDel'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceDel')}}">设备用户清空</a></li>
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceDel')}}">设备清空用户</a></li>
                 @endif
                 @if(Auth::user()->can('tool/userDeviceAdd'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceAdd')}}">设备用户添加</a></li>
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceAdd')}}">设备添加用户</a></li>
                 @endif
             </ul>
         </li>
