@@ -205,6 +205,9 @@
                 @if(Auth::user()->can('tool/cmdSend'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@cmdSend')}}">命令调试</a></li>
                 @endif
+                @if(Auth::user()->can('tool/userDeviceDel'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceDel')}}">设备用户清空</a></li>
+                @endif
             </ul>
         </li>
 
