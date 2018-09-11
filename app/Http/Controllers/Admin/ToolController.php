@@ -15,6 +15,7 @@ use App\Logics\AuthLogic;
 use App\Logics\CommandLogic;
 use App\Logics\DeviceLogic;
 use App\Logics\RedisLogic;
+use App\Logics\UserLogic;
 use App\Models\BiFile;
 use App\Models\BiUser;
 use App\Models\Role;
@@ -341,6 +342,34 @@ class ToolController extends BaseController
             }
 
             TUserDevice::whereUdid($udid)->delete();
+
+            return $this->outPutSuccess();
+        }
+
+        return view('admin.tool.userdevicedel');
+    }
+
+    public function userDeviceAdd(Request $request)
+    {
+
+        if($request->isXmlHttpRequest()){
+            if(!$udid = $this->getUdid($this->getId($request))){
+                return $this->outPutError('设备码有误');
+            }
+
+            $input = $this->checkParams(['phone','owner'], $request->input());
+
+            if($uid = UserLogic::getUidByPhone($input['phone'])){
+                return $this->outPutError('用户不存在');
+            }
+
+            TUserDevice::updateOrCreate([
+                'uid'=>$uid,
+                'udid'=>$udid,
+            ],[
+                'owner'=>$input['owner'],
+                'type'=>0,
+            ]);
 
             return $this->outPutSuccess();
         }

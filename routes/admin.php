@@ -99,6 +99,7 @@ Route::any('/tool/imsiRepeat','Admin\ToolController@imsiRepeat');
 Route::any('/tool/deviceToChannel','Admin\ToolController@deviceToChannel');
 Route::any('/tool/cmdSend','Admin\ToolController@cmdSend');
 Route::any('/tool/userDeviceDel','Admin\ToolController@userDeviceDel');
+Route::any('/tool/userDeviceAdd','Admin\ToolController@userDeviceAdd');
 
 
 Route::get('/breakRule/list','Admin\BreakRuleController@list');

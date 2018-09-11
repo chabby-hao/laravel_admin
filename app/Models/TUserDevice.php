@@ -27,7 +27,12 @@ namespace App\Models;
  */
 class TUserDevice extends \App\Models\Base\TUserDevice
 {
-	protected $fillable = [
+
+    const USER_TYPE_OWNER = 0;
+    const USER_TYPE_WATCHER = 1;
+    const USER_TYPE_LOOKER = 3;
+
+    protected $fillable = [
 		'uid',
 		'udid',
 		'state',
@@ -37,4 +42,16 @@ class TUserDevice extends \App\Models\Base\TUserDevice
 		'isshow',
 		'time'
 	];
+
+    public static function getUserTypeMap($type = null)
+    {
+        $map = [
+            self::USER_TYPE_OWNER => '管理员',
+            self::USER_TYPE_WATCHER => '关注者',
+            self::USER_TYPE_LOOKER => '旁观者',
+        ];
+        return $type === null ? $map : $map[$type];
+    }
+
+
 }

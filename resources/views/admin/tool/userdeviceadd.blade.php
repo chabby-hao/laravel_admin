@@ -10,7 +10,7 @@
                     <div class="widget-content">
                         <form id="myform" method="post" class="form-horizontal">
 
-                            <div class="control-group single">
+                            <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>设备码 :</label>
                                 <div class="controls">
                                     <input name="id" value="" type="text" class="span11"/>
@@ -18,10 +18,29 @@
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>手机号 :</label>
+                                <div class="controls">
+                                    <input name="phone" value="" type="text" class="span11"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>类型 :</label>
+                                <div class="controls">
+                                    <select name="owner">
+                                        <option value="">请选择</option>
+                                        @foreach(\App\Models\TUserDevice::getUserTypeMap() as $k=>$v)
+                                            <option value="{{$k}}">$v</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>
-                            <div class="help-block">本次操作会清空设备所关联的所有用户</div>
                         </form>
                     </div>
                 </div>
