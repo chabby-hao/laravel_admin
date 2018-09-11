@@ -359,7 +359,7 @@ class ToolController extends BaseController
 
             $input = $this->checkParams(['phone','owner'], $request->input());
 
-            if($uid = UserLogic::getUidByPhone($input['phone'])){
+            if(!$uid = UserLogic::getUidByPhone($input['phone'])){
                 return $this->outPutError('用户不存在');
             }
 
