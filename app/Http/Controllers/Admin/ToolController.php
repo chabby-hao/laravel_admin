@@ -363,10 +363,9 @@ class ToolController extends BaseController
                 return $this->outPutError('用户不存在');
             }
 
-            if($input['owner']){
-
+            if($input['owner'] == TUserDevice::USER_TYPE_OWNER){
+                TUserDevice::whereUdid($udid)->whereOwner(TUserDevice::USER_TYPE_OWNER)->delete();
             }
-
 
             TUserDevice::updateOrCreate([
                 'uid'=>$uid,
