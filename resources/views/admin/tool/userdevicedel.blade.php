@@ -21,7 +21,7 @@
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
                             </div>
-                            <span class="help-block">本次操作会清除设备所关联的所有用户</span>
+                            <div class="help-block">本次操作会清除设备所关联的所有用户</div>
                         </form>
                     </div>
                 </div>
