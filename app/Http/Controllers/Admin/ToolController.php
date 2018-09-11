@@ -363,6 +363,11 @@ class ToolController extends BaseController
                 return $this->outPutError('用户不存在');
             }
 
+            if($input['owner']){
+
+            }
+
+
             TUserDevice::updateOrCreate([
                 'uid'=>$uid,
                 'udid'=>$udid,
