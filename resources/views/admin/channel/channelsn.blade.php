@@ -14,7 +14,7 @@
                                 <label class="control-label">已绑定工装号:</label>
                                 <div class="controls">
                                     @foreach($rs as $row)
-                                        <span class="btn btn-mini">{{$row->sn}}</span>
+                                        <span class="btn btn-mini">{{$row->sn}}</span><br/>
                                     @endforeach
                                 </div>
                             </div>
