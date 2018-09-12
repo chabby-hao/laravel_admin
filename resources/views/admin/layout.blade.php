@@ -234,6 +234,16 @@
             </ul>
         </li>
 
+        {{--检测--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>渠道管理</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('channel/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ChannelController@list')}}">渠道列表</a></li>
+                @endif
+            </ul>
+        </li>
+
 
     </ul>
 </div>
