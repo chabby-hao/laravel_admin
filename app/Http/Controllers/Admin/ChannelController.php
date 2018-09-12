@@ -32,7 +32,7 @@ class ChannelController extends BaseController
         $paginates = BiChannel::orderByDesc('id')->paginate();
         $data = $paginates->items();
 
-        return view('admin.api.channelkeylist', [
+        return view('admin.channel.list', [
             'datas' => $data,
             'page_nav' => MyPage::showPageNav($paginates),
         ]);
