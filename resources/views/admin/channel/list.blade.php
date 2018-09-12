@@ -4,10 +4,6 @@
         <hr>
 
         <div class="row-fluid">
-            {{--<span class="pull-right marginright"><a href="<?php echo \Illuminate\Support\Facades\URL::action('Admin\ApiController@channelKeyAdd'); ?>" class="btn btn-success">添加新渠道秘钥</a></span>--}}
-        </div>
-
-        <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"><i class="icon-th"></i></span>
