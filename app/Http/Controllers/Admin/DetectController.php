@@ -39,7 +39,7 @@ class DetectController extends BaseController
             //全部
 
         }else{
-            $model->where('1','=','0');
+            $model->whereId(0);
         }
 
         $paginate = $model->orderByDesc('id')->paginate();
