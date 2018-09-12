@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 27 Aug 2018 16:44:42 +0800.
+ * Date: Wed, 12 Sep 2018 16:14:56 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiUser
- * 
+ *
  * @property int $id
  * @property string $username
  * @property string $password
@@ -24,10 +24,21 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $email
  * @property string $remember_token
  * @property string $nickname
- * 
  * @property \Illuminate\Database\Eloquent\Collection $role_users
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereLastIp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereLoginAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereNickname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereUserType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiUser whereUsername($value)
+ * @mixin \Eloquent
  */
 class BiUser extends Eloquent
 {

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 27 Aug 2018 16:44:42 +0800.
+ * Date: Wed, 12 Sep 2018 16:14:56 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,12 +11,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiProvince
- * 
+ *
  * @property int $id
  * @property string $province
  * @property string $short_name
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiProvince whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiProvince whereProvince($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiProvince whereShortName($value)
+ * @mixin \Eloquent
  */
 class BiProvince extends Eloquent
 {

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 27 Aug 2018 16:44:42 +0800.
+ * Date: Wed, 12 Sep 2018 16:14:56 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Job
- * 
+ *
  * @property int $id
  * @property string $queue
  * @property string $payload
@@ -19,8 +19,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $reserved_at
  * @property int $available_at
  * @property int $created_at
- *
  * @package App\Models\Base
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereAttempts($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereAvailableAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job wherePayload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereQueue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\Job whereReservedAt($value)
+ * @mixin \Eloquent
  */
 class Job extends Eloquent
 {
