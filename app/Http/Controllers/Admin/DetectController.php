@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Libs\MyPage;
+use App\Models\BiChannelSn;
 use App\Models\TTestpostLogAll;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,19 @@ class DetectController extends BaseController
         }
         unset($where['page']);
 
-        $paginate = TTestpostLogAll::where($where)->orderByDesc('id')->paginate();
+        $model = TTestpostLogAll::where($where);
+
+        $userWhere = $this->getWhere();
+        if($userWhere && $userWhere['channel_id']){
+            $model->whereIn('mstsn', BiChannelSn::getSnsByChannelId($userWhere['channel_id']));
+        }elseif (!$userWhere){
+            //全部
+
+        }else{
+            $model->where('1','=','0');
+        }
+
+        $paginate = $model->orderByDesc('id')->paginate();
         $datas = $paginate->items();
 
         /** @var TTestpostLogAll $v */

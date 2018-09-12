@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use App\Libs\Helper;
 
 /**
  * App\Models\BiChannelSn
@@ -23,4 +24,11 @@ class BiChannelSn extends \App\Models\Base\BiChannelSn
 		'channel_id',
 		'sn'
 	];
+
+	public static function getSnsByChannelId($channelId)
+    {
+        $rs = self::whereChannelId($channelId)->get()->toArray();
+        return Helper::transToOneDimensionalArray($rs, 'sn');
+    }
+
 }
