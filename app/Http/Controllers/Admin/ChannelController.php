@@ -44,9 +44,8 @@ class ChannelController extends BaseController
     public function channelSn(Request $request)
     {
         $id = $this->getId($request);
-        $rs = BiChannelSn::whereChannelId($id);
+        $rs = BiChannelSn::whereChannelId($id)->get();
 
-        dd($rs);
 
         if($request->isXmlHttpRequest()){
             $sn = $this->checkParams(['sn'], $request->input())['sn'];
