@@ -27,7 +27,7 @@
                                     <td>{{$data->channel_name}}</td>
                                     <td>{{$data->channel_remark}}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="">工装号配置</a>
+                                        <a class="btn btn-warning" href="{{URL::action('Admin\ChannelController@channelSn',['id'=>$data->id])}}">工装号配置</a>
                                     </td>
                                 </tr>
                             @endforeach
