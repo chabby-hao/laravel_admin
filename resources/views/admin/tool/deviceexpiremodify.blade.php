@@ -44,7 +44,7 @@
             format: "yyyy-mm-dd",
             language: "zh-CN",
             // startDate: '+0d',
-            startView: 1,
+            startView: 0,
             // todayHighlight: true,
         });
     </script>
