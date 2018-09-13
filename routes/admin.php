@@ -88,6 +88,7 @@ Route::any('/brand/detail','Admin\BrandController@detail');
 
 Route::any('/channel/detail','Admin\ChannelController@detail');
 Route::any('/channel/list','Admin\ChannelController@list');
+Route::any('/channel/add','Admin\ChannelController@add');
 Route::any('/channel/channelSn','Admin\ChannelController@channelSn');
 
 Route::any('/customer/detail','Admin\CustomerController@detail');
