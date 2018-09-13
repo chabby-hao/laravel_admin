@@ -13,7 +13,7 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>设备码 :</label>
                                 <div class="controls">
-                                    <input name="id" value="" type="text" class="span4"/>
+                                    <input name="id" value="" type="text" class="span11"/>
                                     <span class="help-block">可输入：设备码/IMEI/IMSI/张飞ID/得威Id</span>
                                 </div>
                             </div>
@@ -21,7 +21,7 @@
                             <div class="control-group">
                                 <label class="control-label"><span class="text-error">*</span>手机号 :</label>
                                 <div class="controls">
-                                    <input name="phone" value="" type="text" class="span4"/>
+                                    <input name="phone" value="" type="text" class="span11"/>
                                 </div>
                             </div>
 
