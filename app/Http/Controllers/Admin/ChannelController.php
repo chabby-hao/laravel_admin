@@ -55,6 +55,7 @@ class ChannelController extends BaseController
             $dicNewModel->level = 3;
             $dicNewModel->name = $input['channel_name'];
             $dicNewModel->remark = $input['channel_remark'] ?: '';
+            $dicNewModel->save();
 
 
             return $this->outputRedirectWithMsg(URL::action('Admin\ChannelController@list'), '渠道添加成功');
