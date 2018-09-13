@@ -170,7 +170,7 @@ class BaseController extends Controller
         return $this->outPut(['msg'=>$msg]);
     }
 
-    protected function outPutError($msg = 'error', array $data = [], $die = true)
+    protected function outPutError($msg = '输入错误', array $data = [], $die = true)
     {
         if (!isset($data['code'])) {
             $data['code'] = 500;
@@ -180,7 +180,7 @@ class BaseController extends Controller
         //die(json_encode($data));
     }
 
-    protected function outputErrorWithDie($msg = 'error', array $data = [])
+    protected function outputErrorWithDie($msg = '输入错误', array $data = [])
     {
         return $this->outPutError($msg, $data, true);
     }
