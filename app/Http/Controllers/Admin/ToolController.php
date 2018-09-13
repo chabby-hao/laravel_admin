@@ -393,6 +393,7 @@ class ToolController extends BaseController
             if(!$model = TPayment::whereUdid($udid)->first()){
                 return $this->outPutError('设备未激活');
             }
+            $model = TPayment::whereUdid($udid)->first();
 
             $date = $this->checkParams(['date'], $request->input())['date'];
             $time = Carbon::parse($date)->getTimestamp();
