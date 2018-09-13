@@ -20,7 +20,9 @@ use App\Models\BiFile;
 use App\Models\BiUser;
 use App\Models\Role;
 use App\Models\TDeviceCode;
+use App\Models\TPayment;
 use App\Models\TUserDevice;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -379,6 +381,28 @@ class ToolController extends BaseController
         }
 
         return view('admin.tool.userdeviceadd');
+    }
+
+    public function deviceExpireModify(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            if(!$udid = $this->getUdid($this->getId($request))){
+                return $this->outPutError('设备码有误');
+            }
+
+            if(!$model = TPayment::whereUdid($udid)->first()){
+                return $this->outPutError('设备未激活');
+            }
+
+            $date = $this->checkParams(['date'], $request->input())['date'];
+            $time = Carbon::parse($date)->getTimestamp();
+            $model->expire($time);
+            $model->save();
+
+            return $this->outPutSuccess();
+        }
+
+        return view('admin.tool.deviceexpiremodify');
     }
 
 }

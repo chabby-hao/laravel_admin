@@ -211,6 +211,9 @@
                 @if(Auth::user()->can('tool/userDeviceAdd'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@userDeviceAdd')}}">设备添加用户</a></li>
                 @endif
+                @if(Auth::user()->can('tool/deviceExpireModify'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@deviceExpireModify')}}">设备有效期修改</a></li>
+                @endif
             </ul>
         </li>
 
