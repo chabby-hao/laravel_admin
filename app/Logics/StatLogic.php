@@ -150,5 +150,16 @@ class StatLogic extends BaseLogic
         return Cache::store('redis')->get('trip_frequency_distribution:' . $keypre . $id);
     }
 
+    public static function setBatteryQuantities($data, $keypre, $id = 0)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        Cache::store('redis')->put('batteryQuantities:' . $keypre . $id, $data, $cacheTime);
+    }
+
+    public static function getBatteryQuantities($keypre, $id = 0)
+    {
+        return Cache::store('redis')->get('batteryQuantities:' . $keypre . $id);
+    }
+
 
 }

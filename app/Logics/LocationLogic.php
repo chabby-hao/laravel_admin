@@ -42,7 +42,7 @@ class LocationLogic extends BaseLogic
         return $ret;
     }
 
-    private static function getLocationsOldFromDb($udid, $date)
+    /*private static function getLocationsOldFromDb($udid, $date)
     {
         $ret = [];
 
@@ -60,9 +60,9 @@ class LocationLogic extends BaseLogic
             $ret[] = $location;
         }
         return $ret;
-    }
+    }*/
 
-    private static function getLocationOldListFromDb($udid, $beginTime, $endTime)
+    /*private static function getLocationOldListFromDb($udid, $beginTime, $endTime)
     {
         $ret = [];
 
@@ -82,21 +82,14 @@ class LocationLogic extends BaseLogic
             $ret[] = $location;
         }
         return $ret;
-    }
+    }*/
 
-    public static function getLocationHistoryFromDb($udid, $date)
+    /*public static function getLocationHistoryFromDb($udid, $date)
     {
         $begin = strtotime($date . ' 00:00:00');
         $end = strtotime($date . ' 23:59:59');
         return self::getLocationsNewFromDb($udid, $begin, $end);
-        /*if (DeviceLogic::isEb001b($udid) || $date > '20170927') {
-            $begin = strtotime($date . ' 00:00:00');
-            $end = strtotime($date . ' 23:59:59');
-            return self::getLocationsNewFromDb($udid, $begin, $end);
-        } else {
-            return self::getLocationsOldFromDb($udid, $date);
-        }*/
-    }
+    }*/
 
     public static function getLocationListFromDb($udid, $beginTime, $endTime)
     {
@@ -108,7 +101,7 @@ class LocationLogic extends BaseLogic
         }*/
     }
 
-    public static function getLocationListByDate($udid, $date)
+    /*public static function getLocationListByDate($udid, $date)
     {
 
         $imei = DeviceLogic::getImei($udid);
@@ -135,9 +128,9 @@ class LocationLogic extends BaseLogic
         }
 
         return $ret;
-    }
+    }*/
 
-    public static function getLocationList($udid, $time, $endTime = null)
+    /*public static function getLocationList($udid, $time, $endTime = null)
     {
         $ret = array();
 
@@ -169,6 +162,6 @@ class LocationLogic extends BaseLogic
 
         return $ret;
         //return $this->filterLocation($ret);
-    }
+    }*/
 
 }

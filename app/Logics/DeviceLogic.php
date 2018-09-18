@@ -816,6 +816,10 @@ class DeviceLogic extends BaseLogic
         return self::getBatteryCount($imei);
     }
 
+    /**
+     * @param $imei
+     * @return float|int
+     */
     public static function getBattery($imei)
     {
         $data = RedisLogic::getDevDataByImei($imei);
