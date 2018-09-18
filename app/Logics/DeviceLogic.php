@@ -775,6 +775,11 @@ class DeviceLogic extends BaseLogic
             //众星用36V的车
             return 3;
         }
+        $cutomerId = self::getCustomerIdByUdid(self::getUdid($imei));
+        if($cutomerId == 121){
+            //苏州企鹊全部36V车
+            return 3;
+        }
 
         $vmax = self::getMaxVoltage($imei);
 
