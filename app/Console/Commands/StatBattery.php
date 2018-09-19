@@ -165,27 +165,27 @@ class StatBattery extends BaseCommand
                 [
                     'name'=>'欠压',
                     'value'=>$low,
-                    'zb'=>round($low/$total),
+                    'zb'=>number_format($low/$total, 2),
                 ],
                 [
                     'name'=>'低电量',
                     'value'=>$lowPower,
-                    'zb'=>round($lowPower/$total),
+                    'zb'=> number_format($lowPower/$total,2),
                 ],
                 [
                     'name'=>'充电中',
                     'value'=>$charging,
-                    'zb'=>round($charging/$total),
+                    'zb'=> number_format($charging/$total,2),
                 ],
                 [
                     'name'=>'使用中',
                     'value'=>$using,
-                    'zb'=>round($using/$total),
+                    'zb'=> number_format($using/$total,2),
                 ],
                 [
                     'name'=>'过冲保护',
                     'value'=>$high,
-                    'zb'=>round($high/$total),
+                    'zb'=> number_format($high/$total,2),
                 ],
             ];
         }
@@ -233,27 +233,27 @@ class StatBattery extends BaseCommand
                 [
                     'name' => '<5%',
                     'value' => $bat05,
-                    'zb' => round($bat05/$total),
+                    'zb' => number_format($bat05/$total,2),
                 ],
                 [
                     'name' => '5%-25',
                     'value' => $bat0525,
-                    'zb' => round($bat0525/$total),
+                    'zb' => number_format($bat0525/$total,2),
                 ],
                 [
                     'name' => '25%-50%',
                     'value' => $bat2550,
-                    'zb' => round($bat2550/$total),
+                    'zb' => number_format($bat2550/$total,2),
                 ],
                 [
                     'name' => '50%-75%',
                     'value' => $bat5075,
-                    'zb' => round($bat5075/$total),
+                    'zb' => number_format($bat5075/$total,2),
                 ],
                 [
                     'name' => '>75%',
                     'value' => $bat75,
-                    'zb' => round($bat75/$total),
+                    'zb' => number_format($bat75/$total,2),
                 ],
             ];
         }
