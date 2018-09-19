@@ -156,10 +156,81 @@ class StatLogic extends BaseLogic
         Cache::store('redis')->put('batteryQuantities:' . $keypre . $id, $data, $cacheTime);
     }
 
+    /**
+     * 运行电池数量
+     * @param $keypre
+     * @param int $id
+     * @return mixed
+     */
     public static function getBatteryQuantities($keypre, $id = 0)
     {
         return Cache::store('redis')->get('batteryQuantities:' . $keypre . $id);
     }
+
+    public static function setChargeTimes($data, $keypre, $id=0)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        Cache::store('redis')->put('chargeTime:' . $keypre . $id, $data, $cacheTime);
+    }
+
+    /**
+     * 充电次数
+     * @param $kerpre
+     * @param int $id
+     */
+    public static function getChargeTimes($keypre, $id =0)
+    {
+        return Cache::store('redis')->get('chargeTime:' . $keypre . $id);
+    }
+
+    public static function setBatteryStateDistribution($data, $keypre, $id = 0)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        Cache::store('redis')->put('batteryStateDistribution:' . $keypre . $id, $data, $cacheTime);
+    }
+
+    /**
+     * 电池状态分布
+     * @param $keypre
+     * @param int $id
+     */
+    public static function getBatteryStateDistribution($keypre, $id = 0)
+    {
+        return Cache::store('redis')->get('batteryStateDistribution:' . $keypre . $id);
+    }
+
+    public static function setRemainElectricity($data, $keypre, $id=0)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        Cache::store('redis')->put('remainElectricity:' . $keypre . $id, $data, $cacheTime);
+    }
+
+    /**
+     * 剩余电量
+     * @param $keypre
+     * @param int $id
+     */
+    public static function getRemainElectricity($keypre, $id=0)
+    {
+        return Cache::store('redis')->get('remainElectricity:' . $keypre . $id);
+    }
+
+    public static function setBatteryUsingTimeDistribution($data, $keypre, $id =0)
+    {
+        $cacheTime = Carbon::now()->addDay();
+        Cache::store('redis')->put('batteryUsingTimeDistribution:' . $keypre . $id, $data, $cacheTime);
+    }
+
+    /**
+     * 电池使用时间分布
+     * @param $keypre
+     * @param int $id
+     */
+    public static function getBatteryUsingTimeDistribution($keypre, $id = 0)
+    {
+        return Cache::store('redis')->get('batteryUsingTimeDistribution:' . $keypre . $id);
+    }
+
 
 
 }

@@ -73,6 +73,17 @@ class StatDevice extends BaseCommand
             //七日活跃曲线图
             $this->batteryQuantities($where, $id, $keyPre);
 
+            //运行电池数量
+            $this->chargeTimes($where, $id, $keyPre);
+
+            //电池状态分布
+            $this->batteryStateDistribution($where, $id, $keyPre);
+
+            //剩余电量
+            $this->remainElectricity($where, $id, $keyPre);
+
+            //电池使用时间分布
+            $this->batteryUsingTimeDistribution($where, $id, $keyPre);
 
         }
 
@@ -93,6 +104,8 @@ class StatDevice extends BaseCommand
     private function chargeTimes($where, $id, $keyPre)
     {
         $count = TDeviceCode::join('t_ev_charge','qr','=','udid')->where($where)->count();
+
+        StatLogic::setChargeTimes($count, $keyPre, $id);
 
     }
 
@@ -166,9 +179,7 @@ class StatDevice extends BaseCommand
             ],
         ];
 
-        $rs;
-
-
+        StatLogic::setBatteryStateDistribution($rs,$kerPre, $id);
 
     }
 
@@ -230,7 +241,7 @@ class StatDevice extends BaseCommand
             ],
         ];
 
-        $rs;
+        StatLogic::setRemainElectricity($rs, $keyPre, $id);
     }
 
     /**
@@ -282,7 +293,7 @@ class StatDevice extends BaseCommand
             ],
         ];
 
-        $rs;
+        StatLogic::setBatteryUsingTimeDistribution($rs, $keyPre, $id);
 
     }
 
