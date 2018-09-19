@@ -95,6 +95,9 @@ class StatBattery extends BaseCommand
     private function batteryQuantities($where, $id, $keyPre)
     {
         $count = TDeviceCode::where($where)->count();
+
+        dump($count);
+
         StatLogic::setBatteryQuantities($count, $keyPre, $id);
     }
 
@@ -104,6 +107,8 @@ class StatBattery extends BaseCommand
     private function chargeTimes($where, $id, $keyPre)
     {
         $count = TDeviceCode::join('t_ev_charge','qr','=','udid')->where($where)->count();
+
+        dump($count);
 
         StatLogic::setChargeTimes($count, $keyPre, $id);
 
@@ -179,6 +184,8 @@ class StatBattery extends BaseCommand
             ],
         ];
 
+        dump($rs);
+
         StatLogic::setBatteryStateDistribution($rs,$kerPre, $id);
 
     }
@@ -241,6 +248,8 @@ class StatBattery extends BaseCommand
             ],
         ];
 
+        dump($rs);
+
         StatLogic::setRemainElectricity($rs, $keyPre, $id);
     }
 
@@ -292,6 +301,8 @@ class StatBattery extends BaseCommand
                 'zb'=>ceil($coutMonth24/$total),
             ],
         ];
+
+        dump($rs);
 
         StatLogic::setBatteryUsingTimeDistribution($rs, $keyPre, $id);
 
