@@ -96,7 +96,7 @@ class StatBattery extends BaseCommand
     {
         $count = TDeviceCode::where($where)->count();
 
-        dump($count);
+        dump($where, $count);
 
         StatLogic::setBatteryQuantities($count, $keyPre, $id);
     }
