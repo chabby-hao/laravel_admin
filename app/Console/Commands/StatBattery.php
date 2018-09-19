@@ -119,6 +119,7 @@ class StatBattery extends BaseCommand
      */
     private function batteryStateDistribution($where, $id, $kerPre)
     {
+        $where[] = ['device_cycle','>',0];
         $model = TDeviceCode::where($where);
         $low = 0;//欠压
         $high = 0;//过冲保护
@@ -200,6 +201,7 @@ class StatBattery extends BaseCommand
      */
     private function remainElectricity($where, $id, $keyPre)
     {
+        $where[] = ['device_cycle','>',0];
         $model = TDeviceCode::where($where);
         $bat05 = 0;//小于5
         $bat0525 = 0;//5-25
@@ -208,18 +210,16 @@ class StatBattery extends BaseCommand
         $bat75 = 0;//大于75
         $this->batchSearch($model, function (TDeviceCode $deviceCode) use (&$bat05, &$bat0525, &$bat2550, &$bat5075, &$bat75) {
             $imei = $deviceCode->imei;
-            if (RedisLogic::getDevDataByImei($imei)) {
-                $battery = DeviceLogic::getBattery($imei);
-                dump($battery);
-                if ($battery > 75) {
-                    ++$bat75;
-                } elseif ($battery > 50) {
-                    ++$bat5075;
-                } elseif ($battery > 25) {
-                    ++$bat0525;
-                } else {
-                    ++$bat05;
-                }
+            $battery = DeviceLogic::getBattery($imei);
+            dump($battery);
+            if ($battery > 75) {
+                ++$bat75;
+            } elseif ($battery > 50) {
+                ++$bat5075;
+            } elseif ($battery > 25) {
+                ++$bat0525;
+            } else {
+                ++$bat05;
             }
             DeviceLogic::clear();
         });
