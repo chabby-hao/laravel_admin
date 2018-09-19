@@ -157,33 +157,37 @@ class StatBattery extends BaseCommand
 
         $total = $low + $high + $lowPower + $charging + $using;
 
-        $rs = [
-            [
-                'name'=>'欠压',
-                'value'=>$low,
-                'zb'=>round($low/$total),
-            ],
-            [
-                'name'=>'低电量',
-                'value'=>$lowPower,
-                'zb'=>round($lowPower/$total),
-            ],
-            [
-                'name'=>'充电中',
-                'value'=>$charging,
-                'zb'=>round($charging/$total),
-            ],
-            [
-                'name'=>'使用中',
-                'value'=>$using,
-                'zb'=>round($using/$total),
-            ],
-            [
-                'name'=>'过冲保护',
-                'value'=>$high,
-                'zb'=>round($high/$total),
-            ],
-        ];
+        if($total === 0){
+            $rs = [];
+        }else{
+            $rs = [
+                [
+                    'name'=>'欠压',
+                    'value'=>$low,
+                    'zb'=>round($low/$total),
+                ],
+                [
+                    'name'=>'低电量',
+                    'value'=>$lowPower,
+                    'zb'=>round($lowPower/$total),
+                ],
+                [
+                    'name'=>'充电中',
+                    'value'=>$charging,
+                    'zb'=>round($charging/$total),
+                ],
+                [
+                    'name'=>'使用中',
+                    'value'=>$using,
+                    'zb'=>round($using/$total),
+                ],
+                [
+                    'name'=>'过冲保护',
+                    'value'=>$high,
+                    'zb'=>round($high/$total),
+                ],
+            ];
+        }
 
         dump($rs);
 
@@ -222,33 +226,37 @@ class StatBattery extends BaseCommand
 
         $total = $bat05 + $bat0525 + $bat5075 + $bat75 + $bat2550;
 
-        $rs = [
-            [
-                'name' => '<5%',
-                'value' => $bat05,
-                'zb' => round($bat05/$total),
-            ],
-            [
-                'name' => '5%-25',
-                'value' => $bat0525,
-                'zb' => round($bat0525/$total),
-            ],
-            [
-                'name' => '25%-50%',
-                'value' => $bat2550,
-                'zb' => round($bat2550/$total),
-            ],
-            [
-                'name' => '50%-75%',
-                'value' => $bat5075,
-                'zb' => round($bat5075/$total),
-            ],
-            [
-                'name' => '>75%',
-                'value' => $bat75,
-                'zb' => round($bat75/$total),
-            ],
-        ];
+        if($total === 0){
+            $rs = [];
+        }else{
+            $rs = [
+                [
+                    'name' => '<5%',
+                    'value' => $bat05,
+                    'zb' => round($bat05/$total),
+                ],
+                [
+                    'name' => '5%-25',
+                    'value' => $bat0525,
+                    'zb' => round($bat0525/$total),
+                ],
+                [
+                    'name' => '25%-50%',
+                    'value' => $bat2550,
+                    'zb' => round($bat2550/$total),
+                ],
+                [
+                    'name' => '50%-75%',
+                    'value' => $bat5075,
+                    'zb' => round($bat5075/$total),
+                ],
+                [
+                    'name' => '>75%',
+                    'value' => $bat75,
+                    'zb' => round($bat75/$total),
+                ],
+            ];
+        }
 
         dump($rs);
 
