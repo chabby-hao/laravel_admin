@@ -288,27 +288,27 @@ class StatBattery extends BaseCommand
             [
                 'name'=>'1个月以内',
                 'value'=>$coutMonth1,
-                'zb'=>ceil($coutMonth1/$total),
+                'zb'=>number_format($coutMonth1/$total,2),
             ],
             [
                 'name'=>'1-6个月',
                 'value'=>$coutMonth16,
-                'zb'=>ceil($coutMonth16/$total),
+                'zb'=>number_format($coutMonth16/$total,2),
             ],
             [
                 'name'=>'6-12个月',
                 'value'=>$coutMonth612,
-                'zb'=>ceil($coutMonth612/$total),
+                'zb'=>number_format($coutMonth612/$total,2),
             ],
             [
                 'name'=>'12-24个月',
                 'value'=>$coutMonth1224,
-                'zb'=>ceil($coutMonth1224/$total),
+                'zb'=>number_format($coutMonth1224/$total,2),
             ],
             [
                 'name'=>'24个月以上',
                 'value'=>$coutMonth24,
-                'zb'=>ceil($coutMonth24/$total),
+                'zb'=>number_format($coutMonth24/$total,2),
             ],
         ];
 
