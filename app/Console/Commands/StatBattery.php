@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 //为安骑物联制作的统计脚本
-class StatDevice extends BaseCommand
+class StatBattery extends BaseCommand
 {
 
     protected $signature = 'stat:battery';
