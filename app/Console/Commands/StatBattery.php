@@ -284,33 +284,39 @@ class StatBattery extends BaseCommand
 
         $total = $coutMonth1 + $coutMonth16 + $coutMonth612 + $coutMonth1224 + $coutMonth24;
 
-        $rs = [
-            [
-                'name'=>'1个月以内',
-                'value'=>$coutMonth1,
-                'zb'=>number_format($coutMonth1/$total,2),
-            ],
-            [
-                'name'=>'1-6个月',
-                'value'=>$coutMonth16,
-                'zb'=>number_format($coutMonth16/$total,2),
-            ],
-            [
-                'name'=>'6-12个月',
-                'value'=>$coutMonth612,
-                'zb'=>number_format($coutMonth612/$total,2),
-            ],
-            [
-                'name'=>'12-24个月',
-                'value'=>$coutMonth1224,
-                'zb'=>number_format($coutMonth1224/$total,2),
-            ],
-            [
-                'name'=>'24个月以上',
-                'value'=>$coutMonth24,
-                'zb'=>number_format($coutMonth24/$total,2),
-            ],
-        ];
+        if($total === 0) {
+            $rs = [];
+        }else{
+            $rs = [
+                [
+                    'name'=>'1个月以内',
+                    'value'=>$coutMonth1,
+                    'zb'=>number_format($coutMonth1/$total,2),
+                ],
+                [
+                    'name'=>'1-6个月',
+                    'value'=>$coutMonth16,
+                    'zb'=>number_format($coutMonth16/$total,2),
+                ],
+                [
+                    'name'=>'6-12个月',
+                    'value'=>$coutMonth612,
+                    'zb'=>number_format($coutMonth612/$total,2),
+                ],
+                [
+                    'name'=>'12-24个月',
+                    'value'=>$coutMonth1224,
+                    'zb'=>number_format($coutMonth1224/$total,2),
+                ],
+                [
+                    'name'=>'24个月以上',
+                    'value'=>$coutMonth24,
+                    'zb'=>number_format($coutMonth24/$total,2),
+                ],
+            ];
+        }
+
+
 
         dump($rs);
 
