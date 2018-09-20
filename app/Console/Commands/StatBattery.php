@@ -133,6 +133,7 @@ class StatBattery extends BaseCommand
             if($data = RedisLogic::getDevDataByImei($imei)){
                 $battery = DeviceLogic::getBattery($imei);
                 dump($battery);
+                $lastBattery = Cache::store('redis')->get($key);
                 Cache::store('redis')->put($key, $battery, 60*24);
                 if($data['low'] == 1){
                     ++$low;
@@ -146,7 +147,7 @@ class StatBattery extends BaseCommand
                     ++$lowPower;
                     return;
                 }
-                $lastBattery = Cache::store('redis')->get($key);
+
                 if($battery > $lastBattery){
                     ++$charging;
                 }else{
