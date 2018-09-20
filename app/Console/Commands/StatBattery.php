@@ -218,6 +218,8 @@ class StatBattery extends BaseCommand
             } elseif ($battery > 50) {
                 ++$bat5075;
             } elseif ($battery > 25) {
+                ++$bat2550;
+            } elseif ($battery > 5) {
                 ++$bat0525;
             } else {
                 ++$bat05;
