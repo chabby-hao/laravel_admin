@@ -236,7 +236,7 @@ class StatBattery extends BaseCommand
                     'zb' => number_format($bat05/$total,2),
                 ],
                 [
-                    'name' => '5%-25',
+                    'name' => '5%-25%',
                     'value' => $bat0525,
                     'zb' => number_format($bat0525/$total,2),
                 ],
