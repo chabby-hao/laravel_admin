@@ -8,7 +8,7 @@
 		.container-fluid{width: auto;}
 	}
 </style>
-    <div class="container-fluid">
+    <div class="container-fluid" style="background: #fff;">
 		<div class="row-fluid bat_info">
 			<div class="span4">
 				<div class="bat_info_boxl">
