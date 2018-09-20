@@ -6,6 +6,7 @@ use App\Console\Commands\DbSync;
 use App\Console\Commands\DeviceAddress;
 use App\Console\Commands\DeviceCache;
 use App\Console\Commands\MapCache;
+use App\Console\Commands\StatBattery;
 use App\Console\Commands\StatDevice;
 use App\Console\Commands\Test;
 use App\Console\Commands\UpiotSync;
@@ -42,6 +43,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
             $schedule->command(StatDevice::class)->everyFifteenMinutes()->runInBackground();
             $schedule->command(UpiotSync::class)->cron("0 */3 * * *")->runInBackground();
+            $schedule->command(StatBattery::class)->everyThirtyMinutes()->runInBackground();
         }
     }
 
