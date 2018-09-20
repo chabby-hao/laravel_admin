@@ -67,15 +67,7 @@ $(function(){
 		                textStyle: {
 		                    color: '#7a7a7a',
 		                    fontSize:12
-		                },
-		                formatter:function(value,index){
-		                    if (index % 2 != 0) {
-		                        return '\n\n' + value;
-		                    }
-		                    else {
-		                        return value;
-		                    }
-		                }
+		                },		                
 		            },
 		            axisLine: {
 		                lineStyle: {
@@ -178,14 +170,7 @@ $(function(){
 		                    color: '#7a7a7a',
 		                    fontSize:12
 		                },
-		                formatter:function(value,index){
-		                    if (index % 2 != 0) {
-		                        return '\n\n' + value;
-		                    }
-		                    else {
-		                        return value;
-		                    }
-		                }
+		               
 		            },
 		            axisLine: {
 		                lineStyle: {
@@ -289,14 +274,7 @@ $(function(){
 		                    color: '#7a7a7a',
 		                    fontSize:12
 		                },
-		                formatter:function(value,index){
-		                    if (index % 2 != 0) {
-		                        return '\n\n' + value;
-		                    }
-		                    else {
-		                        return value;
-		                    }
-		                }
+		                
 		            },
 		            axisLine: {
 		                lineStyle: {
