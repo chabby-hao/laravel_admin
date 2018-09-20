@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
             $schedule->command(DeviceAddress::class)->everyFiveMinutes()->runInBackground();
             $schedule->command(StatDevice::class)->everyFifteenMinutes()->runInBackground();
             $schedule->command(UpiotSync::class)->cron("0 */3 * * *")->runInBackground();
-            $schedule->command(StatBattery::class)->everyThirtyMinutes()->runInBackground();
+            $schedule->command(StatBattery::class)->cron("0 */2 * * *")->runInBackground();
         }
     }
 

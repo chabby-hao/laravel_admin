@@ -98,6 +98,9 @@
                 @if(Auth::user()->can('device/stat'))
                     <li><a href="{{URL::action('Admin\DeviceController@stat')}}">车辆</a></li>
                 @endif
+                @if(Auth::user()->can('battery/stat'))
+                    <li><a href="{{URL::action('Admin\BatteryController@stat')}}">电池</a></li>
+                @endif
             </ul>
         </li>
 
