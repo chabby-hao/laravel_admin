@@ -25,6 +25,7 @@ use App\Models\TDeviceCategoryDicNew;
 use App\Models\TDeviceCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class ChannelController extends BaseController
@@ -115,6 +116,34 @@ class ChannelController extends BaseController
             return $this->outPut($data);
         }
         return $this->outPutError();
+    }
+
+    //渠道修改
+    public function update(Request $request){
+        if($request->isMethod('get')){
+            $Channelid=$request->input('id');
+            $model = new BiChannel();
+            $models=$model->getChannelid($Channelid);
+            return view('admin.channel.update', ['datas'=>$models]);
+        };
+
+        if($request->isMethod('post')){
+            $id=$request->input('id');
+            $Channelss=$request->input();
+            $Channelname=DB::table('bi_channels')->where('id',$id)->value('channel_name');
+
+            if(DB::table('bi_channels')->where('id',$id)->update(['Channel_name'=>$Channelss['channel_name'],'Channel_remark'=>$Channelss['channel_remark']])){
+                //修改老版本库的内容
+                  $dicNewModel = new TDeviceCategoryDicNew();
+                  $dicNewModel->updatess($Channelname,$Channelss['channel_name'],$Channelss['channel_remark']);
+
+                return $this->outPutRedirect(URL::action('Admin\ChannelController@list'));
+
+            }else{
+                return $this->outPutError('无修改信息');
+            }
+        }
+
     }
 
 }

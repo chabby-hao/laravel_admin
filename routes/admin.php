@@ -90,6 +90,7 @@ Route::any('/channel/detail','Admin\ChannelController@detail');
 Route::any('/channel/list','Admin\ChannelController@list');
 Route::any('/channel/add','Admin\ChannelController@add');
 Route::any('/channel/channelSn','Admin\ChannelController@channelSn');
+Route::any('/channel/update','Admin\ChannelController@update');
 
 Route::any('/customer/detail','Admin\CustomerController@detail');
 

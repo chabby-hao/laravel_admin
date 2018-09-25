@@ -32,6 +32,7 @@
                                     <td>{{$data->channel_remark}}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{URL::action('Admin\ChannelController@channelSn',['id'=>$data->id])}}">工装号配置</a>
+                                        <a href="{{URL::action('Admin\ChannelController@update',['id'=>$data->id])}}" class="btn btn-warning">编辑</a>
                                     </td>
                                 </tr>
                             @endforeach

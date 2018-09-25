@@ -43,4 +43,12 @@ class TDeviceCategoryDicNew extends \App\Models\Base\TDeviceCategoryDicNew
 		'remark',
 		'rank'
 	];
+
+	public function updatess($Channelname,$channel_names,$channel_remark){
+        $Chann=$this->where('name',$Channelname)->where('level',3)->first();
+        //dd($Chann);
+        $Chann->name=$channel_names;
+        $Chann->remark=$channel_remark;
+        return $Chann->save();
+    }
 }

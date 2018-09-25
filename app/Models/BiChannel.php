@@ -42,4 +42,8 @@ class BiChannel extends \App\Models\Base\BiChannel
         $rs = self::get()->toArray();
         return Helper::transToOneDimensionalArray($rs, 'id');
     }
+
+    public function getChannelid($Channelid){
+        return $this->where('id',$Channelid)->first()->toArray();
+    }
 }
