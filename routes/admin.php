@@ -118,5 +118,7 @@ Route::any('/api/refreshChannelConfig','Admin\ApiController@refreshChannelConfig
 
 Route::any('/detect/factoryTestList','Admin\DetectController@factoryTestList');
 
+Route::any('/battery/stat', 'Admin\BatteryController@stat');
+
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');

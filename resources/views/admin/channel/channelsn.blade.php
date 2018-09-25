@@ -24,7 +24,7 @@
                                 <label class="control-label">工装号:</label>
                                 <div class="controls">
                                     <input name="sn" value="" type="text" class="span11"/>
-                                    <span class="help-block">该参数为对外定义渠道名，例：60019443AFB1</span>
+                                    <span class="help-block">例：60019443AFB1</span>
                                 </div>
                             </div>
 

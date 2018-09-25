@@ -25,7 +25,7 @@ class BiCity extends Eloquent
 {
 	protected $connection = 'bi';
 	protected $table = 'bi_city';
-	protected $primaryKey = 'city';
+	protected $primaryKey = 'id';
 	public $incrementing = false;
 	public $timestamps = false;
 
