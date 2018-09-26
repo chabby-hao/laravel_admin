@@ -26,11 +26,21 @@ class UpiotSync extends BaseCommand
     public function handle()
     {
 
-        $this->cardListSyncByDb();
+        $date = $this->option('date');
+        if($date){
+            $this->cardDataUsageSync($date);
+        }else{
+            $date = Carbon::today()->subDays(1)->format('Ymd');
 
-        $this->cardListSync();
+            $this->cardListSyncByDb();
 
-        $this->cardDataUsageSync();
+            $this->cardListSync();
+
+            $this->cardDataUsageSync($date);
+        }
+
+
+
 
     }
 
@@ -95,10 +105,8 @@ class UpiotSync extends BaseCommand
     /**
      * 流量日明细同步，因为没有日明细接口，所以，用昨日的月流量-前日的月流量=昨日的日流量
      */
-    protected function cardDataUsageSync()
+    protected function cardDataUsageSync($date)
     {
-        $date = $this->option('date');
-        $date or $date = Carbon::today()->subDays(1)->format('Ymd');
         var_dump($date);
         $this->cardDataUsage($date);
     }
@@ -152,7 +160,7 @@ class UpiotSync extends BaseCommand
         $predate = Carbon::parse($date)->subDay(1)->format('Ymd');
         if($data['data']){
             foreach ($data['data'] as $item){
-                Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 48);
+                Cache::store('redis')->put($this->getKey($item['msisdn'], $date), $item['data_usage'], 60 * 72);
                 $preUsage = Cache::store('redis')->get($this->getKey($item['msisdn'], $predate));
 
                 if($preUsage === null){
