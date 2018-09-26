@@ -120,5 +120,15 @@ Route::any('/detect/factoryTestList','Admin\DetectController@factoryTestList');
 
 Route::any('/battery/stat', 'Admin\BatteryController@stat');
 
+//客户
+Route::any('/customer/list','Admin\CustomerController@list');
+Route::any('/customer/add','Admin\CustomerController@add');
+Route::any('/customer/edit','Admin\CustomerController@edit');
+
+//场景
+Route::any('/scenes/list','Admin\ScenesController@list');
+Route::any('/scenes/add','Admin\ScenesController@add');
+Route::any('/scenes/edit','Admin\ScenesController@edit');
+
 //放在最后
 Route::any('/', 'Admin\IndexController@welcome');
