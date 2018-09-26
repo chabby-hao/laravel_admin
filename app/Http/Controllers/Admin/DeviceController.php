@@ -172,7 +172,7 @@ class DeviceController extends BaseController
             $data['lockLogUrl'] = URL::action('Admin\DeviceController@lockLogList', ['imei' => $data['imei']]);
             $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
             $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList', ['id' => $udid]);
-
+            $data['satellite'] = Url::action('Admin\DeviceController@historyStrength', ['imei' => $data['imei']]);
 
             //服务信息
             $data['paymentInfo'] = DeviceLogic::getPaymentInfoByUdid($udid);
@@ -909,6 +909,35 @@ class DeviceController extends BaseController
             'start' => $startDatetime,
             'end' => $endDatetime,
         ]);
+    }
+
+    public function historyStrength()
+    {
+
+        $imei = Input::get('imei');
+
+        $udid = DeviceLogic::getUdid($imei);
+
+        list($startDatetime, $endDatetime) = $this->getDaterange();
+
+        $where = ['udid' => $udid];
+        $whereBetween = ['create_time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $paginate = $this->getUnionTablePaginate('t_ev_strength_', $where, $whereBetween, 'care', $startDatetime, $endDatetime);
+
+        $data = $paginate->items();
+        foreach ($data as $row) {
+            $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
+
+        }
+
+        return view('admin.device.historystrength', [
+            'datas' => $data,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'udid' => $udid,
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+
     }
 
 }

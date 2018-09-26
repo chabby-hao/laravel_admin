@@ -131,7 +131,8 @@
                 <td><%lastLocation.address%></td>
                 <td><%lastLocation.landmark%></td>
                 <td><%chipPower%>%</td>
-                <td><a class="text-success" href="<%locationUrl%>">历史定位</a></td>
+                <td><a class="text-success" href="<%locationUrl%>">历史定位</a>
+                <a class="text-success" href="<%satellite%>">卫星强度</a></td>
             </tr>
             </tbody>
         </table>
