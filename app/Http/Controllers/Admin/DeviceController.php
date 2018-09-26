@@ -928,6 +928,26 @@ class DeviceController extends BaseController
         foreach ($data as $row) {
             $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
 
+            $r=json_decode($row->snr_json,true);
+            $str = '';
+            $arr = [];
+            if($r){
+
+            }else{
+                $r=substr($row->snr_json,0,strripos($row->snr_json,'}') + 1);
+                $r=$r.']';
+                $r=json_decode($r,true);
+            }
+            foreach ($r as $v) {
+                foreach ($v as $k => $vs){
+                    $arr[]= $k . '=' . $vs;
+                }
+            }
+            $str = implode(' , ', $arr);
+
+            $row->snr_json = $str;
+
+
         }
 
         return view('admin.device.historystrength', [
