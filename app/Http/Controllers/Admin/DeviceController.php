@@ -944,10 +944,7 @@ class DeviceController extends BaseController
                 }
             }
             $str = implode(' , ', $arr);
-
             $row->snr_json = $str;
-
-
         }
 
         return view('admin.device.historystrength', [
