@@ -180,9 +180,9 @@ class DeviceController extends BaseController
             RedisLogic::getRedis()->select(1);
             $battery=RedisLogic::hGet('battery_type', $data['imei']);
 
-            if($battery==BATTERY_TYPE_XINPU || $battery==BATTERY_TYPE_AIBIKE){
+            if($battery==BiDeliveryOrder::BATTERY_TYPE_XINPU || $battery==BiDeliveryOrder::BATTERY_TYPE_AIBIKE){
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@historyZhangfei', ['imei' => $data['imei']]);
-            }elseif($battery==BATTERY_TYPE_ZHONGLI){
+            }elseif($battery==BiDeliveryOrder::BATTERY_TYPE_ZHONGLI){
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@four', ['imei' => $data['imei']]);
             }
 
