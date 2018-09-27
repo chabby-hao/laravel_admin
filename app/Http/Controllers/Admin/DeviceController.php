@@ -998,7 +998,55 @@ class DeviceController extends BaseController
             'start' => $startDatetime,
             'end' => $endDatetime,
         ]);
+    }
+    //型号列表
+    public function types(){
+
+        $paginates=DB::table('bi_device_types')->orderBy('id','desc')->paginate();
+        $data = $paginates->items();
+
+        return view('admin.device.types',
+            [   'datas'=>$data,
+                'page_nav' => MyPage::showPageNav($paginates)
+            ]);
+    }
+
+    public function typesadd(Request $request){
+        if($request->isMethod('get')){
+            return view('admin.device.typesadd');
+        }
+
+        if($request->isMethod('post')){
+            $name=$request->input('name');
+            $remark=$request->input('remark');
+            if(DB::table('bi_device_types')->insert(['name'=>$name,'remark'=>$remark])){
+                return $this->outPutRedirect(URL::action('Admin\DeviceController@types'));
+            }else{
+                return $this->outPutError('添加失败');
+            }
+        }
 
     }
+
+    public function typesedit(Request $request){
+        if($request->isMethod('get')){
+            $id=$request->input('id');
+            $type=DB::table('bi_device_types')->where('id',$id)->first();
+            return view('admin.device.typesedit',['datas'=>$type]);
+        }
+
+        if($request->isMethod('post')){
+            $id=$request->input('id');
+            $name=$request->input('name');
+            $remark=$request->input('remark');
+            if(DB::table('bi_device_types')->where('id',$id)->update(['name'=>$name,'remark'=>$remark])){
+                return $this->outPutRedirect(URL::action('Admin\DeviceController@types'));
+            }else{
+                return $this->outPutError('无修改信息');
+            }
+        }
+    }
+
+
 
 }

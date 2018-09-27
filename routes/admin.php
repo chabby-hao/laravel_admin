@@ -67,6 +67,10 @@ Route::any('/device/cardList','Admin\DeviceController@cardList');
 Route::any('/device/cardDailyList','Admin\DeviceController@cardDailyList');
 Route::any('/device/historyStrength','Admin\DeviceController@historyStrength');
 Route::any('/device/historyZhangfei','Admin\DeviceController@historyZhangfei');
+Route::any('/device/types','Admin\DeviceController@types');
+Route::any('/device/typesedit','Admin\DeviceController@typesedit');
+Route::any('/device/typesadd','Admin\DeviceController@typesadd');
+
 //订单
 Route::any('/order/list','Admin\OrderController@list');
 Route::any('/order/add','Admin\OrderController@add');
