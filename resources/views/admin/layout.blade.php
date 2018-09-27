@@ -246,6 +246,7 @@
             <ul>
                 @if(Auth::user()->can('channel/list'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ChannelController@list')}}">渠道列表</a></li>
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\BrandController@list')}}">品牌列表</a></li>
                 @endif
             </ul>
         </li>

@@ -86,6 +86,13 @@ Route::any('/delivery/listDevice','Admin\DeliveryController@listDevice');
 Route::any('/map/show','Admin\MapController@show');
 
 Route::any('/brand/detail','Admin\BrandController@detail');
+Route::any('/brand/list','Admin\BrandController@list');
+Route::any('/brand/add','Admin\BrandController@add');
+Route::any('/brand/edit','Admin\BrandController@edit');
+
+Route::any('/ebike/list','Admin\EbikeController@list');
+Route::any('/ebike/add','Admin\EbikeController@add');
+Route::any('/ebike/edit','Admin\EbikeController@edit');
 
 Route::any('/channel/detail','Admin\ChannelController@detail');
 Route::any('/channel/list','Admin\ChannelController@list');
