@@ -99,11 +99,6 @@ class DeliveryController extends BaseController
             //提交imeis
             $imeis = $request->input('data');//array
 
-            $rt = $_POST['data'];
-            $a = file_get_contents('php://input');
-
-            dd($a,$rt,$imeis);
-
             //重复
             if(max(array_count_values($imeis)) > 1){
                 $unique = array_unique($imeis);
