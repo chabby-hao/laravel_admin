@@ -70,7 +70,7 @@ Route::any('/device/historyZhangfei','Admin\DeviceController@historyZhangfei');
 Route::any('/device/types','Admin\DeviceController@types');
 Route::any('/device/typesedit','Admin\DeviceController@typesedit');
 Route::any('/device/typesadd','Admin\DeviceController@typesadd');
-
+Route::any('/device/four','Admin\DeviceController@four');
 //订单
 Route::any('/order/list','Admin\OrderController@list');
 Route::any('/order/add','Admin\OrderController@add');

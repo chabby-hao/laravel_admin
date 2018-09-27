@@ -133,7 +133,6 @@
                 <td><%chipPower%>%</td>
                 <td><a class="text-success" href="<%locationUrl%>">历史定位</a>
                     <a class="text-success" href="<%satellite%>">卫星强度</a>
-
                 </td>
             </tr>
             </tbody>
@@ -212,7 +211,9 @@
                     {{--<a class="text-success">电门日志</a>--}}
                     <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
                     <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
-                    <a href="<%zhangfei%>" class="text-success">电池状态</a>
+                    <%#batteryUrl%>
+                    <a href="<%batteryUrl%>" class="text-success">电池状态</a>
+                    <%/batteryUrl%>
                 </td>
             </tr>
             </tbody>
