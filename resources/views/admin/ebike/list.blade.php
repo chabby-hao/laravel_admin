@@ -18,7 +18,7 @@
                             <thead>
                             <tr>
                                 <th>车型id</th>
-                                <th>所属客户</th>
+                                <th>所属品牌</th>
                                 <th>车型名称</th>
                                 <th>备注</th>
                                 <th>操作</th>
