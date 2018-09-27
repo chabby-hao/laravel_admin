@@ -173,7 +173,7 @@ class DeviceController extends BaseController
             $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
             $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList', ['id' => $udid]);
             $data['satellite'] = Url::action('Admin\DeviceController@historyStrength', ['imei' => $data['imei']]);
-
+            $data['zhangfei'] = Url::action('Admin\DeviceController@historyZhangfei', ['imei' => $data['imei']]);
             //服务信息
             $data['paymentInfo'] = DeviceLogic::getPaymentInfoByUdid($udid);
 
@@ -948,6 +948,50 @@ class DeviceController extends BaseController
         }
 
         return view('admin.device.historystrength', [
+            'datas' => $data,
+            'page_nav' => MyPage::showPageNav($paginate),
+            'udid' => $udid,
+            'start' => $startDatetime,
+            'end' => $endDatetime,
+        ]);
+
+    }
+
+    public function historyZhangfei()
+    {
+        $imei = Input::get('imei');
+        $udid = DeviceLogic::getUdid($imei);
+        list($startDatetime, $endDatetime) = $this->getDaterange();
+
+        $where = ['udid' => $udid];
+        $whereBetween = ['create_time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
+        $paginate = $this->getUnionTablePaginate('t_ev_zhangfei_', $where, $whereBetween, 'care', $startDatetime, $endDatetime);
+
+        $data = $paginate->items();
+
+        foreach ($data as $row) {
+            $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
+            $row->create_time=date("Y-m-d H:i:s",$row->create_time);
+
+            if($row->battery_onlie_state=0){
+                $row->battery_onlie_state='电池未连接，备用电池供电';
+            }elseif ($row->battery_onlie_state=1){
+                $row->battery_onlie_state='电池已连接，备用电池供电';
+            }elseif ($row->battery_onlie_state=2){
+                $row->battery_onlie_state='电池未连接，电瓶供电';
+            }elseif ($row->battery_onlie_state=3){
+                $row->battery_onlie_state='电池已连接，电瓶供电';
+            }
+            $row->line_state = 1? '正常' : '异常';
+            $row->battery_io_current=max($row->battery_io_current, $row->battery_io_current_plus);
+            $row->abk_battery_lock_status = 1? '已锁' : '未锁';
+            //$row->battery_voltage=$row->battery_voltage.'mV';
+//            $row->ev_lock_trans = $row->ev_lock ? '已锁' : '未锁';
+//            $row->voltage = max($row->voltage, $row->local_voltage) / 10;
+//            $row->usb_trans = $row->usb ? '是' : '否';
+        }
+
+        return view('admin.device.historyzhangfei', [
             'datas' => $data,
             'page_nav' => MyPage::showPageNav($paginate),
             'udid' => $udid,
