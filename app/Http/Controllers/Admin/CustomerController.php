@@ -9,14 +9,12 @@
 namespace App\Http\Controllers\Admin;
 
 
-use App\Libs\MyPage;
-use App\Logics\AuthLogic;
-use App\Models\Permission;
-use App\Models\Role;
+use App\Models\BiScene;
 use Illuminate\Http\Request;
 use App\Models\TDeviceCategoryDicNew;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use App\Models\BiCustomer;
 
 
 class CustomerController extends BaseController
@@ -97,14 +95,20 @@ class CustomerController extends BaseController
         }
     }
 
-    public function delete(Request $request)
+    public function detail(Request $request)
     {
-        if($request->isXmlHttpRequest()){
-            $id = $this->getId($request);
-            $role = Role::findOrFail($id);
-            $role->delete();
-            return $this->outPutSuccess();
+        $id = $this->getId($request);
+
+        $model = BiCustomer::find($id);
+        if($model){
+            $rs = BiScene::whereCustomerId($model->id)->get();
+            $data = $rs->toArray();
+            foreach ($rs as $row){
+                $data['children'][] = $row->toArray();
+            }
+            return $this->outPut($data);
         }
+        return $this->outPutError();
     }
 
 
