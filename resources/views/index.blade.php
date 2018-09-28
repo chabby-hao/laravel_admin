@@ -163,7 +163,6 @@
 			$('body').css('overflow','auto');
 		});
 		
-		$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 	    var myform = $("#loginform");
 	    myform.ajaxForm({
 	        dataType: 'json',
