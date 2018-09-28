@@ -1335,6 +1335,10 @@ class DeviceLogic extends BaseLogic
             $evmodel = sprintf('%03s', $ebikeType->ev_model);
         }*/
 
+        $evmodel = '001';
+        if($model){
+            $evmodel = sprintf('%03s', $model->ev_model);
+        }
 
         TDeviceCategory::updateOrCreate([
             'udid' => $udid,
@@ -1342,7 +1346,7 @@ class DeviceLogic extends BaseLogic
             'category' => $type,
             'channel' => $model ? $model->channel : 0,
             'brand' => $model ? $model->brand : 0,
-            'model' => $model ? $model->brand . $model->ev_model : 0,
+            'model' => $model ? $model->brand . $evmodel : 0,
         ]);
 
         //将设备踢下线
