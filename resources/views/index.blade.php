@@ -11,7 +11,6 @@
 	<title>BI</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrapV4.min.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/indexNew.css"/>
-	<script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
 </head>
 <body>
 	<div class="container-fluid part1_box">		
@@ -144,6 +143,7 @@
 <script src="/js/special.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/bootstrapV4.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/jquery-form/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
 <script type="text/javascript">
 	$(function(){
 		var h = window.innerHeight;
@@ -163,7 +163,6 @@
 			$('body').css('overflow','auto');
 		});
 		
-		$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 	    var myform = $("#loginform");
 	    myform.ajaxForm({
 	        dataType: 'json',
