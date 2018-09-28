@@ -11,6 +11,7 @@
 	<title>BI</title>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrapV4.min.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/indexNew.css"/>
+	<script src="{{ asset('js/jquery-helper/jquery-helper.js') }}"></script>
 </head>
 <body>
 	<div class="container-fluid part1_box">		
