@@ -17,7 +17,7 @@
 
 
 Route::get('/','Bi\HomeController@index');
-Route::get('/stat/requestCount','Bi\StatController@requestCount');
+Route::any('/stat/requestCount','Bi\StatController@requestCount');
 
 /*Route::get('/phpinfo',function(){
     phpinfo();
