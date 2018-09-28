@@ -1342,7 +1342,7 @@ class DeviceLogic extends BaseLogic
             'category' => $type,
             'channel' => $model ? $model->channel : 0,
             'brand' => $model ? $model->brand : 0,
-            'model' => $model ? $model->ev_model : '001',
+            'model' => $model ? $model->brand . $model->ev_model : 0,
         ]);
 
         //将设备踢下线
