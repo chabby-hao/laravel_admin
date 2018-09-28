@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>BI</title>
+	<link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}"/>
 	<link rel="stylesheet" type="text/css" href="/css/bootstrapV4.min.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/indexNew.css"/>
 </head>
@@ -178,6 +179,9 @@
 	    var refreshTotal = function(){
 	        $.ajax({
 	            url:'{{URL::action('Bi\StatController@requestCount')}}',
+                beforeSend:function(){
+
+				},
 	            success:function(res){
 	                if(res.code === 200){
 	                    var sum = res.data.sum;
