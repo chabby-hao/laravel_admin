@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row-fluid">
-            <div class="span8">
+            <div class="span6">
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
                         <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
