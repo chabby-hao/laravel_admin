@@ -14,7 +14,7 @@
                                 <label class="control-label"><span class="text-error">*</span>设备码 :</label>
                                 <div class="controls">
                                     <input name="id" value="" type="text" class="span11"/>
-                                    <span class="help-block">可输入：设备码/IMEI/IMSI/张飞ID/得威Id</span>
+                                    <span class="help-block">可输入：设备码/IMEI/IMSI</span>
                                 </div>
                             </div>
 
