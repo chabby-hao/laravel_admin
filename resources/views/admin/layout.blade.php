@@ -217,6 +217,9 @@
                 @if(Auth::user()->can('tool/deviceExpireModify'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@deviceExpireModify')}}">设备有效期修改</a></li>
                 @endif
+                @if(Auth::user()->can('tool/lock'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@lock')}}">远程锁车</a></li>
+                @endif
             </ul>
         </li>
 
