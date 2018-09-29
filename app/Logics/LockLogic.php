@@ -31,6 +31,7 @@ class LockLogic extends BaseLogic
                 'udid'=>$udid,
                 'name'=>$username,
                 'timestamp'=>$time,
+                'lock'=>$lock,
             ]
         ]);
         $body = $r->getBody()->getContents();
