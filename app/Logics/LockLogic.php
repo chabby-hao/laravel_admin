@@ -23,7 +23,7 @@ class LockLogic extends BaseLogic
 
         $sign = md5($time . $udid . $key);
 
-        $url = 'http://api.vipcare.com';
+        $url = 'http://api.vipcare.com/helper/lock';
         $client = new Client();
         $r = $client->post($url, [
             'form_params'=>[
