@@ -19,9 +19,11 @@
                             </div>
 
 
+                            <input type="hidden" name="lock" id="lock">
 
                             <div class="form-actions">
-                                <button name="dd" type="button" id="mysubmit" class="btn btn-success">锁车</button>
+                                <button type="button" lock="0"  class="btn btn-success mysubmit">解锁</button>
+                                <button type="button" lock="1"  class="btn btn-danger mysubmit">锁车</button>
                             </div>
                         </form>
                     </div>
@@ -30,7 +32,32 @@
         </div>
     </div>
 
+    <script>
 
-    @include('admin.common_submitjs')
+        $(function () {
+
+
+            var myform = $(".myform");
+
+            myform.click(function () {
+
+                $("#lock").val($(this).attr('lock'));
+                myform.submit();
+            });
+
+            myform.ajaxForm({
+                dataType: 'json',
+                //beforeSubmit : test,//ajax动画加载
+                success: function (data) {
+                    if (ajax_check_res(data)) {
+                        //myalert('保存成功');
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    {{--@include('admin.common_submitjs')--}}
 @endsection
 
