@@ -16,12 +16,12 @@ use Phalcon\Http\Request;
 class LockLogic extends BaseLogic
 {
 
-    public static function lock($udid, $username = null)
+    public static function lock($udid, $lock, $username = null)
     {
         $time = time();
         $key = 'bi0921777';
 
-        $sign = md5($time . $udid . $key);
+        $sign = md5($lock . $time . $udid . $key);
 
         $url = 'http://api.vipcare.com/helper/lock';
         $client = new Client();
