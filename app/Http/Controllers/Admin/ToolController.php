@@ -414,7 +414,6 @@ class ToolController extends BaseController
             }
             $lock = $this->checkParams(['lock'],$request->input())['lock'];
 
-            var_dump(Auth::user()->username);
             if(!LockLogic::lock($udid, $lock,  Auth::user()->username)){
                 return $this->outPutError('操作失败，请联系管理员');
             }

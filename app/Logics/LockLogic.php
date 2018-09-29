@@ -29,7 +29,7 @@ class LockLogic extends BaseLogic
             'form_params'=>[
                 'sign'=>$sign,
                 'udid'=>$udid,
-                'username'=>$username,
+                'name'=>$username,
                 'timestamp'=>$time,
             ]
         ]);
