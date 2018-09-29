@@ -37,9 +37,9 @@
         $(function () {
 
 
-            var myform = $(".myform");
+            var myform = $("#myform");
 
-            myform.click(function () {
+            $('.mysubmit').click(function () {
 
                 $("#lock").val($(this).attr('lock'));
                 myform.submit();
