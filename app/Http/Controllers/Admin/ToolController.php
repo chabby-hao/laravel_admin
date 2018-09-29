@@ -413,8 +413,6 @@ class ToolController extends BaseController
                 return $this->outPutError('设备码有误');
             }
 
-            var_dump($request);
-
             if(!LockLogic::lock($udid, Auth::user()->username)){
                 return $this->outPutError('操作失败，请联系管理员');
             }
