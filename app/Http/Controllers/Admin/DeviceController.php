@@ -1031,22 +1031,27 @@ class DeviceController extends BaseController
 
             $row->create_time=date("Y-m-d H:i:s",$row->create_time);
 
-//            if($row->battery_onlie_state=0){
-//                $row->battery_onlie_state='电池未连接，备用电池供电';
-//            }elseif ($row->battery_onlie_state=1){
-//                $row->battery_onlie_state='电池已连接，备用电池供电';
-//            }elseif ($row->battery_onlie_state=2){
-//                $row->battery_onlie_state='电池未连接，电瓶供电';
-//            }elseif ($row->battery_onlie_state=3){
-//                $row->battery_onlie_state='电池已连接，电瓶供电';
-//            }
-//            $row->line_state = 1? '正常' : '异常';
-//            $row->battery_io_current=max($row->battery_io_current, $row->battery_io_current_plus);
-//            $row->abk_battery_lock_status = 1? '已锁' : '未锁';
-//            $row->battery_voltage=$row->battery_voltage.'mV';
-//            $row->ev_lock_trans = $row->ev_lock ? '已锁' : '未锁';
-//            $row->voltage = max($row->voltage, $row->local_voltage) / 10;
-//            $row->usb_trans = $row->usb ? '是' : '否';
+            //BIT0-1： 充电状态 0-非充非放状态； 1-充电状态； 2-放电状态 BIT2： 电池状态 0-正常状态； 1-故障状态BIT3： 开关状态 0-输出关闭； 1-输出开通
+            if($row->batt_charge_status_485 == 0){
+                $row->batt_charge_status_485_trans = '非充非放状态';
+            }elseif($row->batt_charge_status_485 == 1){
+                $row->batt_charge_status_485_trans = '充电状态';
+            }elseif($row->batt_charge_status_485 == 2){
+                $row->batt_charge_status_485_trans = '放电状态';
+            }
+
+            if($row->batt_batt_status_485 == 0){
+                $row->batt_batt_status_485_trans = '正常状态';
+            }elseif($row->batt_batt_status_485 == 1){
+                $row->batt_batt_status_485_trans = '故障状态';
+            }
+
+            if($row->batt_ioput_status_485 == 0){
+                $row->batt_ioput_status_485_trans = '输出关闭';
+            }elseif($row->batt_ioput_status_485 == 1){
+                $row->batt_ioput_status_485_trans = '输出开通';
+            }
+
         }
 
         return view('admin.device.four', [

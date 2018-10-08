@@ -37,33 +37,39 @@
                                 <th>上报时间</th>
                                 <th>电池包固件版本号</th>
                                 <th>电池包硬件版本号</th>
-                                {{--<th>电池ID</th>--}}
-                                {{--<th>电池电量(单位:%)</th>--}}
-                                {{--<th>电池电压(单位:mV)</th>--}}
-                                {{--<th>电芯温度(单位:0.001℃)</th>--}}
-                                {{--<th>充放电循环次数</th>--}}
-                                {{--<th>充放电电流</th>--}}
-                                {{--<th>PCB温度(单位:0.001℃)</th>--}}
-                                {{--<th>电池健康状态</th>--}}
-                                {{--<th>充电器</th>--}}
+                                <th>电池序列号</th>
+                                <th>剩余容量百分比</th>
+                                <th>电池电压</th>
+                                <th>电池包温度1</th>
+                                <th>电池包温度2</th>
+                                <th>电池包电流</th>
+                                <th>电池包后备时间</th>
+                                <th>循环次数</th>
+                                <th>SOH</th>
+                                <th>充电状态</th>
+                                <th>电池状态</th>
+                                <th>故障状态</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
                                     <td>{{$data->udid}}</td>
-                                    <td>{{$data->create_time}}</td>
+                                    <td>{{$data->datetime}}</td>
                                     <td>{{$data->batt_rom_ver_485}}</td>
                                     <td>{{$data->batt_hd_ver_485}}</td>
-                                    {{--<td>{{$data->battery_id}}</td>--}}
-                                    {{--<td>{{$data->battery_level}}</td>--}}
-                                    {{--<td>{{$data->battery_voltage}}</td>--}}
-                                    {{--<td>{{$data->core_temperature}}</td>--}}
-                                    {{--<td>{{$data->battery_cycle_times}}</td>--}}
-                                    {{--<td>{{$data->battery_io_current}}</td>--}}
-                                    {{--<td>{{$data->pcb_temperature}}</td>--}}
-                                    {{--<td>{{$data->battery_health_state}}</td>--}}
-                                    {{--<td>{{$data->abk_battery_lock_status}}</td>--}}
+                                    <td>{{$data->batt_id_485}}</td>
+                                    <td>{{$data->batt_dump_energy_per_485}}</td>
+                                    <td>{{$data->batt_voltage_485}}</td>
+                                    <td>{{$data->batt_temprature1_485}}</td>
+                                    <td>{{$data->batt_temprature2_485}}</td>
+                                    <td>{{$data->batt_cur_485}}</td>
+                                    <td>{{$data->batt_save_time_485}}</td>
+                                    <td>{{$data->batt_cycle_times_485}}</td>
+                                    <td>{{$data->batt_soh_485}}</td>
+                                    <td>{{$data->batt_charge_status_485_trans}}</td>
+                                    <td>{{$data->batt_batt_status_485_trans}}</td>
+                                    <td>{{$data->batt_ioput_status_485_trans}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
