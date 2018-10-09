@@ -243,6 +243,55 @@
 </div>
 
 
+<%#zhangfei%>
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>电池信息</h5>
+    </div>
+    <div class="widget-content">
+
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>状态上报时间</th>
+                <th>电门状态</th>
+                <th>锁车状态</th>
+                <th>电瓶电压</th>
+                <th>剩余电量</th>
+                <th>备用电池</th>
+                <th>电瓶是否在位</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%lastContact%></td>
+                <td><%turnonTrans%></td>
+                <td><%isLockTrans%></td>
+                <td><%voltage%>v</td>
+                <td><%battery%>%</td>
+                <td><%chipPower%>%</td>
+                <td><%chargeTrans%></td>
+                <td>
+                    {{--<a class="text-success">电门日志</a>--}}
+                    <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
+                    <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
+                    <%#batteryUrl%>
+                    <a href="<%batteryUrl%>" class="text-success">电池状态</a>
+                    <%/batteryUrl%>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<%/zhangfei%>
+
+
+
+
+
 <div class="widget-box">
     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
         <h5>用车信息</h5>

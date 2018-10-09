@@ -53,6 +53,12 @@ class RedisLogic extends BaseLogic
         return self::$devData[$imei] = $data;
     }
 
+    public static function getBatteryTypeByImei($imei)
+    {
+        self::getRedis()->select(1);
+        return RedisLogic::hGet('battery_type', $imei);
+    }
+
     public static function getZhangfeiByImei($imei)
     {
         //加个类缓存
@@ -64,6 +70,11 @@ class RedisLogic extends BaseLogic
         $data = self::getRedis()->hGetAll($key) ?: [];
         //Log::debug("redis hgetall $key", $data);
         return self::$zhangfeiData[$imei] = $data;
+    }
+
+    public static function getZhangfeiTransByImei($imei)
+    {
+
     }
 
     public static function getImeiByBatteryId($batteryId)

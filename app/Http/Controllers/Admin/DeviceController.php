@@ -176,17 +176,17 @@ class DeviceController extends BaseController
             $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList', ['id' => $udid]);
             $data['satellite'] = Url::action('Admin\DeviceController@historyStrength', ['imei' => $data['imei']]);
 
-            //连接redis取值做判断
-            RedisLogic::getRedis()->select(1);
-            $battery=RedisLogic::hGet('battery_type', $data['imei']);
+            $batteryType=RedisLogic::getBatteryTypeByImei($data['imei']);
 
-            if($battery==BiDeliveryOrder::BATTERY_TYPE_XINPU || $battery==BiDeliveryOrder::BATTERY_TYPE_AIBIKE){
+            if($batteryType==BiDeliveryOrder::BATTERY_TYPE_XINPU || $batteryType==BiDeliveryOrder::BATTERY_TYPE_AIBIKE){
+                //张飞
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@historyZhangfei', ['imei' => $data['imei']]);
-            }elseif($battery==BiDeliveryOrder::BATTERY_TYPE_ZHONGLI){
+                $zhangfei = RedisLogic::getZhangfeiByImei($data['imei']);
+            }elseif($batteryType==BiDeliveryOrder::BATTERY_TYPE_ZHONGLI){
+                //485
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@four', ['imei' => $data['imei']]);
+                $battery485 = RedisLogic::getDevDataByImei($data['imei']);
             }
-
-
 
             //服务信息
             $data['paymentInfo'] = DeviceLogic::getPaymentInfoByUdid($udid);
