@@ -320,12 +320,12 @@
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%zhangfei.batt_id_485%></td>
-                <td><%zhangfei.batt_dump_energy_per_485%>%</td>
-                <td><%zhangfei.batt_voltage_485%>(0.01V)</td>
-                <td><%zhangfei.batt_temprature1_485%>(0.1℃)</td>
-                <td><%zhangfei.batt_temprature2_485%>(0.1℃)</td>
-                <td><%zhangfei.batt_cur_485%>(0.1A)</td>
+                <td><%battery485.batt_id_485%></td>
+                <td><%battery485.batt_dump_energy_per_485%>%</td>
+                <td><%battery485.batt_voltage_485%>(0.01V)</td>
+                <td><%battery485.batt_temprature1_485%>(0.1℃)</td>
+                <td><%battery485.batt_temprature2_485%>(0.1℃)</td>
+                <td><%battery485.batt_cur_485%>(0.1A)</td>
                 <td>
                     <a href="<%batteryUrl%>" class="text-success">电池状态</a>
                 </td>
@@ -345,12 +345,12 @@
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%zhangfei.batt_save_time_485%>分钟</td>
-                <td><%zhangfei.batt_cycle_times_485%></td>
-                <td><%zhangfei.batt_soh_485%>%</td>
-                <td><%zhangfei.batt_charge_status_485_trans%></td>
-                <td><%zhangfei.batt_batt_status_485_trans%></td>
-                <td><%zhangfei.batt_ioput_status_485_trans%></td>
+                <td><%battery485.batt_save_time_485%>分钟</td>
+                <td><%battery485.batt_cycle_times_485%></td>
+                <td><%battery485.batt_soh_485%>%</td>
+                <td><%battery485.batt_charge_status_485_trans%></td>
+                <td><%battery485.batt_batt_status_485_trans%></td>
+                <td><%battery485.batt_ioput_status_485_trans%></td>
             </tr>
             </tbody>
         </table>
