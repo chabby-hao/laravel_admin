@@ -291,8 +291,8 @@
                 <td><%zhangfei.batteryCycleTimes%></td>
                 <td><%zhangfei.batteryIOCurrent%>mA</td>
                 <td><%zhangfei.PCBTemperature%>(0.001℃)</td>
-                <td><%zhangfei.batteryHealthState%>%</td>
-                <td><%zhangfei.batteryIOStateTrans%>mv</td>
+                <td><%zhangfei.batteryHealthState%></td>
+                <td><%zhangfei.batteryIOStateTrans%></td>
             </tr>
             </tbody>
         </table>
