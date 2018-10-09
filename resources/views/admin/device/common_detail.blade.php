@@ -243,7 +243,7 @@
 <%#zhangfei%>
 <div class="widget-box">
     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
-        <h5>电池信息</h5>
+        <h5>张飞电池信息</h5>
     </div>
     <div class="widget-content">
 
@@ -302,7 +302,7 @@
 <%#battery485%>
 <div class="widget-box">
     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
-        <h5>电池信息</h5>
+        <h5>485电池信息</h5>
     </div>
     <div class="widget-content">
 
