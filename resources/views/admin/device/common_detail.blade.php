@@ -211,9 +211,6 @@
                     {{--<a class="text-success">电门日志</a>--}}
                     <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
                     <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
-                    <%#batteryUrl%>
-                    <a href="<%batteryUrl%>" class="text-success">电池状态</a>
-                    <%/batteryUrl%>
                 </td>
             </tr>
             </tbody>
@@ -300,6 +297,67 @@
     </div>
 </div>
 <%/zhangfei%>
+
+
+<%#battery485%>
+<div class="widget-box">
+    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+        <h5>电池信息</h5>
+    </div>
+    <div class="widget-content">
+
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>电池序列号</th>
+                <th>剩余容量</th>
+                <th>电池电压</th>
+                <th>电池包温度1</th>
+                <th>电池包温度2</th>
+                <th>电流</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%zhangfei.batt_id_485%></td>
+                <td><%zhangfei.batt_dump_energy_per_485%>%</td>
+                <td><%zhangfei.batt_voltage_485%>(0.01V)</td>
+                <td><%zhangfei.batt_temprature1_485%>(0.1℃)</td>
+                <td><%zhangfei.batt_temprature2_485%>(0.1℃)</td>
+                <td><%zhangfei.batt_cur_485%>(0.1A)</td>
+                <td>
+                    <a href="<%batteryUrl%>" class="text-success">电池状态</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>电池包后备时间</th>
+                <th>电池包循环次数</th>
+                <th>电池包SOH</th>
+                <th>充电状态</th>
+                <th>电池状态</th>
+                <th>故障状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%zhangfei.batt_save_time_485%>分钟</td>
+                <td><%zhangfei.batt_cycle_times_485%></td>
+                <td><%zhangfei.batt_soh_485%>%</td>
+                <td><%zhangfei.batt_charge_status_485_trans%></td>
+                <td><%zhangfei.batt_batt_status_485_trans%></td>
+                <td><%zhangfei.batt_ioput_status_485_trans%></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<%/battery485%>
 
 
 
