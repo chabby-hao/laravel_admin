@@ -53,6 +53,30 @@ class RedisLogic extends BaseLogic
         return self::$devData[$imei] = $data;
     }
 
+    public static function get485BatteryInfoByImei($imei)
+    {
+        $data = self::getDevDataByImei($imei);
+        if($data){
+            $battChargeStatus485Map = [
+                0=>'非充非放状态',
+                1=>'充电状态',
+                2=>'放电状态',
+            ];
+            $battBattStatus485Map = [
+                0=>'正常状态',
+                1=>'故障状态',
+            ];
+            $battIoputStatus485Map = [
+                0=>'输出关闭',
+                1=>'输出开通',
+            ];
+            $data['batt_charge_status_485_trans'] = $battChargeStatus485Map[$data['batt_charge_status_485']];
+            $data['batt_batt_status_485_trans'] = $battBattStatus485Map[$data['batt_batt_status_485']];
+            $data['batt_ioput_status_485_trans'] = $battIoputStatus485Map[$data['batt_ioput_status_485']];
+        }
+        return $data;
+    }
+
     public static function getBatteryTypeByImei($imei)
     {
         self::getRedis()->select(1);
@@ -74,7 +98,28 @@ class RedisLogic extends BaseLogic
 
     public static function getZhangfeiTransByImei($imei)
     {
+        $zhangfei = RedisLogic::getZhangfeiByImei($imei);
+        if($zhangfei){
+            $batteryOnlineStateMap = [
+                0=>'电池未连接，备用电池供电',
+                1=>'电池已连接，备用电池供电',
+                2=>'电池未连接，电瓶供电',
+                3=>'电池已连接，电瓶供电',
+            ];
+            $lineStateMap = [
+                0=>'线路异常',
+                1=>'线路正常',
+            ];
+            $batteryIOStateMap = [
+                0=>'不放电',
+                1=>'放电',
+            ];
 
+            $zhangfei['batteryOnlieStateTrans'] = $batteryOnlineStateMap[$zhangfei['batteryOnlieState']];
+            $zhangfei['lineStateTrans'] = $lineStateMap[$zhangfei['lineState']];
+            $zhangfei['batteryIOStateTrans'] = $batteryIOStateMap[$zhangfei['batteryIOState']];
+        }
+        return $zhangfei;
     }
 
     public static function getImeiByBatteryId($batteryId)

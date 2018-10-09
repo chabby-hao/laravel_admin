@@ -181,11 +181,13 @@ class DeviceController extends BaseController
             if($batteryType==BiDeliveryOrder::BATTERY_TYPE_XINPU || $batteryType==BiDeliveryOrder::BATTERY_TYPE_AIBIKE){
                 //张飞
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@historyZhangfei', ['imei' => $data['imei']]);
-                $zhangfei = RedisLogic::getZhangfeiByImei($data['imei']);
+                $zhangfei = RedisLogic::getZhangfeiTransByImei($data['imei']);
+                $data['zhangfei'] = $zhangfei;
             }elseif($batteryType==BiDeliveryOrder::BATTERY_TYPE_ZHONGLI){
                 //485
                 $data['batteryUrl'] = Url::action('Admin\DeviceController@four', ['imei' => $data['imei']]);
-                $battery485 = RedisLogic::getDevDataByImei($data['imei']);
+                $battery485 = RedisLogic::get485BatteryInfoByImei($data['imei']);
+                $data['battery485'] = $battery485;
             }
 
             //服务信息

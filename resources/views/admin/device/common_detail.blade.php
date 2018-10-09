@@ -253,25 +253,23 @@
         <table class="table table-bordered data-table">
             <thead>
             <tr>
-                <th>状态上报时间</th>
-                <th>电门状态</th>
-                <th>锁车状态</th>
-                <th>电瓶电压</th>
-                <th>剩余电量</th>
-                <th>备用电池</th>
-                <th>电瓶是否在位</th>
+                <th>电池在线状态</th>
+                <th>线路状态</th>
+                <th>电池ID</th>
+                <th>电池电量</th>
+                <th>电池电压</th>
+                <th>电芯温度</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%lastContact%></td>
-                <td><%turnonTrans%></td>
-                <td><%isLockTrans%></td>
-                <td><%voltage%>v</td>
-                <td><%battery%>%</td>
-                <td><%chipPower%>%</td>
-                <td><%chargeTrans%></td>
+                <td><%zhangfei.batteryOnlieStateMap%></td>
+                <td><%zhangfei.lineStateMap%></td>
+                <td><%zhangfei.batteryID%></td>
+                <td><%zhangfei.batteryLevel%>%</td>
+                <td><%zhangfei.batteryVoltage%>mv</td>
+                <td><%zhangfei.coreTemperature%>(0.001℃)</td>
                 <td>
                     {{--<a class="text-success">电门日志</a>--}}
                     <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
@@ -280,6 +278,26 @@
                     <a href="<%batteryUrl%>" class="text-success">电池状态</a>
                     <%/batteryUrl%>
                 </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered data-table">
+            <thead>
+            <tr>
+                <th>充放电循环次数</th>
+                <th>充放电电流</th>
+                <th>PCB 温度</th>
+                <th>电池健康状态</th>
+                <th>充放电状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="gradeX">
+                <td><%zhangfei.batteryCycleTimes%></td>
+                <td><%zhangfei.batteryIOCurrent%>mA</td>
+                <td><%zhangfei.PCBTemperature%>(0.001℃)</td>
+                <td><%zhangfei.batteryHealthState%>%</td>
+                <td><%zhangfei.batteryIOStateMap%>mv</td>
             </tr>
             </tbody>
         </table>
