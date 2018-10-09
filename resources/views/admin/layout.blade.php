@@ -187,7 +187,7 @@
 
 
         {{--工具管理--}}
-        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>客服工具</span>
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>运营工具</span>
             </a>
             <ul>
                 @if(Auth::user()->can('tool/file'))
@@ -216,6 +216,9 @@
                 @endif
                 @if(Auth::user()->can('tool/deviceExpireModify'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@deviceExpireModify')}}">设备有效期修改</a></li>
+                @endif
+                @if(Auth::user()->can('tool/lock'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@lock')}}">远程锁车</a></li>
                 @endif
             </ul>
         </li>

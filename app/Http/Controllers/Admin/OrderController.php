@@ -69,7 +69,9 @@ class OrderController extends BaseController
                 'expect_delivery',
                 'after_sale',
                 'remark',
-            ], $request->input(), ['remark','customer_id','scene_id']);
+                'customer_id',
+                'scene_id',
+            ], $request->input(), ['remark']);
 
             $input['user_id'] = Auth::id();
 

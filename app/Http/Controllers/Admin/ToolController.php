@@ -14,6 +14,7 @@ use App\Libs\MyPage;
 use App\Logics\AuthLogic;
 use App\Logics\CommandLogic;
 use App\Logics\DeviceLogic;
+use App\Logics\LockLogic;
 use App\Logics\RedisLogic;
 use App\Logics\UserLogic;
 use App\Models\BiFile;
@@ -403,6 +404,23 @@ class ToolController extends BaseController
         }
 
         return view('admin.tool.deviceexpiremodify');
+    }
+
+    public function lock(Request $request)
+    {
+        if($request->isXmlHttpRequest()){
+            if(!$udid = $this->getUdid($this->getId($request))){
+                return $this->outPutError('设备码有误');
+            }
+            $lock = $this->checkParams(['lock'],$request->input())['lock'];
+
+            if(!LockLogic::lock($udid, $lock,  Auth::user()->username)){
+                return $this->outPutError('操作失败，请联系管理员');
+            }
+            return $this->outPutSuccess();
+        }
+
+        return view('admin.tool.lock');
     }
 
 }

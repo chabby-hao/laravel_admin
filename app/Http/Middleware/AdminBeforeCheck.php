@@ -43,7 +43,7 @@ class AdminBeforeCheck
             header("Access-Control-Allow-Origin: *");
         }*/
 
-        Log::debug('user:' . Auth::user()->username . ' --- admin route : ' . $request->route()->getActionName());
+        Log::debug('user:' . Auth::user()->username . ' --- route : ' . $request->route()->getActionName(), $request->input());
 
         $routeName = $request->route()->getName();
 

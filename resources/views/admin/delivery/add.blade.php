@@ -29,14 +29,14 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">客户名称:</label>
+                                <label class="control-label"><span class="text-error">*</span>客户名称:</label>
                                 <div class="controls">
                                     <input id="customer_name" readonly value="" type="text" class="span11"/>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label">场景:</label>
+                                <label class="control-label"><span class="text-error">*</span>场景:</label>
                                 <div class="controls">
                                     <input id="scene_name" readonly value="" type="text" class="span11"/>
                                 </div>

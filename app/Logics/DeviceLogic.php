@@ -1327,16 +1327,18 @@ class DeviceLogic extends BaseLogic
 
 //        # 判断设备是否已归类
         $model = TDeviceCategoryDicNew::whereLevel(6)->whereType($type)->first();
-
-        $evmodel = 0;
-        if ($sceneId) {
+        /*if ($sceneId) {
             $ebikeType = BiEbikeType::find($sceneId);
             if (!$ebikeType) {
                 return false;
             }
             $evmodel = sprintf('%03s', $ebikeType->ev_model);
-        }
+        }*/
 
+        $evmodel = '001';
+        if($model){
+            $evmodel = sprintf('%03s', $model->ev_model);
+        }
 
         TDeviceCategory::updateOrCreate([
             'udid' => $udid,
@@ -1344,7 +1346,7 @@ class DeviceLogic extends BaseLogic
             'category' => $type,
             'channel' => $model ? $model->channel : 0,
             'brand' => $model ? $model->brand : 0,
-            'model' => $evmodel ? $model->brand . $evmodel : 0,
+            'model' => $model ? $model->brand . $evmodel : 0,
         ]);
 
         //将设备踢下线
