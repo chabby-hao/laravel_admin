@@ -1341,6 +1341,7 @@ class DeviceLogic extends BaseLogic
         }
 
         Log::debug($model->toJson());
+        Log::debug($evmodel);
 
         TDeviceCategory::updateOrCreate([
             'udid' => $udid,
