@@ -264,8 +264,8 @@
             </thead>
             <tbody>
             <tr class="gradeX">
-                <td><%zhangfei.batteryOnlieStateMap%></td>
-                <td><%zhangfei.lineStateMap%></td>
+                <td><%zhangfei.batteryOnlieStateTrans%></td>
+                <td><%zhangfei.lineStateTrans%></td>
                 <td><%zhangfei.batteryID%></td>
                 <td><%zhangfei.batteryLevel%>%</td>
                 <td><%zhangfei.batteryVoltage%>mv</td>
@@ -292,7 +292,7 @@
                 <td><%zhangfei.batteryIOCurrent%>mA</td>
                 <td><%zhangfei.PCBTemperature%>(0.001℃)</td>
                 <td><%zhangfei.batteryHealthState%>%</td>
-                <td><%zhangfei.batteryIOStateMap%>mv</td>
+                <td><%zhangfei.batteryIOStateTrans%>mv</td>
             </tr>
             </tbody>
         </table>
