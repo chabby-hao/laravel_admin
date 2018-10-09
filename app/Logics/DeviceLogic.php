@@ -1340,6 +1340,8 @@ class DeviceLogic extends BaseLogic
             $evmodel = sprintf('%03s', $model->ev_model);
         }
 
+        Log::debug($model->toJson());
+
         TDeviceCategory::updateOrCreate([
             'udid' => $udid,
         ], [
