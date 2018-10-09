@@ -271,12 +271,7 @@
                 <td><%zhangfei.batteryVoltage%>mv</td>
                 <td><%zhangfei.coreTemperature%>(0.001℃)</td>
                 <td>
-                    {{--<a class="text-success">电门日志</a>--}}
-                    <a href='<%lockLogUrl%>' class="text-success">锁车日志</a>
-                    <a href='<%historyStateUrl%>' class="text-success">历史状态</a>
-                    <%#batteryUrl%>
                     <a href="<%batteryUrl%>" class="text-success">电池状态</a>
-                    <%/batteryUrl%>
                 </td>
             </tr>
             </tbody>
