@@ -11,6 +11,8 @@ use App\Models\TUserDevice;
 class UserLogic extends BaseLogic
 {
 
+    public static $uidToPhone = [];
+
     /**
      * 根据管理员手机号获取udid列表
      */
@@ -30,6 +32,22 @@ class UserLogic extends BaseLogic
     {
         $model = TUser::wherePhone($phone)->first();
         return $model ? intval($model->uid) : false;
+    }
+
+    public static function getPhoneByUid($uid, $cache = false)
+    {
+        if($cache && isset(self::$uidToPhone[$uid])){
+            return self::$uidToPhone[$uid];
+        }
+        $phone = false;
+        $model = TUser::find($uid);
+        if($model){
+            $phone = $model->phone;
+        }
+        if($cache){
+            self::$uidToPhone[$uid] = $phone;
+        }
+        return $phone;
     }
 
     public static function getUserConfigByUid($uid)
