@@ -86,14 +86,15 @@ class AdminBeforeCheck
                 $permis = Permission::get();
                 foreach ($permis as $permi){
                     if($user->can($permi->name)){
+                        Session::flash('msg', '无权限查看');
                         return Redirect::to('/admin/' . $permi->name);
                     }
                 }
 
                 if($request->isXmlHttpRequest()){
-                    return response(['code'=>403,'msg'=>'未经授权操作']);
+                    return response(['code'=>403,'msg'=>'无权限查看']);
                 }
-                return abort(403,'未经授权操作');
+                return abort(403,'无权限查看');
             }
 
             return $next($request);
