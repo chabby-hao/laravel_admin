@@ -109,6 +109,16 @@ class DeviceObject extends BaseObject
         return $map;
     }
 
+    const DEVICE_TYPE_OPTIONS_485 = '485';
+
+    public static function getDeviceTypeOptions()
+    {
+        $arr = [
+            self::DEVICE_TYPE_OPTIONS_485,
+        ];
+
+    }
+
     public $udid = '';//设备号
     public $imei = '';//imei号
     public $productType = 0;//产品型号id
