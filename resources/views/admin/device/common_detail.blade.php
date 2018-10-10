@@ -510,29 +510,27 @@
                 <td><%caremsg.inuse.0%></td>
                 <td><%caremsg.care.0%></td>
                 <td><%caremsg.fault.0%></td>
+                <td><a class="text-success" href="<%messageUrl%>">历史消息</a></td>
             </tr>
             <tr class="gradeX">
                 <td><%caremsg.safe.1%></td>
                 <td><%caremsg.inuse.1%></td>
                 <td><%caremsg.care.1%></td>
                 <td><%caremsg.fault.1%></td>
+                <td></td>
             </tr>
             <tr class="gradeX">
                 <td><%caremsg.safe.2%></td>
                 <td><%caremsg.inuse.2%></td>
                 <td><%caremsg.care.2%></td>
                 <td><%caremsg.fault.2%></td>
+                <td></td>
             </tr>
             <tr class="gradeX">
                 <td><%caremsg.safe.3%></td>
                 <td><%caremsg.inuse.3%></td>
                 <td><%caremsg.care.3%></td>
                 <td><%caremsg.fault.3%></td>
-            </tr>
-            <tr class="gradeX">
-                <td><a class="text-success" href="<%messageUrl%>">历史消息</a></td>
-                <td></td>
-                <td></td>
                 <td></td>
             </tr>
             </tbody>
