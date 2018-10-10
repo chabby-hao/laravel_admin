@@ -10,6 +10,7 @@ use App\Libs\Helper;
  * @property int $id
  * @property string|null $name
  * @property string|null $remark
+ * @property string|null $options
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereRemark($value)
@@ -22,7 +23,8 @@ class BiDeviceType extends \App\Models\Base\BiDeviceType
 
 	protected $fillable = [
 		'name',
-		'remark'
+		'remark',
+        'options',
 	];
 
     public static function getNameMap($cache = true)
