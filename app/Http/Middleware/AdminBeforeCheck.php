@@ -87,7 +87,7 @@ class AdminBeforeCheck
                 foreach ($permis as $permi){
                     if($user->can($permi->name)){
                         Session::flash('msg', '无权限查看');
-//                        Session::flash('msgClass','alert-error');
+                        Session::flash('msgClass','alert-error');
                         return Redirect::to('/admin/' . $permi->name);
                     }
                 }
