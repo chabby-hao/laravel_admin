@@ -267,7 +267,7 @@
             <a href="#" class="current"><?php echo \App\Logics\AuthLogic::getPermisName(); ?></a>
         </div>
         @if($msg = Session::get('msg'))
-            <div class="alert alert-success mymsg">
+            <div class="alert alert-success {{Session::get('msgClass')}} mymsg">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <strong>{{$msg}}</strong>
             </div>
