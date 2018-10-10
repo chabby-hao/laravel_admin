@@ -34,14 +34,15 @@
                             <thead>
                             <tr>
                                 <th>上报时间</th>
+                                <th>卫星数</th>
                                 <th>信号强度</th>
-
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
                                     <td>{{$data->datetime}}</td>
+                                    <td>{{$data->satCount}}</td>
                                     <td>{{$data->snr_json}}</td>
                                 </tr>
                             @endforeach

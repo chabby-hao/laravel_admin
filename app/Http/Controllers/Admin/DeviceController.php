@@ -945,7 +945,6 @@ class DeviceController extends BaseController
             $row->datetime = Carbon::createFromTimestamp($row->create_time)->toDateTimeString();
 
             $r=json_decode($row->snr_json,true);
-            $str = '';
             $arr = [];
             if($r){
 
@@ -954,9 +953,12 @@ class DeviceController extends BaseController
                 $r=$r.']';
                 $r=json_decode($r,true);
             }
+            $row->satCount = count($r);
             foreach ($r as $v) {
                 foreach ($v as $k => $vs){
-                    $arr[]= $k . '=' . $vs;
+                    if($k == 'snr'){
+                        $arr[]= $k . '=' . $vs;
+                    }
                 }
             }
             $str = implode(' , ', $arr);

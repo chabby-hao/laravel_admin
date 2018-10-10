@@ -53,6 +53,8 @@
                                 <th>备用电池</th>
                                 <th>GSM信号强度</th>
                                 <th>电瓶是否在位</th>
+                                <th>卫星数</th>
+                                <th>定位精度</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -66,6 +68,8 @@
                                     <td>{{$data->battery}}</td>
                                     <td>{{$data->gsm}}</td>
                                     <td>{{$data->usb_trans}}</td>
+                                    <td>{{$data->satCount}}</td>
+                                    <td>{{$data->accuracy}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
