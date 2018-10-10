@@ -116,7 +116,7 @@ class DeviceObject extends BaseObject
         $arr = [
             self::DEVICE_TYPE_OPTIONS_485,
         ];
-
+        return $arr;
     }
 
     public $udid = '';//设备号
