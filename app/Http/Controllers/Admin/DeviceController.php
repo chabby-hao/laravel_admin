@@ -175,6 +175,7 @@ class DeviceController extends BaseController
             $data['historyStateUrl'] = Url::action('Admin\DeviceController@historyState', ['imei' => $data['imei']]);
             $data['mileageUrl'] = Url::action('Admin\DeviceController@mileageList', ['id' => $udid]);
             $data['satellite'] = Url::action('Admin\DeviceController@historyStrength', ['imei' => $data['imei']]);
+            $data['messageUrl'] = Url::action('Admin\MessageController@list', ['imei' => $data['imei']]);
 
             $batteryType=RedisLogic::getBatteryTypeByImei($data['imei']);
 

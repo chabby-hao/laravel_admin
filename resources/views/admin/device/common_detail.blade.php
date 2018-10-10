@@ -501,6 +501,7 @@
                 <th>用车</th>
                 <th>关怀</th>
                 <th>故障</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -527,6 +528,12 @@
                 <td><%caremsg.inuse.3%></td>
                 <td><%caremsg.care.3%></td>
                 <td><%caremsg.fault.3%></td>
+            </tr>
+            <tr class="gradeX">
+                <td><a class="text-success" href="<%messageUrl%>">历史消息</a></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
