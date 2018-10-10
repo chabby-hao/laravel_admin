@@ -20,6 +20,7 @@
                                 <th>型号id</th>
                                 <th>型号名称</th>
                                 <th>备注</th>
+                                <th>特性</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
@@ -30,6 +31,7 @@
                                     <td>{{$data->id}}</td>
                                     <td>{{$data->name}}</td>
                                     <td>{{$data->remark}}</td>
+                                    <td>{{$data->options}}</td>
                                     <td>
                                         <a href="{{URL::action('Admin\DeviceController@typesedit',['id'=>$data->id])}}" class="btn btn-warning">编辑</a>
                                     </td>
