@@ -1087,7 +1087,11 @@ class DeviceController extends BaseController
         if($request->isMethod('post')){
             $name=$request->input('name');
             $remark=$request->input('remark');
-            if(DB::table('bi_device_types')->insert(['name'=>$name,'remark'=>$remark])){
+            $options = $request->input('options');
+            if($options){
+                $options = json_encode($options);
+            }
+            if(DB::table('bi_device_types')->insert(['name'=>$name,'remark'=>$remark,'options'=>$options])){
                 return $this->outPutRedirect(URL::action('Admin\DeviceController@types'));
             }else{
                 return $this->outPutError('添加失败');
@@ -1100,14 +1104,22 @@ class DeviceController extends BaseController
         if($request->isMethod('get')){
             $id=$request->input('id');
             $type=DB::table('bi_device_types')->where('id',$id)->first();
-            return view('admin.device.typesedit',['datas'=>$type]);
+            $options = [];
+            if($type->options){
+                $options = json_decode($type->options, true);
+            }
+            return view('admin.device.typesedit',['datas'=>$type,'options'=>$options]);
         }
 
         if($request->isMethod('post')){
             $id=$request->input('id');
             $name=$request->input('name');
             $remark=$request->input('remark');
-            if(DB::table('bi_device_types')->where('id',$id)->update(['name'=>$name,'remark'=>$remark])){
+            $options = $request->input('options');
+            if($options){
+                $options = json_encode($options);
+            }
+            if(DB::table('bi_device_types')->where('id',$id)->update(['name'=>$name,'remark'=>$remark,'options'=>$options])){
                 return $this->outPutRedirect(URL::action('Admin\DeviceController@types'));
             }else{
                 return $this->outPutError('无修改信息');

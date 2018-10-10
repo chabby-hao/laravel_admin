@@ -24,7 +24,16 @@
                                 </div>
                             </div>
 
-
+                            <div class="control-group">
+                                <label class="control-label"><span class="text-error">*</span>特性选择 :</label>
+                                <div class="controls">
+                                    @foreach(\App\Objects\DeviceObject::getDeviceTypeOptions() as $v)
+                                        <label>
+                                            <input type="checkbox" name="options[]" @if(in_array($v, $options)) checked @endif value="{{$v}}"/>
+                                            {{$v}}</label>
+                                    @endforeach
+                                </div>
+                            </div>
 
                             <div class="form-actions">
                                 <button type="button" id="mysubmit" class="btn btn-success">提交</button>
