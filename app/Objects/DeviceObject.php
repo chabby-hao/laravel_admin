@@ -110,13 +110,13 @@ class DeviceObject extends BaseObject
     }
 
     const DEVICE_TYPE_OPTIONS_485 = '485';
-    const DEVICE_TYPE_OPTOPMS_ZHANGFEI = 'zhangfei';
+    const DEVICE_TYPE_OPTOPMS_YIXIANTONG = 'yixiantong';
 
     public static function getDeviceTypeOptions()
     {
         $arr = [
             self::DEVICE_TYPE_OPTIONS_485,
-            self::DEVICE_TYPE_OPTOPMS_ZHANGFEI,
+            self::DEVICE_TYPE_OPTOPMS_YIXIANTONG,
         ];
         return $arr;
     }
