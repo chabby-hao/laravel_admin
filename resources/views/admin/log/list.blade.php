@@ -33,6 +33,7 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
+                                <th>操作序号</th>
                                 <th>时间</th>
                                 <th>操作人</th>
                                 <th>描述</th>
@@ -41,6 +42,7 @@
                             <tbody>
                             @foreach($datas as $data)
                                 <tr class="gradeX">
+                                    <td>{{$data->id}}</td>
                                     <td>{{$data->created_at}}</td>
                                     <td>{{$data->username}}</td>
                                     <td>{{$data->desc}}</td>
