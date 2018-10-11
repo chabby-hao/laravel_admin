@@ -255,6 +255,16 @@
             </ul>
         </li>
 
+        {{--系统设置--}}
+        <li class="submenu"><a href="#"><i class="icon icon-th-list"></i> <span>系统设置</span>
+            </a>
+            <ul>
+                @if(Auth::user()->can('log/list'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ChannelController@list')}}">操作日志</a></li>
+                @endif
+            </ul>
+        </li>
+
 
     </ul>
 </div>

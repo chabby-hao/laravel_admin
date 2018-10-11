@@ -75,6 +75,9 @@ Route::any('/device/four','Admin\DeviceController@four');
 //消息
 Route::any('/message/list','Admin\MessageController@list');
 
+//日志
+Route::any('/log/list','Admin\LogController@list');
+
 
 //订单
 Route::any('/order/list','Admin\OrderController@list');
