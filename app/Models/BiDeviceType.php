@@ -15,6 +15,7 @@ use App\Libs\Helper;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereRemark($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiDeviceType whereOptions($value)
  */
 class BiDeviceType extends \App\Models\Base\BiDeviceType
 {

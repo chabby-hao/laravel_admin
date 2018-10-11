@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 12 Sep 2018 16:14:56 +0800.
+ * Date: Thu, 11 Oct 2018 16:13:45 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,15 +11,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class PasswordReset
- *
+ * 
  * @property string $email
  * @property string $token
  * @property \Carbon\Carbon $created_at
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\PasswordReset whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\PasswordReset whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\PasswordReset whereToken($value)
- * @mixin \Eloquent
  */
 class PasswordReset extends Eloquent
 {

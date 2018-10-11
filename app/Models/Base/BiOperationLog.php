@@ -10,21 +10,26 @@ namespace App\Models\Base;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class BiActiveDevice
+ * Class BiOperationLog
  * 
  * @property int $id
- * @property string $date
- * @property int $total
+ * @property int $user_id
+ * @property string $username
+ * @property int $type
+ * @property int $desc
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  *
  * @package App\Models\Base
  */
-class BiActiveDevice extends Eloquent
+class BiOperationLog extends Eloquent
 {
 	protected $connection = 'bi';
+	protected $table = 'bi_operation_log';
 
 	protected $casts = [
-		'total' => 'int'
+		'user_id' => 'int',
+		'type' => 'int',
+		'desc' => 'int'
 	];
 }

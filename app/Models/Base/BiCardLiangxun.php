@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 12 Sep 2018 16:14:56 +0800.
+ * Date: Thu, 11 Oct 2018 16:13:45 +0800.
  */
 
 namespace App\Models\Base;
@@ -11,7 +11,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class BiCardLiangxun
- *
+ * 
  * @property int $id
  * @property string $msisdn
  * @property string $iccid
@@ -29,25 +29,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $active_date
  * @property float $data_balance
  * @property \Carbon\Carbon $outbound_date
+ *
  * @package App\Models\Base
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereAccountStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereActiveDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereCarrier($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereCurrentDateUsage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereDataBalance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereDataPlan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereDataUsage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereExpiryDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereIccid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereImsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereMsisdn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereOutboundDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereSilentValidDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereTestUsedDataUsage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Base\BiCardLiangxun whereTestValidDate($value)
- * @mixin \Eloquent
  */
 class BiCardLiangxun extends Eloquent
 {

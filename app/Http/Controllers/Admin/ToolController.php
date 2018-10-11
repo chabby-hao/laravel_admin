@@ -346,6 +346,8 @@ class ToolController extends BaseController
 
             TUserDevice::whereUdid($udid)->delete();
 
+
+
             return $this->outPutSuccess();
         }
 
