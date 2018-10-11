@@ -26,6 +26,7 @@ class BiOperationLog extends \App\Models\Base\BiOperationLog
     const TYPE_TOOL_USER_DEVICE_DEL = 1000;//设备清空用户
     const TYPE_TOOL_USER_DEVICE_ADD = 1001;//设备添加用户
     const TYPE_TOOL_DEVICE_EXPIRE_MODIFY = 1002;//设备有效期修改
+    const TYPE_TOOL_DEVICE_CMD_SEND = 1003;//命令调试
 
 	protected $fillable = [
 		'type',

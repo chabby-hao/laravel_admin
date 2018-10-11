@@ -18,6 +18,7 @@ use App\Logics\LockLogic;
 use App\Logics\RedisLogic;
 use App\Logics\UserLogic;
 use App\Models\BiFile;
+use App\Models\BiOperationLog;
 use App\Models\BiUser;
 use App\Models\Role;
 use App\Models\TDeviceCode;
@@ -328,6 +329,7 @@ class ToolController extends BaseController
             $input = $this->checkParams(['id','cmd'], $request->input());
             if($udid = $this->getUdid($input['id'])){
                 CommandLogic::sendCmdByUdid($udid, $input['cmd']);
+                BiOperationLog::addLog(BiOperationLog::TYPE_TOOL_DEVICE_CMD_SEND, "设备码{$udid}下发命令{$input['cmd']}");
                 return $this->outPutSuccess();
             }
             return $this->outPutError('数据有误');
@@ -346,7 +348,7 @@ class ToolController extends BaseController
 
             TUserDevice::whereUdid($udid)->delete();
 
-
+            BiOperationLog::addLog(BiOperationLog::TYPE_TOOL_USER_DEVICE_DEL, "设备码{$udid}清空用户");
 
             return $this->outPutSuccess();
         }
@@ -380,6 +382,10 @@ class ToolController extends BaseController
                 'type'=>0,
             ]);
 
+            $trans = TUserDevice::getUserTypeMap($input['owner']);
+
+            BiOperationLog::addLog(BiOperationLog::TYPE_TOOL_USER_DEVICE_ADD, "设备码{$udid}添加{$trans}{$input['phone']}");
+
             return $this->outPutSuccess();
         }
 
@@ -401,6 +407,8 @@ class ToolController extends BaseController
             $time = Carbon::parse($date)->getTimestamp();
             $model->expire = $time;
             $model->save();
+
+            BiOperationLog::addLog(BiOperationLog::TYPE_TOOL_DEVICE_EXPIRE_MODIFY, "设备码{$udid}修改有效期至{$date}");
 
             return $this->outPutSuccess();
         }
