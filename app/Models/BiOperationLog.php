@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Auth;
  *
  * @property int $id
  * @property int $type 操作类型
- * @property int $desc 描述
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOperationLog whereDesc($value)
+ * @property int $description 描述
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOperationLog whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\BiOperationLog whereType($value)
  * @mixin \Eloquent
@@ -30,7 +29,7 @@ class BiOperationLog extends \App\Models\Base\BiOperationLog
 
 	protected $fillable = [
 		'type',
-		'desc'
+		'description'
 	];
 
 	public static function addLog($type, $desc)
@@ -41,7 +40,7 @@ class BiOperationLog extends \App\Models\Base\BiOperationLog
         $model->user_id = $user->id;
         $model->username = $user->username;
         $model->type = $type;
-        $model->desc = $desc;
+        $model->description = $desc;
         return $model->save();
     }
 }
