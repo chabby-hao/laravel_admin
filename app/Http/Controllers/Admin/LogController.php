@@ -40,8 +40,7 @@ class LogController extends BaseController
 
         list($startDatetime, $endDatetime) = $this->getDaterange();
 
-        $whereBetween = ['time', [Carbon::parse($startDatetime)->getTimestamp(), Carbon::parse($endDatetime)->getTimestamp()]];
-        $paginate = BiOperationLog::whereBetween($whereBetween[0], $whereBetween[1])
+        $paginate = BiOperationLog::whereBetween('created_at', [$startDatetime, $endDatetime])
             ->orderByDesc('id')->paginate();
 
 
