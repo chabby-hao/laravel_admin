@@ -260,7 +260,7 @@
             </a>
             <ul>
                 @if(Auth::user()->can('log/list'))
-                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ChannelController@list')}}">操作日志</a></li>
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\LogController@list')}}">操作日志</a></li>
                 @endif
             </ul>
         </li>
