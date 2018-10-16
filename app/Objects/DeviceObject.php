@@ -114,7 +114,8 @@ class DeviceObject extends BaseObject
     {
         $arr = [
             '485电池',
-            '485控制器	485仪表',
+            '485控制器',
+            '485仪表',
             '安显/新思维一线通输入',
             '增强一线通输出',
             'TX／RX',
