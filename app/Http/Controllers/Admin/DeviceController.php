@@ -1074,6 +1074,12 @@ class DeviceController extends BaseController
         $paginates=DB::table('bi_device_types')->orderBy('id','desc')->paginate();
         $data = $paginates->items();
 
+        foreach ($data as $row){
+            if($row->options){
+                $row->options = implode("\r\n", json_decode($row->options, true));
+            }
+        }
+
         return view('admin.device.types',
             [   'datas'=>$data,
                 'page_nav' => MyPage::showPageNav($paginates)
