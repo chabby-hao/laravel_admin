@@ -109,16 +109,27 @@ class DeviceObject extends BaseObject
         return $map;
     }
 
-    const DEVICE_TYPE_OPTIONS_485 = '485';
-    const DEVICE_TYPE_OPTOPMS_YIXIANTONG = 'yixiantong';
-    const DEVICE_TYPE_OPTOPMS_TXRX = 'TX/RX';
 
     public static function getDeviceTypeOptions()
     {
         $arr = [
-            self::DEVICE_TYPE_OPTIONS_485,
-            self::DEVICE_TYPE_OPTOPMS_YIXIANTONG,
-            self::DEVICE_TYPE_OPTOPMS_TXRX,
+            '485电池',
+            '485控制器	485仪表',
+            '安显/新思维',
+            '一线通输入',
+            '增强一线通输出',
+            'TX／RX',
+            '电源',
+            'BLE',
+            '电门控制',
+            '电门检测',
+            '控制器锁车',
+            '防盗器锁车',
+            '12V输出',
+            '电池锁',
+            '6轴传感器',
+            '3轴传感器',
+            '震动开关',
         ];
         return $arr;
     }
