@@ -5,7 +5,7 @@ namespace App\Libs;
 class IntHelper
 {
 
-    public static function uInt(int $i,int $len = 0)
+    public static function uInt($i,int $len = 0)
     {
         if(!$len){
             $len = strlen($i);

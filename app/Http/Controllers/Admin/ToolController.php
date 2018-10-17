@@ -486,7 +486,7 @@ class ToolController extends BaseController
             $imei = DeviceLogic::getImei($udid);
 
             $input = $this->checkParams(['configId','len','value'], $request->input());
-            if($value = IntHelper::uInt($input['value'], $input['len'])){
+            if($value = IntHelper::uInt(intval($input['value']), $input['len'])){
                 RedisLogic::devConfigSet($imei, $input['configId'], $value);
                 return $this->outPutSuccess();
             }
