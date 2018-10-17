@@ -440,6 +440,7 @@ class ToolController extends BaseController
             $id = $request->input('id');
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
+
             $imei = '357550110389790';
 
             $devRecordCfg = RedisLogic::getDevRecordConfig($imei);

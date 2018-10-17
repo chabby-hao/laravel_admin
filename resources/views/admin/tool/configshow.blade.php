@@ -9,13 +9,11 @@
                         <h5>筛选查询</h5>
                     </div>
                     <div class="widget-content">
-                        <form method="get" class="form-search">
+                        <form  class="form-search">
                             <div class="control-group">
                                 <div class="inline-block w10">
-                                    <input class="w1 margintop" type="text" name="MstSn" value="{{Request::input('MstSn')}}" placeholder="MstSn">
-                                    <input class="w1 margintop" type="text" name="CiNum" value="{{Request::input('CiNum')}}" placeholder="CiNum">
-                                    <input class="w1 margintop" type="text" name="CPAct" value="{{Request::input('CPAct')}}" placeholder="CPAct">
-                                    <input type="submit" class="btn btn-success margintop search" value="查询">
+                                    <input class="w1 margintop" type="text" name="id" id="id" value="{{Request::input('id')}}" placeholder="请输入UDID/IMEI/IMSI">
+                                    <input type="button" class="btn btn-success margintop search" value="查询">
 
                                 </div>
 
@@ -33,7 +31,7 @@
                             <div class="span6">
                                 <h5>DeviceRecordCgf</h5>
                                 <table class="">
-                                    <tbody>
+                                    <tbody id="recordBody">
 
                                     <script id="template" type="x-tmpl-mustache">
                                         <%#recordConfig%>
@@ -49,13 +47,16 @@
                             <div class="span6">
                                 <h5>DeviceSendCgf</h5>
                                 <table class="">
-                                    <tbody>
+                                    <tbody id="sendBody">
 
-                                        {{--@foreach($devSendCfg as $k=>$v)
+
+                                        <script id="template" type="x-tmpl-mustache">
+                                            <%#sendConfig%>
                                             <tr>
-                                                <td><strong>{{$k}}：{{$v}}</strong></td>
+                                                <td><strong>{{$id}}：{{$value}}</strong></td>
                                             </tr>
-                                        @endforeach--}}
+                                            <%/sendConfig%>
+                                        </script>
 
                                     </tbody>
                                 </table>
@@ -86,13 +87,36 @@
             var template = $('#template').html();
             Mustache.parse(template);   // optional, speeds up future uses
 
+            var template2 = $('#template2').html();
+            Mustache.parse(template2);   // optional, speeds up future uses
 
-            window.render = function (data) {
-                console.log(data);
-                var target = $("#box");
-                var rendered = Mustache.render(template, data);
-                target.html(rendered);
+            function search(){
+                var id = $("#id").val();
+                if(id){
+                    search(id);
+                }
+                $.ajax({
+                    url:'{{URL::action('Admin\ToolController@configShow')}}',
+                    data:{id:id},
+                    success:function (data) {
+                        console.log(data);
+                        var target = $("#recordBody");
+                        var rendered = Mustache.render(template, data);
+                        target.html(rendered);
+
+                        var target2 = $("#sendBody");
+                        var rendered2 = Mustache.render(template2, data);
+                        target2.html(rendered2);
+                    }
+                })
             }
+
+            search();
+
+            $(".search").click(function () {
+                search();
+            })
+
         })
     </script>
 
