@@ -220,6 +220,12 @@
                 @if(Auth::user()->can('tool/lock'))
                     <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@lock')}}">远程锁车</a></li>
                 @endif
+                @if(Auth::user()->can('tool/configShow'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@configShow')}}">配置项查询</a></li>
+                @endif
+                @if(Auth::user()->can('tool/configSet'))
+                    <li><a href="{{\Illuminate\Support\Facades\URL::action('Admin\ToolController@configSet')}}">配置项设置</a></li>
+                @endif
             </ul>
         </li>
 
