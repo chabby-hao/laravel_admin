@@ -6,14 +6,15 @@
 
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-search"></i> </span>
-                        <h5>筛选查询</h5>
+                        <h5>查询</h5>
                     </div>
                     <div class="widget-content">
-                        <form  class="form-search">
+                        <form method="get" action="{{Url::action('Admin\ToolController@configSet')}}" class="form-search">
                             <div class="control-group">
                                 <div class="inline-block w10">
                                     <input class="w3 margintop" type="text" name="id" id="id" value="{{Request::input('id')}}" placeholder="请输入设备码/IMEI/IMSI">
                                     <input type="button" class="btn btn-success margintop search" value="查询">
+                                    <input type="submit" class="btn btn-warning margintop" value="设置" >
 
                                 </div>
 
