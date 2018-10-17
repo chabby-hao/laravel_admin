@@ -2,6 +2,69 @@
 @section('content')
     <div class="container-fluid">
         <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-briefcase"></i> </span>
+                        <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
+                    </div>
+                    <div class="widget-content">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <table class="">
+                                    <tbody>
+                                    <tr>
+                                        <td><strong>料号：{{$data->part_number}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>出货单号：{{$data->ship_no}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>设备型号：{{$data->device_type_name}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>要求出货时间：{{$data->delivery_date}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>出货数量：{{$data->delivery_quantity}}</strong></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="span6">
+                                <form class="form-search" id="myform" method="post" enctype="multipart/form-data">
+                                    <div class="control-group">
+                                        <div class="controls controls-row">
+
+                                            <div class="inline-block">
+                                                <label>上传附件</label>
+                                                <input class="file-uploading" name="myfile" type="file"/>
+                                                {{--<span class="help-block">点击下载模板示例: <a href="">示例文件</a></span>--}}
+                                            </div>
+
+                                            <div class="inline-block">
+                                                <span class="help-block">点击下载附件示例: <a href="{{asset('demo/factdemo.xlsx')}}">示例文件</a></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="widget-box">
+                                    <div class="widget-content mytable">
+                                        {{--<div class="mydiv">35755249243223</div>--}}
+                                    </div>
+                                </div>
+                                <div class="pull-right">
+                                    <a class="btn btn-primary btn-large pull-right" id="mysubmit" href="javascript:">提交</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="span6">
                 <div class="widget-box">
                     <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
