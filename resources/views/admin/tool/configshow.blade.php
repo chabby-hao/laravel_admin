@@ -12,21 +12,13 @@
                                 <h5>DeviceRecordCgf</h5>
                                 <table class="">
                                     <tbody>
-                                    <tr>
-                                        <td><strong>料号：{{$data->part_number}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>出货单号：{{$data->ship_no}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>设备型号：{{$data->device_type_name}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>要求出货时间：{{$data->delivery_date}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>出货数量：{{$data->delivery_quantity}}</strong></td>
-                                    </tr>
+
+                                        @foreach($devRecordCfg as $k=>$v)
+                                            <tr>
+                                                <td><strong>{{$k}}：{{$v}}</strong></td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -34,21 +26,13 @@
                                 <h5>DeviceSendCgf</h5>
                                 <table class="">
                                     <tbody>
-                                    <tr>
-                                        <td><strong>料号：{{$data->part_number}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>出货单号：{{$data->ship_no}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>设备型号：{{$data->device_type_name}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>要求出货时间：{{$data->delivery_date}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>出货数量：{{$data->delivery_quantity}}</strong></td>
-                                    </tr>
+
+                                        @foreach($devSendCfg as $k=>$v)
+                                            <tr>
+                                                <td><strong>{{$k}}：{{$v}}</strong></td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>

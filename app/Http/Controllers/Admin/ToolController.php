@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Libs\Helper;
+use App\Libs\IntHelper;
 use App\Libs\MyPage;
 use App\Logics\AuthLogic;
 use App\Logics\CommandLogic;
@@ -444,24 +445,20 @@ class ToolController extends BaseController
             $devRecordCfg = RedisLogic::getDevRecordConfig($imei);
             $devSendCfg = RedisLogic::getDevSendConfig($imei);
 
-            foreach ($devRecordCfg as $k=>$v){
-                $len = strlen($v);
-                var_dump([
-                    'k'=>$k,
-                    'v'=>$v,
-                    'l'=>strlen($v),
-                    'unpack'=>unpack('C', $v),
-                    'unpack2'=>unpack("C$len", $v),
-                ]);
+            foreach ($devRecordCfg as $k=>&$v){
+                $v = IntHelper::uInt($v);
             }
 
-            foreach ($devSendCfg as $k=>$v){
-                var_dump($k, strlen($v));
+            foreach ($devSendCfg as $k=>&$v){
+                $v = IntHelper::uInt($v);
             }
 
         }
 
-        return view('admin.tool.configshow');
+        return view('admin.tool.configshow', [
+            'devRecordCfg'=>$devRecordCfg,
+            'devSendCfg'=>$devSendCfg,
+        ]);
 
     }
 
