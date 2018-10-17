@@ -28,8 +28,8 @@
                         <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
                     </div>
                     <div class="widget-content">
+                        <div class="row-fluid">
                             <div class="span6">
-                                <div class="row-fluid">
                                 <h5>DeviceRecordCgf</h5>
                                 <table class="">
                                     <tbody id="recordBody">
@@ -44,7 +44,6 @@
 
                                     </tbody>
                                 </table>
-                                </div>
                             </div>
                             <div class="span6">
                                 <h5>DeviceSendCgf</h5>
@@ -63,6 +62,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
                         <div class="row-fluid">
                         </div>
                     </div>
