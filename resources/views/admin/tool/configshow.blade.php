@@ -29,6 +29,7 @@
                     </div>
                     <div class="widget-content">
                             <div class="span6">
+                                <div class="row-fluid">
                                 <h5>DeviceRecordCgf</h5>
                                 <table class="">
                                     <tbody id="recordBody">
@@ -43,6 +44,7 @@
 
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                             <div class="span6">
                                 <h5>DeviceSendCgf</h5>
@@ -62,13 +64,6 @@
                                 </table>
                             </div>
                         <div class="row-fluid">
-                            <div class="span12">
-                                <div class="widget-box">
-                                    <div class="widget-content mytable">
-                                        {{--<div class="mydiv">35755249243223</div>--}}
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
