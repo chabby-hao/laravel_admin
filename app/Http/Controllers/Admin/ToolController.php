@@ -436,12 +436,12 @@ class ToolController extends BaseController
 
     public function configShow(Request $request)
     {
-        if($request->isXmlHttpRequest() || true){
+        if($request->isXmlHttpRequest()){
             $id = $request->input('id');
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
 
-            $imei = '357550110389790';
+            //$imei = '357550110389790';
 
             $devRecordCfg = RedisLogic::getDevRecordConfig($imei);
             $devSendCfg = RedisLogic::getDevSendConfig($imei);
@@ -465,14 +465,14 @@ class ToolController extends BaseController
                 ];
             }
 
-
+            return $this->outPut([
+                'recordConfig'=>$recordConfig,
+                'sendConfig'=>$sendConfig,
+            ]);
 
         }
 
-        return view('admin.tool.configshow', [
-            'recordConfig'=>$recordConfig,
-            'sendConfig'=>$sendConfig,
-        ]);
+        return view('admin.tool.configshow');
 
     }
 
