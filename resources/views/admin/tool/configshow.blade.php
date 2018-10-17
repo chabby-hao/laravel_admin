@@ -28,40 +28,41 @@
                         <h5>{{\App\Logics\AuthLogic::getPermisName() }}</h5>
                     </div>
                     <div class="widget-content">
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <h5>DeviceRecordCgf</h5>
-                                <table class="">
-                                    <tbody id="recordBody">
 
-                                    <script id="template" type="x-tmpl-mustache">
-                                        <%#recordConfig%>
+                        <div class="span6">
+                            <h5>DeviceRecordCgf</h5>
+                            <table class="">
+                                <tbody id="recordBody">
+
+                                <script id="template" type="x-tmpl-mustache">
+                                    <%#recordConfig%>
+                                    <tr>
+                                        <td><strong><%id%>：<%value%></strong></td>
+                                    </tr>
+                                    <%/recordConfig%>
+                                </script>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="span6">
+                            <h5>DeviceSendCgf</h5>
+                            <table class="">
+                                <tbody id="sendBody">
+
+
+                                    <script id="template2" type="x-tmpl-mustache">
+                                        <%#sendConfig%>
                                         <tr>
-                                            <td><strong><%id%>：<%value%></strong></td>
+                                            <td><strong>{{$id}}：{{$value}}</strong></td>
                                         </tr>
-                                        <%/recordConfig%>
+                                        <%/sendConfig%>
                                     </script>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="span6">
-                                <h5>DeviceSendCgf</h5>
-                                <table class="">
-                                    <tbody id="sendBody">
-
-
-                                        <script id="template2" type="x-tmpl-mustache">
-                                            <%#sendConfig%>
-                                            <tr>
-                                                <td><strong>{{$id}}：{{$value}}</strong></td>
-                                            </tr>
-                                            <%/sendConfig%>
-                                        </script>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row-fluid">
                         </div>
                     </div>
                 </div>
