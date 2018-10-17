@@ -50,7 +50,7 @@
                                     <tbody id="sendBody">
 
 
-                                        <script id="template" type="x-tmpl-mustache">
+                                        <script id="template2" type="x-tmpl-mustache">
                                             <%#sendConfig%>
                                             <tr>
                                                 <td><strong>{{$id}}：{{$value}}</strong></td>
