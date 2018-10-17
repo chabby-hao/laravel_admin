@@ -435,15 +435,20 @@ class ToolController extends BaseController
 
     public function configShow(Request $request)
     {
-        if($request->isXmlHttpRequest()){
+        if($request->isXmlHttpRequest() || true){
             $id = $request->input('id');
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
+            $imei = '357550110389790';
 
             $devRecordCfg = RedisLogic::getDevRecordConfig($imei);
             $devSendCfg = RedisLogic::getDevSendConfig($imei);
 
             foreach ($devRecordCfg as $k=>$v){
+                var_dump($k, strlen($v));
+            }
+
+            foreach ($devSendCfg as $k=>$v){
                 var_dump($k, strlen($v));
             }
 
