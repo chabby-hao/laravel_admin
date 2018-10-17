@@ -304,4 +304,11 @@ class RedisLogic extends BaseLogic
         return self::getRedis()->hgetall($key);
     }
 
+    public static function devConfigSet($imei, $hashKey, $value)
+    {
+        $key = 'DeviceSendCgf:' . $imei;
+        self::getRedis()->select(6);
+        return self::getRedis()->hset($key, $hashKey, $value);
+    }
+
 }

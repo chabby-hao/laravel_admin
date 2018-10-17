@@ -13,16 +13,32 @@
                             <div class="control-group single">
                                 <label class="control-label"><span class="text-error">*</span>设备码 :</label>
                                 <div class="controls">
-                                    <input name="id" value="" type="text" class="span11"/>
+                                    <input name="id" value="{{Request::input('id')}}" type="text" class="span11"/>
                                     <span class="help-block">可输入：设备码/IMEI/IMSI/张飞ID/得威Id</span>
                                 </div>
                             </div>
 
                             <div class="control-group single">
-                                <label class="control-label"><span class="text-error">*</span>命令编号 :</label>
+                                <label class="control-label"><span class="text-error">*</span>配置项id :</label>
                                 <div class="controls">
-                                    <input name="cmd" value="" type="text" class="span11"/>
-                                    <span class="help-block">例如：24003</span>
+                                    <input name="configId" value="" type="text" class="span11"/>
+                                    <span class="help-block">例如：1</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group single">
+                                <label class="control-label"><span class="text-error">*</span>长度 :</label>
+                                <div class="controls">
+                                    <input name="len" value="" type="text" class="span11"/>
+                                    <span class="help-block">例如：1</span>
+                                </div>
+                            </div>
+
+                            <div class="control-group single">
+                                <label class="control-label"><span class="text-error">*</span>数值 :</label>
+                                <div class="controls">
+                                    <input name="value" value="" type="text" class="span11"/>
+                                    <span class="help-block">例如：1</span>
                                 </div>
                             </div>
 

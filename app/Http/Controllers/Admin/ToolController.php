@@ -479,9 +479,19 @@ class ToolController extends BaseController
     public function configSet(Request $request)
     {
 
-        $imei = $request->input('imei');
+        $id = $this->getId($request);
         if($request->isXmlHttpRequest()){
-            $udid = DeviceLogic::getUdid($imei);
+
+            $udid = $this->getUdid($id);
+            $imei = DeviceLogic::getImei($udid);
+
+            $input = $this->checkParams(['configId','len','value'], $request->input());
+            if($value = IntHelper::uInt($input['value'])){
+                RedisLogic::devConfigSet($imei, $input['configId'], $value);
+                return $this->outPutSuccess();
+            }
+
+            return $this->outPutError();
 
         }
 
