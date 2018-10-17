@@ -55,7 +55,7 @@
                                     <script id="template2" type="x-tmpl-mustache">
                                         <%#sendConfig%>
                                         <tr>
-                                            <td><strong>{{$id}}：{{$value}}</strong></td>
+                                            <td><strong><%id%>：<%value%></strong></td>
                                         </tr>
                                         <%/sendConfig%>
                                     </script>
