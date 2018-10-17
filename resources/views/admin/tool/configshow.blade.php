@@ -51,11 +51,11 @@
                                 <table class="">
                                     <tbody>
 
-                                        @foreach($devSendCfg as $k=>$v)
+                                        {{--@foreach($devSendCfg as $k=>$v)
                                             <tr>
                                                 <td><strong>{{$k}}：{{$v}}</strong></td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach--}}
 
                                     </tbody>
                                 </table>
