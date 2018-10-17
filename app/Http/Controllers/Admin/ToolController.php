@@ -433,24 +433,21 @@ class ToolController extends BaseController
         return view('admin.tool.lock');
     }
 
-    public function configSet(Request $request)
+    public function configShow(Request $request)
     {
         if($request->isXmlHttpRequest()){
             $id = $request->input('id');
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
 
-            if($request->input('show')){
-                //展示配置
-
-            }elseif($request->input('set')){
-                //下发配置
-
-            }
-
         }
 
-        return view('admin.tool.configset');
+        return view('admin.tool.configshow');
+
+    }
+
+    public function configSet(Request $request)
+    {
 
     }
 
