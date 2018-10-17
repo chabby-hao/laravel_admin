@@ -479,9 +479,8 @@ class ToolController extends BaseController
     public function configSet(Request $request)
     {
 
-        $id = $this->getId($request);
         if($request->isXmlHttpRequest()){
-
+            $id = $this->getId($request);
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
 
