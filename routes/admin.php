@@ -129,6 +129,7 @@ Route::any('/tool/userDeviceAdd','Admin\ToolController@userDeviceAdd');
 Route::any('/tool/deviceExpireModify','Admin\ToolController@deviceExpireModify');
 Route::any('/tool/lock','Admin\ToolController@lock');
 Route::any('/tool/configSet','Admin\ToolController@configSet');
+Route::any('/tool/configShow','Admin\ToolController@configShow');
 
 
 Route::get('/breakRule/list','Admin\BreakRuleController@list');
