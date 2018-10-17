@@ -12,7 +12,7 @@
                         <form  class="form-search">
                             <div class="control-group">
                                 <div class="inline-block w10">
-                                    <input class="w1 margintop" type="text" name="id" id="id" value="{{Request::input('id')}}" placeholder="请输入UDID/IMEI/IMSI">
+                                    <input class="w3 margintop" type="text" name="id" id="id" value="{{Request::input('id')}}" placeholder="请输入UDID/IMEI/IMSI">
                                     <input type="button" class="btn btn-success margintop search" value="查询">
 
                                 </div>
