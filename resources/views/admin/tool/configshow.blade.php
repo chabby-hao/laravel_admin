@@ -9,7 +9,7 @@
                         <h5>查询</h5>
                     </div>
                     <div class="widget-content">
-                        <form method="get" action="{{Url::action('Admin\ToolController@configSet')}}" class="form-search">
+                        <form method="get" action="{{URL::action('Admin\ToolController@configSet')}}" class="form-search">
                             <div class="control-group">
                                 <div class="inline-block w10">
                                     <input class="w3 margintop" type="text" name="id" id="id" value="{{Request::input('id')}}" placeholder="请输入设备码/IMEI/IMSI">
