@@ -18,6 +18,7 @@
                                     <input class="w1 margintop" type="text" name="MstSn" value="{{Request::input('MstSn')}}" placeholder="MstSn">
                                     <input class="w1 margintop" type="text" name="CiNum" value="{{Request::input('CiNum')}}" placeholder="CiNum">
                                     <input class="w1 margintop" type="text" name="CPAct" value="{{Request::input('CPAct')}}" placeholder="CPAct">
+                                    <input class="w1 margintop" type="text" name="imsi" value="{{Request::input('imsi')}}" placeholder="imsi">
                                     <input type="submit" class="btn btn-success margintop search" value="查询">
 
                                 </div>
