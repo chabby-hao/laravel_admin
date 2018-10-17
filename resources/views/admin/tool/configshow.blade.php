@@ -93,22 +93,21 @@
             function search(){
                 var id = $("#id").val();
                 if(id){
-                    search(id);
-                }
-                $.ajax({
-                    url:'{{URL::action('Admin\ToolController@configShow')}}',
-                    data:{id:id},
-                    success:function (data) {
-                        console.log(data);
-                        var target = $("#recordBody");
-                        var rendered = Mustache.render(template, data);
-                        target.html(rendered);
+                    $.ajax({
+                        url:'{{URL::action('Admin\ToolController@configShow')}}',
+                        data:{id:id},
+                        success:function (data) {
+                            console.log(data);
+                            var target = $("#recordBody");
+                            var rendered = Mustache.render(template, data);
+                            target.html(rendered);
 
-                        var target2 = $("#sendBody");
-                        var rendered2 = Mustache.render(template2, data);
-                        target2.html(rendered2);
-                    }
-                })
+                            var target2 = $("#sendBody");
+                            var rendered2 = Mustache.render(template2, data);
+                            target2.html(rendered2);
+                        }
+                    })
+                }
             }
 
             search();
