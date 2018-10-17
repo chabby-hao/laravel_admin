@@ -61,6 +61,15 @@
                                     </tbody>
                                 </table>
                             </div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="widget-box">
+                                    <div class="widget-content mytable">
+                                        {{--<div class="mydiv">35755249243223</div>--}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
