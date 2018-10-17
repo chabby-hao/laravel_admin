@@ -5,9 +5,12 @@ namespace App\Libs;
 class IntHelper
 {
 
-    public static function uInt($i)
+    public static function uInt(int $i,int $len = 0)
     {
-        $len = strlen($i);
+        if(!$len){
+            $len = strlen($i);
+        }
+
         if ($len === 1) {
             return self::uInt8($i);
         } elseif ($len === 2) {
