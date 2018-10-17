@@ -445,19 +445,32 @@ class ToolController extends BaseController
             $devRecordCfg = RedisLogic::getDevRecordConfig($imei);
             $devSendCfg = RedisLogic::getDevSendConfig($imei);
 
-            foreach ($devRecordCfg as $k=>&$v){
+            $recordConfig = [];
+            $sendConfig = [];
+
+            foreach ($devRecordCfg as $k=>$v){
                 $v = IntHelper::uInt($v);
+                $recordConfig[] = [
+                    'id'=>$k,
+                    'value'=>$v,
+                ];
             }
 
-            foreach ($devSendCfg as $k=>&$v){
+            foreach ($devSendCfg as $k=>$v){
                 $v = IntHelper::uInt($v);
+                $sendConfig[] = [
+                    'id'=>$k,
+                    'value'=>$v,
+                ];
             }
+
+
 
         }
 
         return view('admin.tool.configshow', [
-            'devRecordCfg'=>$devRecordCfg,
-            'devSendCfg'=>$devSendCfg,
+            'recordConfig'=>$recordConfig,
+            'sendConfig'=>$sendConfig,
         ]);
 
     }
