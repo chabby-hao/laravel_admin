@@ -445,7 +445,7 @@ class ToolController extends BaseController
             $devSendCfg = RedisLogic::getDevSendConfig($imei);
 
             foreach ($devRecordCfg as $k=>$v){
-                var_dump($k, strlen($v));
+                var_dump(strlen($v));
             }
 
             foreach ($devSendCfg as $k=>$v){
