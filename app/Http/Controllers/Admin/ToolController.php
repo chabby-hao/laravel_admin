@@ -487,7 +487,7 @@ class ToolController extends BaseController
 
             $input = $this->checkParams(['configId','len','value'], $request->input());
             var_dump($input);
-            if($value = IntHelper::uInt($input['value'])){
+            if($value = pack("C", $input['value']))){
                 var_dump($value);
                 RedisLogic::devConfigSet($imei, $input['configId'], $value);
                 return $this->outPutSuccess();
