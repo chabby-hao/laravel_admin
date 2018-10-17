@@ -36,7 +36,7 @@
                                     <script id="template" type="x-tmpl-mustache">
                                         <%#recordConfig%>
                                         <tr>
-                                            <td><strong>{{$id}}：{{$value}}</strong></td>
+                                            <td><strong><%id%>：<%value%></strong></td>
                                         </tr>
                                         <%/recordConfig%>
                                     </script>
