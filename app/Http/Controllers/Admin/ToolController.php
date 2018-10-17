@@ -440,6 +440,13 @@ class ToolController extends BaseController
             $udid = $this->getUdid($id);
             $imei = DeviceLogic::getImei($udid);
 
+            $devRecordCfg = RedisLogic::getDevRecordConfig($imei);
+            $devSendCfg = RedisLogic::getDevSendConfig($imei);
+
+            foreach ($devRecordCfg as $k=>$v){
+                var_dump($k, strlen($v));
+            }
+
         }
 
         return view('admin.tool.configshow');

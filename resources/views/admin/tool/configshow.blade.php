@@ -31,7 +31,7 @@
                                 </table>
                             </div>
                             <div class="span6">
-                                <h6>DeviceSendCgf</h6>
+                                <h5>DeviceSendCgf</h5>
                                 <table class="">
                                     <tbody>
                                     <tr>

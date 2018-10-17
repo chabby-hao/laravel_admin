@@ -161,6 +161,7 @@ class RedisLogic extends BaseLogic
         return self::getDevDataByImei($imei);
     }
 
+
     public static function getLocationByLid($lid)
     {
         $key = 'loc:' . $lid;
@@ -287,6 +288,20 @@ class RedisLogic extends BaseLogic
         $key = 'dev:' . $imei;
         $b = self::exists($key);
         return !$b;
+    }
+
+    public static function getDevRecordConfig($imei)
+    {
+        $key = 'DeviceRecordCgf:' . $imei;
+        self::getRedis()->select(6);
+        return self::getRedis()->hgetall($key);
+    }
+
+    public static function getDevSendConfig($imei)
+    {
+        $key = 'DeviceSendCgf:' . $imei;
+        self::getRedis()->select(6);
+        return self::getRedis()->hgetall($key);
     }
 
 }
