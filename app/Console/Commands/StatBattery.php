@@ -106,7 +106,8 @@ class StatBattery extends BaseCommand
      */
     private function chargeTimes($where, $id, $keyPre)
     {
-        $count = TDeviceCode::join('t_ev_charge','qr','=','udid')->where($where)->count();
+        $where[] = ['device_cycle','>',0];
+        $count = TDeviceCode::where($where)->join('t_ev_charge','qr','=','udid')->where($where)->count();
 
         dump($count);
 
